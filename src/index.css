@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   PREMIUM AI & DATA SCIENCE ENGINEER PORTFOLIO · SUMIT KUMAR
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* Dark cinematic backgrounds */
+    --background: 204 45% 4%;
+    --foreground: 40 20% 95%;
+
+    --card: 204 40% 6%;
+    --card-foreground: 40 20% 95%;
+
+    --popover: 204 40% 6%;
+    --popover-foreground: 40 20% 95%;
+
+    /* Premium Orange system */
+    --primary: 21 100% 52%;
+    --primary-foreground: 20 60% 8%;
+
+    --secondary: 204 20% 12%;
+    --secondary-foreground: 40 20% 95%;
+
+    --muted: 204 22% 10%;
+    --muted-foreground: 204 12% 64%;
+
+    --accent: 18 90% 48%;
+    --accent-foreground: 20 60% 8%;
+
+    --border: 204 14% 15%;
+    --input: 204 14% 15%;
+    --ring: 22 100% 52%;
+
+    --radius: 0.85rem;
+
+    --gradient-primary: linear-gradient(135deg, #FF6A00 0%, #FF8A2B 55%, #B84E02 100%);
+    --gradient-ember: radial-gradient(circle at 50% 40%, rgba(255,106,0,0.22), rgba(184,78,2,0.05) 55%, transparent 70%);
+
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+    background-color: #060c14;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(255,106,0,0.3);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #060c14;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255,106,0,0.4);
+    border-radius: 8px;
+    border: 2px solid #060c14;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,106,0,0.7);
+  }
+}
+
+@layer components {
+  /* ---- Giant background typography ---- */
+  .giant-bg {
+    font-family: "Anton", "Oswald", sans-serif;
+    font-weight: 400;
+    font-size: clamp(5rem, 20vw, 20rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.03);
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  /* ---- Technical Grid Overlay ---- */
+  .bg-tech-grid {
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ---- Editorial Glassmorphism ---- */
+  .glass {
+    background: rgba(13, 20, 30, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .glass-strong {
+    background: rgba(15, 23, 35, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  }
+
+  .glass-editorial {
+    background: rgba(10, 16, 26, 0.65);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 106, 0, 0.18);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* ---- Refined CTAs ---- */
+  .btn-ember {
+    position: relative;
+    isolation: isolate;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #FF6A00 0%, #FF8A2B 60%, #C45200 100%);
+    color: #0d0600;
+    font-weight: 600;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 25px rgba(255,106,0,0.22);
+  }
+  .btn-ember:hover {
+    box-shadow: 0 0 45px rgba(255,106,0,0.5), 0 10px 30px rgba(0,0,0,0.35);
+    transform: translateY(-2px);
+  }
+
+  /* ---- Film grain ---- */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+    animation: grain-shift 0.6s steps(2) infinite;
+  }
+  @keyframes grain-shift {
+    0% { background-position: 0 0; }
+    50% { background-position: 30px -20px; }
+    100% { background-position: -20px 30px; }
+  }
+
+  /* ---- Ambient gradient ---- */
+  .ambient {
+    background:
+      radial-gradient(50% 35% at 50% 0%, rgba(255,106,0,0.08), transparent 70%),
+      radial-gradient(40% 40% at 85% 55%, rgba(184,78,2,0.06), transparent 70%),
+      linear-gradient(180deg, #070d16 0%, #060c14 40%, #08101a 100%);
+  }
+
+  /* ---- Cursor glow ---- */
+  .cursor-glow {
+    position: fixed;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(circle, rgba(255,106,0,0.1) 0%, rgba(255,106,0,0.02) 40%, transparent 70%);
+    transform: translate(-50%, -50%);
+    filter: blur(14px);
+    mix-blend-mode: screen;
+  }
+}
+
+@layer utilities {
+  .font-display { font-family: "Anton", "Oswald", sans-serif; }
+  .font-condensed { font-family: "Oswald", sans-serif; }
+  .text-h1 {
+    font-size: clamp(3.2rem, 7vw, 6.2rem);
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+  }
+  .text-glow { text-shadow: 0 0 25px rgba(255,106,0,0.35); }
+
+  .perspective-1000 { perspective: 1000px; }
+  .preserve-3d { transform-style: preserve-3d; }
+  .backface-hidden { backface-visibility: hidden; }
+
+  .animate-pulse-subtle { animation: pulseSubtle 3s ease-in-out infinite; }
+  @keyframes pulseSubtle {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+}
