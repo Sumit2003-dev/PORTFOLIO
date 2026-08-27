@@ -16,7 +16,7 @@ const GRADIENTS = [
 ];
 
 export default function Projects() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
   const [active, setActive] = useState<Project | null>(null);
   const [selectedCat, setSelectedCat] = useState("All");
@@ -37,7 +37,7 @@ export default function Projects() {
 
   useEffect(() => {
     document.body.style.overflow = active ? "hidden" : "";
-    const lenis = (window as any).__lenis;
+    const lenis = window.__lenis;
     if (active) lenis?.stop();
     else lenis?.start();
     return () => {
@@ -273,7 +273,7 @@ function Modal({ project, onClose }: { project: Project; onClose: () => void }) 
           return (
             <button
               key={t.id}
-              onClick={() => setModalTab(t.id as any)}
+              onClick={() => setModalTab(t.id as "overview" | "architecture" | "code")}
               className={`flex items-center gap-2 border-b-2 px-5 py-3.5 text-xs font-condensed uppercase tracking-wider transition-colors ${
                 isActive
                   ? "border-ember-500 text-ember-500 font-bold"

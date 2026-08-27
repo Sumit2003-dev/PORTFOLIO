@@ -5,6 +5,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+declare global {
+  interface Window {
+    __lenis?: Lenis | null;
+    __rafId?: number;
+  }
+}
+
 /**
  * Initializes Lenis smooth scrolling, synced with GSAP ScrollTrigger.
  */
@@ -18,20 +25,20 @@ export function useLenis() {
       smoothWheel: true,
       touchMultiplier: 1.6,
     });
-    (window as any).__lenis = lenis;
+    window.__lenis = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 
     function raf(time: number) {
       lenis.raf(time * 1000);
-      (window as any).__rafId = requestAnimationFrame(raf);
+      window.__rafId = requestAnimationFrame(raf);
     }
-    (window as any).__rafId = requestAnimationFrame(raf);
+    window.__rafId = requestAnimationFrame(raf);
 
     return () => {
-      cancelAnimationFrame((window as any).__rafId);
+      cancelAnimationFrame(window.__rafId ?? 0);
       lenis.destroy();
-      (window as any).__lenis = null;
+      window.__lenis = null;
     };
   }, []);
 }
@@ -40,7 +47,7 @@ export function useLenis() {
 export function scrollToId(target: string) {
   const el = document.querySelector(target) as HTMLElement | null;
   if (!el) return;
-  const lenis = (window as any).__lenis;
+  const lenis = window.__lenis;
   if (lenis) {
     lenis.scrollTo(el, { offset: 0, duration: 1.2 });
   } else {

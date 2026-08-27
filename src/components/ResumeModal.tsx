@@ -1,4 +1,4 @@
-import { X, Download, ExternalLink, FileText, Printer } from "lucide-react";
+import { X, Download, ExternalLink, FileText } from "lucide-react";
 import { profile } from "@/lib/data";
 
 type ResumeModalProps = {

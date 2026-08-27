@@ -25,8 +25,6 @@ export const profile = {
   githubHandle: "Sumit2003-dev",
 };
 
-export const heroWords = ["PORTFOLIO", "ABOUT", "SKILLS", "PROJECTS", "EDUCATION", "CERTIFICATES", "ACHIEVEMENTS", "CONTACT"];
-
 /* ============================ ABOUT ============================ */
 export const stats = [
   { label: "Projects", value: 4, suffix: "+" },
@@ -235,14 +233,6 @@ export const projects: Project[] = [
     gradient: "from-orange-500/20 via-ember-600/10 to-transparent",
   },
 ];
-
-/* ================= SKILLS HELPERS for icons ================= */
-export const skillIcons: Record<string, string> = {
-  python: "python",
-  ml: "Sicikitlearn",
-  dl: "genai",
-  data: "pandas",
-};
 
 /* ================= EDUCATION ================= */
 export const education = [

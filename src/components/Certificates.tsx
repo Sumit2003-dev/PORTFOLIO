@@ -5,7 +5,7 @@ import { useFadeUp } from "@/hooks/use-scroll";
 import { Award, ExternalLink, X, Eye, Download, FileText, CheckCircle2 } from "lucide-react";
 
 export default function Certificates() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
   const [selectedCert, setSelectedCert] = useState<CertificateItem | null>(null);
 

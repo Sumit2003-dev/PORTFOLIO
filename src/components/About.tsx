@@ -17,7 +17,7 @@ function Stat({ label, value, suffix }: { label: string; value: number; suffix: 
 }
 
 export default function About() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
 
   return (

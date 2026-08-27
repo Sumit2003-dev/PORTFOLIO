@@ -55,7 +55,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
 };
 
 export default function Skills() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
   const [viewMode, setViewMode] = useState<"tree" | "3d">("tree");
 

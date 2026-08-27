@@ -8,7 +8,7 @@ const FIELD =
   "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white placeholder-white/30 outline-none transition-colors focus:border-ember-500/60";
 
 export default function Contact() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
   const [sent, setSent] = useState(false);
   const [formData, setFormData] = useState({ first: "", email: "", subject: "", message: "" });

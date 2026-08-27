@@ -5,7 +5,7 @@ import { useFadeUp } from "@/hooks/use-scroll";
 import { GraduationCap, MapPin, Calendar, Award } from "lucide-react";
 
 export default function Education() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
 
   return (

@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
  * Fades section content upward as it enters the viewport.
  * Call inside a component after render, passing the section root.
  */
-export function useFadeUp(ref: React.RefObject<HTMLElement>, deps: any[] = []) {
+export function useFadeUp(ref: React.RefObject<HTMLElement>, deps: React.DependencyList = []) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -99,7 +99,7 @@ export function useCounter(
     }
 
     return () => ctx?.revert();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [end, duration, start]);
 
   return ref;

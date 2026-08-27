@@ -84,13 +84,13 @@ export default function AskSumitAI() {
 
     setTimeout(() => {
       const lower = query.toLowerCase();
-      let match = KNOWLEDGE_BASE.find((k) => k.keywords.some((kw) => lower.includes(kw)));
+      const match = KNOWLEDGE_BASE.find((k) => k.keywords.some((kw) => lower.includes(kw)));
 
-      let responseText = match
+      const responseText = match
         ? match.answer
         : "Sumit is a Data Scientist & AI Engineer specializing in RAG systems, Scikit-learn ML pipelines, and predictive applications. Feel free to reach out directly via the Contact section!";
 
-      let responseAction = match?.action;
+      const responseAction = match?.action;
 
       setMessages((prev) => [
         ...prev,

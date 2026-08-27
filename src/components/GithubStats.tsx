@@ -4,7 +4,7 @@ import { useFadeUp } from "@/hooks/use-scroll";
 import { Github, GitCommit, GitPullRequest, Star, Code2, Cpu } from "lucide-react";
 
 export default function GithubStats() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
 
   const stats = [

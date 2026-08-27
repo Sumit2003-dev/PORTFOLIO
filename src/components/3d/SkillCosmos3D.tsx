@@ -88,15 +88,6 @@ export default function SkillCosmos3D() {
     const starField = new THREE.Points(starGeo, starMat);
     cosmosGroup.add(starField);
 
-    let mouseX = 0;
-    let mouseY = 0;
-    const onMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      mouseX = ((e.clientX - rect.left) / container.clientWidth) * 2 - 1;
-      mouseY = -((e.clientY - rect.top) / container.clientHeight) * 2 + 1;
-    };
-    window.addEventListener("mousemove", onMouseMove);
-
     const onResize = () => {
       if (!container) return;
       camera.aspect = container.clientWidth / container.clientHeight;
@@ -106,7 +97,7 @@ export default function SkillCosmos3D() {
     window.addEventListener("resize", onResize);
 
     let animId: number;
-    let clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
@@ -126,7 +117,6 @@ export default function SkillCosmos3D() {
     animate();
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("resize", onResize);
       cancelAnimationFrame(animId);
       if (renderer.domElement && container.contains(renderer.domElement)) {

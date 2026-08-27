@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Github, Linkedin, Mail, Download, ArrowRight, Eye, Sparkles, Cpu, ShieldCheck, Database } from "lucide-react";
+import { Github, Linkedin, Mail, Download, ArrowRight, Eye, Sparkles, Cpu, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
 import { scrollToId } from "@/hooks/use-lenis";
 import { profile } from "@/lib/data";
@@ -358,21 +358,6 @@ export default function Hero({ onOpenResume }: HeroProps) {
                   <div>
                     <p className="font-display text-base text-ember-500 text-glow leading-none">RAG</p>
                     <p className="text-[9px] uppercase tracking-wider text-white/50">GyanVerse AI</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="glass pointer-events-none absolute -right-2 bottom-10 z-30 rounded-xl px-3 py-2 backdrop-blur-xl border border-white/15 shadow-xl"
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                style={{ transform: "translateZ(65px)" }}
-              >
-                <div className="flex items-center gap-1.5">
-                  <Database className="h-3.5 w-3.5 text-ember-500" />
-                  <div>
-                    <p className="font-display text-base text-ember-500 text-glow leading-none">1,000+</p>
-                    <p className="text-[9px] uppercase tracking-wider text-white/50">Student Records</p>
                   </div>
                 </div>
               </motion.div>

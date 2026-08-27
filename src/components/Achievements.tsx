@@ -2,7 +2,7 @@ import { useRef } from "react";
 import Section from "./Section";
 import { achievements, leetcode, githubStats } from "@/lib/data";
 import { useCounter, useFadeUp } from "@/hooks/use-scroll";
-import { Trophy, Briefcase, FolderGit2, GitBranch, Code2, Database } from "lucide-react";
+import { Trophy, FolderGit2, GitBranch, Code2, Database } from "lucide-react";
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const ref = useCounter(value);
@@ -14,7 +14,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 }
 
 export default function Achievements() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
 
   const aIcons: Record<string, React.ReactNode> = {
