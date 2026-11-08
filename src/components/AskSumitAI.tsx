@@ -150,7 +150,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
     keywords: ["gdg", "community", "google developer group", "developer program", "membership", "lucknow"],
     answer:
       "Sumit is an active member of **Google Developer Group (GDG) Lucknow** and holds a **Google Developer Program premium tier membership**, actively engaging with fellow AI practitioners and developer summits.",
-    action: { label: "Read Community Journey", href: "#about", type: "scroll" },
+    action: { label: "Read About Sumit", href: "#about", type: "scroll" },
   },
 ];
 
@@ -302,7 +302,7 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
     ) {
       return {
         text: "Sumit Kumar is a final-year B.Tech Computer Science student specializing in **Artificial Intelligence & Data Science** at SRMU, and currently a **Machine Learning Intern at FlyRank AI**.\n\nHe specializes in building context-grounded RAG systems, predictive ML pipelines, and production data workflows, and holds the **#1 Diamond League rank** on Google Cloud Skills Boost.",
-        action: { label: "Read Career Journey", href: "#about", type: "scroll" },
+        action: { label: "Read About Sumit", href: "#about", type: "scroll" },
       };
     }
 

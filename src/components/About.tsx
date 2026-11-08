@@ -1,8 +1,7 @@
 import { useRef } from "react";
 import Section from "./Section";
-import { stats, aboutTimeline, interests, profile } from "@/lib/data";
+import { stats, interests, profile } from "@/lib/data";
 import { useCounter, useFadeUp } from "@/hooks/use-scroll";
-import { Sparkles } from "lucide-react";
 
 function Stat({
   label,
@@ -51,7 +50,7 @@ export default function About() {
 
   return (
     <Section id="about" word="ABOUT">
-      <div ref={ref} className="grid gap-8 lg:grid-cols-[1.15fr,0.85fr] lg:gap-12">
+      <div ref={ref} className="grid gap-8 lg:grid-cols-[1.15fr,0.85fr] lg:gap-12 items-start">
         {/* Left: narrative + counters */}
         <div>
           <h2 data-reveal className="font-display text-huge uppercase leading-[1.05] text-white">
@@ -64,75 +63,15 @@ export default function About() {
             ))}
           </div>
 
-          <div data-reveal className="mt-6 sm:mt-7 grid grid-cols-2 gap-2.5 sm:gap-3.5 sm:grid-cols-4">
+          <div data-reveal className="mt-7 grid grid-cols-2 gap-2.5 sm:gap-3.5 sm:grid-cols-4">
             {stats.map((s) => (
               <Stat key={s.label} {...s} onMove={onMove} />
             ))}
           </div>
-
-          {/* Timeline */}
-          <div className="mt-12 sm:mt-16">
-            <div className="mb-6 flex items-center justify-between">
-              <div>
-                <p data-reveal className="font-condensed text-xs sm:text-sm uppercase tracking-[0.28em] text-ember-500 font-semibold">
-                  Career Evolution &amp; Milestones
-                </p>
-                <h3 data-reveal className="mt-1 font-display text-2xl sm:text-3xl lg:text-4xl uppercase text-white">
-                  Journey<span className="text-ember-500 text-glow">.</span>
-                </h3>
-              </div>
-              <span data-reveal className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs text-white/60 backdrop-blur">
-                <Sparkles className="h-3.5 w-3.5 text-ember-500" /> 2023 — Present
-              </span>
-            </div>
-
-            <div className="relative space-y-5 sm:space-y-6 border-l-2 border-ember-500/30 pl-6 sm:pl-8">
-              <span className="absolute -left-[5px] top-0 h-2.5 w-2.5 rounded-full bg-ember-500 shadow-glow" />
-              {aboutTimeline.map((t) => (
-                <div
-                  key={t.title}
-                  data-reveal
-                  onMouseMove={onMove}
-                  className="group/item glass relative overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 transition-all duration-500 hover:border-ember-500/40 hover:-translate-y-0.5 hover:shadow-glow"
-                >
-                  {/* Spotlight hover effect */}
-                  <div
-                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/item:opacity-100"
-                    style={{
-                      background:
-                        "radial-gradient(320px circle at var(--mx,50%) var(--my,50%), rgba(255,106,0,0.14), transparent 70%)",
-                    }}
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent" />
-
-                  {/* Timeline Marker Anchor */}
-                  <span className="absolute -left-[33px] sm:-left-[41px] top-5 flex h-4 w-4 items-center justify-center rounded-full border-2 border-ember-500 bg-[#071018] shadow-glow transition-transform duration-300 group-hover/item:scale-125">
-                    <span className="h-1.5 w-1.5 rounded-full bg-ember-500" />
-                  </span>
-
-                  <div className="relative flex flex-wrap items-center justify-between gap-2">
-                    <span className="rounded-full border border-ember-500/30 bg-ember-500/10 px-3 py-0.5 font-display text-sm font-bold text-ember-400">
-                      {t.year}
-                    </span>
-                    <span className="text-[11px] font-condensed uppercase tracking-wider text-white/40">
-                      Milestone
-                    </span>
-                  </div>
-
-                  <h4 className="relative mt-2.5 font-display text-base sm:text-lg uppercase text-white tracking-wide transition-colors group-hover/item:text-ember-400">
-                    {t.title}
-                  </h4>
-                  <p className="relative mt-1.5 text-xs sm:text-sm leading-relaxed text-white/65">
-                    {t.text}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Right: glass card + interests */}
-        <div className="lg:sticky lg:top-24 lg:self-start">
+        <div className="lg:top-24">
           <div
             data-reveal
             onMouseMove={onMove}
