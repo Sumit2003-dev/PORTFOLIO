@@ -50,13 +50,13 @@ export default function Navigation({ onOpenResume }: NavigationProps) {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10">
+      <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-3.5 sm:py-4">
         {/* Brand / Logo */}
-        <button onClick={() => go("#home")} className="group flex items-center gap-3">
-          <span className="relative grid h-9 w-9 place-items-center rounded-xl bg-gradient-primary font-display text-base text-[#120800] font-bold shadow-glow transition-transform group-hover:scale-105">
+        <button onClick={() => go("#home")} className="group flex items-center gap-2.5">
+          <span className="relative grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary font-display text-sm text-[#120800] font-bold shadow-glow transition-transform group-hover:scale-105">
             S
           </span>
-          <span className="font-condensed text-sm font-semibold uppercase tracking-[0.25em] text-white/90">
+          <span className="font-condensed text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
             Sumit <span className="text-ember-500">Kumar</span>
           </span>
         </button>
@@ -102,7 +102,9 @@ export default function Navigation({ onOpenResume }: NavigationProps) {
         <button
           onClick={() => setOpen((v) => !v)}
           className="grid h-10 w-10 place-items-center rounded-full border border-white/10 lg:hidden"
-          aria-label="Menu"
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={open}
+          aria-controls="mobile-navigation-menu"
         >
           <div className="space-y-1.5">
             <span className={`block h-px w-5 bg-white transition-all ${open ? "translate-y-2 rotate-45" : ""}`} />
@@ -114,8 +116,9 @@ export default function Navigation({ onOpenResume }: NavigationProps) {
 
       {/* Mobile Drawer */}
       <div
-        className={`lg:hidden overflow-hidden bg-[#060c14]/95 backdrop-blur-2xl transition-all duration-500 ${
-          open ? "max-h-96 border-b border-white/10" : "max-h-0"
+        id="mobile-navigation-menu"
+        className={`lg:hidden overflow-y-auto bg-[#060c14]/95 backdrop-blur-2xl transition-all duration-500 ${
+          open ? "max-h-[85vh] border-b border-white/10" : "max-h-0"
         }`}
       >
         <div className="flex flex-col gap-3 px-6 py-6">

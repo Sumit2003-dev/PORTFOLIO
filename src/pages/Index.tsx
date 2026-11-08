@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, lazy, Suspense } from "react";
 import { useLenis } from "@/hooks/use-lenis";
 import ParticleField, { FogField, CursorGlow } from "@/components/Atmosphere";
 import Navigation from "@/components/Navigation";
@@ -6,14 +6,16 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
-import GithubStats from "@/components/GithubStats";
-import Education from "@/components/Education";
-import Certificates from "@/components/Certificates";
-import Achievements from "@/components/Achievements";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import AskSumitAI from "@/components/AskSumitAI";
-import ResumeModal from "@/components/ResumeModal";
+
+// Lazy-loaded components for optimal initial paint & bundle splitting
+const GithubStats = lazy(() => import("@/components/GithubStats"));
+const Education = lazy(() => import("@/components/Education"));
+const Certificates = lazy(() => import("@/components/Certificates"));
+const Achievements = lazy(() => import("@/components/Achievements"));
+const AskSumitAI = lazy(() => import("@/components/AskSumitAI"));
+const ResumeModal = lazy(() => import("@/components/ResumeModal"));
 
 const Index = () => {
   useLenis();
@@ -22,6 +24,14 @@ const Index = () => {
 
   return (
     <div ref={mainRef} className="ambient relative min-h-screen w-full overflow-x-hidden text-white grain">
+      {/* Accessible skip link for keyboard & screen reader navigation */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[999] focus:rounded-lg focus:bg-ember-500 focus:px-4 focus:py-2 focus:text-black focus:font-semibold focus:shadow-glow"
+      >
+        Skip to main content
+      </a>
+
       {/* Global cinematic atmosphere */}
       <div className="pointer-events-none fixed inset-0 z-[1]" aria-hidden>
         <FogField />
@@ -32,25 +42,31 @@ const Index = () => {
 
       <Navigation onOpenResume={() => setResumeOpen(true)} />
 
-      <main className="relative z-[2]">
+      <main id="main-content" className="relative z-[2]">
         <Hero onOpenResume={() => setResumeOpen(true)} />
         <About />
         <Skills />
         <Projects />
-        <GithubStats />
-        <Education />
-        <Certificates />
-        <Achievements />
+        <Suspense fallback={<div className="min-h-[200px]" />}>
+          <GithubStats />
+          <Education />
+          <Certificates />
+          <Achievements />
+        </Suspense>
         <Contact />
       </main>
 
       <Footer />
 
       {/* Floating Interactive RAG AI Assistant */}
-      <AskSumitAI />
+      <Suspense fallback={null}>
+        <AskSumitAI onOpenResume={() => setResumeOpen(true)} />
+      </Suspense>
 
       {/* In-Browser PDF Resume Modal */}
-      <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
+      <Suspense fallback={null}>
+        <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
+      </Suspense>
     </div>
   );
 };

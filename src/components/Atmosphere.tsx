@@ -56,11 +56,15 @@ export default function ParticleField({ density = 55 }: { density?: number }) {
     };
     rescale();
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
     let t0 = performance.now();
+    let isPaused = false;
 
     function draw(t: number) {
-      const dt = (t - t0) / 1000;
+      if (isPaused) return;
+
+      const dt = Math.min((t - t0) / 1000, 0.1);
       t0 = t;
       ctx.clearRect(0, 0, w, h);
 
@@ -88,15 +92,38 @@ export default function ParticleField({ density = 55 }: { density?: number }) {
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       }
-      raf = requestAnimationFrame(draw);
+
+      if (!prefersReducedMotion) {
+        raf = requestAnimationFrame(draw);
+      }
     }
-    raf = requestAnimationFrame(draw);
+
+    if (!prefersReducedMotion) {
+      raf = requestAnimationFrame(draw);
+    } else {
+      draw(performance.now());
+    }
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        isPaused = true;
+        cancelAnimationFrame(raf);
+      } else {
+        isPaused = false;
+        t0 = performance.now();
+        if (!prefersReducedMotion) {
+          raf = requestAnimationFrame(draw);
+        }
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
 
     const onResize = () => rescale();
     window.addEventListener("resize", onResize);
 
     return () => {
       cancelAnimationFrame(raf);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("resize", onResize);
     };
   }, [density]);

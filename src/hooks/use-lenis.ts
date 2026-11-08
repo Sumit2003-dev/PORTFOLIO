@@ -30,7 +30,7 @@ export function useLenis() {
     lenis.on("scroll", ScrollTrigger.update);
 
     function raf(time: number) {
-      lenis.raf(time * 1000);
+      lenis.raf(time);
       window.__rafId = requestAnimationFrame(raf);
     }
     window.__rafId = requestAnimationFrame(raf);

@@ -2,20 +2,36 @@ import { useRef, useState } from "react";
 import Section from "./Section";
 import { profile } from "@/lib/data";
 import { useFadeUp } from "@/hooks/use-scroll";
-import { Mail, Phone, MapPin, Github, Linkedin, Send, Check, Sparkles } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin, Send, Check, Sparkles, Copy } from "lucide-react";
 
 const FIELD =
-  "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white placeholder-white/30 outline-none transition-colors focus:border-ember-500/60";
+  "w-full rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-white/30 outline-none transition-colors focus:border-ember-500/60";
 
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
   const [sent, setSent] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({ first: "", email: "", subject: "", message: "" });
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText(profile.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2200);
+  };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSent(true);
+
+    const mailtoUrl = `mailto:${profile.email}?subject=${encodeURIComponent(
+      formData.subject || "Portfolio Contact Inquiry"
+    )}&body=${encodeURIComponent(
+      `Hello Sumit,\n\nName: ${formData.first}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    )}`;
+
+    window.open(mailtoUrl, "_blank");
+
     setTimeout(() => {
       setSent(false);
       setFormData({ first: "", email: "", subject: "", message: "" });
@@ -23,80 +39,103 @@ export default function Contact() {
   };
 
   const info = [
-    { icon: <Mail className="h-5 w-5" />, label: "Email", value: profile.email, href: `mailto:${profile.email}` },
-    { icon: <Phone className="h-5 w-5" />, label: "Phone", value: profile.phone, href: `tel:${profile.phone.replace(/\s+/g, '')}` },
-    { icon: <MapPin className="h-5 w-5" />, label: "Location", value: profile.location, href: undefined },
+    { icon: <Mail className="h-4 w-4" />, label: "Email", value: profile.email, href: `mailto:${profile.email}` },
+    { icon: <Phone className="h-4 w-4" />, label: "Phone", value: profile.phone, href: `tel:${profile.phone.replace(/\s+/g, '')}` },
+    { icon: <MapPin className="h-4 w-4" />, label: "Location", value: profile.location, href: undefined },
   ];
 
   return (
     <Section id="contact" word="CONTACT" inverted>
-      <div ref={ref} className="grid gap-12 lg:grid-cols-2">
+      <div ref={ref} className="grid gap-8 lg:gap-16 lg:grid-cols-2 items-start">
         {/* Left */}
         <div>
-          <p data-reveal className="font-condensed text-sm uppercase tracking-[0.3em] text-ember-500">
+          <p data-reveal className="font-condensed text-xs uppercase tracking-[0.3em] text-ember-500">
             Get in touch
           </p>
-          <h2 data-reveal className="mt-2 font-display text-huge uppercase leading-[1.05] text-white">
+          <h2 data-reveal className="mt-1.5 font-display text-huge uppercase leading-[1.05] text-white">
             Let's build
             <br />
             <span className="text-ember-500 text-glow">something</span>
           </h2>
-          <p data-reveal className="mt-6 max-w-md text-lg leading-relaxed text-white/60">
+          <p data-reveal className="mt-4 max-w-md text-sm sm:text-base leading-relaxed text-white/60">
             Have a project, a Machine Learning role, or an AI idea? I'm always excited to talk data science, RAG systems, and turning complex algorithms into products that feel alive.
           </p>
 
-          <div data-reveal className="mt-9 space-y-5">
+          <div data-reveal className="mt-6 space-y-3.5">
             {info.map((i) => (
-              <div key={i.label} className="flex items-center gap-4">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-ember-500">
+              <div key={i.label} className="flex items-center gap-3">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.03] text-ember-500">
                   {i.icon}
                 </span>
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-white/40">{i.label}</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-[10px] uppercase tracking-widest text-white/40">{i.label}</p>
+                    {i.label === "Email" && (
+                      <button
+                        type="button"
+                        onClick={copyEmail}
+                        className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/[0.04] px-1.5 py-0.5 text-[9px] font-condensed uppercase tracking-wider text-white/70 transition-colors hover:border-ember-500/40 hover:text-ember-400"
+                        title="Copy email address"
+                      >
+                        {copied ? (
+                          <>
+                            <Check className="h-2.5 w-2.5 text-emerald-400" />
+                            <span className="text-emerald-400 font-bold">Copied!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="h-2.5 w-2.5" />
+                            <span>Copy</span>
+                          </>
+                        )}
+                      </button>
+                    )}
+                  </div>
                   {i.href ? (
-                    <a href={i.href} className="text-white/80 transition-colors hover:text-ember-500">
+                    <a href={i.href} className="text-xs sm:text-sm text-white/80 transition-colors hover:text-ember-500">
                       {i.value}
                     </a>
                   ) : (
-                    <p className="text-white/80">{i.value}</p>
+                    <p className="text-xs sm:text-sm text-white/80">{i.value}</p>
                   )}
                 </div>
               </div>
             ))}
           </div>
 
-          <div data-reveal className="mt-8 flex items-center gap-3">
+          <div data-reveal className="mt-6 flex items-center gap-2.5">
             <a
               href={profile.social[0].href}
               target="_blank"
               rel="noopener noreferrer"
-              className="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-white/60 transition-all hover:border-ember-500/60 hover:text-ember-500 hover:shadow-glow"
+              className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 text-white/60 transition-all hover:border-ember-500/60 hover:text-ember-500 hover:shadow-glow"
               aria-label="GitHub"
             >
-              <Github className="h-5 w-5" />
+              <Github className="h-4 w-4" />
             </a>
             <a
               href={profile.social[1].href}
               target="_blank"
               rel="noopener noreferrer"
-              className="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-white/60 transition-all hover:border-ember-500/60 hover:text-ember-500 hover:shadow-glow"
+              className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 text-white/60 transition-all hover:border-ember-500/60 hover:text-ember-500 hover:shadow-glow"
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5" />
+              <Linkedin className="h-4 w-4" />
             </a>
           </div>
         </div>
 
         {/* Form */}
-        <form onSubmit={onSubmit} data-reveal className="glass space-y-5 rounded-3xl p-7 sm:p-9">
+        <form onSubmit={onSubmit} data-reveal className="glass space-y-3.5 rounded-2xl p-5 sm:p-6">
           <div className="flex items-center gap-2 text-ember-500 font-condensed text-xs uppercase tracking-widest">
-            <Sparkles className="h-4 w-4" /> Direct Inquiry
+            <Sparkles className="h-3.5 w-3.5" /> Direct Inquiry
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <input
                 required
+                aria-label="First name"
                 placeholder="First name"
                 className={FIELD}
                 value={formData.first}
@@ -106,6 +145,7 @@ export default function Contact() {
             <div>
               <input
                 required
+                aria-label="Your email address"
                 placeholder="Your email"
                 type="email"
                 className={FIELD}
@@ -116,6 +156,7 @@ export default function Contact() {
           </div>
 
           <input
+            aria-label="Message subject"
             placeholder="Subject"
             required
             className={FIELD}
@@ -125,8 +166,9 @@ export default function Contact() {
 
           <textarea
             required
+            aria-label="Your message or project requirements"
             placeholder="Tell me your story or project requirements…"
-            rows={6}
+            rows={4}
             className={`${FIELD} resize-none`}
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -134,20 +176,20 @@ export default function Contact() {
 
           <button
             type="submit"
-            className="btn-ember group flex w-full items-center justify-center gap-2 py-4 text-sm font-bold uppercase tracking-wider"
+            className="btn-ember group flex w-full items-center justify-center gap-2 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider"
           >
             {sent ? (
               <>
-                <Check className="h-5 w-5" /> Message Sent Successfully!
+                <Check className="h-4 w-4" /> Message Sent Successfully!
               </>
             ) : (
               <>
-                <Send className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />{" "}
+                <Send className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />{" "}
                 Send Message
               </>
             )}
           </button>
-          <p className="text-center text-xs text-white/35">
+          <p className="text-center text-[11px] text-white/60">
             Sumit typically replies within 24 hours.
           </p>
         </form>

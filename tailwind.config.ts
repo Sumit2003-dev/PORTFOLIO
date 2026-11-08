@@ -83,9 +83,9 @@ export default {
 				inter: ["Inter", "system-ui", "sans-serif"],
 			},
 			fontSize: {
-				giant: "clamp(6rem, 22vw, 22rem)",
-				huge: "clamp(2.4rem, 8vw, 6.5rem)",
-				h1: "clamp(2.6rem, 7vw, 5rem)",
+				giant: "clamp(5rem, 18vw, 18rem)",
+				huge: "clamp(2.5rem, 6.5vw, 5.5rem)",
+				h1: "clamp(2.8rem, 6.8vw, 5.2rem)",
 			},
 			letterSpacing: {
 				giant: "-3px",
@@ -99,6 +99,9 @@ export default {
 				glow: "0 0 60px rgba(255,106,0,0.35)",
 				"glow-sm": "0 0 24px rgba(255,106,0,0.4)",
 				card: "0 25px 80px rgba(0,0,0,0.45)",
+			},
+			gridTemplateColumns: {
+				"16": "repeat(16, minmax(0, 1fr))",
 			},
 			keyframes: {
 				"accordion-down": {

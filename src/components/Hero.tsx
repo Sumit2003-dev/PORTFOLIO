@@ -87,7 +87,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
         <img
           src={HOME_BG}
           alt=""
-          className="h-[120%] w-full object-cover object-center opacity-65 transition-opacity duration-700"
+          className="h-[120%] w-full object-cover object-center opacity-25 transition-opacity duration-700"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#071018]/85 via-[#071018]/45 to-[#08131E]/30" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#071018]/50 via-transparent to-[#071018]" />
@@ -105,18 +105,18 @@ export default function Hero({ onOpenResume }: HeroProps) {
         PORTFOLIO
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 pb-24 pt-32 sm:px-10 lg:grid-cols-[1.1fr,0.9fr]">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-10 sm:gap-12 lg:gap-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-16 pt-24 sm:pb-20 sm:pt-28 lg:pb-24 lg:pt-32 lg:grid-cols-[1.2fr,0.8fr]">
         {/* ===== Left: Copy ===== */}
         <div className="order-2 lg:order-1">
-          <div data-reveal className="mb-5 flex items-center gap-3">
-            <span className="flex items-center gap-2 rounded-full border border-ember-500/30 bg-ember-500/10 px-3.5 py-1 text-xs font-condensed uppercase tracking-[0.25em] text-ember-500">
+          <div data-reveal className="mb-4 flex items-center gap-3">
+            <span className="flex items-center gap-2 rounded-full border border-ember-500/30 bg-ember-500/10 px-3.5 py-1 text-xs font-condensed uppercase tracking-[0.22em] text-ember-500">
               <span className="h-1.5 w-1.5 rounded-full bg-ember-500 animate-pulse" />
               Machine Learning Intern · FlyRank AI
             </span>
           </div>
 
           <motion.h1
-            className="font-display leading-[0.9] tracking-tight"
+            className="font-display leading-[0.92] tracking-tight"
             variants={headContainer}
             initial="hidden"
             animate="show"
@@ -134,30 +134,30 @@ export default function Hero({ onOpenResume }: HeroProps) {
           </motion.h1>
 
           {/* Role Rotator */}
-          <div data-reveal className="mt-5 flex h-10 items-center overflow-hidden font-condensed text-2xl text-white/80 sm:text-3xl">
+          <div data-reveal className="mt-4 flex h-8 items-center overflow-hidden font-condensed text-lg text-white/85 sm:text-2xl">
             <AnimatePresence mode="wait">
               <motion.p
                 key={roleIdx}
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 24, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -30, opacity: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                exit={{ y: -24, opacity: 0 }}
+                transition={{ duration: 0.45, ease: "easeOut" }}
               >
                 <span className="text-ember-500">▸</span> {ROLES[roleIdx]}
               </motion.p>
             </AnimatePresence>
           </div>
 
-          <p data-reveal className="mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
+          <p data-reveal className="mt-4 max-w-xl text-base sm:text-lg leading-relaxed text-white/65">
             Turning raw data into cinematic intelligence — building RAG systems that reason, models that predict,
             and end-to-end ML applications that feel alive.
           </p>
 
-          <div data-reveal className="mt-8 flex flex-wrap items-center gap-4">
+          <div data-reveal className="mt-7 flex flex-wrap items-center gap-3.5">
             <Magnetic>
               <button
                 onClick={() => scrollToId("#projects")}
-                className="btn-ember group flex items-center gap-2 px-8 py-4"
+                className="btn-ember group flex items-center gap-2 px-6 py-3 text-xs sm:text-sm font-semibold"
               >
                 <span>View Projects</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -168,7 +168,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
               <Magnetic>
                 <button
                   onClick={onOpenResume}
-                  className="group flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-white/85 backdrop-blur transition-all hover:border-ember-500/60 hover:text-ember-500"
+                  className="group flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-xs sm:text-sm text-white/85 backdrop-blur transition-all hover:border-ember-500/60 hover:text-ember-500"
                 >
                   <Eye className="h-4 w-4 text-ember-500 transition-transform group-hover:scale-110" />
                   View Resume
@@ -180,26 +180,26 @@ export default function Hero({ onOpenResume }: HeroProps) {
               <a
                 href={profile.resume}
                 download="Sumit_Kumar_Resume.pdf"
-                className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-4 text-sm text-white/60 transition-colors hover:text-white"
+                className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-xs sm:text-sm text-white/65 transition-colors hover:text-white"
               >
-                <Download className="h-4 w-4" /> Download PDF
+                <Download className="h-3.5 w-3.5" /> Download PDF
               </a>
             </Magnetic>
           </div>
 
           {/* Social Icons */}
-          <div data-reveal className="mt-10 flex items-center gap-3">
+          <div data-reveal className="mt-8 flex items-center gap-3">
             {[
-              { icon: <Github className="h-5 w-5" />, href: "https://github.com/Sumit2003-dev", label: "GitHub" },
-              { icon: <Linkedin className="h-5 w-5" />, href: "https://www.linkedin.com/in/sumit2003-dev/", label: "LinkedIn" },
-              { icon: <Mail className="h-5 w-5" />, href: "mailto:sumit.ku5981@gmail.com", label: "Email" },
+              { icon: <Github className="h-4 w-4" />, href: "https://github.com/Sumit2003-dev", label: "GitHub" },
+              { icon: <Linkedin className="h-4 w-4" />, href: "https://www.linkedin.com/in/sumit2003-dev/", label: "LinkedIn" },
+              { icon: <Mail className="h-4 w-4" />, href: "mailto:sumit.ku5981@gmail.com", label: "Email" },
             ].map((s) => (
               <a
                 key={s.label}
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group grid h-12 w-12 place-items-center rounded-2xl border border-white/15 bg-white/[0.03] text-white/60 backdrop-blur transition-all hover:-translate-y-1 hover:border-ember-500/60 hover:text-ember-500 hover:shadow-glow"
+                className="group grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/[0.03] text-white/65 backdrop-blur transition-all hover:-translate-y-0.5 hover:border-ember-500/60 hover:text-ember-500 hover:shadow-glow"
                 aria-label={s.label}
               >
                 {s.icon}
@@ -208,160 +208,165 @@ export default function Hero({ onOpenResume }: HeroProps) {
           </div>
         </div>
 
-        {/* ===== Right: Compact Holographic 3D Lanyard ID Badge ===== */}
-        <div data-reveal className="order-1 lg:order-2 -mt-6 lg:-mt-12">
-          <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[360px]">
-            {/* Subtle Soft 3D WebGL Canvas Layer Background */}
-            <div className="absolute -inset-16 -z-10 flex items-center justify-center opacity-65 pointer-events-none">
-              <AiSphere3D className="h-[500px] w-[500px] sm:h-[560px] sm:w-[560px]" />
-            </div>
-
-            {/* Suspended Lanyard Cord & Ring */}
-            <div className="pointer-events-none absolute -top-11 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center">
-              <div className="h-11 w-0.5 bg-gradient-to-b from-white/60 via-ember-500/40 to-ember-500" />
-              <div className="-mt-1.5 grid h-3.5 w-3.5 place-items-center rounded-full border border-ember-500/80 bg-[#071018] shadow-glow">
-                <span className="h-1.5 w-1.5 rounded-full bg-ember-500" />
+        {/* ===== Right: Holographic 3D Lanyard ID Badge ===== */}
+        <div data-reveal className="order-1 lg:order-2 flex justify-center items-center">
+          <div className="relative w-full max-w-[320px] xs:max-w-[340px] sm:max-w-[360px] lg:max-w-[380px]">
+            {/* Card Anchor Wrapper */}
+            <div className="relative">
+              {/* Suspended Lanyard Cord & Ring */}
+              <div className="pointer-events-none absolute -top-11 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center">
+                <div className="h-11 w-0.5 bg-gradient-to-b from-white/60 via-ember-500/40 to-ember-500" />
+                <div className="-mt-1.5 grid h-3.5 w-3.5 place-items-center rounded-full border border-ember-500/80 bg-[#071018] shadow-glow">
+                  <span className="h-1.5 w-1.5 rounded-full bg-ember-500" />
+                </div>
               </div>
-            </div>
 
-            {/* Interactive 3D Card Stage */}
-            <motion.div
-              onMouseMove={onMove}
-              onMouseLeave={onLeave}
-              onClick={onCardClick}
-              style={{
-                rotateX: rX,
-                rotateY: rY,
-                rotateZ: rZ,
-                scaleX: sX,
-                scaleY: sY,
-                transformStyle: "preserve-3d",
-              }}
-              className="perspective-1000 relative cursor-pointer pt-3"
-              whileTap={{ scale: 0.97 }}
-            >
-              {/* Click Pulse Wave Ring */}
-              <motion.span
-                key={`ring-${pulse}`}
-                className="pointer-events-none absolute inset-0 z-30 rounded-[1.8rem] border-2 border-ember-500/80"
-                initial={{ opacity: 0.8, scale: 0.94 }}
-                animate={{ opacity: 0, scale: 1.14 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              />
+              {/* Perfectly Centered 3D WebGL Sphere */}
+              <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-85">
+                <AiSphere3D className="h-[480px] w-[480px] sm:h-[540px] sm:w-[540px] lg:h-[580px] lg:w-[580px]" />
+              </div>
 
-              {/* Compact Main ID Badge Frame */}
+              {/* Interactive 3D Card Stage */}
               <motion.div
-                animate={{ y: [0, -6, 0], rotateZ: [0.5, -0.5, 0.5] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="glass-strong relative overflow-hidden rounded-[1.8rem] border border-white/20 p-3 shadow-2xl transition-all duration-500 hover:border-ember-500/60 hover:shadow-glow"
+                onMouseMove={onMove}
+                onMouseLeave={onLeave}
+                onClick={onCardClick}
                 style={{
-                  background: "rgba(12, 18, 28, 0.75)",
-                  backdropFilter: "blur(24px)",
+                  rotateX: rX,
+                  rotateY: rY,
+                  rotateZ: rZ,
+                  scaleX: sX,
+                  scaleY: sY,
                   transformStyle: "preserve-3d",
                 }}
+                className="perspective-1000 relative z-10 cursor-pointer pt-3"
+                whileTap={{ scale: 0.97 }}
               >
-                {/* Dynamic Mouse Cursor Holographic Spotlight */}
-                <motion.div
-                  className="pointer-events-none absolute inset-0 rounded-[1.8rem] opacity-60"
-                  style={{
-                    background: useMotionTemplate`radial-gradient(300px circle at ${glowX} ${glowY}, rgba(255,106,0,0.3), transparent 70%)`,
-                  }}
+                {/* Click Pulse Wave Ring */}
+                <motion.span
+                  key={`ring-${pulse}`}
+                  className="pointer-events-none absolute inset-0 z-30 rounded-[1.8rem] border-2 border-ember-500/80"
+                  initial={{ opacity: 0.8, scale: 0.94 }}
+                  animate={{ opacity: 0, scale: 1.14 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
                 />
 
-                {/* Card Top Header Bar */}
-                <div className="mb-2.5 flex items-center justify-between px-1.5 pt-0.5">
-                  <div className="flex items-center gap-1.5">
-                    <span className="flex h-1.5 w-1.5 rounded-full bg-ember-500 shadow-glow animate-ping" />
-                    <span className="font-condensed text-[10px] uppercase tracking-[0.22em] text-ember-400 font-semibold">
-                      AI ENGINEER PASS
-                    </span>
-                  </div>
-
-                  {/* Gold Smart-Chip Visual */}
-                  <div className="flex items-center gap-1 rounded-md border border-amber-400/40 bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-transparent px-1.5 py-0.5">
-                    <Cpu className="h-3 w-3 text-amber-400" />
-                    <span className="font-mono text-[8px] text-amber-300">RFID 2.0</span>
-                  </div>
-                </div>
-
-                {/* Portrait Display Frame */}
-                <div className="relative aspect-[4/4.4] overflow-hidden rounded-[1.3rem] border border-white/10">
-                  <motion.img
-                    src={HOME_BG}
-                    alt="Sumit Kumar — AI & Data Science Engineer"
-                    className="h-full w-full object-cover object-center filter saturate-[1.15] contrast-[1.05]"
-                    style={{ scale: imgScale }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#060c14] via-[#060c14]/20 to-transparent" />
-
-                  {/* Top Left Verified Badge */}
-                  <div className="absolute left-2.5 top-2.5">
-                    <span className="inline-flex items-center gap-1 rounded-full border border-ember-500/40 bg-[#060c14]/85 px-2.5 py-0.5 text-[9px] font-condensed uppercase tracking-wider text-ember-400 backdrop-blur-md">
-                      <ShieldCheck className="h-3 w-3 text-ember-500" /> Verified
-                    </span>
-                  </div>
-
-                  {/* Card Bottom Details Overlay */}
-                  <div className="absolute inset-x-2.5 bottom-2.5 flex items-end justify-between">
-                    <div className="rounded-xl bg-[#060c14]/90 px-3 py-2 backdrop-blur-xl border border-white/10 shadow-lg">
-                      <p className="font-display text-sm uppercase leading-none text-white tracking-wide">
-                        SUMIT KUMAR
-                      </p>
-                      <p className="mt-1 font-condensed text-[10px] uppercase tracking-[0.18em] text-ember-500">
-                        AI & Data Science · SRMU
-                      </p>
-                    </div>
-                    <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary font-display text-sm text-[#120800] font-bold shadow-glow">
-                      S
-                    </span>
-                  </div>
-                </div>
-
-                {/* Click Hologram Sheen Sweep */}
+                {/* Main ID Badge Frame */}
                 <motion.div
-                  key={`shine-${pulse}`}
-                  className="pointer-events-none absolute inset-0 z-20 overflow-hidden rounded-[1.8rem]"
+                  animate={{ y: [0, -6, 0], rotateZ: [0.5, -0.5, 0.5] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="glass-strong relative overflow-hidden rounded-[1.8rem] border border-white/20 p-3.5 sm:p-4 shadow-2xl transition-all duration-500 hover:border-ember-500/60 hover:shadow-glow"
+                  style={{
+                    background: "rgba(12, 18, 28, 0.75)",
+                    backdropFilter: "blur(24px)",
+                    transformStyle: "preserve-3d",
+                  }}
                 >
+                  {/* Dynamic Mouse Cursor Holographic Spotlight */}
                   <motion.div
-                    className="h-full w-28 skew-x-[-22deg] bg-gradient-to-r from-transparent via-white/35 to-transparent"
-                    initial={{ x: "-150%", opacity: 0 }}
-                    animate={{ x: "350%", opacity: [0, 1, 1, 0] }}
-                    transition={{ duration: 0.95, ease: "easeInOut" }}
+                    className="pointer-events-none absolute inset-0 rounded-[1.8rem] opacity-60"
+                    style={{
+                      background: useMotionTemplate`radial-gradient(300px circle at ${glowX} ${glowY}, rgba(255,106,0,0.3), transparent 70%)`,
+                    }}
                   />
+
+                  {/* Card Top Header Bar */}
+                  <div className="mb-2.5 flex items-center justify-between px-1.5 pt-0.5">
+                    <div className="flex items-center gap-1.5">
+                      <span className="flex h-1.5 w-1.5 rounded-full bg-ember-500 shadow-glow animate-ping" />
+                      <span className="font-condensed text-[10px] uppercase tracking-[0.22em] text-ember-400 font-semibold">
+                        AI ENGINEER PASS
+                      </span>
+                    </div>
+
+                    {/* Gold Smart-Chip Visual */}
+                    <div className="flex items-center gap-1 rounded-md border border-amber-400/40 bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-transparent px-1.5 py-0.5">
+                      <Cpu className="h-3 w-3 text-amber-400" />
+                      <span className="font-mono text-[8px] text-amber-300">RFID 2.0</span>
+                    </div>
+                  </div>
+
+                  {/* Portrait Display Frame */}
+                  <div className="relative aspect-[4/4.4] overflow-hidden rounded-[1.3rem] border border-white/10">
+                    <motion.img
+                      src={HOME_BG}
+                      alt="Sumit Kumar — AI & Data Science Engineer"
+                      loading="eager"
+                      decoding="async"
+                      className="h-full w-full object-cover object-center filter saturate-[1.15] contrast-[1.05]"
+                      style={{ scale: imgScale }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#060c14] via-[#060c14]/20 to-transparent" />
+
+                    {/* Top Left Verified Badge */}
+                    <div className="absolute left-2.5 top-2.5">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-ember-500/40 bg-[#060c14]/85 px-2.5 py-0.5 text-[9px] font-condensed uppercase tracking-wider text-ember-400 backdrop-blur-md">
+                        <ShieldCheck className="h-3 w-3 text-ember-500" /> Verified
+                      </span>
+                    </div>
+
+                    {/* Card Bottom Details Overlay */}
+                    <div className="absolute inset-x-2.5 bottom-2.5 flex items-end justify-between">
+                      <div className="rounded-xl bg-[#060c14]/90 px-3 py-2 backdrop-blur-xl border border-white/10 shadow-lg">
+                        <p className="font-display text-sm uppercase leading-none text-white tracking-wide">
+                          SUMIT KUMAR
+                        </p>
+                        <p className="mt-1 font-condensed text-[10px] uppercase tracking-[0.18em] text-ember-500">
+                          AI & Data Science · SRMU
+                        </p>
+                      </div>
+                      <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary font-display text-sm text-[#120800] font-bold shadow-glow">
+                        S
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Click Hologram Sheen Sweep */}
+                  <motion.div
+                    key={`shine-${pulse}`}
+                    className="pointer-events-none absolute inset-0 z-20 overflow-hidden rounded-[1.8rem]"
+                  >
+                    <motion.div
+                      className="h-full w-28 skew-x-[-22deg] bg-gradient-to-r from-transparent via-white/35 to-transparent"
+                      initial={{ x: "-150%", opacity: 0 }}
+                      animate={{ x: "350%", opacity: [0, 1, 1, 0] }}
+                      transition={{ duration: 0.95, ease: "easeInOut" }}
+                    />
+                  </motion.div>
+                </motion.div>
+
+                {/* Floating Parallax Chips (Responsive Offset) */}
+                <motion.div
+                  className="glass pointer-events-none absolute -left-2 sm:-left-3 lg:-left-4 top-8 z-30 rounded-lg px-2 py-1 backdrop-blur-xl border border-white/15 shadow-lg"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  style={{ transform: "translateZ(35px)" }}
+                >
+                  <div className="flex items-center gap-1.5">
+                    <Sparkles className="h-3 w-3 text-ember-500" />
+                    <div>
+                      <p className="font-display text-sm text-ember-500 text-glow leading-none">92%</p>
+                      <p className="text-[8px] uppercase tracking-wider text-white/50">Accuracy</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="glass pointer-events-none absolute -right-2 sm:-right-3 lg:-right-4 top-12 z-30 rounded-lg px-2 py-1 backdrop-blur-xl border border-white/15 shadow-lg"
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  style={{ transform: "translateZ(50px)" }}
+                >
+                  <div className="flex items-center gap-1.5">
+                    <Cpu className="h-3 w-3 text-ember-500" />
+                    <div>
+                      <p className="font-display text-sm text-ember-500 text-glow leading-none">RAG</p>
+                      <p className="text-[8px] uppercase tracking-wider text-white/50">GyanVerse</p>
+                    </div>
+                  </div>
                 </motion.div>
               </motion.div>
-
-              {/* Floating Parallax Chips (Compact Offset) */}
-              <motion.div
-                className="glass pointer-events-none absolute -left-4 top-8 z-30 rounded-xl px-3 py-2 backdrop-blur-xl border border-white/15 shadow-xl"
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                style={{ transform: "translateZ(35px)" }}
-              >
-                <div className="flex items-center gap-1.5">
-                  <Sparkles className="h-3.5 w-3.5 text-ember-500" />
-                  <div>
-                    <p className="font-display text-base text-ember-500 text-glow leading-none">92%</p>
-                    <p className="text-[9px] uppercase tracking-wider text-white/50">Model Accuracy</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="glass pointer-events-none absolute -right-4 top-12 z-30 rounded-xl px-3 py-2 backdrop-blur-xl border border-white/15 shadow-xl"
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                style={{ transform: "translateZ(50px)" }}
-              >
-                <div className="flex items-center gap-1.5">
-                  <Cpu className="h-3.5 w-3.5 text-ember-500" />
-                  <div>
-                    <p className="font-display text-base text-ember-500 text-glow leading-none">RAG</p>
-                    <p className="text-[9px] uppercase tracking-wider text-white/50">GyanVerse AI</p>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
+            </div>
 
             <p className="pointer-events-none mt-5 text-center font-condensed text-[10px] uppercase tracking-[0.28em] text-white/35">
               3D Holographic ID Pass · Move cursor &amp; Click

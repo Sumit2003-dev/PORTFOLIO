@@ -128,39 +128,3 @@ export function useParallax(ref: React.RefObject<HTMLElement | null>, factor = 0
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [factor]);
 }
-
-/** Image clip-path mask reveal on scroll. */
-export function useImageReveal(ref: React.RefObject<HTMLElement | null>) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        { clipPath: "inset(0 0 100% 0)", y: 40 },
-        {
-          clipPath: "inset(0 0 0% 0)",
-          y: 0,
-          duration: 1.4,
-          ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 85%" },
-        }
-      );
-      const img = el.querySelector("img");
-      if (img) {
-        gsap.fromTo(
-          img,
-          { scale: 1.25 },
-          {
-            scale: 1,
-            duration: 1.6,
-            ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 85%" },
-          }
-        );
-      }
-    }, el);
-    return () => ctx.revert();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-}

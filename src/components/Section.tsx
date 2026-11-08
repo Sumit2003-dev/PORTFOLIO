@@ -34,20 +34,20 @@ export default function Section({ id, word, children, inverted = false }: Sectio
   return (
     <section
       id={id}
-      className={`relative min-h-screen scroll-mt-24 overflow-hidden py-28 sm:py-36 ${
+      className={`relative min-h-screen scroll-mt-20 overflow-hidden py-20 sm:py-28 lg:py-32 ${
         inverted ? "bg-[#0D1117]" : "bg-transparent"
       }`}
     >
       {/* Background typography */}
       <div
         ref={wordRef}
-        className="giant-bg absolute inset-x-0 top-10 whitespace-nowrap text-center leading-none select-none pointer-events-none"
+        className="giant-bg absolute inset-x-0 top-6 whitespace-nowrap text-center leading-none select-none pointer-events-none"
         aria-hidden
       >
         {word}
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 sm:px-10">{children}</div>
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">{children}</div>
     </section>
   );
 }

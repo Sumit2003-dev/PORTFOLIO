@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 type AiSphere3DProps = {
@@ -7,25 +7,31 @@ type AiSphere3DProps = {
 
 export default function AiSphere3D({ className = "relative h-full w-full" }: AiSphere3DProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    // Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      42,
-      container.clientWidth / container.clientHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 4.4;
+    let renderer: THREE.WebGLRenderer;
+    let animId: number;
+    let isPaused = false;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(renderer.domElement);
+    try {
+      // Scene setup
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        42,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 4.4;
+
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
 
     const mainGroup = new THREE.Group();
     scene.add(mainGroup);
@@ -155,6 +161,7 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
     const clock = new THREE.Clock();
 
     const animate = () => {
+      if (isPaused) return;
       animId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
@@ -180,16 +187,45 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
 
     animate();
 
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        isPaused = true;
+        cancelAnimationFrame(animId);
+      } else {
+        isPaused = false;
+        clock.getDelta();
+        animate();
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       cancelAnimationFrame(animId);
-      if (renderer.domElement && container.contains(renderer.domElement)) {
+      if (renderer?.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
-      renderer.dispose();
+      renderer?.dispose();
     };
+  } catch (err) {
+    console.warn("WebGL initialization failed, falling back to CSS animation:", err);
+    setHasError(true);
+  }
   }, []);
+
+  if (hasError) {
+    return (
+      <div className={`${className} flex items-center justify-center`}>
+        <div className="relative h-64 w-64 rounded-full border border-ember-500/30 animate-pulse bg-gradient-radial from-ember-500/20 via-transparent to-transparent">
+          <div className="absolute inset-4 rounded-full border border-burnt-red/40 animate-spin [animation-duration:12s]" />
+          <div className="absolute inset-12 rounded-full border border-white/20 animate-spin [animation-duration:8s] [animation-direction:reverse]" />
+          <div className="absolute inset-20 rounded-full bg-ember-500/30 blur-md" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className={className}>

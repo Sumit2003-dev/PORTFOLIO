@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
+import { useRef, useState, lazy, Suspense } from "react";
 import Section from "./Section";
 import { skillTrees, skillRings } from "@/lib/data";
 import { useFadeUp } from "@/hooks/use-scroll";
-import SkillCosmos3D from "./3d/SkillCosmos3D";
+
+const SkillCosmos3D = lazy(() => import("./3d/SkillCosmos3D"));
 import {
   SiPython,
   SiPandas,
@@ -36,8 +37,8 @@ const iconMap: Record<string, React.ReactNode> = {
   "RAG Systems": <Sparkles className="text-ember-500" />,
   "LLMs (GPT / LLaMA)": <Bot className="text-[#10a37f]" />,
   "Deep Learning": <Flame className="text-[#FF6A00]" />,
-  Pandas: <SiPandas className="text-[#150458]" />,
-  NumPy: <SiNumpy className="text-[#013243]" />,
+  Pandas: <SiPandas className="text-[#E70488]" />,
+  NumPy: <SiNumpy className="text-[#4DABCF]" />,
   Matplotlib: <BarChart3 className="text-ember-500" />,
   "Scikit-learn": <SiScikitlearn className="text-[#F7931E]" />,
   "FAISS / ChromaDB": <Database className="text-[#FF8A2B]" />,
@@ -74,7 +75,7 @@ export default function Skills() {
             <h2 data-reveal className="font-display text-huge uppercase leading-[1.05] text-white">
               Skills<span className="text-ember-500 text-glow">.</span>
             </h2>
-            <p data-reveal className="mt-4 max-w-2xl text-lg text-white/55">
+            <p data-reveal className="mt-3 max-w-2xl text-sm sm:text-base text-white/60">
               A toolkit for turning raw data into intelligence — from language mastery and ML core
               pipelines to vector databases and Generative AI.
             </p>
@@ -103,46 +104,57 @@ export default function Skills() {
 
         {viewMode === "3d" ? (
           <div className="mt-10">
-            <SkillCosmos3D />
+            <Suspense
+              fallback={
+                <div className="glass flex h-[380px] w-full items-center justify-center rounded-2xl border border-white/10">
+                  <div className="flex flex-col items-center gap-3 text-ember-500 font-condensed tracking-widest text-xs uppercase">
+                    <span className="h-6 w-6 animate-spin rounded-full border-2 border-ember-500 border-t-transparent" />
+                    <span>Initializing 3D Cosmos...</span>
+                  </div>
+                </div>
+              }
+            >
+              <SkillCosmos3D />
+            </Suspense>
           </div>
         ) : (
-          <div className="mt-14 grid gap-10 lg:grid-cols-[1.15fr,0.85fr]">
+          <div className="mt-10 grid gap-8 lg:grid-cols-[1.15fr,0.85fr]">
             {/* Skill tree */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               {skillTrees.map((tree) => (
                 <div
                   key={tree.category}
                   data-reveal
                   onMouseMove={onMove}
-                  className="group/spot glass relative overflow-hidden rounded-3xl p-6 sm:p-8"
+                  className="group/spot glass relative overflow-hidden rounded-2xl p-5 sm:p-6"
                 >
                   <div
                     className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/spot:opacity-100"
                     style={{
                       background:
-                        "radial-gradient(360px circle at var(--mx,50%) var(--my,50%), rgba(255,138,43,0.14), transparent 70%)",
+                        "radial-gradient(320px circle at var(--mx,50%) var(--my,50%), rgba(255,138,43,0.12), transparent 70%)",
                     }}
                   />
-                  <div className="relative mb-5 flex items-center gap-3">
-                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-ember-500/15">
-                      {categoryIcons[tree.category] ?? <Code2 className="h-5 w-5 text-ember-500" />}
+                  <div className="relative mb-4 flex items-center gap-2.5">
+                    <span className="grid h-8 w-8 place-items-center rounded-lg bg-ember-500/15">
+                      {categoryIcons[tree.category] ?? <Code2 className="h-4 w-4 text-ember-500" />}
                     </span>
-                    <h3 className="font-condensed text-lg uppercase tracking-[0.2em] text-white">
+                    <h3 className="font-condensed text-base uppercase tracking-[0.18em] text-white">
                       {tree.category}
                     </h3>
                   </div>
-                  <div className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+                  <div className="grid gap-x-6 gap-y-3 sm:grid-cols-2">
                     {tree.items.map((item) => (
                       <div key={item.name} className="group">
-                        <div className="mb-1.5 flex items-center justify-between text-sm">
-                          <span className="flex items-center gap-2 text-white/80">
-                            <span className="text-base">{iconMap[item.name] ?? <Terminal className="h-4 w-4 text-ember-500" />}</span>
+                        <div className="mb-1 flex items-center justify-between text-xs sm:text-sm">
+                          <span className="flex items-center gap-1.5 text-white/80">
+                            <span className="text-sm">{iconMap[item.name] ?? <Terminal className="h-3.5 w-3.5 text-ember-500" />}</span>
                             {item.name}
-                            <span className="hidden text-xs text-white/30 sm:inline">· {item.tag}</span>
+                            <span className="hidden text-[11px] text-white/30 sm:inline">· {item.tag}</span>
                           </span>
-                          <span className="font-display text-ember-500">{item.level}%</span>
+                          <span className="font-display text-xs text-ember-500">{item.level}%</span>
                         </div>
-                        <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
+                        <div className="h-1 overflow-hidden rounded-full bg-white/5">
                           <div
                             className="h-full rounded-full bg-gradient-to-r from-ember-500 to-burnt-red transition-all duration-1000 ease-out group-hover:shadow-glow"
                             style={{ width: `${item.level}%` }}
@@ -156,7 +168,7 @@ export default function Skills() {
             </div>
 
             {/* Rings */}
-            <div data-reveal className="grid content-start grid-cols-2 gap-5 sm:grid-cols-2">
+            <div data-reveal className="grid content-start grid-cols-2 gap-2.5 sm:gap-3.5">
               {skillRings.map((r) => (
                 <Ring key={r.name} name={r.name} value={r.value} />
               ))}
@@ -169,20 +181,20 @@ export default function Skills() {
 }
 
 function Ring({ name, value }: { name: string; value: number }) {
-  const C = 2 * Math.PI * 52;
+  const C = 2 * Math.PI * 40;
   const gid = `rg-${name.replace(/[^a-zA-Z0-9]/g, "")}`;
   return (
-    <div className="group glass flex flex-col items-center rounded-3xl p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-glow">
-      <div className="relative h-28 w-28">
-        <svg viewBox="0 0 120 120" className="h-full w-full -rotate-90">
-          <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="7" />
+    <div className="group glass flex flex-col items-center justify-center rounded-xl p-3 sm:p-4 transition-all duration-500 hover:-translate-y-0.5 hover:shadow-glow">
+      <div className="relative h-20 w-20 sm:h-24 sm:w-24">
+        <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="6" />
           <circle
-            cx="60"
-            cy="60"
-            r="52"
+            cx="50"
+            cy="50"
+            r="40"
             fill="none"
             stroke={`url(#${gid})`}
-            strokeWidth="7"
+            strokeWidth="6"
             strokeLinecap="round"
             strokeDasharray={`${(value / 100) * C} ${C}`}
             className="transition-[filter] duration-500 group-hover:drop-shadow-[0_0_6px_rgba(255,106,0,0.8)]"
@@ -194,11 +206,11 @@ function Ring({ name, value }: { name: string; value: number }) {
             </linearGradient>
           </defs>
         </svg>
-        <span className="absolute inset-0 grid place-items-center font-display text-2xl text-ember-500 transition-transform duration-500 group-hover:scale-110">
+        <span className="absolute inset-0 grid place-items-center font-display text-sm sm:text-base text-ember-500 transition-transform duration-500 group-hover:scale-105">
           {value}%
         </span>
       </div>
-      <p className="mt-4 text-center font-medium text-white/80">{name}</p>
+      <p className="mt-2 text-center text-xs font-medium text-white/80">{name}</p>
     </div>
   );
 }
