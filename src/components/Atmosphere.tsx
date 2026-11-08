@@ -56,8 +56,6 @@ export default function ParticleField({ density = 55 }: { density?: number }) {
     };
     rescale();
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const speedFactor = prefersReducedMotion ? 0.25 : 1.0;
     let raf = 0;
     let t0 = performance.now();
     let isPaused = false;
@@ -65,14 +63,14 @@ export default function ParticleField({ density = 55 }: { density?: number }) {
     function draw(t: number) {
       if (isPaused) return;
 
-      const dt = Math.min((t - t0) / 1000, 0.1) * speedFactor;
+      const dt = Math.min((t - t0) / 1000, 0.1);
       t0 = t;
       ctx.clearRect(0, 0, w, h);
 
       for (const p of particles) {
         p.x += p.vx * (dt * 60);
         p.y += p.vy * (dt * 60);
-        p.phase += 0.01 * speedFactor;
+        p.phase += 0.01;
         p.life = 0.55 + 0.45 * Math.sin(p.phase);
 
         if (p.y < -10) { p.y = h + 10; p.x = rand(0, w); }
@@ -158,56 +156,32 @@ export function FogField() {
   );
 }
 
-/** Interactive cursor glow that follows the mouse with energy & accessibility throttling. */
+/** Interactive cursor glow that follows the mouse. */
 export function CursorGlow() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Ignore coarse pointer devices (touchscreens without a mouse cursor)
-    const isCoarse = window.matchMedia("(pointer: coarse)").matches;
-    if (isCoarse) return;
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const lerpFactor = prefersReducedMotion ? 0.04 : 0.07;
-
     const el = ref.current;
     if (!el) return;
     let x = window.innerWidth / 2;
     let y = window.innerHeight / 2;
     let rx = x, ry = y;
     let raf = 0;
-    let isPaused = false;
 
     const onMove = (e: MouseEvent) => {
       x = e.clientX;
       y = e.clientY;
     };
-
     const loop = () => {
-      if (isPaused) return;
-      rx += (x - rx) * lerpFactor;
-      ry += (y - ry) * lerpFactor;
+      rx += (x - rx) * 0.06;
+      ry += (y - ry) * 0.06;
       el.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
       raf = requestAnimationFrame(loop);
     };
-
-    const onVisibilityChange = () => {
-      if (document.hidden) {
-        isPaused = true;
-        cancelAnimationFrame(raf);
-      } else {
-        isPaused = false;
-        raf = requestAnimationFrame(loop);
-      }
-    };
-
-    window.addEventListener("mousemove", onMove, { passive: true });
-    document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("mousemove", onMove);
     raf = requestAnimationFrame(loop);
-
     return () => {
       window.removeEventListener("mousemove", onMove);
-      document.removeEventListener("visibilitychange", onVisibilityChange);
       cancelAnimationFrame(raf);
     };
   }, []);

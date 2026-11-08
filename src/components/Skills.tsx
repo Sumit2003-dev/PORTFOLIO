@@ -58,7 +58,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
 export default function Skills() {
   const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
-  const [viewMode, setViewMode] = useState<"3d" | "tree">("3d");
+  const [viewMode, setViewMode] = useState<"tree" | "3d">("tree");
 
   const onMove = (e: React.MouseEvent<HTMLElement>) => {
     const el = e.currentTarget;
@@ -82,23 +82,22 @@ export default function Skills() {
           </div>
 
           {/* View Toggle */}
-          <div data-reveal className="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.04] p-1.5 backdrop-blur">
-            <button
-              onClick={() => setViewMode("3d")}
-              className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
-                viewMode === "3d" ? "bg-ember-500 text-black shadow-glow font-bold" : "text-white/60 hover:text-white"
-              }`}
-            >
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>3D Cosmos</span>
-            </button>
+          <div data-reveal className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] p-1">
             <button
               onClick={() => setViewMode("tree")}
               className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
-                viewMode === "tree" ? "bg-ember-500 text-black shadow-glow font-bold" : "text-white/60 hover:text-white"
+                viewMode === "tree" ? "bg-ember-500 text-black shadow-glow" : "text-white/60 hover:text-white"
               }`}
             >
-              Detailed List
+              List View
+            </button>
+            <button
+              onClick={() => setViewMode("3d")}
+              className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+                viewMode === "3d" ? "bg-ember-500 text-black shadow-glow" : "text-white/60 hover:text-white"
+              }`}
+            >
+              3D Cosmos
             </button>
           </div>
         </div>

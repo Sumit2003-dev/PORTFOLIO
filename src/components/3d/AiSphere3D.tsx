@@ -13,272 +13,186 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
     const container = containerRef.current;
     if (!container) return;
 
-    let renderer: THREE.WebGLRenderer | null = null;
-    let animId = 0;
+    let renderer: THREE.WebGLRenderer;
+    let animId: number;
     let isPaused = false;
-    let resizeObserver: ResizeObserver | null = null;
 
     try {
-      // 1. Scene & Camera Setup
+      const width = container.clientWidth || 480;
+      const height = container.clientHeight || 480;
+
+      // Scene setup
       const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        42,
+        width / height,
+        0.1,
+        1000
+      );
+      camera.position.z = 4.4;
 
-      // Safe initial aspect calculation
-      const initialW = container.clientWidth || 520;
-      const initialH = container.clientHeight || 520;
-      const camera = new THREE.PerspectiveCamera(45, initialW / initialH, 0.1, 1000);
-      camera.position.z = 5.2;
-
-      // WebGL Renderer with antialias and alpha transparency
-      renderer = new THREE.WebGLRenderer({
-        alpha: true,
-        antialias: true,
-        powerPreference: "high-performance",
-      });
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-      renderer.setSize(initialW, initialH);
-      renderer.domElement.style.display = "block";
-      renderer.domElement.style.width = "100%";
-      renderer.domElement.style.height = "100%";
-      renderer.domElement.style.pointerEvents = "none";
+      renderer.setSize(width, height);
       container.appendChild(renderer.domElement);
 
       const mainGroup = new THREE.Group();
       scene.add(mainGroup);
 
-      // 2. Luminous Central AI Energy Core
-      const coreGroup = new THREE.Group();
-      mainGroup.add(coreGroup);
-
-      // Inner dense glowing nucleus
-      const nucleusGeo = new THREE.SphereGeometry(0.55, 24, 24);
-      const nucleusMat = new THREE.MeshBasicMaterial({
+      // 1. Soft Atmospheric Core Geometries
+      const coreGeo = new THREE.IcosahedronGeometry(1.2, 2);
+      const coreMat = new THREE.MeshBasicMaterial({
         color: 0xff6a00,
+        wireframe: true,
         transparent: true,
-        opacity: 0.65,
+        opacity: 0.35,
       });
-      const nucleusMesh = new THREE.Mesh(nucleusGeo, nucleusMat);
-      coreGroup.add(nucleusMesh);
+      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      mainGroup.add(coreMesh);
 
-      // Mid wireframe icosahedron cage
-      const cageGeo = new THREE.IcosahedronGeometry(0.95, 1);
-      const cageMat = new THREE.MeshBasicMaterial({
+      const innerGeo = new THREE.IcosahedronGeometry(0.85, 1);
+      const innerMat = new THREE.MeshBasicMaterial({
         color: 0xff8a2b,
         wireframe: true,
         transparent: true,
-        opacity: 0.7,
+        opacity: 0.5,
       });
-      const cageMesh = new THREE.Mesh(cageGeo, cageMat);
-      coreGroup.add(cageMesh);
+      const innerMesh = new THREE.Mesh(innerGeo, innerMat);
+      mainGroup.add(innerMesh);
 
-      // Outer neural shell with vertex node markers
-      const shellGeo = new THREE.IcosahedronGeometry(1.45, 2);
-      const shellMat = new THREE.MeshBasicMaterial({
-        color: 0xffa043,
-        wireframe: true,
+      // Subtle Soft Inner Nucleus
+      const nucleusGeo = new THREE.SphereGeometry(0.42, 16, 16);
+      const nucleusMat = new THREE.MeshBasicMaterial({
+        color: 0xff6a00,
         transparent: true,
-        opacity: 0.45,
+        opacity: 0.4,
       });
-      const shellMesh = new THREE.Mesh(shellGeo, shellMat);
-      coreGroup.add(shellMesh);
+      const nucleusMesh = new THREE.Mesh(nucleusGeo, nucleusMat);
+      mainGroup.add(nucleusMesh);
 
-      // 3. Expansive Gyroscopic Orbital Rings & Satellites (extending well beyond the card)
-      const ringGroup = new THREE.Group();
-      mainGroup.add(ringGroup);
-
-      type RingData = {
-        ring: THREE.Line;
-        satellite: THREE.Mesh;
-        radius: number;
-        speed: number;
-        initialTiltX: number;
-        initialTiltY: number;
-      };
-
+      // 2. Soft Orbital Rings
       const ringConfigs = [
-        { radius: 1.85, tiltX: Math.PI * 0.35, tiltY: Math.PI * 0.15, color: 0xff6a00, opacity: 0.7, speed: 0.8 },
-        { radius: 2.35, tiltX: -Math.PI * 0.28, tiltY: Math.PI * 0.38, color: 0xff8a2b, opacity: 0.6, speed: -0.65 },
-        { radius: 2.85, tiltX: Math.PI * 0.18, tiltY: -Math.PI * 0.32, color: 0xffb870, opacity: 0.5, speed: 0.5 },
+        { radius: 1.65, tiltX: Math.PI * 0.35, tiltY: Math.PI * 0.15, color: 0xff6a00, opacity: 0.4 },
+        { radius: 2.0, tiltX: -Math.PI * 0.25, tiltY: Math.PI * 0.4, color: 0xff8a2b, opacity: 0.3 },
+        { radius: 2.35, tiltX: Math.PI * 0.15, tiltY: -Math.PI * 0.3, color: 0xb84e02, opacity: 0.2 },
       ];
 
-      const ringsData: RingData[] = [];
-
+      const rings: THREE.Line[] = [];
       ringConfigs.forEach((cfg) => {
-        // High-definition smooth ring
-        const segments = 128;
         const ringGeo = new THREE.BufferGeometry();
         const points: THREE.Vector3[] = [];
+        const segments = 128;
         for (let j = 0; j <= segments; j++) {
           const theta = (j / segments) * Math.PI * 2;
           points.push(new THREE.Vector3(Math.cos(theta) * cfg.radius, Math.sin(theta) * cfg.radius, 0));
         }
         ringGeo.setFromPoints(points);
-
         const ringMat = new THREE.LineBasicMaterial({
           color: cfg.color,
           transparent: true,
           opacity: cfg.opacity,
-          blending: THREE.AdditiveBlending,
         });
         const ring = new THREE.Line(ringGeo, ringMat);
         ring.rotation.x = cfg.tiltX;
         ring.rotation.y = cfg.tiltY;
-        ringGroup.add(ring);
-
-        // Glowing orbital beacon satellite traveling along the ring
-        const satGeo = new THREE.SphereGeometry(0.08, 12, 12);
-        const satMat = new THREE.MeshBasicMaterial({
-          color: 0xffffff,
-          transparent: true,
-          opacity: 0.95,
-          blending: THREE.AdditiveBlending,
-        });
-        const satHaloGeo = new THREE.SphereGeometry(0.18, 12, 12);
-        const satHaloMat = new THREE.MeshBasicMaterial({
-          color: cfg.color,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.6,
-        });
-        const satellite = new THREE.Mesh(satGeo, satMat);
-        satellite.add(new THREE.Mesh(satHaloGeo, satHaloMat));
-        ring.add(satellite);
-
-        ringsData.push({
-          ring,
-          satellite,
-          radius: cfg.radius,
-          speed: cfg.speed,
-          initialTiltX: cfg.tiltX,
-          initialTiltY: cfg.tiltY,
-        });
+        rings.push(ring);
+        mainGroup.add(ring);
       });
 
-      // 4. Vibrant Floating Ember Particles
-      const particleCount = 260;
+      // 3. Subtle Floating Data Particles
+      const particleCount = 180;
       const particleGeo = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
       const colors = new Float32Array(particleCount * 3);
 
-      const colorPalette = [
-        new THREE.Color(0xff6a00), // Pure Ember
-        new THREE.Color(0xff8a2b), // Bright Orange
-        new THREE.Color(0xffc799), // Warm Gold
-        new THREE.Color(0xffffff), // Radiant White
-      ];
+      const cPrimary = new THREE.Color(0xff6a00);
+      const cSecondary = new THREE.Color(0xffa043);
 
       for (let i = 0; i < particleCount; i++) {
         const u = Math.random();
         const v = Math.random();
         const theta = u * 2.0 * Math.PI;
         const phi = Math.acos(2.0 * v - 1.0);
-        // Distribute from inside core out to expansive halo
-        const r = 1.2 + Math.random() * 2.0;
+        const r = 1.35 + Math.random() * 0.9;
 
         positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
         positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
         positions[i * 3 + 2] = r * Math.cos(phi);
 
-        const col = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-        colors[i * 3] = col.r;
-        colors[i * 3 + 1] = col.g;
-        colors[i * 3 + 2] = col.b;
+        const c = Math.random() > 0.4 ? cPrimary : cSecondary;
+        colors[i * 3] = c.r;
+        colors[i * 3 + 1] = c.g;
+        colors[i * 3 + 2] = c.b;
       }
 
       particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
       particleGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
       const particleMat = new THREE.PointsMaterial({
-        size: 0.055,
+        size: 0.042,
         vertexColors: true,
         transparent: true,
-        opacity: 0.85,
+        opacity: 0.65,
         blending: THREE.AdditiveBlending,
       });
       const particles = new THREE.Points(particleGeo, particleMat);
       mainGroup.add(particles);
 
-      // 5. Interactive Mouse Parallax & Inertia
-      let targetRotX = 0;
-      let targetRotY = 0;
+      // Mouse Interaction
+      let targetRotationX = 0;
+      let targetRotationY = 0;
 
       const onMouseMove = (e: MouseEvent) => {
         const rect = container.getBoundingClientRect();
-        const mx = ((e.clientX - rect.left) / (rect.width || 500)) * 2 - 1;
-        const my = -((e.clientY - rect.top) / (rect.height || 500)) * 2 + 1;
-        targetRotY = mx * 0.55;
-        targetRotX = my * 0.45;
+        const w = rect.width || container.clientWidth || 480;
+        const h = rect.height || container.clientHeight || 480;
+        const mx = ((e.clientX - rect.left) / w) * 2 - 1;
+        const my = -((e.clientY - rect.top) / h) * 2 + 1;
+        targetRotationY = mx * 0.45;
+        targetRotationX = my * 0.45;
       };
-      window.addEventListener("mousemove", onMouseMove, { passive: true });
 
-      // 6. Robust Dynamic Resize Observer
-      const handleResize = (w: number, h: number) => {
-        if (!renderer || w <= 0 || h <= 0) return;
+      window.addEventListener("mousemove", onMouseMove);
+
+      const onResize = () => {
+        if (!container) return;
+        const w = container.clientWidth || 480;
+        const h = container.clientHeight || 480;
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
-        renderer.setSize(w, h, false);
+        renderer.setSize(w, h);
       };
+      window.addEventListener("resize", onResize);
 
-      resizeObserver = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-          const w = Math.round(entry.contentRect.width || container.clientWidth || 520);
-          const h = Math.round(entry.contentRect.height || container.clientHeight || 520);
-          handleResize(w, h);
-        }
-      });
-      resizeObserver.observe(container);
-
-      // Initial dimension guarantee
-      handleResize(initialW, initialH);
-
-      // 7. Render Loop with Accessibility-Friendly Motion Scaling
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      // If user prefers reduced motion, scale speeds down to a serene float rather than freezing
-      const speedScale = prefersReducedMotion ? 0.35 : 1.0;
       const clock = new THREE.Clock();
 
       const animate = () => {
-        if (isPaused || !renderer) return;
+        if (isPaused) return;
+        animId = requestAnimationFrame(animate);
+        const elapsedTime = clock.getElapsedTime();
 
-        const elapsed = clock.getElapsedTime() * speedScale;
+        // Smooth rotation animations
+        coreMesh.rotation.y = elapsedTime * 0.12;
+        coreMesh.rotation.x = elapsedTime * 0.08;
 
-        // Core pulsating & spinning
-        cageMesh.rotation.y = elapsed * 0.22;
-        cageMesh.rotation.x = elapsed * 0.14;
+        innerMesh.rotation.y = -elapsedTime * 0.18;
+        nucleusMesh.scale.setScalar(1 + Math.sin(elapsedTime * 2) * 0.06);
 
-        shellMesh.rotation.y = -elapsed * 0.16;
-        shellMesh.rotation.z = elapsed * 0.08;
+        particles.rotation.y = elapsedTime * 0.06;
 
-        const pulse = 1 + Math.sin(elapsed * 2.4) * 0.08;
-        nucleusMesh.scale.set(pulse, pulse, pulse);
-
-        // Orbital rings rotation & moving satellites
-        ringsData.forEach((rd, idx) => {
-          rd.ring.rotation.z = elapsed * 0.12 * rd.speed;
-
-          // Move beacon satellite along its ring
-          const satAngle = elapsed * rd.speed * 0.9 + idx * 2.1;
-          rd.satellite.position.set(
-            Math.cos(satAngle) * rd.radius,
-            Math.sin(satAngle) * rd.radius,
-            0
-          );
+        rings.forEach((ring, idx) => {
+          ring.rotation.z = elapsedTime * (0.05 + idx * 0.03);
         });
 
-        // Particle field rotation
-        particles.rotation.y = elapsed * 0.08;
-        particles.rotation.x = Math.sin(elapsed * 0.3) * 0.06;
-
-        // Smooth Lerp to mouse target
-        mainGroup.rotation.y += (targetRotY - mainGroup.rotation.y) * 0.05;
-        mainGroup.rotation.x += (targetRotX - mainGroup.rotation.x) * 0.05;
+        // Lerp to mouse target
+        mainGroup.rotation.y += (targetRotationY - mainGroup.rotation.y) * 0.04;
+        mainGroup.rotation.x += (targetRotationX - mainGroup.rotation.x) * 0.04;
 
         renderer.render(scene, camera);
-        animId = requestAnimationFrame(animate);
       };
 
-      animId = requestAnimationFrame(animate);
+      animate();
 
-      // Tab visibility energy saver
       const onVisibilityChange = () => {
         if (document.hidden) {
           isPaused = true;
@@ -286,34 +200,32 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
         } else {
           isPaused = false;
           clock.getDelta();
-          animId = requestAnimationFrame(animate);
+          animate();
         }
       };
       document.addEventListener("visibilitychange", onVisibilityChange);
 
-      // Cleanup
       return () => {
         window.removeEventListener("mousemove", onMouseMove);
+        window.removeEventListener("resize", onResize);
         document.removeEventListener("visibilitychange", onVisibilityChange);
-        if (resizeObserver) resizeObserver.disconnect();
         cancelAnimationFrame(animId);
 
-        // Dispose geometries & materials
+        // Clean up geometries & materials
+        coreGeo.dispose();
+        coreMat.dispose();
+        innerGeo.dispose();
+        innerMat.dispose();
         nucleusGeo.dispose();
         nucleusMat.dispose();
-        cageGeo.dispose();
-        cageMat.dispose();
-        shellGeo.dispose();
-        shellMat.dispose();
         particleGeo.dispose();
         particleMat.dispose();
-
-        ringsData.forEach((rd) => {
-          rd.ring.geometry.dispose();
-          if (Array.isArray(rd.ring.material)) {
-            rd.ring.material.forEach((m) => m.dispose());
+        rings.forEach((r) => {
+          r.geometry.dispose();
+          if (Array.isArray(r.material)) {
+            r.material.forEach((m) => m.dispose());
           } else {
-            rd.ring.material.dispose();
+            r.material.dispose();
           }
         });
 
@@ -323,7 +235,7 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
         renderer?.dispose();
       };
     } catch (err) {
-      console.warn("AiSphere3D WebGL initialization failed, falling back to CSS animation:", err);
+      console.warn("WebGL initialization failed, falling back to CSS animation:", err);
       setHasError(true);
     }
   }, []);
@@ -331,19 +243,18 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
   if (hasError) {
     return (
       <div className={`${className} flex items-center justify-center`}>
-        <div className="relative h-72 w-72 rounded-full border border-ember-500/40 animate-pulse bg-gradient-radial from-ember-500/25 via-transparent to-transparent">
-          <div className="absolute inset-4 rounded-full border border-burnt-red/50 animate-spin [animation-duration:14s]" />
-          <div className="absolute inset-10 rounded-full border border-white/30 animate-spin [animation-duration:9s] [animation-direction:reverse]" />
-          <div className="absolute inset-16 rounded-full bg-ember-500/35 blur-lg" />
+        <div className="relative h-64 w-64 rounded-full border border-ember-500/30 animate-pulse bg-gradient-radial from-ember-500/20 via-transparent to-transparent">
+          <div className="absolute inset-4 rounded-full border border-burnt-red/40 animate-spin [animation-duration:12s]" />
+          <div className="absolute inset-12 rounded-full border border-white/20 animate-spin [animation-duration:8s] [animation-direction:reverse]" />
+          <div className="absolute inset-20 rounded-full bg-ember-500/30 blur-md" />
         </div>
       </div>
     );
   }
 
   return (
-    <div ref={containerRef} className={`relative flex items-center justify-center overflow-visible ${className}`}>
-      {/* Radiant atmospheric backdrop glow */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-radial-gradient from-ember-500/15 via-ember-500/5 to-transparent blur-2xl" />
+    <div ref={containerRef} className={className}>
+      <div className="pointer-events-none absolute inset-0 bg-gradient-radial from-ember-500/10 via-transparent to-transparent" />
     </div>
   );
 }
