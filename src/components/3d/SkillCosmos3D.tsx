@@ -50,12 +50,14 @@ function createTextSprite(text: string, colorHex: string) {
   const sprite = new THREE.Sprite(spriteMat);
   sprite.scale.set(1.0, 0.25, 1);
   sprite.position.set(0, 0.32, 0);
+  sprite.userData = { texture, material: spriteMat };
   return sprite;
 }
 
 export default function SkillCosmos3D() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeSkill, setActiveSkill] = useState<string>("Python");
+  const [hasError, setHasError] = useState(false);
   const activeSkillRef = useRef(activeSkill);
 
   useEffect(() => {
@@ -66,212 +68,280 @@ export default function SkillCosmos3D() {
     const container = containerRef.current;
     if (!container) return;
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      42,
-      container.clientWidth / container.clientHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 4.8;
-
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(renderer.domElement);
-
-    const cosmosGroup = new THREE.Group();
-    scene.add(cosmosGroup);
-
-    // Orbit Ring Visualizers
-    const orbitConfigs = [
-      { radius: 1.5, tiltX: Math.PI / 2.6, color: 0xff6a00, opacity: 0.4 },
-      { radius: 2.15, tiltX: -Math.PI / 3.2, color: 0xffa043, opacity: 0.3 },
-    ];
-
-    orbitConfigs.forEach((cfg) => {
-      const ringGeo = new THREE.BufferGeometry();
-      const points: THREE.Vector3[] = [];
-      const segs = 96;
-      for (let j = 0; j <= segs; j++) {
-        const theta = (j / segs) * Math.PI * 2;
-        points.push(new THREE.Vector3(Math.cos(theta) * cfg.radius, Math.sin(theta) * cfg.radius, 0));
-      }
-      ringGeo.setFromPoints(points);
-      const ringMat = new THREE.LineBasicMaterial({
-        color: cfg.color,
-        transparent: true,
-        opacity: cfg.opacity,
-      });
-      const ring = new THREE.Line(ringGeo, ringMat);
-      ring.rotation.x = cfg.tiltX;
-      cosmosGroup.add(ring);
-    });
-
-    // Create 3D Meshes for each skill node with labels
-    const nodeMeshes: THREE.Mesh[] = [];
-
-    SKILL_NODES.forEach((node, idx) => {
-      const radius = idx < 5 ? 1.5 : 2.15;
-      const angle = ((idx % 5) / 5) * Math.PI * 2;
-      const x = Math.cos(angle) * radius;
-      const y = Math.sin(angle * 2) * 0.35;
-      const z = Math.sin(angle) * radius;
-
-      // Group holding mesh + label
-      const nodeGroup = new THREE.Group();
-      nodeGroup.position.set(x, y, z);
-
-      // Core Solid Mesh
-      const geo = new THREE.SphereGeometry(node.size, 16, 16);
-      const mat = new THREE.MeshBasicMaterial({
-        color: node.color,
-        transparent: true,
-        opacity: 0.85,
-      });
-      const mesh = new THREE.Mesh(geo, mat);
-      mesh.userData = { name: node.name };
-
-      // Outer Wireframe Halo
-      const haloGeo = new THREE.SphereGeometry(node.size * 1.25, 12, 12);
-      const haloMat = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.25,
-      });
-      const halo = new THREE.Mesh(haloGeo, haloMat);
-      mesh.add(halo);
-
-      // 3D Billboard Floating Label
-      const label = createTextSprite(node.name, `#${node.color.toString(16).padStart(6, "0")}`);
-      mesh.add(label);
-
-      nodeMeshes.push(mesh);
-      nodeGroup.add(mesh);
-      cosmosGroup.add(nodeGroup);
-    });
-
-    // Ambient stars background
-    const starGeo = new THREE.BufferGeometry();
-    const starCount = 140;
-    const starPos = new Float32Array(starCount * 3);
-    for (let i = 0; i < starCount * 3; i++) {
-      starPos[i] = (Math.random() - 0.5) * 8;
-    }
-    starGeo.setAttribute("position", new THREE.BufferAttribute(starPos, 3));
-    const starMat = new THREE.PointsMaterial({
-      size: 0.035,
-      color: 0xffc799,
-      transparent: true,
-      opacity: 0.75,
-      blending: THREE.AdditiveBlending,
-    });
-    const starField = new THREE.Points(starGeo, starMat);
-    cosmosGroup.add(starField);
-
-    // Interactive Drag Controls
-    let isDragging = false;
-    let prevMousePos = { x: 0, y: 0 };
-    let dragVelocity = { x: 0, y: 0 };
-
-    const onPointerDown = (e: PointerEvent) => {
-      isDragging = true;
-      prevMousePos = { x: e.clientX, y: e.clientY };
-    };
-
-    const onPointerMove = (e: PointerEvent) => {
-      if (!isDragging) return;
-      const deltaX = e.clientX - prevMousePos.x;
-      const deltaY = e.clientY - prevMousePos.y;
-      dragVelocity.x = deltaX * 0.005;
-      dragVelocity.y = deltaY * 0.005;
-      cosmosGroup.rotation.y += dragVelocity.x;
-      cosmosGroup.rotation.x += dragVelocity.y;
-      prevMousePos = { x: e.clientX, y: e.clientY };
-    };
-
-    const onPointerUp = () => {
-      isDragging = false;
-    };
-
-    container.addEventListener("pointerdown", onPointerDown);
-    window.addEventListener("pointermove", onPointerMove);
-    window.addEventListener("pointerup", onPointerUp);
-
-    // Raycaster for clicking spheres
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-
-    const onClick = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      mouse.x = ((e.clientX - rect.left) / container.clientWidth) * 2 - 1;
-      mouse.y = -((e.clientY - rect.top) / container.clientHeight) * 2 + 1;
-
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(nodeMeshes, true);
-      if (intersects.length > 0) {
-        let target = intersects[0].object;
-        while (target.parent && !target.userData.name) {
-          target = target.parent as THREE.Object3D;
-        }
-        if (target.userData.name) {
-          setActiveSkill(target.userData.name);
-        }
-      }
-    };
-    container.addEventListener("click", onClick);
-
-    const onResize = () => {
-      if (!container) return;
-      camera.aspect = container.clientWidth / container.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
-    };
-    window.addEventListener("resize", onResize);
-
+    let renderer: THREE.WebGLRenderer;
     let animId: number;
-    const clock = new THREE.Clock();
+    let isPaused = false;
+    const disposables: (() => void)[] = [];
 
-    const animate = () => {
-      animId = requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
+    try {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      container.style.touchAction = "none";
 
-      // Inertia and slow continuous orbital spin
-      if (!isDragging) {
-        dragVelocity.x *= 0.95;
-        dragVelocity.y *= 0.95;
-        cosmosGroup.rotation.y += 0.003 + dragVelocity.x;
-        cosmosGroup.rotation.x += dragVelocity.y;
-      }
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        42,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 4.8;
 
-      const currentActive = activeSkillRef.current;
-      nodeMeshes.forEach((m) => {
-        m.rotation.y = time * 0.4;
-        m.rotation.x = time * 0.2;
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
 
-        const isTarget = m.userData.name === currentActive;
-        const targetScale = isTarget ? 1.35 + Math.sin(time * 3) * 0.08 : 1.0;
-        m.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+      const cosmosGroup = new THREE.Group();
+      scene.add(cosmosGroup);
+
+      // Orbit Ring Visualizers
+      const orbitConfigs = [
+        { radius: 1.5, tiltX: Math.PI / 2.6, color: 0xff6a00, opacity: 0.4 },
+        { radius: 2.15, tiltX: -Math.PI / 3.2, color: 0xffa043, opacity: 0.3 },
+      ];
+
+      orbitConfigs.forEach((cfg) => {
+        const ringGeo = new THREE.BufferGeometry();
+        const points: THREE.Vector3[] = [];
+        const segs = 96;
+        for (let j = 0; j <= segs; j++) {
+          const theta = (j / segs) * Math.PI * 2;
+          points.push(new THREE.Vector3(Math.cos(theta) * cfg.radius, Math.sin(theta) * cfg.radius, 0));
+        }
+        ringGeo.setFromPoints(points);
+        const ringMat = new THREE.LineBasicMaterial({
+          color: cfg.color,
+          transparent: true,
+          opacity: cfg.opacity,
+        });
+        const ring = new THREE.Line(ringGeo, ringMat);
+        ring.rotation.x = cfg.tiltX;
+        cosmosGroup.add(ring);
+
+        disposables.push(() => {
+          ringGeo.dispose();
+          ringMat.dispose();
+        });
       });
 
-      renderer.render(scene, camera);
-    };
+      // Create 3D Meshes for each skill node with labels
+      const nodeMeshes: THREE.Mesh[] = [];
 
-    animate();
+      SKILL_NODES.forEach((node, idx) => {
+        const radius = idx < 5 ? 1.5 : 2.15;
+        const angle = ((idx % 5) / 5) * Math.PI * 2;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle * 2) * 0.35;
+        const z = Math.sin(angle) * radius;
 
-    return () => {
-      container.removeEventListener("pointerdown", onPointerDown);
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerup", onPointerUp);
-      container.removeEventListener("click", onClick);
-      window.removeEventListener("resize", onResize);
-      cancelAnimationFrame(animId);
-      if (renderer.domElement && container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement);
+        // Group holding mesh + label
+        const nodeGroup = new THREE.Group();
+        nodeGroup.position.set(x, y, z);
+
+        // Core Solid Mesh
+        const geo = new THREE.SphereGeometry(node.size, 16, 16);
+        const mat = new THREE.MeshBasicMaterial({
+          color: node.color,
+          transparent: true,
+          opacity: 0.85,
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.userData = { name: node.name };
+
+        // Outer Wireframe Halo
+        const haloGeo = new THREE.SphereGeometry(node.size * 1.25, 12, 12);
+        const haloMat = new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.25,
+        });
+        const halo = new THREE.Mesh(haloGeo, haloMat);
+        mesh.add(halo);
+
+        // 3D Billboard Floating Label
+        const label = createTextSprite(node.name, `#${node.color.toString(16).padStart(6, "0")}`);
+        mesh.add(label);
+
+        nodeMeshes.push(mesh);
+        nodeGroup.add(mesh);
+        cosmosGroup.add(nodeGroup);
+
+        disposables.push(() => {
+          geo.dispose();
+          mat.dispose();
+          haloGeo.dispose();
+          haloMat.dispose();
+          if (label.userData?.texture) label.userData.texture.dispose();
+          if (label.userData?.material) label.userData.material.dispose();
+        });
+      });
+
+      // Ambient stars background
+      const starGeo = new THREE.BufferGeometry();
+      const starCount = 140;
+      const starPos = new Float32Array(starCount * 3);
+      for (let i = 0; i < starCount * 3; i++) {
+        starPos[i] = (Math.random() - 0.5) * 8;
       }
-      renderer.dispose();
-    };
+      starGeo.setAttribute("position", new THREE.BufferAttribute(starPos, 3));
+      const starMat = new THREE.PointsMaterial({
+        size: 0.035,
+        color: 0xffc799,
+        transparent: true,
+        opacity: 0.75,
+        blending: THREE.AdditiveBlending,
+      });
+      const starField = new THREE.Points(starGeo, starMat);
+      cosmosGroup.add(starField);
+
+      disposables.push(() => {
+        starGeo.dispose();
+        starMat.dispose();
+      });
+
+      // Interactive Drag Controls
+      let isDragging = false;
+      let prevMousePos = { x: 0, y: 0 };
+      let dragVelocity = { x: 0, y: 0 };
+
+      const onPointerDown = (e: PointerEvent) => {
+        isDragging = true;
+        prevMousePos = { x: e.clientX, y: e.clientY };
+      };
+
+      const onPointerMove = (e: PointerEvent) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - prevMousePos.x;
+        const deltaY = e.clientY - prevMousePos.y;
+        dragVelocity.x = deltaX * 0.005;
+        dragVelocity.y = deltaY * 0.005;
+        cosmosGroup.rotation.y += dragVelocity.x;
+        cosmosGroup.rotation.x += dragVelocity.y;
+        prevMousePos = { x: e.clientX, y: e.clientY };
+
+        if (prefersReducedMotion) {
+          renderer.render(scene, camera);
+        }
+      };
+
+      const onPointerUp = () => {
+        isDragging = false;
+      };
+
+      container.addEventListener("pointerdown", onPointerDown);
+      window.addEventListener("pointermove", onPointerMove);
+      window.addEventListener("pointerup", onPointerUp);
+
+      // Raycaster for clicking spheres
+      const raycaster = new THREE.Raycaster();
+      const mouse = new THREE.Vector2();
+
+      const onClick = (e: MouseEvent) => {
+        const rect = container.getBoundingClientRect();
+        mouse.x = ((e.clientX - rect.left) / container.clientWidth) * 2 - 1;
+        mouse.y = -((e.clientY - rect.top) / container.clientHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(nodeMeshes, true);
+        if (intersects.length > 0) {
+          let target = intersects[0].object;
+          while (target.parent && !target.userData.name) {
+            target = target.parent as THREE.Object3D;
+          }
+          if (target.userData.name) {
+            setActiveSkill(target.userData.name);
+            if (prefersReducedMotion) {
+              renderer.render(scene, camera);
+            }
+          }
+        }
+      };
+      container.addEventListener("click", onClick);
+
+      const onResize = () => {
+        if (!container) return;
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.render(scene, camera);
+      };
+      window.addEventListener("resize", onResize);
+
+      const clock = new THREE.Clock();
+
+      const animate = () => {
+        if (isPaused) return;
+
+        const time = clock.getElapsedTime();
+
+        // Inertia and continuous orbital spin
+        if (!isDragging && !prefersReducedMotion) {
+          dragVelocity.x *= 0.95;
+          dragVelocity.y *= 0.95;
+          cosmosGroup.rotation.y += 0.0028 + dragVelocity.x;
+          cosmosGroup.rotation.x += dragVelocity.y;
+        }
+
+        const currentActive = activeSkillRef.current;
+        nodeMeshes.forEach((m) => {
+          if (!prefersReducedMotion) {
+            m.rotation.y = time * 0.4;
+            m.rotation.x = time * 0.2;
+          }
+
+          const isTarget = m.userData.name === currentActive;
+          const targetScale = isTarget ? 1.35 + Math.sin(time * 3) * 0.08 : 1.0;
+          m.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+        });
+
+        renderer.render(scene, camera);
+
+        if (!prefersReducedMotion) {
+          animId = requestAnimationFrame(animate);
+        }
+      };
+
+      if (!prefersReducedMotion) {
+        animId = requestAnimationFrame(animate);
+      } else {
+        renderer.render(scene, camera);
+      }
+
+      // Energy-Smart Visibility & Tab Inactivity Throttling
+      const onVisibilityChange = () => {
+        if (prefersReducedMotion) return;
+        if (document.hidden) {
+          isPaused = true;
+          cancelAnimationFrame(animId);
+        } else {
+          isPaused = false;
+          clock.getDelta();
+          animId = requestAnimationFrame(animate);
+        }
+      };
+      document.addEventListener("visibilitychange", onVisibilityChange);
+
+      return () => {
+        container.removeEventListener("pointerdown", onPointerDown);
+        window.removeEventListener("pointermove", onPointerMove);
+        window.removeEventListener("pointerup", onPointerUp);
+        container.removeEventListener("click", onClick);
+        window.removeEventListener("resize", onResize);
+        document.removeEventListener("visibilitychange", onVisibilityChange);
+        cancelAnimationFrame(animId);
+
+        // Complete WebGL cleanup
+        disposables.forEach((fn) => fn());
+        if (renderer?.domElement && container.contains(renderer.domElement)) {
+          container.removeChild(renderer.domElement);
+        }
+        renderer?.dispose();
+      };
+    } catch (err) {
+      console.warn("SkillCosmos WebGL initialization failed, falling back cleanly:", err);
+      setHasError(true);
+    }
   }, []);
 
   const activeNode = SKILL_NODES.find((s) => s.name === activeSkill) ?? SKILL_NODES[0];
@@ -291,11 +361,23 @@ export default function SkillCosmos3D() {
         </span>
       </div>
 
-      {/* 3D WebGL Canvas */}
-      <div
-        ref={containerRef}
-        className="h-[320px] sm:h-[380px] lg:h-[460px] w-full cursor-grab active:cursor-grabbing rounded-xl bg-gradient-to-b from-[#060c14]/40 to-transparent"
-      />
+      {/* 3D WebGL Canvas / Fallback */}
+      {hasError ? (
+        <div className="flex h-[320px] sm:h-[380px] lg:h-[460px] w-full items-center justify-center rounded-xl bg-gradient-to-b from-[#060c14]/40 to-transparent p-6 text-center">
+          <div className="space-y-3">
+            <div className="mx-auto h-24 w-24 rounded-full border border-ember-500/40 bg-ember-500/10 flex items-center justify-center animate-pulse">
+              <Sparkles className="h-8 w-8 text-ember-400" />
+            </div>
+            <p className="font-display text-sm uppercase text-white tracking-wider">Interactive Galaxy Mode</p>
+            <p className="text-xs text-white/50 max-w-xs">Select any skill pill below to inspect core competencies and associated engineering projects.</p>
+          </div>
+        </div>
+      ) : (
+        <div
+          ref={containerRef}
+          className="h-[320px] sm:h-[380px] lg:h-[460px] w-full cursor-grab active:cursor-grabbing rounded-xl bg-gradient-to-b from-[#060c14]/40 to-transparent"
+        />
+      )}
 
       {/* Active Skill HUD Detail Pill */}
       <div className="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-white/10 bg-black/40 px-3.5 py-2.5">

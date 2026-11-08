@@ -23,7 +23,20 @@
 
 A cinematic, performance-obsessed personal portfolio website for **Sumit Kumar**, final-year B.Tech CSE student (AI & Data Science) at Shri Ramswaroop Memorial University (SRMU) and Machine Learning Intern at **FlyRank AI**. 
 
-Engineered with a **dark ember aesthetic** (`#060c14` / `#FF6A00`), real-time **Three.js WebGL 3D scenes**, smooth 60fps momentum physics via **Lenis & GSAP**, and a hybrid **Ask Sumit AI assistant** backed by semantic routing and the Google Gemini API.
+Engineered with a **dark ember aesthetic** (`#060c14` / `#FF6A00`), real-time **Three.js WebGL 3D scenes**, smooth 60fps momentum physics via **Lenis & GSAP**, and the **Ask Sumit AI assistant** backed by an instant grounded semantic engine with zero client-side API key exposure.
+
+---
+
+## 🎯 Profile & Verified Academic Benchmarks
+
+| Metric / Milestone | Verified Record | Details |
+| :--- | :--- | :--- |
+| **B.Tech — CSE (AI & DS)** | **CGPA 7.98 / 10** | Shri Ramswaroop Memorial University (SRMU, 2023–2027) · Sem VI SGPA 8.26 |
+| **Senior Secondary (CBSE XII)** | **75.4%** | PM Shri Kendriya Vidyalaya, Lucknow (PCM, 2023) |
+| **Secondary (CBSE X)** | **87.4%** | Army School, Binaguri, West Bengal (2021) |
+| **Google Cloud Skills Boost** | **#1 Diamond League** | 171 Verified Skill Badges · 38,105 Points · 44-Day Streak |
+| **Competitive Programming** | **341 Solved · Rating 1,460** | LeetCode (@Sumit2003) · 94 Easy · 184 Medium · 63 Hard |
+| **Hackathons & Honors** | **Top 10 Finish** | VIVEKA: The Intelligence 5.0 (Techfest 2k26) · KarigarSetu |
 
 ---
 
@@ -34,11 +47,11 @@ Engineered with a **dark ember aesthetic** (`#060c14` / `#FF6A00`), real-time **
   * *List View*: Categorized skill trees with animated proficiency bars and radial percentage rings.
   * *3D Cosmos*: Fully interactive WebGL galaxy with drag-to-rotate, planetary orbits, and raycasting hover inspection.
 * **Selected Work & Deep Case Studies**: Filterable by *Generative AI*, *Machine Learning*, *Data Science*, and *Research*, featuring full-screen architecture pipeline modals.
-* **Ask Sumit AI Assistant**: Floating hybrid chatbot featuring an instant 13+ topic offline semantic router and an optional live **Google Gemini 1.5 Flash API** mode with custom markdown formatting and direct resume triggers.
+* **Ask Sumit AI Assistant**: Floating hybrid chatbot featuring an instant 16+ topic semantic router with zero client-side API key exposure (support for optional server-side AI proxy).
 * **In-Browser Document & PDF Viewer**: Full-screen modal to preview and download verified certificates (Google, Anthropic, IBM, NPTEL, Deloitte) and resume with zero layout shifts.
-* **Live GitHub API Metrics**: Real-time repository counts cached in `localStorage` with offline resilience.
+* **Transparent GitHub Metrics**: Real-time repository counts via GitHub REST API paired with transparently labeled 2025–2026 curated developer baselines.
 * **1-Click Copy Email**: Instant clipboard copying with visual toast feedback for frictionless recruiter reachout.
-* **Energy-Smart Canvas Throttling**: Background particle canvas loops automatically pause on tab switch (`document.hidden`), drastically conserving GPU and battery life.
+* **Energy-Smart Canvas Throttling**: Background particle canvas and 3D WebGL loops automatically pause on tab switch (`document.hidden`) and respect `prefers-reduced-motion`.
 
 ---
 
@@ -46,11 +59,14 @@ Engineered with a **dark ember aesthetic** (`#060c14` / `#FF6A00`), real-time **
 
 | Project | Category | Key Highlights & Stack |
 | :--- | :--- | :--- |
-| **[FlyRank AI — ML Internship](https://github.com/Sumit2003-dev/flyrank-ml-internship)** | ML Ranking | Content-opportunity scoring framework evaluated against **Precision@50**; HuggingFace data contracts. |
-| **[GyanVerse AI](https://github.com/Sumit2003-dev/GyanVerse-AI)** | GenAI / RAG | Capstone RAG system using Sentence Transformers, FAISS/ChromaDB vector indexing, and Streamlit (<1.2s latency). |
-| **[Student Record Intelligence](https://github.com/Sumit2003-dev/Student-Record-Intelligence-System)** | Analytics | End-to-end data processing platform analyzing 1,000+ student records with 15+ performance metrics. |
-| **[Airline Delay Prediction](https://github.com/Sumit2003-dev/Airlines-Delay-Prediction)** | ML Regression | End-to-end regression forecasting pipeline achieving an **R² score of ~0.85** on held-out evaluation data. |
-| **[AI Exam Proctoring Research](https://github.com/Sumit2003-dev)** | Computer Vision | Co-authored research on ML & computer vision for automated academic-integrity monitoring. |
+| **[BeyondWord (Emotion Reader)](https://github.com/Sumit2003-dev)** | Deep Learning / NLP | Multilingual text emotion classifier across 6 core emotions and psychometric VAD dimensions; PyTorch, FastAPI, React 19. |
+| **[FlyRank AI — ML Internship](https://github.com/Sumit2003-dev/flyrank-ml-internship)** | ML Ranking | Content-opportunity scoring framework evaluated against **Precision@50**; HuggingFace versioned data contracts. |
+| **[GyanVerse AI](https://github.com/Sumit2003-dev/GyanVerse-AI)** | GenAI / RAG | Capstone RAG system using Sentence Transformers, FAISS/ChromaDB vector indexing, and GPT-4o-mini (<1.2s latency). |
+| **[RailSaarthi](https://github.com/Sumit2003-dev)** | ML / Hackathon | Smart India Hackathon 2026 (SIH26028, Team Garuda X) train ETA prediction, delay root-cause analysis, and zonal control room. |
+| **[Student Performance Prediction](https://github.com/Sumit2003-dev/Student-Record-Intelligence-System)** | Analytics & ML | 1,200 records analyzed with Gradient Boosting (**R² 0.85**, 5-fold CV R² 0.83); Flask REST API, deployed at nextgrade.netlify.app. |
+| **[Airline Delay Prediction](https://github.com/Sumit2003-dev/Airlines-Delay-Prediction)** | ML Classification | End-to-end classification pipeline on 124K-row imbalanced flight dataset with Random Forest (ROC-AUC 0.67). |
+| **[KarigarSetu — Artisan's Ledger](https://github.com/Sumit2003-dev)** | Web & Data | Top 10 finish at VIVEKA 2k26 (Team CodeVengers) connecting Lucknow Chikankari artisans directly with transparent pricing. |
+| **[AI Exam Proctoring Research](https://github.com/Sumit2003-dev)** | Computer Vision | Co-authored research on ML & computer vision for automated academic-integrity monitoring under faculty supervision. |
 
 ---
 

@@ -120,18 +120,42 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "flyrank-ml-internship",
+    id: "beyondword-emotion-reader",
     index: "01",
+    title: "Emotion Reader (BeyondWord) — Multilingual AI",
+    category: "Generative AI · NLP",
+    blurb:
+      "Multilingual emotion and sentiment recognition classifying text into 6 core emotions and scoring psychometric VAD dimensions with calibrated probabilities.",
+    description:
+      "Hybrid transformer model in PyTorch served through a FastAPI backend. Supports 100+ languages including English, Hindi, Hinglish, Spanish and French with calibrated probability outputs, single-text & batch CSV analysis, session history, and copyable communication response guidance. Deployed on Vercel with React 19 + TanStack.",
+    problem:
+      "Nuanced emotional cues, cross-language sentiment subtleties, and mixed-dialect expressions (such as Hinglish) are lost in standard sentiment classifiers.",
+    solution:
+      "Built a hybrid PyTorch transformer classifier providing calibrated probability outputs across 6 core emotions along with psychometric Valence, Arousal, and Dominance (VAD) dimension scoring.",
+    architecture:
+      "Multilingual Input (Text / CSV) → FastAPI Inference Gateway → PyTorch Transformer Backbone → VAD Psychometric Scorer → Calibrated Probabilities → React 19 Client",
+    metrics: [
+      { label: "Languages", value: "100+" },
+      { label: "Emotions", value: "6 Core + VAD" },
+      { label: "Frontend", value: "React 19" },
+    ],
+    tech: ["Python", "PyTorch", "Transformers", "FastAPI", "React 19", "TanStack", "Vercel"],
+    github: "https://github.com/Sumit2003-dev",
+    gradient: "from-[#FF6A00]/25 via-burnt-red/10 to-transparent",
+  },
+  {
+    id: "flyrank-ml-internship",
+    index: "02",
     title: "FlyRank AI — ML Internship Case Study",
     category: "Machine Learning · Industry Internship",
     blurb:
-      "Building a content-opportunity scoring framework as an ML ranking problem — designing and validating models against Precision@50 as the core success metric.",
+      "Content-opportunity scoring framework as an ML ranking problem — designing and validating models against Precision@50 as the primary benchmark.",
     description:
-      "Building a content-opportunity scoring framework as an ML ranking problem — designing and validating models against Precision@50 as the core success metric. Progressed through four assignment milestones (ML-01–ML-04), including building a data contract against FlyRank's HuggingFace warehouse for reproducible, versioned data pipelines.",
+      "Designed and trained automated ML ranking models evaluated against Precision@50 as the core success metric across four assignment milestones (ML-01–ML-04). Built reproducible data contracts against FlyRank's HuggingFace warehouse, with hands-on modules on Vertex AI, LoRA, RLHF, and GenAI agent workflows.",
     problem:
       "Identifying high-potential content opportunities requires scalable, automated ranking models rather than manual heuristics.",
     solution:
-      "Designed and trained ML ranking models, benchmarked against Precision@50, and created versioned data contracts with HuggingFace.",
+      "Designed and trained ML ranking models, benchmarked against Precision@50, and created versioned, reproducible data contracts with HuggingFace.",
     architecture:
       "HuggingFace Warehouse → Data Contract Validation → Feature Extraction → ML Ranking Model → Precision@50 Evaluation",
     metrics: [
@@ -141,98 +165,152 @@ export const projects: Project[] = [
     ],
     tech: ["Python", "Scikit-learn", "Ranking Models", "Data Contracts", "HuggingFace", "Git"],
     github: "https://github.com/Sumit2003-dev/flyrank-ml-internship",
-    gradient: "from-[#FF6A00]/25 via-burnt-red/10 to-transparent",
+    gradient: "from-[#FF8A2B]/25 via-burnt-orange/10 to-transparent",
   },
   {
     id: "gyanverse-ai",
-    index: "02",
-    title: "GyanVerse AI",
+    index: "03",
+    title: "GyanVerse AI — RAG Intelligent QnA",
     category: "Generative AI · RAG",
     blurb:
-      "Context-aware multilingual educational chatbot powered by Sentence Transformers and vector database indexing.",
+      "Context-aware multilingual educational chatbot powered by Sentence Transformers, FAISS/ChromaDB indexing, and GPT-4o-mini synthesis.",
     description:
-      "Final-year capstone project designed to reduce query-resolution time for students by grounding AI responses in indexed course materials.",
+      "Final-year capstone project designed to reduce query-resolution time for students by grounding AI responses in indexed course materials. Built with a 3-member team under faculty guidance, featuring low-latency retrieval (<1.2s) in a Streamlit UI.",
     problem:
       "Students waste hours sifting through static PDFs and lecture notes without direct, context-accurate answers.",
     solution:
-      "Engineered an end-to-end RAG pipeline using Sentence Transformers, FAISS/ChromaDB vector search and LLM synthesis with multilingual support.",
+      "Engineered an end-to-end RAG pipeline using Sentence Transformers, FAISS/ChromaDB vector search, and LLM synthesis with multilingual support.",
     architecture:
       "PDF Ingestion → Sentence Transformer Embeddings → FAISS Vector Store → Query Retrieval → Context Augmented LLM → Multilingual Response",
     metrics: [
       { label: "Accuracy", value: "~92%" },
       { label: "Latency", value: "<1.2s" },
-      { label: "Support", value: "Multi" },
+      { label: "Model", value: "GPT-4o-mini" },
     ],
-    tech: ["Python", "RAG", "FAISS", "ChromaDB", "Sentence Transformers", "Flask", "Streamlit"],
+    tech: ["Python", "RAG", "FAISS", "ChromaDB", "Sentence Transformers", "GPT-4o-mini", "Streamlit"],
     github: "https://github.com/Sumit2003-dev/GyanVerse-AI",
-    gradient: "from-[#FF8A2B]/25 via-burnt-orange/10 to-transparent",
-  },
-  {
-    id: "student-record-intelligence",
-    index: "03",
-    title: "Student Record Intelligence",
-    category: "Data Science · Analytics",
-    blurb:
-      "End-to-end analytics platform transforming 1,000+ student records into actionable academic performance insights.",
-    description:
-      "A complete data processing and dashboard system built with Python, Pandas and Streamlit to analyse academic performance trends and risk profiles.",
-    problem:
-      "Academic departments lack real-time visibility into student performance trends and dropout risk factors.",
-    solution:
-      "Cleaned, structured and visualised complex multi-year student data with interactive filterable dashboards and automated statistical summaries.",
-    architecture:
-      "Raw CSV Data → Pandas Cleaning & ETL → Feature Profiling → Streamlit Dashboard → Interactive Analytics Visuals",
-    metrics: [
-      { label: "Records", value: "1,000+" },
-      { label: "Fields", value: "15+" },
-      { label: "Speed", value: "Real-time" },
-    ],
-    tech: ["Python", "Pandas", "NumPy", "Matplotlib", "Streamlit"],
-    github: "https://github.com/Sumit2003-dev/Student-Record-Intelligence-System",
     gradient: "from-amber-400/25 via-burnt-red/10 to-transparent",
   },
   {
-    id: "airline-delay-prediction",
+    id: "railsaarthi-sih",
     index: "04",
-    title: "Airline Delay Prediction",
-    category: "ML Regression",
-    blurb: "Regression model forecasting flight delays, achieving an R² of ~0.85 on held-out data.",
-    description: "Regression model forecasting flight delays, achieving an R² of ~0.85 on held-out data.",
-    problem: "Unpredictable flight delays disrupt scheduling and passenger journeys.",
-    solution: "Trained regression models on historical aviation data to forecast delay durations.",
-    architecture: "Data Cleaning → Feature Engineering → Regression Modeling → Cross-Validation → Evaluation",
+    title: "RailSaarthi — Train ETA & Control-Room Platform",
+    category: "Machine Learning · Smart India Hackathon",
+    blurb:
+      "Multi-factor train ETA prediction engine, delay root-cause classifier, and connecting-train miss-risk analyser for Indian Railways (SIH26028).",
+    description:
+      "Designed an automated multi-factor ETA prediction engine, delay root-cause classifier, connecting-train miss-risk analyser, and control-room zonal dashboard for Indian Railways. Developed for Smart India Hackathon 2026 (Team Garuda X, SIH26028, Ministry of Railways) owning ML data handling and model evaluation.",
+    problem:
+      "Cascading rail delays and connecting-train misses create operational bottlenecks and poor passenger experience across railway zones.",
+    solution:
+      "Engineered machine learning models to forecast ETA deviations, classify delay root causes, and predict connecting-train miss probability in real time.",
+    architecture:
+      "Transit Feeds → Scikit-learn ETA Engine → Delay Root-Cause Classifier → Miss-Risk Analyzer → Control-Room Dashboard",
     metrics: [
-      { label: "R² Score", value: "~0.85" },
-      { label: "Model", value: "Regression" },
-      { label: "Pipeline", value: "End-to-End" },
+      { label: "Event", value: "SIH 2026" },
+      { label: "Team", value: "Garuda X" },
+      { label: "Problem ID", value: "SIH26028" },
     ],
-    tech: ["Python", "Pandas", "NumPy", "Scikit-learn", "Matplotlib"],
-    github: "https://github.com/Sumit2003-dev/Airlines-Delay-Prediction",
+    tech: ["Python", "Scikit-learn", "TypeScript", "TanStack Start", "Git"],
+    github: "https://github.com/Sumit2003-dev",
     gradient: "from-ember-500/20 via-orange-500/10 to-transparent",
   },
   {
-    id: "proctoring-research",
+    id: "student-record-intelligence",
     index: "05",
+    title: "Student Performance Prediction (NextGrade)",
+    category: "Data Science · Analytics",
+    blurb:
+      "Predicts academic performance and flags at-risk students early from 1,200 records using tuned Gradient Boosting (R² 0.85).",
+    description:
+      "Analyzed 1,200 student records across study hours, attendance, prior scores, sleep, and lifestyle factors. Compared Linear Regression, Random Forest, and Gradient Boosting; selected tuned Gradient Boosting (R² 0.85, 5-fold CV R² 0.83) served via a Flask REST API with Chart.js radar charts at nextgrade.netlify.app.",
+    problem:
+      "Academic departments lack automated early-warning systems to identify students vulnerable to dropout or grade degradation.",
+    solution:
+      "Trained Gradient Boosting models with StandardScaler pipelines to deliver real-time risk scores and multi-factor radar visualizations.",
+    architecture:
+      "1,200 Student Records → StandardScaler ETL → Gradient Boosting Model (R² 0.85) → Flask REST API → Chart.js Dashboard",
+    metrics: [
+      { label: "R² Score", value: "0.85" },
+      { label: "CV R²", value: "0.83" },
+      { label: "Records", value: "1,200" },
+    ],
+    tech: ["Python", "Scikit-learn", "Flask", "JavaScript", "Chart.js", "Netlify"],
+    github: "https://github.com/Sumit2003-dev/Student-Record-Intelligence-System",
+    demo: "https://nextgrade.netlify.app",
+    gradient: "from-orange-500/20 via-ember-600/10 to-transparent",
+  },
+  {
+    id: "airline-delay-prediction",
+    index: "06",
+    title: "Airline Delay Prediction — ML Classification",
+    category: "Machine Learning · Classification",
+    blurb:
+      "End-to-end ML classification pipeline on a 124K-row imbalanced flight dataset with Random Forest (ROC-AUC 0.67).",
+    description:
+      "Engineered end-to-end pipeline on 124K flight records with class imbalance handling (34.4% delayed flights). Benchmarked Logistic Regression, Decision Tree, and Random Forest using F1-score and ROC-AUC, selecting Random Forest (ROC-AUC 0.67) with departure-hour feature engineering.",
+    problem:
+      "Aviation delays cause schedule disruptions and passenger frustration, requiring predictive departure-time risk assessment.",
+    solution:
+      "Cleaned, engineered, and evaluated classification models with class imbalance metrics, validating key temporal features like departure windows.",
+    architecture:
+      "124K Flight Records → Imbalance Handling → Feature Engineering → Random Forest Classifier → ROC-AUC Evaluation",
+    metrics: [
+      { label: "Dataset", value: "124K Rows" },
+      { label: "Model", value: "Random Forest" },
+      { label: "ROC-AUC", value: "0.67" },
+    ],
+    tech: ["Python", "Pandas", "NumPy", "Scikit-learn", "Matplotlib"],
+    github: "https://github.com/Sumit2003-dev/Airlines-Delay-Prediction",
+    gradient: "from-[#FF6A00]/25 via-burnt-red/10 to-transparent",
+  },
+  {
+    id: "karigarsetu-artisan",
+    index: "07",
+    title: "KarigarSetu — The Artisan's Ledger",
+    category: "Data Science · Web App",
+    blurb:
+      "Platform connecting Lucknow Chikankari artisans directly with buyers with transparent pricing and digital authenticity. Top 10 finish at VIVEKA 2k26.",
+    description:
+      "Platform connecting Chikankari artisans of Lucknow directly with buyers, featuring artisan/buyer modules, transparent fair pricing, digital sales ledger, and authenticity verification badges. Finished Top 10 at VIVEKA: The Intelligence 5.0 (Techfest 2k26) with Team CodeVengers.",
+    problem:
+      "Traditional Chikankari artisans in Lucknow face exploitation by intermediaries with zero pricing transparency or provenance verification.",
+    solution:
+      "Designed a digital ledger and marketplace connecting artisans directly to consumers, with authenticity badges and fair margin verification.",
+    architecture:
+      "Artisan Profiles → Catalog & Ledger Database → Authenticity Verification → Buyer Portal → Digital Sales Analytics",
+    metrics: [
+      { label: "Finish", value: "Top 10" },
+      { label: "Event", value: "VIVEKA 2k26" },
+      { label: "Team", value: "CodeVengers" },
+    ],
+    tech: ["Python", "Web App", "Data Visualisation", "Git"],
+    github: "https://github.com/Sumit2003-dev",
+    gradient: "from-[#FF8A2B]/25 via-burnt-orange/10 to-transparent",
+  },
+  {
+    id: "proctoring-research",
+    index: "08",
     title: "AI-Based Exam Proctoring System",
     category: "Research · Computer Vision",
     blurb:
-      "Co-authored research paper exploring ML/CV techniques for automated academic-integrity monitoring.",
+      "Co-authored research paper exploring ML and computer vision techniques for automated academic-integrity monitoring.",
     description:
-      "Co-authored research paper supervised by Mrs. Anamika Sharma (SRMU) exploring machine learning and computer-vision techniques for automated academic-integrity monitoring.",
+      "Co-authored research paper supervised by Mrs. Anamika Sharma (SRMU) exploring machine learning and computer vision techniques for automated academic-integrity monitoring and scalable remote assessment.",
     problem:
-      "Traditional exam proctoring is manual, error-prone and hard to scale.",
+      "Traditional manual exam proctoring is unscalable, prone to fatigue, and incapable of monitoring large-scale online examinations.",
     solution:
-      "Investigated ML/CV approaches for automated detection and monitoring, framing the problem for reproducible academic study.",
+      "Investigated ML and computer vision algorithms for head-pose tracking, eye-gaze deviation, and audio-visual anomaly detection.",
     architecture:
-      "Literature review → ML/CV technique selection → integrity-monitoring problem framing → supervised research write-up.",
+      "Video Stream Ingestion → Facial & Head-Pose Detection → Gaze Deviation Tracking → Anomaly Scoring Engine → Supervised Research Paper",
     metrics: [
-      { label: "Authors", value: "Co-auth" },
-      { label: "Focus", value: "ML + CV" },
-      { label: "Status", value: "Paper" },
+      { label: "Authors", value: "Co-author" },
+      { label: "Supervisor", value: "Mrs. A. Sharma" },
+      { label: "Domain", value: "ML + CV" },
     ],
     tech: ["Python", "Computer Vision", "Machine Learning", "Academic Writing"],
     github: "https://github.com/Sumit2003-dev",
-    gradient: "from-orange-500/20 via-ember-600/10 to-transparent",
+    gradient: "from-amber-400/25 via-burnt-red/10 to-transparent",
   },
 ];
 
@@ -247,11 +325,22 @@ export const education = [
     duration: "2023 — 2027 · Final Year",
     grade: "CGPA 7.98 / 10 (SGPA 8.26 — Sem VI)",
     status: "Pursuing",
-    courses: ["Machine Learning", "Data Science", "Statistical Analysis", "Artificial Intelligence", "DSA", "Big Data Analytics", "Data Visualisation"],
+    courses: [
+      "Machine Learning",
+      "Data Science",
+      "Statistical Analysis",
+      "Artificial Intelligence",
+      "Big Data Analytics",
+      "Data Visualisation",
+      "Data Structures & Algorithms",
+      "DBMS",
+      "OOP",
+      "Operating Systems",
+    ],
   },
   {
     degree: "Senior Secondary (XII)",
-    major: "Physics, Chemistry, Mathematics",
+    major: "Physics, Chemistry, Mathematics (PCM)",
     institution: "PM Shri Kendriya Vidyalaya",
     location: "Lucknow, Uttar Pradesh",
     duration: "2022 — 2023 · CBSE",
@@ -262,10 +351,10 @@ export const education = [
   {
     degree: "Secondary (X)",
     major: "Science Stream",
-    institution: "Army Public School Binnaguri",
+    institution: "Army School, Binaguri, West Bengal",
     location: "West Bengal",
     duration: "2020 — 2021 · CBSE",
-    grade: "87.6%",
+    grade: "87.4%",
     status: "Completed",
     courses: ["Mathematics", "Science", "Social Science", "English", "Hindi"],
   },
@@ -423,14 +512,14 @@ export const achievements = [
 ];
 
 export const leetcode = [
-  { label: "Model Accuracy", value: 92, suffix: "%" },
-  { label: "Delay Accuracy", value: 88, suffix: "%" },
-  { label: "GPA / 10", value: 7, suffix: ".98" },
-  { label: "Student Records", value: 1000, suffix: "+" },
+  { label: "Problems Solved", value: 341, suffix: "+" },
+  { label: "Contest Rating", value: 1460, suffix: "" },
+  { label: "Medium / Hard", value: 247, suffix: "" },
+  { label: "Badges Earned", value: 2, suffix: "x" },
 ];
 
 export const githubStats = [
   { label: "Repositories", value: 18, suffix: "+" },
-  { label: "Live Apps", value: 4, suffix: "" },
+  { label: "Live Apps", value: 6, suffix: "" },
   { label: "Papers", value: 1, suffix: "" },
 ];

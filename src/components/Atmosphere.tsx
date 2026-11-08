@@ -165,32 +165,54 @@ export function FogField() {
   );
 }
 
-/** Interactive cursor glow that follows the mouse. */
+/** Interactive cursor glow that follows the mouse with energy & accessibility throttling. */
 export function CursorGlow() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Respect reduced-motion accessibility preference & coarse pointer devices (touchscreens)
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isCoarse = window.matchMedia("(pointer: coarse)").matches;
+    if (prefersReducedMotion || isCoarse) return;
+
     const el = ref.current;
     if (!el) return;
     let x = window.innerWidth / 2;
     let y = window.innerHeight / 2;
     let rx = x, ry = y;
     let raf = 0;
+    let isPaused = false;
 
     const onMove = (e: MouseEvent) => {
       x = e.clientX;
       y = e.clientY;
     };
+
     const loop = () => {
+      if (isPaused) return;
       rx += (x - rx) * 0.06;
       ry += (y - ry) * 0.06;
       el.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
       raf = requestAnimationFrame(loop);
     };
-    window.addEventListener("mousemove", onMove);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        isPaused = true;
+        cancelAnimationFrame(raf);
+      } else {
+        isPaused = false;
+        raf = requestAnimationFrame(loop);
+      }
+    };
+
+    window.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("visibilitychange", onVisibilityChange);
     raf = requestAnimationFrame(loop);
+
     return () => {
       window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       cancelAnimationFrame(raf);
     };
   }, []);

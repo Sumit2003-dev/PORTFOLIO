@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Github, Linkedin, Mail, Download, ArrowRight, Eye, Sparkles, Cpu, ShieldCheck } from "lucide-react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useMotionTemplate, useReducedMotion } from "framer-motion";
 import { scrollToId } from "@/hooks/use-lenis";
 import { profile } from "@/lib/data";
 import { useFadeUp } from "@/hooks/use-scroll";
@@ -35,6 +35,7 @@ type HeroProps = {
 export default function Hero({ onOpenResume }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
   useFadeUp(ref);
+  const shouldReduceMotion = useReducedMotion();
 
   const [roleIdx, setRoleIdx] = useState(0);
   useEffect(() => {
@@ -61,12 +62,14 @@ export default function Hero({ onOpenResume }: HeroProps) {
 
   const bgY = useMotionValue(0);
   useEffect(() => {
+    if (shouldReduceMotion) return;
     const onScroll = () => bgY.set(window.scrollY * 0.25);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [bgY]);
+  }, [bgY, shouldReduceMotion]);
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (shouldReduceMotion) return;
     const r = e.currentTarget.getBoundingClientRect();
     mx.set((e.clientX - r.left) / r.width);
     my.set((e.clientY - r.top) / r.height);
@@ -253,7 +256,11 @@ export default function Hero({ onOpenResume }: HeroProps) {
 
                 {/* Main ID Badge Frame */}
                 <motion.div
-                  animate={{ y: [0, -6, 0], rotateZ: [0.5, -0.5, 0.5] }}
+                  animate={
+                    shouldReduceMotion
+                      ? { y: 0, rotateZ: 0 }
+                      : { y: [0, -6, 0], rotateZ: [0.5, -0.5, 0.5] }
+                  }
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   className="glass-strong relative overflow-hidden rounded-[1.8rem] border border-white/20 p-3.5 sm:p-4 shadow-2xl transition-all duration-500 hover:border-ember-500/60 hover:shadow-glow"
                   style={{
@@ -338,7 +345,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
                 {/* Floating Parallax Chips (Responsive Offset) */}
                 <motion.div
                   className="glass pointer-events-none absolute -left-2 sm:-left-3 lg:-left-4 top-8 z-30 rounded-lg px-2 py-1 backdrop-blur-xl border border-white/15 shadow-lg"
-                  animate={{ y: [0, -6, 0] }}
+                  animate={shouldReduceMotion ? { y: 0 } : { y: [0, -6, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                   style={{ transform: "translateZ(35px)" }}
                 >
@@ -353,7 +360,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
 
                 <motion.div
                   className="glass pointer-events-none absolute -right-2 sm:-right-3 lg:-right-4 top-12 z-30 rounded-lg px-2 py-1 backdrop-blur-xl border border-white/15 shadow-lg"
-                  animate={{ y: [0, 6, 0] }}
+                  animate={shouldReduceMotion ? { y: 0 } : { y: [0, 6, 0] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   style={{ transform: "translateZ(50px)" }}
                 >

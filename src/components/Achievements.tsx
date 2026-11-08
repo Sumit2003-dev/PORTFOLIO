@@ -56,7 +56,7 @@ export default function Achievements() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <BarChart3 className="h-5 w-5 text-ember-500" />
-                <h3 className="font-display text-lg uppercase text-white">Academic &amp; ML Benchmarks</h3>
+                <h3 className="font-display text-lg uppercase text-white">LeetCode &amp; Problem Solving</h3>
               </div>
               <a
                 href={profile.leetcode}

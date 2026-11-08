@@ -31,10 +31,10 @@ export default function GithubStats() {
   }, []);
 
   const stats = [
-    { label: "Public Repositories", value: repoCount, icon: Code2 },
-    { label: "Total Contributions (2025–2026)", value: "640+", icon: GitCommit },
-    { label: "Primary Stack", value: "Python / ML", icon: Cpu },
-    { label: "Pull Requests Merged", value: "45+", icon: GitPullRequest },
+    { label: "Public Repositories", value: repoCount, icon: Code2, tag: "Live API" },
+    { label: "Total Contributions", value: "640+", icon: GitCommit, tag: "2025–2026 Baseline" },
+    { label: "Primary Stack", value: "Python / ML", icon: Cpu, tag: "Active Focus" },
+    { label: "Pull Requests Merged", value: "45+", icon: GitPullRequest, tag: "Curated Archive" },
   ];
 
   const languages = [
@@ -53,7 +53,7 @@ export default function GithubStats() {
               GitHub & ML<span className="text-ember-500 text-glow">.</span> Activity
             </h2>
             <p data-reveal className="mt-3 max-w-2xl text-sm sm:text-base text-white/60">
-              Consistent open-source contributions, engineering metrics, and language distribution across Machine Learning, Data Analytics, and Full-Stack repositories.
+              Open-source contributions, engineering metrics, and language distribution. Public repository counts are fetched dynamically via the GitHub API; contribution velocity and language shares reflect curated 2025–2026 developer baselines.
             </p>
           </div>
           <a
@@ -81,7 +81,9 @@ export default function GithubStats() {
                   <span className="grid h-8 w-8 place-items-center rounded-xl bg-ember-500/15 text-ember-400">
                     <Icon className="h-4 w-4" />
                   </span>
-                  <span className="font-mono text-[10px] text-white/40">Verified</span>
+                  <span className="font-mono text-[10px] text-ember-400/80 bg-ember-500/10 px-2 py-0.5 rounded-full border border-ember-500/20">
+                    {s.tag}
+                  </span>
                 </div>
 
                 <div className="mt-4">
@@ -99,9 +101,12 @@ export default function GithubStats() {
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
           {/* Language Distribution */}
           <div data-reveal className="glass rounded-2xl border border-white/10 p-4 sm:p-5 text-left">
-            <h3 className="font-condensed text-[11px] uppercase tracking-[0.22em] text-ember-500 font-semibold">
-              Codebase Language Breakdown
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="font-condensed text-[11px] uppercase tracking-[0.22em] text-ember-500 font-semibold">
+                Codebase Language Breakdown
+              </h3>
+              <span className="font-mono text-[10px] text-white/40">2025–2026 Curated</span>
+            </div>
 
             <div className="mt-4 space-y-3">
               {languages.map((l) => (
@@ -128,7 +133,7 @@ export default function GithubStats() {
                 <h3 className="font-condensed text-[11px] uppercase tracking-[0.22em] text-ember-500 font-semibold">
                   Git Contribution Velocity
                 </h3>
-                <span className="font-mono text-[10px] text-white/40">640+ commits</span>
+                <span className="font-mono text-[10px] text-white/40">2025–2026 Developer Activity</span>
               </div>
 
               {/* Grid visualizer */}

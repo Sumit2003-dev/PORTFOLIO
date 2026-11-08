@@ -157,12 +157,12 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
     };
     window.addEventListener("resize", onResize);
 
-    let animId: number;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const clock = new THREE.Clock();
 
     const animate = () => {
       if (isPaused) return;
-      animId = requestAnimationFrame(animate);
+
       const elapsedTime = clock.getElapsedTime();
 
       // Smooth rotation animations
@@ -183,18 +183,28 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
       mainGroup.rotation.x += (targetRotationX - mainGroup.rotation.x) * 0.04;
 
       renderer.render(scene, camera);
+
+      if (!prefersReducedMotion) {
+        animId = requestAnimationFrame(animate);
+      }
     };
 
-    animate();
+    if (!prefersReducedMotion) {
+      animId = requestAnimationFrame(animate);
+    } else {
+      // Single static render for reduced-motion users
+      renderer.render(scene, camera);
+    }
 
     const onVisibilityChange = () => {
+      if (prefersReducedMotion) return;
       if (document.hidden) {
         isPaused = true;
         cancelAnimationFrame(animId);
       } else {
         isPaused = false;
         clock.getDelta();
-        animate();
+        animId = requestAnimationFrame(animate);
       }
     };
     document.addEventListener("visibilitychange", onVisibilityChange);
@@ -204,6 +214,25 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
       window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", onVisibilityChange);
       cancelAnimationFrame(animId);
+
+      // Clean up geometries & materials
+      coreGeo.dispose();
+      coreMat.dispose();
+      innerGeo.dispose();
+      innerMat.dispose();
+      nucleusGeo.dispose();
+      nucleusMat.dispose();
+      particleGeo.dispose();
+      particleMat.dispose();
+      rings.forEach((r) => {
+        r.geometry.dispose();
+        if (Array.isArray(r.material)) {
+          r.material.forEach((m) => m.dispose());
+        } else {
+          r.material.dispose();
+        }
+      });
+
       if (renderer?.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }

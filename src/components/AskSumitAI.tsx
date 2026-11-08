@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { Bot, X, Send, Sparkles, User, ArrowRight, RotateCcw, FileText, ExternalLink, Key, Check } from "lucide-react";
+import { Bot, X, Send, Sparkles, User, ArrowRight, RotateCcw, FileText, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { scrollToId } from "@/hooks/use-lenis";
-import { profile, projects, certificates, education, aboutTimeline } from "@/lib/data";
+import { profile } from "@/lib/data";
 
 type Message = {
   id: string;
@@ -23,7 +23,8 @@ const SUGGESTIONS = [
   "What is Sumit's RAG system (GyanVerse)?",
   "Tell me about his FlyRank ML Internship",
   "Google Cloud #1 Diamond League rank?",
-  "What are his core ML & Python skills?",
+  "What is Emotion Reader (BeyondWord)?",
+  "RailSaarthi & SIH 2026 hackathon?",
   "View / Download his Resume",
   "How can I contact or hire Sumit?",
 ];
@@ -41,94 +42,115 @@ type KnowledgeEntry = {
 const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   // 1. GyanVerse RAG
   {
-    keywords: ["rag", "gyanverse", "sentence transformer", "faiss", "chromadb", "vector", "capstone", "final year"],
+    keywords: ["rag", "gyanverse", "sentence transformer", "faiss", "chromadb", "vector", "capstone", "final year", "qna"],
     answer:
-      "**GyanVerse AI** is Sumit's final-year capstone project — an end-to-end Retrieval-Augmented Generation (RAG) system. It indexes academic course documents using Sentence Transformers, stores embeddings in FAISS/ChromaDB vector stores, and synthesizes context-grounded multilingual answers with <1.2s latency in a Streamlit UI.",
+      "**GyanVerse AI** is Sumit's final-year capstone project — an end-to-end Retrieval-Augmented Generation (RAG) system. It indexes academic course documents using Sentence Transformers, stores embeddings in FAISS/ChromaDB vector stores, and generates context-grounded multilingual answers with <1.2s latency using GPT-4o-mini in a Streamlit UI.",
     action: { label: "View GyanVerse Case Study", href: "#projects", type: "scroll" },
   },
   // 2. FlyRank AI Internship
   {
-    keywords: ["flyrank", "internship", "ranking", "p@50", "precision@50", "contract", "huggingface", "work experience"],
+    keywords: ["flyrank", "internship", "ranking", "p@50", "precision@50", "contract", "huggingface", "work experience", "lora", "rlhf"],
     answer:
-      "Sumit is a **Machine Learning Intern at FlyRank AI**. He builds automated content-opportunity scoring frameworks framed as ML ranking problems, benchmarking models against **Precision@50** and creating reproducible data contracts against FlyRank's HuggingFace warehouse.",
+      "Sumit completed an intensive **Machine Learning Engineering Internship at FlyRank AI**. He designed automated content-opportunity scoring frameworks framed as ML ranking problems, benchmarked models against **Precision@50**, and created reproducible, versioned data contracts against FlyRank's HuggingFace warehouse.",
     action: { label: "View FlyRank Project Details", href: "#projects", type: "scroll" },
   },
-  // 3. Google Cloud Arcade & Badges
+  // 3. Emotion Reader (BeyondWord)
+  {
+    keywords: ["emotion", "reader", "beyondword", "sentiment", "pytorch", "vad", "multilingual", "fastapi"],
+    answer:
+      "**BeyondWord (Emotion Reader)** is a live multilingual emotion & sentiment recognition system built with PyTorch and FastAPI. It classifies text across six core emotions and scores psychometric VAD dimensions (Valence, Arousal, Dominance) with calibrated probability outputs across 100+ languages (English, Hindi, Hinglish, Spanish, French).",
+    action: { label: "Explore BeyondWord Project", href: "#projects", type: "scroll" },
+  },
+  // 4. RailSaarthi SIH
+  {
+    keywords: ["railsaarthi", "rail", "train", "eta", "smart india hackathon", "sih", "garuda", "sih26028", "railways"],
+    answer:
+      "**RailSaarthi** is an AI-powered Train ETA Prediction & Control-Room Platform built for Smart India Hackathon 2026 (Team Garuda X, SIH26028, Ministry of Railways). Sumit designed the multi-factor ETA prediction engine, delay root-cause classifier, and connecting-train miss-risk analyzer using Python and Scikit-learn.",
+    action: { label: "View RailSaarthi Details", href: "#projects", type: "scroll" },
+  },
+  // 5. Google Cloud Arcade & Badges
   {
     keywords: ["arcade", "cloud", "badge", "diamond", "rank", "streak", "points", "gcp", "vertex", "bigquery"],
     answer:
-      "Sumit achieved the **#1 Diamond League ranking** globally on Google Cloud Skills Boost! He completed **171+ verified skill badges**, accumulated **38,105 points**, and maintained an unbroken **44-day learning streak** spanning Vertex AI, BigQuery ML, GKE, and Terraform.",
+      "Sumit achieved the **#1 Diamond League ranking** on Google Cloud Skills Boost! He earned **171 verified skill badges**, accumulated **38,105 points**, and sustained an unbroken **44-day streak** spanning Vertex AI, BigQuery ML, GKE, Cloud Run, and Terraform.",
     action: { label: "See Career Milestones", href: "#about", type: "scroll" },
   },
-  // 4. Student Record Intelligence
+  // 6. Student Performance / NextGrade
   {
-    keywords: ["student", "record", "intelligence", "nextgrade", "analytics", "1000+", "academic performance"],
+    keywords: ["student", "record", "intelligence", "nextgrade", "analytics", "academic performance", "dropout"],
     answer:
-      "The **Student Record Intelligence System** is an end-to-end data processing and analytics platform Sumit built with Python, Pandas, and Streamlit. It parses and analyzes 1,000+ student records with 15+ metrics to spot academic dropout risk profiles and performance trends.",
-    action: { label: "Inspect Analytics System", href: "#projects", type: "scroll" },
+      "**Student Performance Prediction (NextGrade)** is an end-to-end ML platform deployed at nextgrade.netlify.app. Analyzing 1,200 student records with 15+ features, Sumit compared Linear Regression, Random Forest, and Gradient Boosting (achieving **R² = 0.85** and 5-fold CV R² = 0.83), served via a Flask REST API with Chart.js radar charts.",
+    action: { label: "Inspect NextGrade System", href: "#projects", type: "scroll" },
   },
-  // 5. Airline Delay Prediction
+  // 7. Airline Delay Prediction
   {
-    keywords: ["airline", "flight", "delay", "prediction", "regression", "r2", "r^2", "aviation"],
+    keywords: ["airline", "flight", "delay", "prediction", "regression", "roc-auc", "aviation", "classification"],
     answer:
-      "Sumit developed the **Airline Delay Prediction** regression model using Scikit-learn, Pandas, and NumPy. The end-to-end pipeline handles rigorous feature engineering and achieves an **R² score of ~0.85** on held-out flight delay evaluation data.",
+      "Sumit developed the **Airline Delay Prediction** pipeline on a 124K-row imbalanced flight dataset (34.4% delayed). He benchmarked Logistic Regression, Decision Trees, and Random Forest using F1-score and ROC-AUC, selecting Random Forest (ROC-AUC 0.67) with custom feature engineering on departure time windows.",
     action: { label: "Explore Flight Delay Model", href: "#projects", type: "scroll" },
   },
-  // 6. Research Paper & Computer Vision
+  // 8. KarigarSetu / Hackathons
+  {
+    keywords: ["karigarsetu", "artisan", "ledger", "viveka", "techfest", "hackathon", "codevengers", "top 10"],
+    answer:
+      "**KarigarSetu — The Artisan's Ledger** earned a **Top 10 finish** at VIVEKA: The Intelligence 5.0 (Techfest 2k26). Developed with Team CodeVengers, it connects Chikankari artisans of Lucknow directly with buyers, featuring transparent pricing and digital authenticity verification.",
+    action: { label: "View Hackathons & Awards", href: "#about", type: "scroll" },
+  },
+  // 9. Research Paper & Computer Vision
   {
     keywords: ["research", "paper", "proctoring", "exam", "vision", "cv", "publication", "anamika", "academic integrity"],
     answer:
-      "Sumit co-authored an **AI-Based Exam Proctoring System** research paper under the supervision of Mrs. Anamika Sharma (SRMU), investigating machine learning and computer-vision algorithms for automated, scalable academic-integrity monitoring.",
+      "Sumit co-authored an **AI-Based Exam Proctoring System** research paper under the faculty supervision of Mrs. Anamika Sharma (SRMU), researching machine learning and computer vision algorithms for automated, scalable academic-integrity monitoring.",
     action: { label: "Review Research Case Study", href: "#projects", type: "scroll" },
   },
-  // 7. Core Skills & Tech Stack
+  // 10. Core Skills & Tech Stack
   {
-    keywords: ["skills", "python", "scikit-learn", "pandas", "ml", "machine learning", "technologies", "tech stack", "languages", "numpy", "sql", "tools"],
+    keywords: ["skills", "python", "scikit-learn", "pandas", "ml", "machine learning", "technologies", "tech stack", "languages", "numpy", "sql", "tools", "pytorch"],
     answer:
-      "Sumit's primary stack includes:\n• **Languages**: Python (93% - Advanced), SQL / MySQL (82%), Java (76%)\n• **ML & GenAI**: Scikit-learn, RAG Systems, FAISS/ChromaDB, Sentence Transformers, LLMs (GPT/LLaMA)\n• **Data & Frameworks**: Pandas (90%), NumPy (88%), Matplotlib, Streamlit, Flask, Git",
-    action: { label: "Explore Interactive Skill Tree", href: "#skills", type: "scroll" },
+      "Sumit's primary stack includes:\n• **Languages**: Python (93% - Advanced), Java (76%), SQL / MySQL (82%)\n• **Machine & Deep Learning**: Scikit-learn (88%), PyTorch, Transformers, Ranking Models, Gradient Boosting\n• **GenAI & RAG**: Sentence Transformers, FAISS, ChromaDB, GPT-4o-mini, Prompt Engineering\n• **Data & Tools**: Pandas (90%), NumPy (88%), Matplotlib, Streamlit, FastAPI, Flask, Git",
+    action: { label: "Explore Interactive Skill Galaxy", href: "#skills", type: "scroll" },
   },
-  // 8. Certifications
+  // 11. Certifications
   {
-    keywords: ["certificate", "certification", "credential", "google data analytics", "coursera", "nptel", "ibm", "anthropic", "deloitte", "tata", "tcs"],
+    keywords: ["certificate", "certification", "credential", "google data analytics", "coursera", "nptel", "ibm", "anthropic", "deloitte", "tata"],
     answer:
-      "Sumit holds **11+ verified professional credentials**, notably:\n• **Google Data Analytics Professional Certificate** (Coursera, 94.87% score)\n• **Anthropic Claude Architecture**\n• **IBM Python for Data Science**\n• **NPTEL Data Science for Engineers** (IIT Madras)\n• **Deloitte Technology Consulting Job Simulation**\n• **Tata Data Visualisation**",
+      "Sumit holds **11+ verified professional credentials**, notably:\n• **Google Data Analytics Professional Certificate** (Coursera, 94.87% score)\n• **Google Advanced Data Analytics Capstone** (100%)\n• **Anthropic Claude Architecture & AI Fluency**\n• **NPTEL Data Analytics with Python** (IIT Roorkee, Elite)\n• **IBM Data Analysis & Generative AI**\n• **Deloitte Australia & Tata Job Simulations**",
     action: { label: "View Verified Certificates", href: "#certificates", type: "scroll" },
   },
-  // 9. Education & University
+  // 12. Education & Academic Marks
   {
-    keywords: ["education", "srmu", "gpa", "cgpa", "sgpa", "degree", "b.tech", "college", "university", "school", "kendriya vidyalaya", "12th", "10th"],
+    keywords: ["education", "srmu", "gpa", "cgpa", "sgpa", "degree", "b.tech", "college", "university", "school", "kendriya vidyalaya", "army school", "12th", "10th", "binaguri"],
     answer:
-      "Sumit is in his final year of **B.Tech in Computer Science & Engineering (Specialization in AI & Data Science)** at Shri Ramswaroop Memorial University (SRMU, 2023–2027), holding a **CGPA of 7.98 / 10** (SGPA 8.26 in Sem VI). Prior to this, he completed CBSE Senior Secondary at PM Shri Kendriya Vidyalaya (75.4%).",
+      "Sumit's verified academic track record:\n• **B.Tech in CSE (AI & Data Science)**: Shri Ramswaroop Memorial University (SRMU, 2023–2027) — **CGPA 7.98 / 10 (SGPA 8.26 in Sem VI)**\n• **Senior Secondary (CBSE XII, PCM)**: PM Shri Kendriya Vidyalaya, Lucknow (2023) — **75.4%**\n• **Secondary (CBSE X)**: Army School, Binaguri, West Bengal (2021) — **87.4%**",
     action: { label: "View Education Details", href: "#education", type: "scroll" },
   },
-  // 10. Resume / CV
+  // 13. LeetCode & Competitive Programming
+  {
+    keywords: ["leetcode", "coding", "dsa", "algorithms", "problem solving", "rating", "contest"],
+    answer:
+      "Sumit is an active problem solver on **LeetCode** (@Sumit2003):\n• **341 Problems Solved**: 94 Easy, 184 Medium, 63 Hard\n• **Contest Rating**: 1,460\n• Earned both **LeetCode 50-Day and 100-Day 2026 badges** with consistent practice in Python, Java, and MySQL.",
+    action: { label: "Visit LeetCode Profile", href: profile.leetcode, type: "external" },
+  },
+  // 14. Resume / CV
   {
     keywords: ["resume", "cv", "download resume", "view resume", "profile document", "pdf"],
     answer:
-      "Sumit's verified resume is available for preview right inside this portfolio or as a direct PDF download. It highlights his FlyRank internship, GyanVerse RAG capstone, 171 Google Cloud badges, and technical competencies.",
+      "Sumit's verified resume is available for preview right inside this portfolio or as a direct PDF download. It highlights his FlyRank ML internship, GyanVerse RAG capstone, BeyondWord, 171 Google Cloud badges, and technical proficiencies.",
     action: { label: "Open Resume Preview", type: "resume" },
   },
-  // 11. Contact & Hiring
+  // 15. Contact & Hiring
   {
     keywords: ["contact", "email", "hire", "phone", "linkedin", "github", "reach", "opportunity", "freelance", "interview"],
     answer:
-      "Sumit is open for Data Scientist, AI Engineer, and Machine Learning roles (Full-Time / Internships / Freelance). You can reach him directly:\n• **Email**: sumit.ku5981@gmail.com\n• **Phone**: +91 8810845474\n• **Location**: Lucknow, Uttar Pradesh, India (Open to Remote / Relocation)",
+      "Sumit is actively interviewing for Data Scientist, AI Engineer, and Machine Learning roles (Full-Time / Internships / Remote / Relocation):\n• **Email**: sumit.ku5981@gmail.com\n• **Phone**: +91 8810845474\n• **Location**: Lucknow, Uttar Pradesh, India",
     action: { label: "Go to Contact Form", href: "#contact", type: "scroll" },
   },
-  // 12. Community & Memberships
+  // 16. Community & Memberships
   {
     keywords: ["gdg", "community", "google developer group", "developer program", "membership", "lucknow"],
     answer:
-      "Sumit is an active member of **Google Developer Group (GDG) Lucknow** and holds a **Google Developer Program premium tier membership**, actively engaging with AI builders and tech communities across India.",
+      "Sumit is an active member of **Google Developer Group (GDG) Lucknow** and holds a **Google Developer Program premium tier membership**, actively engaging with fellow AI practitioners and developer summits.",
     action: { label: "Read Community Journey", href: "#about", type: "scroll" },
-  },
-  // 13. LeetCode & Coding
-  {
-    keywords: ["leetcode", "coding", "dsa", "algorithms", "problem solving"],
-    answer:
-      "Sumit practices algorithmic problem solving and Data Structures on **LeetCode** (@Sumit2003), focusing on arrays, dynamic programming, trees, and computational efficiency.",
-    action: { label: "Visit LeetCode Profile", href: profile.leetcode, type: "external" },
   },
 ];
 
@@ -203,16 +225,16 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
-  const [apiKey, setApiKey] = useState<string>(() => {
-    return (
-      (import.meta as any).env?.VITE_GEMINI_API_KEY ||
-      localStorage.getItem("sumit_gemini_api_key") ||
-      ""
-    );
-  });
-  const [showKeyInput, setShowKeyInput] = useState(false);
-  const [tempKey, setTempKey] = useState(apiKey);
   const chatEndRef = useRef<HTMLDivElement>(null);
+
+  // Clear any legacy client API keys from previous visits to guarantee zero key leakage
+  useEffect(() => {
+    try {
+      localStorage.removeItem("sumit_gemini_api_key");
+    } catch {
+      // Storage access restricted
+    }
+  }, []);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -222,7 +244,6 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpen(false);
-        setShowKeyInput(false);
       }
     };
     if (open) window.addEventListener("keydown", onKey);
@@ -237,17 +258,6 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
         text: "Chat cleared. What else would you like to know about Sumit's background or projects?",
       },
     ]);
-  };
-
-  const handleSaveKey = () => {
-    const trimmed = tempKey.trim();
-    setApiKey(trimmed);
-    if (trimmed) {
-      localStorage.setItem("sumit_gemini_api_key", trimmed);
-    } else {
-      localStorage.removeItem("sumit_gemini_api_key");
-    }
-    setShowKeyInput(false);
   };
 
   const queryLocalKnowledge = (query: string): { text: string; action?: Message["action"] } => {
@@ -365,36 +375,19 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
     if (!textToSend) setInput("");
     setIsTyping(true);
 
-    // If Gemini API Key is available, try real Gemini API
-    if (apiKey) {
+    // Optional Server-Side AI Proxy endpoint (keeps API keys completely off client browsers)
+    const proxyUrl = (import.meta as any).env?.VITE_AI_PROXY_URL;
+    if (proxyUrl) {
       try {
-        const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              contents: [
-                {
-                  role: "user",
-                  parts: [
-                    {
-                      text: `${SYSTEM_CONTEXT}\n\nUser Question: ${query}\nProvide a concise, helpful answer as Sumit's portfolio assistant. If relevant, suggest visiting a section like #projects, #skills, #about, or #contact.`,
-                    },
-                  ],
-                },
-              ],
-              generationConfig: {
-                maxOutputTokens: 250,
-                temperature: 0.4,
-              },
-            }),
-          }
-        );
+        const response = await fetch(proxyUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query }),
+        });
 
         if (response.ok) {
           const data = await response.json();
-          const candidateText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          const candidateText = data?.reply || data?.answer || data?.content;
           if (candidateText) {
             setMessages((prev) => [
               ...prev,
@@ -410,11 +403,11 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
           }
         }
       } catch (err) {
-        console.warn("Gemini API call failed, falling back to local knowledge engine:", err);
+        console.warn("AI proxy unavailable, falling back to instant portfolio knowledge engine:", err);
       }
     }
 
-    // Offline / Instant Local Knowledge Fallback
+    // Instant Grounded Portfolio Knowledge Engine (Zero client API key exposure)
     setTimeout(() => {
       const result = queryLocalKnowledge(query);
       setMessages((prev) => [
@@ -427,7 +420,7 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
         },
       ]);
       setIsTyping(false);
-    }, 450);
+    }, 380);
   };
 
   const handleActionClick = (action?: Message["action"]) => {
@@ -488,7 +481,9 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
                 <div>
                   <h3 className="font-display text-base sm:text-lg uppercase text-white">Ask Sumit AI</h3>
                   <p className="text-[10px] sm:text-[11px] text-ember-500 flex items-center gap-1">
-                    <span>{apiKey ? "Live Gemini Mode" : "Smart Semantic Engine"}</span>
+                    <span>
+                      {(import.meta as any).env?.VITE_AI_PROXY_URL ? "Secure AI Proxy Mode" : "Smart Semantic Engine"}
+                    </span>
                     <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   </p>
                 </div>
@@ -505,18 +500,6 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
                   <RotateCcw className="h-3.5 w-3.5" />
                 </button>
 
-                {/* API Key Modal Toggle */}
-                <button
-                  onClick={() => setShowKeyInput((v) => !v)}
-                  title={apiKey ? "Gemini API key configured" : "Configure Gemini API key"}
-                  aria-label="Gemini API Key Settings"
-                  className={`grid h-8 w-8 place-items-center rounded-full transition-colors ${
-                    apiKey ? "bg-ember-500/20 text-ember-400 hover:bg-ember-500/30" : "bg-white/5 text-white/50 hover:bg-white/10"
-                  }`}
-                >
-                  <Key className="h-3.5 w-3.5" />
-                </button>
-
                 {/* Close Button */}
                 <button
                   onClick={() => setOpen(false)}
@@ -527,33 +510,6 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
                 </button>
               </div>
             </div>
-
-            {/* Optional Gemini API Key Banner */}
-            {showKeyInput && (
-              <div className="border-b border-ember-500/20 bg-[#0d1c2b] p-3 text-xs text-white/90">
-                <p className="font-semibold text-ember-400 flex items-center gap-1.5 mb-1">
-                  <Key className="h-3.5 w-3.5" /> Optional Google Gemini API Key
-                </p>
-                <p className="text-[11px] text-white/60 mb-2">
-                  Add a free Gemini API key for live generative conversational responses, or leave blank to use the instant built-in portfolio knowledge base.
-                </p>
-                <div className="flex gap-2">
-                  <input
-                    type="password"
-                    placeholder="AIzaSy..."
-                    value={tempKey}
-                    onChange={(e) => setTempKey(e.target.value)}
-                    className="flex-1 rounded-lg border border-white/15 bg-black/40 px-3 py-1.5 text-xs text-white outline-none focus:border-ember-500"
-                  />
-                  <button
-                    onClick={handleSaveKey}
-                    className="btn-ember flex items-center gap-1 px-3 py-1.5 text-xs font-semibold"
-                  >
-                    <Check className="h-3.5 w-3.5" /> Save
-                  </button>
-                </div>
-              </div>
-            )}
 
             {/* Chat History */}
             <div className="h-72 sm:h-80 max-h-[52vh] overflow-y-auto p-4 space-y-3.5 scrollbar-thin">
