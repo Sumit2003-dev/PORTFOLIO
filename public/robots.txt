@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sumit2003dev.github.io/PORTFOLIO/sitemap.xml
+Sitemap: https://sumit2003-dev.github.io/PORTFOLIO/sitemap.xml

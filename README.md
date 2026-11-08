@@ -13,7 +13,7 @@
   <b>Turning raw data into cinematic intelligence — building models that predict, systems that learn, and products that feel alive.</b>
 </p>
 
-[🌐 Live Portfolio](https://sumit2003dev.github.io/PORTFOLIO/) • [📄 View Resume](https://github.com/Sumit2003-dev/PORTFOLIO/blob/main/public/uploads/Sumit_Kumar_Bharti_Resume_Updated.pdf) • [💼 LinkedIn](https://www.linkedin.com/in/sumit2003-dev/) • [📬 Get in Touch](mailto:sumit.ku5981@gmail.com)
+[🌐 Live Portfolio](https://sumit2003-dev.github.io/PORTFOLIO/) • [📄 View Resume](https://github.com/Sumit2003-dev/PORTFOLIO/blob/main/public/uploads/Sumit_Kumar_Bharti_Resume_Updated.pdf) • [💼 LinkedIn](https://www.linkedin.com/in/sumit2003-dev/) • [📬 Get in Touch](mailto:sumit.ku5981@gmail.com)
 
 </div>
 
@@ -158,7 +158,7 @@ This repository includes a preconfigured GitHub Actions workflow in [`.github/wo
 2. Under **Build and deployment** > **Source**, choose **GitHub Actions**.
 3. Push any commit to `main`, and your site will automatically build and publish to:
    ```
-   https://sumit2003dev.github.io/PORTFOLIO/
+   https://sumit2003-dev.github.io/PORTFOLIO/
    ```
 
 ### Vercel / Netlify
