@@ -43,15 +43,16 @@ export default function Hero({ onOpenResume }: HeroProps) {
     return () => clearInterval(t);
   }, []);
 
-  /* 3D tilt & stretch spring physics */
+  /* 3D tilt & stretch spring physics with graceful motion scaling */
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
 
-  const rX = useSpring(useTransform(my, [0, 1], [12, -12]), { stiffness: 160, damping: 20 });
-  const rY = useSpring(useTransform(mx, [0, 1], [-12, 12]), { stiffness: 160, damping: 20 });
-  const rZ = useSpring(useTransform(mx, [0, 0.5, 1], [2, 0, -2]), { stiffness: 140, damping: 22 });
-  const sX = useSpring(useTransform(mx, [0, 0.5, 1], [0.97, 1, 1.03]), { stiffness: 220, damping: 22 });
-  const sY = useSpring(useTransform(my, [0, 0.5, 1], [1.03, 1, 0.97]), { stiffness: 220, damping: 22 });
+  const tiltAngle = shouldReduceMotion ? 4 : 14;
+  const rX = useSpring(useTransform(my, [0, 1], [tiltAngle, -tiltAngle]), { stiffness: 180, damping: 22 });
+  const rY = useSpring(useTransform(mx, [0, 1], [-tiltAngle, tiltAngle]), { stiffness: 180, damping: 22 });
+  const rZ = useSpring(useTransform(mx, [0, 0.5, 1], [tiltAngle * 0.18, 0, -tiltAngle * 0.18]), { stiffness: 150, damping: 22 });
+  const sX = useSpring(useTransform(mx, [0, 0.5, 1], [0.98, 1, 1.02]), { stiffness: 220, damping: 22 });
+  const sY = useSpring(useTransform(my, [0, 0.5, 1], [1.02, 1, 0.98]), { stiffness: 220, damping: 22 });
   const imgScale = useSpring(useTransform(my, [0, 0.5, 1], [1.02, 1.05, 1.08]), { stiffness: 140, damping: 22 });
 
   const glowX = useTransform(mx, [0, 1], ["10%", "90%"]);
@@ -69,10 +70,11 @@ export default function Hero({ onOpenResume }: HeroProps) {
   }, [bgY, shouldReduceMotion]);
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (shouldReduceMotion) return;
     const r = e.currentTarget.getBoundingClientRect();
-    mx.set((e.clientX - r.left) / r.width);
-    my.set((e.clientY - r.top) / r.height);
+    if (r.width > 0 && r.height > 0) {
+      mx.set((e.clientX - r.left) / r.width);
+      my.set((e.clientY - r.top) / r.height);
+    }
   };
   const onLeave = () => {
     mx.set(0.5);
@@ -225,8 +227,8 @@ export default function Hero({ onOpenResume }: HeroProps) {
               </div>
 
               {/* Perfectly Centered 3D WebGL Sphere */}
-              <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-85">
-                <AiSphere3D className="h-[480px] w-[480px] sm:h-[540px] sm:w-[540px] lg:h-[580px] lg:w-[580px]" />
+              <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-95">
+                <AiSphere3D className="h-[520px] w-[520px] sm:h-[600px] sm:w-[600px] lg:h-[680px] lg:w-[680px]" />
               </div>
 
               {/* Interactive 3D Card Stage */}

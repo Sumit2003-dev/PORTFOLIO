@@ -57,6 +57,7 @@ export default function ParticleField({ density = 55 }: { density?: number }) {
     rescale();
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const speedFactor = prefersReducedMotion ? 0.25 : 1.0;
     let raf = 0;
     let t0 = performance.now();
     let isPaused = false;
@@ -64,14 +65,14 @@ export default function ParticleField({ density = 55 }: { density?: number }) {
     function draw(t: number) {
       if (isPaused) return;
 
-      const dt = Math.min((t - t0) / 1000, 0.1);
+      const dt = Math.min((t - t0) / 1000, 0.1) * speedFactor;
       t0 = t;
       ctx.clearRect(0, 0, w, h);
 
       for (const p of particles) {
         p.x += p.vx * (dt * 60);
         p.y += p.vy * (dt * 60);
-        p.phase += 0.01;
+        p.phase += 0.01 * speedFactor;
         p.life = 0.55 + 0.45 * Math.sin(p.phase);
 
         if (p.y < -10) { p.y = h + 10; p.x = rand(0, w); }
@@ -93,16 +94,10 @@ export default function ParticleField({ density = 55 }: { density?: number }) {
         ctx.fill();
       }
 
-      if (!prefersReducedMotion) {
-        raf = requestAnimationFrame(draw);
-      }
+      raf = requestAnimationFrame(draw);
     }
 
-    if (!prefersReducedMotion) {
-      raf = requestAnimationFrame(draw);
-    } else {
-      draw(performance.now());
-    }
+    raf = requestAnimationFrame(draw);
 
     const onVisibilityChange = () => {
       if (document.hidden) {
@@ -111,9 +106,7 @@ export default function ParticleField({ density = 55 }: { density?: number }) {
       } else {
         isPaused = false;
         t0 = performance.now();
-        if (!prefersReducedMotion) {
-          raf = requestAnimationFrame(draw);
-        }
+        raf = requestAnimationFrame(draw);
       }
     };
     document.addEventListener("visibilitychange", onVisibilityChange);
@@ -170,10 +163,12 @@ export function CursorGlow() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Respect reduced-motion accessibility preference & coarse pointer devices (touchscreens)
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Ignore coarse pointer devices (touchscreens without a mouse cursor)
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
-    if (prefersReducedMotion || isCoarse) return;
+    if (isCoarse) return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lerpFactor = prefersReducedMotion ? 0.04 : 0.07;
 
     const el = ref.current;
     if (!el) return;
@@ -190,8 +185,8 @@ export function CursorGlow() {
 
     const loop = () => {
       if (isPaused) return;
-      rx += (x - rx) * 0.06;
-      ry += (y - ry) * 0.06;
+      rx += (x - rx) * lerpFactor;
+      ry += (y - ry) * lerpFactor;
       el.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
       raf = requestAnimationFrame(loop);
     };
