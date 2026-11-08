@@ -68,7 +68,8 @@ export function useFadeUp(ref: React.RefObject<HTMLElement>, deps: React.Depende
 export function useCounter(
   end: number,
   duration = 1.6,
-  start = true
+  start = true,
+  formatThousands = true
 ) {
   const ref = useRef<HTMLSpanElement>(null);
   useEffect(() => {
@@ -90,17 +91,18 @@ export function useCounter(
             once: true,
           },
           onUpdate: () => {
-            el.textContent = String(Math.round(obj.val));
+            const rounded = Math.round(obj.val);
+            el.textContent = formatThousands ? rounded.toLocaleString("en-US") : String(rounded);
           },
         });
       }, el);
     } else {
-      el.textContent = String(end);
+      el.textContent = formatThousands ? end.toLocaleString("en-US") : String(end);
     }
 
     return () => ctx?.revert();
      
-  }, [end, duration, start]);
+  }, [end, duration, start, formatThousands]);
 
   return ref;
 }

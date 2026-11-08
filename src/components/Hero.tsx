@@ -110,7 +110,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
         PORTFOLIO
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-10 sm:gap-12 lg:gap-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-16 pt-24 sm:pb-20 sm:pt-28 lg:pb-24 lg:pt-32 lg:grid-cols-[1.2fr,0.8fr]">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-10 sm:gap-12 lg:gap-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-12 pt-24 sm:pb-16 sm:pt-28 lg:pb-16 lg:pt-30 lg:grid-cols-[1.2fr,0.8fr]">
         {/* ===== Left: Copy ===== */}
         <div className="order-2 lg:order-1">
           <div data-reveal className="mb-4 flex items-center gap-3">
@@ -158,7 +158,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
             I work with Python, predictive modelling, NLP and RAG, turning ideas and real-world problems into working applications.
           </p>
 
-          <div data-reveal className="mt-7 flex flex-wrap items-center gap-3.5">
+          <div data-reveal className="mt-5 sm:mt-6 flex flex-wrap items-center gap-3">
             <Magnetic>
               <button
                 onClick={() => scrollToId("#projects")}
@@ -192,8 +192,8 @@ export default function Hero({ onOpenResume }: HeroProps) {
             </Magnetic>
           </div>
 
-          {/* Social Icons */}
-          <div data-reveal className="mt-8 flex flex-wrap items-center gap-3">
+          {/* Social / Profile Icons */}
+          <div data-reveal className="mt-5 flex flex-wrap items-center gap-2.5 sm:gap-3">
             {[
               { icon: <Github className="h-4 w-4" />, href: "https://github.com/Sumit2003-dev", label: "GitHub" },
               { icon: <Linkedin className="h-4 w-4" />, href: "https://www.linkedin.com/in/sumit2003-dev/", label: "LinkedIn" },
