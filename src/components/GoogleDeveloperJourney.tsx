@@ -104,7 +104,7 @@ export default function GoogleDeveloperJourney() {
   const [activeTab, setActiveTab] = useState<"skills-boost" | "dev-program" | "gdg">("skills-boost");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [visibleCount, setVisibleCount] = useState<number>(8);
+  const [visibleCount, setVisibleCount] = useState<number>(16);
 
   // Filter skills boost badges
   const categories = ["All", "Generative AI", "Data & BigQuery", "Cloud Infrastructure", "Security & IAM", "DevOps & SRE"];
@@ -192,7 +192,7 @@ export default function GoogleDeveloperJourney() {
             <SiGooglecloud className="h-3.5 w-3.5 text-blue-400" />
             <span>Cloud Skills Boost</span>
             <span className="rounded-full bg-ember-500/20 px-2 py-0.5 text-[10px] font-mono text-ember-400">
-              178 Badges
+              {verifiedSkillBadges.length} Badges
             </span>
           </button>
 
@@ -390,7 +390,7 @@ export default function GoogleDeveloperJourney() {
                     value={searchQuery}
                     onChange={(e) => {
                       setSearchQuery(e.target.value);
-                      setVisibleCount(8);
+                      setVisibleCount(16);
                     }}
                     placeholder="Search badges, tools, topics..."
                     className="w-full rounded-full border border-white/15 bg-white/[0.04] py-1.5 pl-9 pr-8 text-xs text-white placeholder-white/40 transition-colors focus:border-ember-500 focus:bg-white/[0.08] focus:outline-none"
@@ -414,7 +414,7 @@ export default function GoogleDeveloperJourney() {
                     key={cat}
                     onClick={() => {
                       setSelectedCategory(cat);
-                      setVisibleCount(8);
+                      setVisibleCount(16);
                     }}
                     className={`rounded-full px-3 py-1 font-condensed text-[11px] uppercase tracking-wider transition-all ${
                       selectedCategory === cat
@@ -471,10 +471,10 @@ export default function GoogleDeveloperJourney() {
                     <div>
                       {/* Top: Artwork & Category */}
                       <div className="flex items-start justify-between gap-3">
-                        {badge.localImage ? (
+                        {badge.imageUrl || badge.localImage ? (
                           <div className="relative h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-2xl border border-white/15 bg-black/40 p-1.5 shadow-md transition-transform duration-300 group-hover:scale-105">
                             <img
-                              src={badge.localImage}
+                              src={badge.imageUrl || badge.localImage}
                               alt={badge.title}
                               loading="lazy"
                               className="h-full w-full object-contain filter drop-shadow"
@@ -542,13 +542,19 @@ export default function GoogleDeveloperJourney() {
 
             {/* View More / Expand Badges */}
             {hasMore && (
-              <div data-reveal className="flex justify-center pt-2">
+              <div data-reveal className="flex flex-wrap items-center justify-center gap-3 pt-2">
                 <button
-                  onClick={() => setVisibleCount((prev) => prev + 8)}
+                  onClick={() => setVisibleCount((prev) => prev + 16)}
                   className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-2.5 font-condensed text-xs uppercase tracking-wider text-white transition-all hover:border-ember-500/60 hover:bg-ember-500/10 hover:text-ember-400"
                 >
-                  <span>Load More Verified Badges</span>
+                  <span>Load More (+16 Badges)</span>
                   <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+                </button>
+                <button
+                  onClick={() => setVisibleCount(filteredBadges.length)}
+                  className="group flex items-center gap-2 rounded-full border border-ember-500/40 bg-ember-500/10 px-6 py-2.5 font-condensed text-xs uppercase tracking-wider text-ember-400 transition-all hover:bg-ember-500 hover:text-black hover:shadow-glow"
+                >
+                  <span>Show All ({filteredBadges.length} Badges)</span>
                 </button>
               </div>
             )}
@@ -779,3 +785,4 @@ export default function GoogleDeveloperJourney() {
     </Section>
   );
 }
+
