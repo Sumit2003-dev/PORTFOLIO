@@ -13,7 +13,7 @@
   <b>Turning raw data into cinematic intelligence — building models that predict, systems that learn, and products that feel alive.</b>
 </p>
 
-[🌐 Live Portfolio](https://sumit2003-dev.github.io/PORTFOLIO/) • [📄 View Resume](https://github.com/Sumit2003-dev/PORTFOLIO/blob/main/public/uploads/Sumit_Kumar_Bharti_Resume_Updated.pdf) • [💼 LinkedIn](https://www.linkedin.com/in/sumit2003-dev/) • [📬 Get in Touch](mailto:sumit.ku5981@gmail.com)
+[🌐 Live Portfolio](https://sumit2003-dev.github.io/PORTFOLIO/) • [📄 View Resume](https://github.com/Sumit2003-dev/PORTFOLIO/blob/main/public/uploads/Sumit_Kumar_Bharti_Resume_Updated.pdf) • [💼 LinkedIn](https://www.linkedin.com/in/sumit2003-dev/) • [☁️ Google Skills (171 Badges)](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9) • [⚡ LeetCode](https://leetcode.com/u/sumit2003dev/) • [📬 Contact](mailto:sumit.ku5981@gmail.com)
 
 </div>
 
@@ -34,8 +34,8 @@ Engineered with a **dark ember aesthetic** (`#060c14` / `#FF6A00`), real-time **
 | **B.Tech — CSE (AI & DS)** | **CGPA 7.98 / 10** | Shri Ramswaroop Memorial University (SRMU, 2023–2027) · Sem VI SGPA 8.26 |
 | **Senior Secondary (CBSE XII)** | **75.4%** | PM Shri Kendriya Vidyalaya, Lucknow (PCM, 2023) |
 | **Secondary (CBSE X)** | **87.4%** | Army School, Binaguri, West Bengal (2021) |
-| **Google Cloud Skills Boost** | **#1 Diamond League** | 171 Verified Skill Badges · 38,105 Points · 44-Day Streak |
-| **Competitive Programming** | **341 Solved · Rating 1,460** | LeetCode (@Sumit2003) · 94 Easy · 184 Medium · 63 Hard |
+| **Google Cloud Skills Boost** | **#1 Diamond League** | [171 Verified Skill Badges · 38,105 Points · 44-Day Streak](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9) |
+| **Competitive Programming** | **341 Solved · Rating 1,460** | [LeetCode (@sumit2003dev)](https://leetcode.com/u/sumit2003dev/) · 94 Easy · 184 Medium · 63 Hard |
 | **Hackathons & Honors** | **Top 10 Finish** | VIVEKA: The Intelligence 5.0 (Techfest 2k26) · KarigarSetu |
 
 ---
@@ -174,7 +174,10 @@ This repository includes a preconfigured GitHub Actions workflow in [`.github/wo
 * **Email**: [sumit.ku5981@gmail.com](mailto:sumit.ku5981@gmail.com)
 * **LinkedIn**: [linkedin.com/in/sumit2003-dev](https://www.linkedin.com/in/sumit2003-dev/)
 * **GitHub**: [@Sumit2003-dev](https://github.com/Sumit2003-dev)
-* **LeetCode**: [@Sumit2003](https://leetcode.com/Sumit2003)
+* **LeetCode**: [@sumit2003dev](https://leetcode.com/u/sumit2003dev/)
+* **Google Skills Boost**: [171 Badges · #1 Diamond League](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9)
+* **Credly**: [sumitdev2003 Badges](https://www.credly.com/users/sumitdev2003/badges)
+* **Google Builder Hub**: [me.developers.google.com/u/me](https://me.developers.google.com/u/me)
 * **Location**: Lucknow, Uttar Pradesh, India
 
 ---

@@ -128,7 +128,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["leetcode", "coding", "dsa", "algorithms", "problem solving", "rating", "contest"],
     answer:
-      "Sumit is an active problem solver on **LeetCode** (@Sumit2003):\n• **341 Problems Solved**: 94 Easy, 184 Medium, 63 Hard\n• **Contest Rating**: 1,460\n• Earned both **LeetCode 50-Day and 100-Day 2026 badges** with consistent practice in Python, Java, and MySQL.",
+      "Sumit is an active problem solver on **LeetCode** (@sumit2003dev):\n• **341 Problems Solved**: 94 Easy, 184 Medium, 63 Hard\n• **Contest Rating**: 1,460\n• Earned both **LeetCode 50-Day and 100-Day 2026 badges** with consistent practice in Python, Java, and MySQL.",
     action: { label: "Visit LeetCode Profile", href: profile.leetcode, type: "external" },
   },
   // 14. Resume / CV
@@ -163,7 +163,10 @@ Key projects:
 3. Airline Delay Prediction: Scikit-learn regression model with R² score of ~0.85.
 4. AI-Based Exam Proctoring Research: Co-authored research on ML & Computer Vision for exam integrity under Mrs. Anamika Sharma.
 Key achievements:
-- #1 Diamond League Rank in Google Cloud Arcade with 171 skill badges, 38,105 points, and 44-day streak.
+- #1 Diamond League Rank in Google Cloud Arcade with 171 skill badges, 38,105 points, and 44-day streak (verified at https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9).
+- Credly verified badges profile: https://www.credly.com/users/sumitdev2003/badges
+- LeetCode profile (@sumit2003dev) with 341+ problems solved: https://leetcode.com/u/sumit2003dev/
+- Google Builder Hub / Developer Profile: https://me.developers.google.com/u/me
 - Google Data Analytics Professional Certificate with 94.87% score.
 - Active GDG Lucknow member and Google Developer Program premium member.
 Technical skills: Python (93%), Machine Learning (88%), Scikit-learn, RAG & GenAI (80%), FAISS, Pandas, NumPy, SQL, Streamlit, Flask, Java.

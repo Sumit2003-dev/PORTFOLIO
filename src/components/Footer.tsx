@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { profile } from "@/lib/data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,14 +50,17 @@ export default function Footer() {
               </span>
             </button>
             <p className="mt-2 max-w-xs text-xs text-white/40">
-              Data Scientist & AI Engineer crafting cinematic intelligence.
+              Data Scientist and AI/ML developer building practical machine learning systems.
             </p>
           </div>
 
-          <div className="flex items-center gap-5 text-xs text-white/50">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-5 text-xs text-white/50">
             <a href="https://github.com/Sumit2003-dev" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ember-500">GitHub</a>
             <a href="https://www.linkedin.com/in/sumit2003-dev/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ember-500">LinkedIn</a>
-            <a href="mailto:sumit.ku5981@gmail.com" className="transition-colors hover:text-ember-500">Email</a>
+            <a href={profile.leetcode} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ember-500">LeetCode</a>
+            <a href={profile.googleSkills} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ember-500">Google Skills</a>
+            <a href={profile.credly} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ember-500">Credly</a>
+            <a href={`mailto:${profile.email}`} className="transition-colors hover:text-ember-500">Email</a>
           </div>
         </div>
 

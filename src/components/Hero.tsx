@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Github, Linkedin, Mail, Download, ArrowRight, Eye, Sparkles, Cpu, ShieldCheck } from "lucide-react";
+import { SiLeetcode, SiGooglecloud } from "react-icons/si";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useMotionTemplate, useReducedMotion } from "framer-motion";
 import { scrollToId } from "@/hooks/use-lenis";
 import { profile } from "@/lib/data";
@@ -192,11 +193,13 @@ export default function Hero({ onOpenResume }: HeroProps) {
           </div>
 
           {/* Social Icons */}
-          <div data-reveal className="mt-8 flex items-center gap-3">
+          <div data-reveal className="mt-8 flex flex-wrap items-center gap-3">
             {[
               { icon: <Github className="h-4 w-4" />, href: "https://github.com/Sumit2003-dev", label: "GitHub" },
               { icon: <Linkedin className="h-4 w-4" />, href: "https://www.linkedin.com/in/sumit2003-dev/", label: "LinkedIn" },
-              { icon: <Mail className="h-4 w-4" />, href: "mailto:sumit.ku5981@gmail.com", label: "Email" },
+              { icon: <SiLeetcode className="h-4 w-4" />, href: profile.leetcode, label: "LeetCode (@sumit2003dev)" },
+              { icon: <SiGooglecloud className="h-4 w-4" />, href: profile.googleSkills, label: "Google Skills (171 Badges · #1 Rank)" },
+              { icon: <Mail className="h-4 w-4" />, href: `mailto:${profile.email}`, label: "Email" },
             ].map((s) => (
               <a
                 key={s.label}
@@ -205,6 +208,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
                 rel="noopener noreferrer"
                 className="group grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/[0.03] text-white/65 backdrop-blur transition-all hover:-translate-y-0.5 hover:border-ember-500/60 hover:text-ember-500 hover:shadow-glow"
                 aria-label={s.label}
+                title={s.label}
               >
                 {s.icon}
               </a>

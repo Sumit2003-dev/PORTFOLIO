@@ -1,8 +1,9 @@
 import { useRef, useState, useEffect } from "react";
 import Section from "./Section";
-import { certificates, CertificateItem } from "@/lib/data";
+import { certificates, CertificateItem, profile } from "@/lib/data";
 import { useFadeUp } from "@/hooks/use-scroll";
 import { Award, ExternalLink, X, Eye, Download, FileText, CheckCircle2 } from "lucide-react";
+import { SiGooglecloud, SiCredly } from "react-icons/si";
 
 export default function Certificates() {
   const ref = useRef<HTMLDivElement>(null);
@@ -40,9 +41,33 @@ export default function Certificates() {
               Verified professional credentials and job simulations from Google, NPTEL, Anthropic, IBM, TCS, TATA, and Deloitte.
             </p>
           </div>
-          <div data-reveal className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs text-white/60">
-            <CheckCircle2 className="h-4 w-4 text-ember-500" />
-            <span>{certificates.length} Verified Credentials</span>
+          <div data-reveal className="flex flex-wrap items-center gap-2">
+            <a
+              href={profile.googleSkills}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 rounded-full border border-ember-500/30 bg-ember-500/10 px-3 py-1.5 text-xs text-ember-400 transition-all hover:border-ember-500 hover:bg-ember-500/20 hover:text-white"
+              title="View live 171 Google Cloud badges on Google Skills Boost"
+            >
+              <SiGooglecloud className="h-3.5 w-3.5 text-ember-500" />
+              <span>Google Skills (171 Badges)</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+            <a
+              href={profile.credly}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/70 transition-all hover:border-ember-500/50 hover:text-white"
+              title="View verified Credly badges"
+            >
+              <SiCredly className="h-3.5 w-3.5 text-ember-500" />
+              <span>Credly Badges</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+            <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/50">
+              <CheckCircle2 className="h-3.5 w-3.5 text-ember-500" />
+              <span>{certificates.length} Credentials</span>
+            </div>
           </div>
         </div>
 
@@ -128,7 +153,17 @@ export default function Certificates() {
                 <h3 className="font-display text-lg sm:text-xl uppercase text-white">{selectedCert.title}</h3>
               </div>
 
-              <div className="flex items-center gap-2 sm:gap-3">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                {selectedCert.url && (
+                  <a
+                    href={selectedCert.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 rounded-full border border-ember-500/50 bg-ember-500/15 px-3 py-1.5 text-xs font-semibold text-ember-400 transition-colors hover:bg-ember-500 hover:text-black"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5" /> Verify Live Profile
+                  </a>
+                )}
                 {selectedCert.pdf && (
                   <>
                     <a

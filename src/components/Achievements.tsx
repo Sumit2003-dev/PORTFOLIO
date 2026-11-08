@@ -37,17 +37,36 @@ export default function Achievements() {
 
         {/* main counters */}
         <div data-reveal className="mt-9 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {achievements.map((a) => (
-            <div key={a.label} className="glass group relative overflow-hidden rounded-xl p-4 sm:p-5 lg:p-6 text-center transition-all duration-500 hover:-translate-y-0.5 hover:shadow-glow">
-              <span className="mx-auto grid h-10 w-10 place-items-center rounded-xl bg-ember-500/15 text-ember-500">
-                {aIcons[a.icon]}
-              </span>
-              <p className="mt-3.5 font-display text-2xl sm:text-3xl lg:text-4xl text-ember-500">
-                <Counter value={a.value} suffix={a.suffix} />
-              </p>
-              <p className="mt-1 font-condensed text-xs sm:text-sm uppercase tracking-wider text-white/55">{a.label}</p>
-            </div>
-          ))}
+          {achievements.map((a) => {
+            const isCloud = a.label.includes("Diamond") || a.label.includes("Cloud");
+            const Wrapper = isCloud ? "a" : "div";
+            const wrapperProps = isCloud
+              ? {
+                  href: profile.googleSkills,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  title: "Verify on Google Cloud Skills Boost public profile",
+                }
+              : {};
+            return (
+              <Wrapper
+                key={a.label}
+                {...wrapperProps}
+                className="glass group relative overflow-hidden rounded-xl p-4 sm:p-5 lg:p-6 text-center transition-all duration-500 hover:-translate-y-0.5 hover:shadow-glow hover:border-ember-500/40"
+              >
+                <span className="mx-auto grid h-10 w-10 place-items-center rounded-xl bg-ember-500/15 text-ember-500">
+                  {aIcons[a.icon]}
+                </span>
+                <p className="mt-3.5 font-display text-2xl sm:text-3xl lg:text-4xl text-ember-500">
+                  <Counter value={a.value} suffix={a.suffix} />
+                </p>
+                <p className="mt-1 font-condensed text-xs sm:text-sm uppercase tracking-wider text-white/55 flex items-center justify-center gap-1">
+                  <span>{a.label}</span>
+                  {isCloud && <ExternalLink className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100 text-ember-500" />}
+                </p>
+              </Wrapper>
+            );
+          })}
         </div>
 
         {/* metrics + github */}

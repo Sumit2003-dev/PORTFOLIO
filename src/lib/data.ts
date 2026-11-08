@@ -21,9 +21,15 @@ export const profile = {
   social: [
     { name: "GitHub", href: "https://github.com/Sumit2003-dev" },
     { name: "LinkedIn", href: "https://www.linkedin.com/in/sumit2003-dev/" },
+    { name: "LeetCode", href: "https://leetcode.com/u/sumit2003dev/" },
+    { name: "Google Skills", href: "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9" },
+    { name: "Credly", href: "https://www.credly.com/users/sumitdev2003/badges" },
     { name: "Email", href: "mailto:sumit.ku5981@gmail.com" },
   ],
-  leetcode: "https://leetcode.com/Sumit2003",
+  leetcode: "https://leetcode.com/u/sumit2003dev/",
+  googleSkills: "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
+  credly: "https://www.credly.com/users/sumitdev2003/badges",
+  googleDev: "https://me.developers.google.com/u/me",
   githubHandle: "Sumit2003-dev",
 };
 
@@ -370,6 +376,7 @@ export type CertificateItem = {
   skills: string[];
   img: string;
   pdf?: string;
+  url?: string;
   hue: string;
 };
 
@@ -383,6 +390,7 @@ const rawCertificates: CertificateItem[] = [
     skills: ["GCP", "BigQuery ML", "Vertex AI", "Terraform", "IAM", "Cloud Architecture", "GKE", "Cloud Run", "Pub/Sub", "Dataproc"],
     img: "/uploads/homepage.png",
     pdf: "/uploads/ALL CERTIFICATES_compressed.pdf",
+    url: "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
     hue: "210 90% 55%",
   },
   {
