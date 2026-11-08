@@ -147,10 +147,10 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   },
   // 16. Community & Memberships
   {
-    keywords: ["gdg", "community", "google developer group", "developer program", "membership", "lucknow"],
+    keywords: ["gdg", "community", "google developer group", "developer program", "membership", "lucknow", "g.dev", "builder hub", "developer profile"],
     answer:
-      "Sumit is an active member of **Google Developer Group (GDG) Lucknow** and holds a **Google Developer Program premium tier membership**, actively engaging with fellow AI practitioners and developer summits.",
-    action: { label: "Read About Sumit", href: "#about", type: "scroll" },
+      "Sumit is an active member of **Google Developer Group (GDG) Lucknow** and holds a **Google Developer Program premium tier membership** (verified at https://g.dev/sumit2003dev), actively engaging with fellow AI practitioners and developer summits.",
+    action: { label: "View Google Dev Profile", href: profile.googleDev, type: "external" },
   },
 ];
 
@@ -166,7 +166,7 @@ Key achievements:
 - #1 Diamond League Rank in Google Cloud Arcade with 171 skill badges, 38,105 points, and 44-day streak (verified at https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9).
 - Credly verified badges profile: https://www.credly.com/users/sumitdev2003/badges
 - LeetCode profile (@sumit2003dev) with 341+ problems solved: https://leetcode.com/u/sumit2003dev/
-- Google Builder Hub / Developer Profile: https://me.developers.google.com/u/me
+- Google Developer Profile: https://g.dev/sumit2003dev
 - Google Data Analytics Professional Certificate with 94.87% score.
 - Active GDG Lucknow member and Google Developer Program premium member.
 Technical skills: Python (93%), Machine Learning (88%), Scikit-learn, RAG & GenAI (80%), FAISS, Pandas, NumPy, SQL, Streamlit, Flask, Java.

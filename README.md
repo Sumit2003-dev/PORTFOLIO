@@ -177,7 +177,7 @@ This repository includes a preconfigured GitHub Actions workflow in [`.github/wo
 * **LeetCode**: [@sumit2003dev](https://leetcode.com/u/sumit2003dev/)
 * **Google Skills Boost**: [171 Badges · #1 Diamond League](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9)
 * **Credly**: [sumitdev2003 Badges](https://www.credly.com/users/sumitdev2003/badges)
-* **Google Builder Hub**: [me.developers.google.com/u/me](https://me.developers.google.com/u/me)
+* **Google Developer Profile**: [g.dev/sumit2003dev](https://g.dev/sumit2003dev)
 * **Location**: Lucknow, Uttar Pradesh, India
 
 ---

@@ -59,6 +59,7 @@ export default function Footer() {
             <a href="https://www.linkedin.com/in/sumit2003-dev/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ember-500">LinkedIn</a>
             <a href={profile.leetcode} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ember-500">LeetCode</a>
             <a href={profile.googleSkills} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ember-500">Google Skills</a>
+            <a href={profile.googleDev} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ember-500">Google Dev</a>
             <a href={profile.credly} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ember-500">Credly</a>
             <a href={`mailto:${profile.email}`} className="transition-colors hover:text-ember-500">Email</a>
           </div>

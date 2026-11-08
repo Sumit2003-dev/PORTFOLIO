@@ -54,6 +54,16 @@ export default function Certificates() {
               <ExternalLink className="h-3 w-3" />
             </a>
             <a
+              href={profile.googleDev}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/70 transition-all hover:border-ember-500/50 hover:text-white"
+              title="View Google Developer Profile (g.dev/sumit2003dev)"
+            >
+              <span>g.dev/sumit2003dev</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+            <a
               href={profile.credly}
               target="_blank"
               rel="noopener noreferrer"

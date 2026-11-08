@@ -23,13 +23,14 @@ export const profile = {
     { name: "LinkedIn", href: "https://www.linkedin.com/in/sumit2003-dev/" },
     { name: "LeetCode", href: "https://leetcode.com/u/sumit2003dev/" },
     { name: "Google Skills", href: "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9" },
+    { name: "Google Dev", href: "https://g.dev/sumit2003dev" },
     { name: "Credly", href: "https://www.credly.com/users/sumitdev2003/badges" },
     { name: "Email", href: "mailto:sumit.ku5981@gmail.com" },
   ],
   leetcode: "https://leetcode.com/u/sumit2003dev/",
   googleSkills: "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
   credly: "https://www.credly.com/users/sumitdev2003/badges",
-  googleDev: "https://me.developers.google.com/u/me",
+  googleDev: "https://g.dev/sumit2003dev",
   githubHandle: "Sumit2003-dev",
 };
 
