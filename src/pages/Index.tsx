@@ -12,6 +12,7 @@ import Footer from "@/components/Footer";
 // Lazy-loaded components for optimal initial paint & bundle splitting
 const GithubStats = lazy(() => import("@/components/GithubStats"));
 const Education = lazy(() => import("@/components/Education"));
+const GoogleDeveloperJourney = lazy(() => import("@/components/GoogleDeveloperJourney"));
 const Certificates = lazy(() => import("@/components/Certificates"));
 const Achievements = lazy(() => import("@/components/Achievements"));
 const AskSumitAI = lazy(() => import("@/components/AskSumitAI"));
@@ -51,6 +52,7 @@ const Index = () => {
         <Skills />
         <Projects />
         <Suspense fallback={<div className="min-h-[200px]" />}>
+          <GoogleDeveloperJourney />
           <GithubStats />
           <Certificates />
           <Achievements />

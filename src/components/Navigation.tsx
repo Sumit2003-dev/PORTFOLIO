@@ -8,6 +8,7 @@ const NAV = [
   { name: "EDUCATION", href: "#education" },
   { name: "SKILLS", href: "#skills" },
   { name: "WORK", href: "#projects" },
+  { name: "GOOGLE", href: "#google-journey" },
   { name: "CERTIFICATES", href: "#certificates" },
   { name: "CONTACT", href: "#contact" },
 ];
@@ -22,7 +23,7 @@ export default function Navigation({ onOpenResume }: NavigationProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const ids = ["home", "about", "education", "skills", "projects", "certificates", "contact"];
+    const ids = ["home", "about", "education", "skills", "projects", "google-journey", "certificates", "contact"];
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
       let current = "#home";

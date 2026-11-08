@@ -70,10 +70,10 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   },
   // 5. Google Cloud Arcade & Badges
   {
-    keywords: ["arcade", "cloud", "badge", "diamond", "rank", "streak", "points", "gcp", "vertex", "bigquery"],
+    keywords: ["arcade", "cloud", "badge", "diamond", "rank", "streak", "points", "gcp", "vertex", "bigquery", "google journey"],
     answer:
-      "Sumit achieved the **#1 Diamond League ranking** on Google Cloud Skills Boost! He earned **171 verified skill badges**, accumulated **38,105 points**, and sustained an unbroken **44-day streak** spanning Vertex AI, BigQuery ML, GKE, Cloud Run, and Terraform.",
-    action: { label: "See Career Milestones", href: "#about", type: "scroll" },
+      "Sumit is in the **Diamond League (Position #18)** on Google Cloud Skills Boost! He has earned **178 verified skill badges**, accumulated **47,957 points**, and maintains a continuous learning streak across Vertex AI, BigQuery ML, GKE, Cloud Run, and Terraform. He also holds a Google Developer Program Premium membership.",
+    action: { label: "Explore Google Developer Journey", href: "#google-journey", type: "scroll" },
   },
   // 6. Student Performance / NextGrade
   {
@@ -163,7 +163,7 @@ Key projects:
 3. Airline Delay Prediction: Scikit-learn regression model with R² score of ~0.85.
 4. AI-Based Exam Proctoring Research: Co-authored research on ML & Computer Vision for exam integrity under Mrs. Anamika Sharma.
 Key achievements:
-- #1 Diamond League Rank in Google Cloud Arcade with 171 skill badges, 38,105 points, and 44-day streak (verified at https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9).
+- Diamond League (Position #18) in Google Cloud Arcade with 178 skill badges, 47,957 points, and 12-day streak (verified at https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9).
 - Credly verified badges profile: https://www.credly.com/users/sumitdev2003/badges
 - LeetCode profile (@sumit2003dev) with 341+ problems solved: https://leetcode.com/u/sumit2003dev/
 - Google Developer Profile: https://g.dev/sumit2003dev

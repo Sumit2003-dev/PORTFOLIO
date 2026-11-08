@@ -7,13 +7,13 @@
 [![Vite](https://img.shields.io/badge/Vite-8.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Three.js](https://img.shields.io/badge/Three.js-0.185-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Google Cloud](https://img.shields.io/badge/Google_Cloud-%231_Diamond_League-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
+[![Google Cloud](https://img.shields.io/badge/Google_Cloud-Diamond_League_178_Badges-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
 
 <p align="center">
   <b>Turning raw data into cinematic intelligence — building models that predict, systems that learn, and products that feel alive.</b>
 </p>
 
-[🌐 Live Portfolio](https://sumit2003-dev.github.io/PORTFOLIO/) • [📄 View Resume](https://github.com/Sumit2003-dev/PORTFOLIO/blob/main/public/uploads/Sumit_Kumar_Bharti_Resume_Updated.pdf) • [💼 LinkedIn](https://www.linkedin.com/in/sumit2003-dev/) • [☁️ Google Skills (171 Badges)](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9) • [⚡ LeetCode](https://leetcode.com/u/sumit2003dev/) • [📬 Contact](mailto:sumit.ku5981@gmail.com)
+[🌐 Live Portfolio](https://sumit2003-dev.github.io/PORTFOLIO/) • [📄 View Resume](https://github.com/Sumit2003-dev/PORTFOLIO/blob/main/public/uploads/Sumit_Kumar_Bharti_Resume_Updated.pdf) • [💼 LinkedIn](https://www.linkedin.com/in/sumit2003-dev/) • [☁️ Google Skills (178 Badges)](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9) • [⚡ LeetCode](https://leetcode.com/u/sumit2003dev/) • [📬 Contact](mailto:sumit.ku5981@gmail.com)
 
 </div>
 
@@ -34,7 +34,7 @@ Engineered with a **dark ember aesthetic** (`#060c14` / `#FF6A00`), real-time **
 | **B.Tech — CSE (AI & DS)** | **CGPA 7.98 / 10** | Shri Ramswaroop Memorial University (SRMU, 2023–2027) · Sem VI SGPA 8.26 |
 | **Senior Secondary (CBSE XII)** | **75.4%** | PM Shri Kendriya Vidyalaya, Lucknow (PCM, 2023) |
 | **Secondary (CBSE X)** | **87.4%** | Army School, Binaguri, West Bengal (2021) |
-| **Google Cloud Skills Boost** | **#1 Diamond League** | [171 Verified Skill Badges · 38,105 Points · 44-Day Streak](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9) |
+| **Google Cloud Skills Boost** | **Diamond League (#18)** | [178 Verified Skill Badges · 47,957 Points · 12-Day Streak](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9) |
 | **Competitive Programming** | **341 Solved · Rating 1,460** | [LeetCode (@sumit2003dev)](https://leetcode.com/u/sumit2003dev/) · 94 Easy · 184 Medium · 63 Hard |
 | **Hackathons & Honors** | **Top 10 Finish** | VIVEKA: The Intelligence 5.0 (Techfest 2k26) · KarigarSetu |
 
@@ -175,7 +175,7 @@ This repository includes a preconfigured GitHub Actions workflow in [`.github/wo
 * **LinkedIn**: [linkedin.com/in/sumit2003-dev](https://www.linkedin.com/in/sumit2003-dev/)
 * **GitHub**: [@Sumit2003-dev](https://github.com/Sumit2003-dev)
 * **LeetCode**: [@sumit2003dev](https://leetcode.com/u/sumit2003dev/)
-* **Google Skills Boost**: [171 Badges · #1 Diamond League](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9)
+* **Google Skills Boost**: [178 Badges · Diamond League (#18)](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9)
 * **Credly**: [sumitdev2003 Badges](https://www.credly.com/users/sumitdev2003/badges)
 * **Google Developer Profile**: [g.dev/sumit2003dev](https://g.dev/sumit2003dev)
 * **Location**: Lucknow, Uttar Pradesh, India

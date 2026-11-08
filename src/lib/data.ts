@@ -11,7 +11,7 @@ export const profile = {
   short: "Data Scientist and AI/ML developer building practical machine learning systems, predictive models, and context-grounded RAG applications.",
   description: [
     "Final-year Computer Science & Engineering student specialising in Artificial Intelligence and Data Science, currently gaining hands-on industry experience as a Machine Learning Intern at FlyRank AI.",
-    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I currently hold the #1 Diamond League ranking on Google Cloud Skills Boost with 171 skill badges and a 44-day learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
+    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I actively learn and build on Google Cloud, standing in the Diamond League on Google Cloud Skills Boost with 178 skill badges, 47,957 points, and a continuous learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
     "I'm actively expanding my expertise in Generative AI, RAG systems and LLMs through applied academic and industry projects.",
   ],
   email: "sumit.ku5981@gmail.com",
@@ -38,7 +38,7 @@ export const profile = {
 export const stats = [
   { label: "Projects", value: 6, suffix: "+" },
   { label: "Certificates", value: 11, suffix: "+" },
-  { label: "Cloud Badges", value: 171, suffix: "+" },
+  { label: "Cloud Badges", value: 178, suffix: "+" },
   { label: "Internships", value: 1, suffix: "" },
 ];
 
@@ -383,11 +383,11 @@ export type CertificateItem = {
 
 const rawCertificates: CertificateItem[] = [
   {
-    title: "Diamond League — #1 Rank",
+    title: "Google Cloud Arcade — Diamond League",
     issuer: "Google Cloud Skills Boost",
     date: "2026",
-    level: "Top Rank",
-    credential: "171 Badges · 38,105 Pts · 44-Day Streak",
+    level: "Diamond",
+    credential: "178 Badges · 47,957 Pts · Position #18",
     skills: ["GCP", "BigQuery ML", "Vertex AI", "Terraform", "IAM", "Cloud Architecture", "GKE", "Cloud Run", "Pub/Sub", "Dataproc"],
     img: "/uploads/homepage.png",
     pdf: "/uploads/ALL CERTIFICATES_compressed.pdf",
@@ -514,10 +514,10 @@ export const certificates: CertificateItem[] = rawCertificates.map((c) => ({
 
 /* ================= ACHIEVEMENTS ================= */
 export const achievements = [
-  { label: "#1 Diamond League Rank", value: 1, suffix: "st", icon: "trophy" },
-  { label: "Cloud Skill Badges", value: 171, suffix: "+", icon: "repo" },
-  { label: "Hackathons Completed", value: 3, suffix: "+", icon: "trophy" },
-  { label: "Events Lead", value: 10, suffix: "+", icon: "git" },
+  { label: "Diamond League Rank", value: 18, suffix: "th", icon: "trophy" },
+  { label: "Cloud Skill Badges", value: 178, suffix: "+", icon: "repo" },
+  { label: "Arcade Points", value: 47957, suffix: "", icon: "trophy" },
+  { label: "Events & Study Jams", value: 10, suffix: "+", icon: "git" },
 ];
 
 export const leetcode = [

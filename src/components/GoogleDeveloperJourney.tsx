@@ -1,0 +1,781 @@
+import { useState, useRef, useMemo } from "react";
+import Section from "./Section";
+import {
+  skillsBoostStats,
+  googleDevProgram,
+  gdgLucknow,
+  verifiedSkillBadges,
+  GoogleSkillBadge,
+  GoogleDevBadge,
+} from "@/lib/googleDeveloperData";
+import { useFadeUp, useCounter } from "@/hooks/use-scroll";
+import {
+  Trophy,
+  Flame,
+  Sparkles,
+  ExternalLink,
+  Search,
+  X,
+  CheckCircle2,
+  Calendar,
+  MapPin,
+  Users,
+  Award,
+  ShieldCheck,
+  Layers,
+  Cpu,
+  Star,
+  ChevronDown,
+  RotateCcw,
+} from "lucide-react";
+import { SiGooglecloud, SiGoogle } from "react-icons/si";
+import { motion, AnimatePresence } from "framer-motion";
+
+function StatCounter({ value, suffix }: { value: number; suffix?: string }) {
+  const ref = useCounter(value);
+  return (
+    <span>
+      <span ref={ref}>0</span>
+      {suffix || ""}
+    </span>
+  );
+}
+
+// Google 4-Color Accent Dot Strip
+function GoogleColorStrip({ className = "" }: { className?: string }) {
+  return (
+    <div className={`flex items-center gap-1.5 ${className}`} aria-hidden>
+      <span className="h-2 w-2 rounded-full bg-[#4285F4]" />
+      <span className="h-2 w-2 rounded-full bg-[#EA4335]" />
+      <span className="h-2 w-2 rounded-full bg-[#FBBC05]" />
+      <span className="h-2 w-2 rounded-full bg-[#34A853]" />
+    </div>
+  );
+}
+
+// Crisp Vector Badge Artwork for badges without static screenshot
+function BadgeVectorArtwork({
+  category,
+  iconType,
+}: {
+  category: GoogleSkillBadge["category"];
+  iconType: GoogleSkillBadge["iconType"];
+}) {
+  const colors: Record<string, { bg: string; border: string; accent: string }> = {
+    "Generative AI": { bg: "from-amber-500/20 to-ember-500/10", border: "border-ember-500/40", accent: "#FF6A00" },
+    "Data & BigQuery": { bg: "from-blue-500/20 to-cyan-500/10", border: "border-blue-500/40", accent: "#4285F4" },
+    "Cloud Infrastructure": { bg: "from-green-500/20 to-emerald-500/10", border: "border-green-500/40", accent: "#34A853" },
+    "Security & IAM": { bg: "from-red-500/20 to-orange-500/10", border: "border-red-500/40", accent: "#EA4335" },
+    "DevOps & SRE": { bg: "from-purple-500/20 to-indigo-500/10", border: "border-purple-500/40", accent: "#A855F7" },
+  };
+
+  const scheme = colors[category] || colors["Cloud Infrastructure"];
+
+  return (
+    <div
+      className={`relative grid h-14 w-14 sm:h-16 sm:w-16 place-items-center rounded-2xl border bg-gradient-to-br ${scheme.bg} ${scheme.border} shadow-lg transition-transform duration-300 group-hover:scale-105`}
+    >
+      <div className="absolute inset-0 rounded-2xl bg-black/40" />
+      <div className="relative z-10 flex flex-col items-center justify-center">
+        {iconType === "gemini" ? (
+          <Sparkles className="h-6 w-6 text-ember-400" />
+        ) : iconType === "deepmind" ? (
+          <Cpu className="h-6 w-6 text-ember-400" />
+        ) : iconType === "security" ? (
+          <ShieldCheck className="h-6 w-6 text-red-400" />
+        ) : iconType === "kubernetes" ? (
+          <Layers className="h-6 w-6 text-emerald-400" />
+        ) : (
+          <SiGooglecloud className="h-6 w-6 text-blue-400" />
+        )}
+      </div>
+      <span
+        className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full border border-black/80"
+        style={{ backgroundColor: scheme.accent }}
+      />
+    </div>
+  );
+}
+
+export default function GoogleDeveloperJourney() {
+  const ref = useRef<HTMLDivElement>(null);
+  useFadeUp(ref);
+
+  const [activeTab, setActiveTab] = useState<"skills-boost" | "dev-program" | "gdg">("skills-boost");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [visibleCount, setVisibleCount] = useState<number>(8);
+
+  // Filter skills boost badges
+  const categories = ["All", "Generative AI", "Data & BigQuery", "Cloud Infrastructure", "Security & IAM", "DevOps & SRE"];
+
+  const filteredBadges = useMemo(() => {
+    return verifiedSkillBadges.filter((b) => {
+      const matchCat = selectedCategory === "All" || b.category === selectedCategory;
+      const query = searchQuery.trim().toLowerCase();
+      const matchSearch =
+        !query ||
+        b.title.toLowerCase().includes(query) ||
+        b.description.toLowerCase().includes(query) ||
+        b.skills.some((s) => s.toLowerCase().includes(query));
+      return matchCat && matchSearch;
+    });
+  }, [searchQuery, selectedCategory]);
+
+  const displayedBadges = filteredBadges.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredBadges.length;
+
+  const onMove = (e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
+  return (
+    <Section id="google-journey" word="GOOGLE DEV">
+      <div ref={ref} className="relative z-10">
+        {/* Section Heading */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div data-reveal className="flex items-center gap-3">
+              <GoogleColorStrip />
+              <span className="font-condensed text-xs uppercase tracking-[0.25em] text-ember-500 font-semibold">
+                Google Cloud Ecosystem
+              </span>
+            </div>
+            <h2 data-reveal className="mt-2 font-display text-huge uppercase leading-[1.05] text-white">
+              Google Developer <span className="text-ember-500 text-glow">Journey</span>
+            </h2>
+            <p data-reveal className="mt-3 max-w-2xl text-sm sm:text-base text-white/60">
+              Exploring Google Cloud, building technical skills, and growing through developer communities.
+            </p>
+          </div>
+
+          {/* Quick Verified Profile Links */}
+          <div data-reveal className="flex flex-wrap items-center gap-2">
+            <a
+              href={skillsBoostStats.profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-1.5 rounded-full border border-ember-500/40 bg-ember-500/10 px-3.5 py-1.5 text-xs text-ember-400 transition-all hover:bg-ember-500 hover:text-black hover:shadow-glow"
+              title="View live transcript on Google Cloud Skills Boost"
+            >
+              <SiGooglecloud className="h-3.5 w-3.5 transition-transform group-hover:scale-110" />
+              <span>Skills Boost Public Profile</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+            <a
+              href={googleDevProgram.profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-xs text-white/70 transition-all hover:border-ember-500/60 hover:text-white"
+              title="View Google Developer Profile on g.dev"
+            >
+              <SiGoogle className="h-3.5 w-3.5 text-blue-400" />
+              <span>g.dev/sumit2003dev</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          </div>
+        </div>
+
+        {/* Dashboard Navigation Tabs */}
+        <div data-reveal className="mt-8 flex flex-wrap items-center gap-2 border-b border-white/10 pb-4">
+          <button
+            onClick={() => setActiveTab("skills-boost")}
+            className={`group relative flex items-center gap-2.5 rounded-full px-4 py-2 font-condensed text-xs uppercase tracking-wider transition-all ${
+              activeTab === "skills-boost"
+                ? "border border-ember-500/60 bg-ember-500/15 text-white shadow-glow"
+                : "border border-white/10 bg-white/[0.02] text-white/60 hover:border-white/20 hover:text-white"
+            }`}
+          >
+            <SiGooglecloud className="h-3.5 w-3.5 text-blue-400" />
+            <span>Cloud Skills Boost</span>
+            <span className="rounded-full bg-ember-500/20 px-2 py-0.5 text-[10px] font-mono text-ember-400">
+              178 Badges
+            </span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("dev-program")}
+            className={`group relative flex items-center gap-2.5 rounded-full px-4 py-2 font-condensed text-xs uppercase tracking-wider transition-all ${
+              activeTab === "dev-program"
+                ? "border border-ember-500/60 bg-ember-500/15 text-white shadow-glow"
+                : "border border-white/10 bg-white/[0.02] text-white/60 hover:border-white/20 hover:text-white"
+            }`}
+          >
+            <Star className="h-3.5 w-3.5 text-yellow-400" />
+            <span>Developer Program</span>
+            <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-mono text-white/70">
+              12 Badges · Premium
+            </span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("gdg")}
+            className={`group relative flex items-center gap-2.5 rounded-full px-4 py-2 font-condensed text-xs uppercase tracking-wider transition-all ${
+              activeTab === "gdg"
+                ? "border border-ember-500/60 bg-ember-500/15 text-white shadow-glow"
+                : "border border-white/10 bg-white/[0.02] text-white/60 hover:border-white/20 hover:text-white"
+            }`}
+          >
+            <Users className="h-3.5 w-3.5 text-emerald-400" />
+            <span>GDG Lucknow</span>
+            <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-mono text-white/70">
+              Community Member
+            </span>
+          </button>
+        </div>
+
+        {/* =========================================================================
+            TAB 1: Google Cloud Skills Boost
+           ========================================================================= */}
+        {activeTab === "skills-boost" && (
+          <div className="mt-8 space-y-8">
+            {/* Live Verified Stats HUD */}
+            <div data-reveal className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5">
+              {/* Skill Badges */}
+              <div
+                onMouseMove={onMove}
+                className="group glass relative overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 text-center transition-all duration-500 hover:-translate-y-0.5 hover:border-ember-500/40 hover:shadow-glow"
+              >
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(180px circle at var(--mx,50%) var(--my,50%), rgba(255,106,0,0.18), transparent 70%)",
+                  }}
+                />
+                <span className="mx-auto grid h-9 w-9 place-items-center rounded-xl bg-ember-500/15 text-ember-500">
+                  <Trophy className="h-4 w-4" />
+                </span>
+                <p className="mt-3 font-display text-2xl sm:text-3xl text-ember-500">
+                  <StatCounter value={skillsBoostStats.skillBadges} suffix="+" />
+                </p>
+                <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">Skill Badges</p>
+                <span className="mt-2 inline-block rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-400">
+                  Verified Record
+                </span>
+              </div>
+
+              {/* Arcade Points */}
+              <div
+                onMouseMove={onMove}
+                className="group glass relative overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 text-center transition-all duration-500 hover:-translate-y-0.5 hover:border-ember-500/40 hover:shadow-glow"
+              >
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(180px circle at var(--mx,50%) var(--my,50%), rgba(255,106,0,0.18), transparent 70%)",
+                  }}
+                />
+                <span className="mx-auto grid h-9 w-9 place-items-center rounded-xl bg-ember-500/15 text-ember-500">
+                  <Flame className="h-4 w-4" />
+                </span>
+                <p className="mt-3 font-display text-2xl sm:text-3xl text-ember-500">
+                  <StatCounter value={skillsBoostStats.points} />
+                </p>
+                <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">Arcade Points</p>
+                <span className="mt-2 inline-block text-[10px] text-white/40 font-mono">Accumulated</span>
+              </div>
+
+              {/* League Standing */}
+              <div
+                onMouseMove={onMove}
+                className="group glass relative overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 text-center transition-all duration-500 hover:-translate-y-0.5 hover:border-ember-500/40 hover:shadow-glow"
+              >
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(180px circle at var(--mx,50%) var(--my,50%), rgba(66,133,244,0.18), transparent 70%)",
+                  }}
+                />
+                <span className="mx-auto grid h-9 w-9 place-items-center rounded-xl bg-blue-500/15 text-blue-400">
+                  <Sparkles className="h-4 w-4" />
+                </span>
+                <p className="mt-3 font-display text-2xl sm:text-3xl text-blue-400">
+                  {skillsBoostStats.league}
+                </p>
+                <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">League Tier</p>
+                <span className="mt-2 inline-block text-[10px] text-blue-300 font-mono">Diamond Division</span>
+              </div>
+
+              {/* League Position */}
+              <div
+                onMouseMove={onMove}
+                className="group glass relative overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 text-center transition-all duration-500 hover:-translate-y-0.5 hover:border-ember-500/40 hover:shadow-glow"
+              >
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(180px circle at var(--mx,50%) var(--my,50%), rgba(255,106,0,0.18), transparent 70%)",
+                  }}
+                />
+                <span className="mx-auto grid h-9 w-9 place-items-center rounded-xl bg-ember-500/15 text-ember-500">
+                  <Award className="h-4 w-4" />
+                </span>
+                <p className="mt-3 font-display text-2xl sm:text-3xl text-ember-500">
+                  #<StatCounter value={skillsBoostStats.leaguePosition} />
+                </p>
+                <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">League Position</p>
+                <span className="mt-2 inline-block text-[10px] text-white/40 font-mono">Global Standing</span>
+              </div>
+
+              {/* Current Streak */}
+              <div
+                onMouseMove={onMove}
+                className="group col-span-2 sm:col-span-1 glass relative overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 text-center transition-all duration-500 hover:-translate-y-0.5 hover:border-ember-500/40 hover:shadow-glow"
+              >
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(180px circle at var(--mx,50%) var(--my,50%), rgba(234,67,53,0.18), transparent 70%)",
+                  }}
+                />
+                <span className="mx-auto grid h-9 w-9 place-items-center rounded-xl bg-red-500/15 text-red-400">
+                  <Flame className="h-4 w-4" />
+                </span>
+                <p className="mt-3 font-display text-2xl sm:text-3xl text-red-400">
+                  <StatCounter value={skillsBoostStats.streakDays} suffix="d" />
+                </p>
+                <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">Active Streak</p>
+                <span className="mt-2 inline-block text-[10px] text-white/40 font-mono">Continuous Labs</span>
+              </div>
+            </div>
+
+            {/* Sync Timestamp & Provenance Bar */}
+            <div data-reveal className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-2.5 text-xs text-white/60 backdrop-blur">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                <span>
+                  Last verified from Google Cloud Skills Boost transcript:{" "}
+                  <strong className="text-white">{skillsBoostStats.lastVerified}</strong>
+                </span>
+              </div>
+              <div className="flex items-center gap-4 text-[11px] text-white/40">
+                <span>Manually verified figures</span>
+                <span className="h-3 w-px bg-white/10" />
+                <a
+                  href={skillsBoostStats.profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ember-400 hover:underline"
+                >
+                  Verify Live Public Transcript ↗
+                </a>
+              </div>
+            </div>
+
+            {/* Badge Explorer Toolbar */}
+            <div data-reveal className="space-y-4 rounded-2xl border border-white/10 bg-[#08131e]/70 p-4 sm:p-5 backdrop-blur-xl">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <h3 className="font-display text-xl uppercase tracking-wide text-white">
+                    Skill Badge Explorer
+                  </h3>
+                  <p className="text-xs text-white/50">
+                    Search and filter verified skill credentials earned across Vertex AI, BigQuery, GKE, and Infrastructure.
+                  </p>
+                </div>
+
+                {/* Search Input */}
+                <div className="relative w-full sm:w-72">
+                  <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/40" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setVisibleCount(8);
+                    }}
+                    placeholder="Search badges, tools, topics..."
+                    className="w-full rounded-full border border-white/15 bg-white/[0.04] py-1.5 pl-9 pr-8 text-xs text-white placeholder-white/40 transition-colors focus:border-ember-500 focus:bg-white/[0.08] focus:outline-none"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery("")}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white"
+                      aria-label="Clear search"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Category Filter Pills */}
+              <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-white/5">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => {
+                      setSelectedCategory(cat);
+                      setVisibleCount(8);
+                    }}
+                    className={`rounded-full px-3 py-1 font-condensed text-[11px] uppercase tracking-wider transition-all ${
+                      selectedCategory === cat
+                        ? "border border-ember-500/80 bg-ember-500 text-black font-semibold shadow-glow-sm"
+                        : "border border-white/10 bg-white/[0.02] text-white/60 hover:border-white/20 hover:text-white"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+                <span className="ml-auto text-[11px] text-white/40">
+                  Showing {displayedBadges.length} of {filteredBadges.length} badges
+                </span>
+              </div>
+            </div>
+
+            {/* Badge Cards Grid */}
+            {filteredBadges.length === 0 ? (
+              <div data-reveal className="glass flex flex-col items-center justify-center rounded-2xl p-12 text-center">
+                <Search className="h-8 w-8 text-white/30" />
+                <h4 className="mt-3 font-display text-lg uppercase text-white">No badges found</h4>
+                <p className="mt-1 max-w-sm text-xs text-white/50">
+                  No skill badges match "{searchQuery}" in category "{selectedCategory}".
+                </p>
+                <button
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSelectedCategory("All");
+                  }}
+                  className="mt-4 flex items-center gap-1.5 rounded-full border border-ember-500/50 bg-ember-500/10 px-4 py-1.5 text-xs text-ember-400 hover:bg-ember-500 hover:text-black"
+                >
+                  <RotateCcw className="h-3 w-3" /> Reset Filters
+                </button>
+              </div>
+            ) : (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {displayedBadges.map((badge) => (
+                  <div
+                    key={badge.id}
+                    data-reveal
+                    onMouseMove={onMove}
+                    className="group glass relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 transition-all duration-500 hover:-translate-y-1 hover:border-ember-500/40 hover:shadow-glow"
+                  >
+                    {/* Spotlight hover effect */}
+                    <div
+                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      style={{
+                        background:
+                          "radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(255,106,0,0.14), transparent 70%)",
+                      }}
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent" />
+
+                    <div>
+                      {/* Top: Artwork & Category */}
+                      <div className="flex items-start justify-between gap-3">
+                        {badge.localImage ? (
+                          <div className="relative h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-2xl border border-white/15 bg-black/40 p-1.5 shadow-md transition-transform duration-300 group-hover:scale-105">
+                            <img
+                              src={badge.localImage}
+                              alt={badge.title}
+                              loading="lazy"
+                              className="h-full w-full object-contain filter drop-shadow"
+                            />
+                          </div>
+                        ) : (
+                          <BadgeVectorArtwork category={badge.category} iconType={badge.iconType} />
+                        )}
+
+                        <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white/50">
+                          {badge.earnedDate}
+                        </span>
+                      </div>
+
+                      {/* Badge Title */}
+                      <h4 className="mt-3.5 font-display text-base uppercase leading-snug text-white transition-colors group-hover:text-ember-400">
+                        {badge.title}
+                      </h4>
+
+                      <p className="mt-1 font-condensed text-[11px] uppercase tracking-wider text-ember-500">
+                        {badge.category}
+                      </p>
+
+                      <p className="mt-2 text-xs leading-relaxed text-white/60 line-clamp-3">
+                        {badge.description}
+                      </p>
+
+                      {/* Skills tags */}
+                      <div className="mt-3 flex flex-wrap gap-1">
+                        {badge.skills.slice(0, 3).map((s) => (
+                          <span
+                            key={s}
+                            className="rounded-full border border-white/10 bg-black/20 px-2 py-0.5 text-[9px] text-white/60"
+                          >
+                            {s}
+                          </span>
+                        ))}
+                        {badge.skills.length > 3 && (
+                          <span className="rounded-full border border-white/5 px-1.5 py-0.5 text-[9px] text-white/40">
+                            +{badge.skills.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Bottom verification link */}
+                    <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
+                      <span className="text-[10px] text-emerald-400 flex items-center gap-1">
+                        <CheckCircle2 className="h-3 w-3" /> Skill Badge
+                      </span>
+                      <a
+                        href={badge.verificationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-[11px] text-ember-500 hover:underline"
+                        title="View badge on Google Cloud Skills Boost transcript"
+                      >
+                        Verify ↗
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* View More / Expand Badges */}
+            {hasMore && (
+              <div data-reveal className="flex justify-center pt-2">
+                <button
+                  onClick={() => setVisibleCount((prev) => prev + 8)}
+                  className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-2.5 font-condensed text-xs uppercase tracking-wider text-white transition-all hover:border-ember-500/60 hover:bg-ember-500/10 hover:text-ember-400"
+                >
+                  <span>Load More Verified Badges</span>
+                  <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* =========================================================================
+            TAB 2: Google Developer Program
+           ========================================================================= */}
+        {activeTab === "dev-program" && (
+          <div className="mt-8 space-y-6">
+            {/* Membership Header Card */}
+            <div data-reveal className="glass-strong relative overflow-hidden rounded-2xl border border-white/15 p-6 sm:p-8">
+              <div className="absolute right-0 top-0 -mr-16 -mt-16 h-48 w-48 rounded-full bg-gradient-to-br from-blue-500/20 to-transparent blur-3xl pointer-events-none" />
+
+              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <GoogleColorStrip />
+                    <span className="font-condensed text-xs uppercase tracking-[0.25em] text-blue-400 font-semibold">
+                      Official Membership
+                    </span>
+                  </div>
+                  <h3 className="mt-2 font-display text-2xl sm:text-3xl uppercase text-white">
+                    Google Developer Program
+                  </h3>
+                  <p className="mt-2 max-w-xl text-xs sm:text-sm text-white/60">
+                    Verified presence on Google's unified developer platform (g.dev). Distinct from Skills Boost learning challenges, recognizing active ecosystem engagement and solution development.
+                  </p>
+
+                  <div className="mt-4 flex flex-wrap items-center gap-2.5">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-yellow-500/40 bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400">
+                      <Star className="h-3.5 w-3.5" /> {googleDevProgram.membershipTier}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/40 bg-blue-500/10 px-3 py-1 text-xs font-semibold text-blue-400">
+                      <SiGooglecloud className="h-3.5 w-3.5" /> {googleDevProgram.innovatorStatus}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-white/70">
+                      <Award className="h-3.5 w-3.5 text-ember-500" /> {googleDevProgram.totalBadges} Program Badges
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-start md:items-end gap-2.5 shrink-0">
+                  <a
+                    href={googleDevProgram.profileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-ember flex items-center gap-2 px-5 py-2.5 text-xs font-semibold"
+                  >
+                    <SiGoogle className="h-3.5 w-3.5" />
+                    <span>View g.dev Profile</span>
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                  <span className="text-[11px] text-white/40 font-mono">
+                    Authenticated: {googleDevProgram.lastVerified}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* 12 Badges Grid */}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {googleDevProgram.badges.map((b: GoogleDevBadge) => (
+                <div
+                  key={b.id}
+                  data-reveal
+                  onMouseMove={onMove}
+                  className="group glass relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 transition-all duration-500 hover:-translate-y-0.5 hover:border-blue-500/40 hover:shadow-glow"
+                >
+                  <div
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    style={{
+                      background:
+                        "radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(66,133,244,0.14), transparent 70%)",
+                    }}
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent" />
+
+                  <div>
+                    <div className="flex items-start justify-between">
+                      <div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-500/15 text-blue-400">
+                        {b.iconType === "cloud" ? (
+                          <SiGooglecloud className="h-5 w-5" />
+                        ) : b.iconType === "gemini" ? (
+                          <Sparkles className="h-5 w-5 text-ember-400" />
+                        ) : b.iconType === "shield" ? (
+                          <ShieldCheck className="h-5 w-5 text-emerald-400" />
+                        ) : b.iconType === "star" ? (
+                          <Star className="h-5 w-5 text-yellow-400" />
+                        ) : (
+                          <SiGoogle className="h-5 w-5" />
+                        )}
+                      </div>
+                      <span className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-white/45">
+                        {b.date}
+                      </span>
+                    </div>
+
+                    <h4 className="mt-3.5 font-display text-base uppercase leading-snug text-white transition-colors group-hover:text-blue-400">
+                      {b.title}
+                    </h4>
+                    <p className="mt-1 font-condensed text-[11px] uppercase tracking-wider text-blue-400">
+                      {b.category}
+                    </p>
+                    <p className="mt-2 text-xs leading-relaxed text-white/60">{b.description}</p>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
+                    <span className="text-[10px] text-white/40">Developer Program</span>
+                    <a
+                      href={googleDevProgram.profileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-[11px] text-blue-400 hover:underline"
+                    >
+                      g.dev ↗
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* =========================================================================
+            TAB 3: Google Developer Groups (GDG Lucknow)
+           ========================================================================= */}
+        {activeTab === "gdg" && (
+          <div className="mt-8 space-y-6">
+            {/* GDG Community Header Card */}
+            <div data-reveal className="glass-strong relative overflow-hidden rounded-2xl border border-white/15 p-6 sm:p-8">
+              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <GoogleColorStrip />
+                    <span className="font-condensed text-xs uppercase tracking-[0.25em] text-emerald-400 font-semibold">
+                      Community Chapter
+                    </span>
+                  </div>
+                  <h3 className="mt-2 font-display text-2xl sm:text-3xl uppercase text-white">
+                    {gdgLucknow.chapterName}
+                  </h3>
+                  <p className="mt-2 max-w-2xl text-xs sm:text-sm text-white/65 leading-relaxed">
+                    {gdgLucknow.description}
+                  </p>
+
+                  <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-white/60">
+                    <span className="flex items-center gap-1.5 text-emerald-400">
+                      <CheckCircle2 className="h-4 w-4" /> {gdgLucknow.membershipStatus}
+                    </span>
+                    <span className="h-3 w-px bg-white/10" />
+                    <span className="flex items-center gap-1.5">
+                      <MapPin className="h-3.5 w-3.5 text-ember-500" /> {gdgLucknow.location}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="shrink-0">
+                  <a
+                    href={gdgLucknow.communityUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-xs text-white/80 transition-all hover:border-emerald-500/60 hover:text-white"
+                  >
+                    <Users className="h-3.5 w-3.5 text-emerald-400" />
+                    <span>GDG Community Chapter</span>
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Event Highlights Grid */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              {gdgLucknow.events.map((ev) => (
+                <div
+                  key={ev.title}
+                  data-reveal
+                  onMouseMove={onMove}
+                  className="group glass relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-5 sm:p-6 transition-all duration-500 hover:-translate-y-0.5 hover:border-emerald-500/40 hover:shadow-glow"
+                >
+                  <div
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    style={{
+                      background:
+                        "radial-gradient(240px circle at var(--mx,50%) var(--my,50%), rgba(52,168,83,0.14), transparent 70%)",
+                    }}
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent" />
+
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-emerald-400">
+                        {ev.type}
+                      </span>
+                      <span className="font-mono text-xs text-white/45">{ev.year}</span>
+                    </div>
+
+                    <h4 className="mt-3 font-display text-lg uppercase text-white transition-colors group-hover:text-emerald-400">
+                      {ev.title}
+                    </h4>
+
+                    <p className="mt-2 text-xs leading-relaxed text-white/65">{ev.highlight}</p>
+
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {ev.topics.map((tp) => (
+                        <span
+                          key={tp}
+                          className="rounded-full border border-white/10 bg-black/20 px-2.5 py-0.5 text-[10px] text-white/60"
+                        >
+                          {tp}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-4 border-t border-white/5 pt-3 text-[11px] text-white/40 flex items-center justify-between">
+                    <span>GDG Lucknow Community Track</span>
+                    <span className="text-emerald-400 font-medium">Participant</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </Section>
+  );
+}

@@ -47,10 +47,10 @@ export default function Certificates() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 rounded-full border border-ember-500/30 bg-ember-500/10 px-3 py-1.5 text-xs text-ember-400 transition-all hover:border-ember-500 hover:bg-ember-500/20 hover:text-white"
-              title="View live 171 Google Cloud badges on Google Skills Boost"
+              title="View live 178 Google Cloud badges on Google Skills Boost"
             >
               <SiGooglecloud className="h-3.5 w-3.5 text-ember-500" />
-              <span>Google Skills (171 Badges)</span>
+              <span>Google Skills (178 Badges)</span>
               <ExternalLink className="h-3 w-3" />
             </a>
             <a
