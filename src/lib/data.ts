@@ -11,7 +11,7 @@ export const profile = {
   short: "Final-year Computer Science & Engineering student (AI & Data Science) and Machine Learning Intern — building RAG systems, predictive models and end-to-end ML applications.",
   description: [
     "Final-year Computer Science & Engineering student specialising in Artificial Intelligence and Data Science, currently gaining hands-on industry experience as a Machine Learning Intern at FlyRank AI.",
-    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I currently hold the #1 Diamond League ranking on Google Cloud Skills Boost with 124 skill badges and a 44-day learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
+    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I currently hold the #1 Diamond League ranking on Google Cloud Skills Boost with 171 skill badges and a 44-day learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
     "I'm actively expanding my expertise in Generative AI, RAG systems and LLMs through applied academic and industry projects.",
   ],
   email: "sumit.ku5981@gmail.com",
@@ -29,14 +29,14 @@ export const profile = {
 
 /* ============================ ABOUT ============================ */
 export const stats = [
-  { label: "Projects", value: 4, suffix: "+" },
+  { label: "Projects", value: 6, suffix: "+" },
   { label: "Certificates", value: 11, suffix: "+" },
-  { label: "Cloud Badges", value: 124, suffix: "+" },
+  { label: "Cloud Badges", value: 171, suffix: "+" },
   { label: "Internships", value: 1, suffix: "" },
 ];
 
 export const aboutTimeline = [
-  { year: "2026", title: "Google Cloud Arcade · #1 Diamond League Rank", text: "Ranked #1 in the Diamond League with 124 skill badges earned, 38,105 points, and a 44-day streak across Vertex AI, BigQuery ML, GKE, and Terraform." },
+  { year: "2026", title: "Google Cloud Arcade · #1 Diamond League Rank", text: "Ranked #1 in the Diamond League with 171 skill badges earned, 38,105 points, and a 44-day streak across Vertex AI, BigQuery ML, GKE, and Terraform." },
   { year: "2026", title: "ML Intern · FlyRank AI", text: "Building a content-opportunity scoring framework as an ML ranking problem — validating models against Precision@50 and building HuggingFace data contracts." },
   { year: "2026", title: "GyanVerse AI · RAG System", text: "Final-year project combining Sentence Transformers with FAISS/ChromaDB for intelligent, context-aware Q&A." },
   { year: "2025", title: "Google Data Analytics Professional Certificate", text: "Completed Google's Data Analytics track via Coursera with a 94.87% score, building foundational skills in SQL, R, and spreadsheet-based analysis — laying the groundwork for the ML and GCP-focused work that followed." },
@@ -290,7 +290,7 @@ const rawCertificates: CertificateItem[] = [
     issuer: "Google Cloud Skills Boost",
     date: "2026",
     level: "Top Rank",
-    credential: "124 Badges · 38,105 Pts · 44-Day Streak",
+    credential: "171 Badges · 38,105 Pts · 44-Day Streak",
     skills: ["GCP", "BigQuery ML", "Vertex AI", "Terraform", "IAM", "Cloud Architecture", "GKE", "Cloud Run", "Pub/Sub", "Dataproc"],
     img: "/uploads/homepage.png",
     pdf: "/uploads/ALL CERTIFICATES_compressed.pdf",
@@ -417,7 +417,7 @@ export const certificates: CertificateItem[] = rawCertificates.map((c) => ({
 /* ================= ACHIEVEMENTS ================= */
 export const achievements = [
   { label: "#1 Diamond League Rank", value: 1, suffix: "st", icon: "trophy" },
-  { label: "Cloud Skill Badges", value: 124, suffix: "+", icon: "repo" },
+  { label: "Cloud Skill Badges", value: 171, suffix: "+", icon: "repo" },
   { label: "Hackathons Completed", value: 3, suffix: "+", icon: "trophy" },
   { label: "Events Lead", value: 10, suffix: "+", icon: "git" },
 ];

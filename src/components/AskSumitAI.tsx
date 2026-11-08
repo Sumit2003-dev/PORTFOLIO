@@ -57,7 +57,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["arcade", "cloud", "badge", "diamond", "rank", "streak", "points", "gcp", "vertex", "bigquery"],
     answer:
-      "Sumit achieved the **#1 Diamond League ranking** globally on Google Cloud Skills Boost! He completed **124+ verified skill badges**, accumulated **38,105 points**, and maintained an unbroken **44-day learning streak** spanning Vertex AI, BigQuery ML, GKE, and Terraform.",
+      "Sumit achieved the **#1 Diamond League ranking** globally on Google Cloud Skills Boost! He completed **171+ verified skill badges**, accumulated **38,105 points**, and maintained an unbroken **44-day learning streak** spanning Vertex AI, BigQuery ML, GKE, and Terraform.",
     action: { label: "See Career Milestones", href: "#about", type: "scroll" },
   },
   // 4. Student Record Intelligence
@@ -106,7 +106,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["resume", "cv", "download resume", "view resume", "profile document", "pdf"],
     answer:
-      "Sumit's verified resume is available for preview right inside this portfolio or as a direct PDF download. It highlights his FlyRank internship, GyanVerse RAG capstone, 124 Google Cloud badges, and technical competencies.",
+      "Sumit's verified resume is available for preview right inside this portfolio or as a direct PDF download. It highlights his FlyRank internship, GyanVerse RAG capstone, 171 Google Cloud badges, and technical competencies.",
     action: { label: "Open Resume Preview", type: "resume" },
   },
   // 11. Contact & Hiring
@@ -141,7 +141,7 @@ Key projects:
 3. Airline Delay Prediction: Scikit-learn regression model with R² score of ~0.85.
 4. AI-Based Exam Proctoring Research: Co-authored research on ML & Computer Vision for exam integrity under Mrs. Anamika Sharma.
 Key achievements:
-- #1 Diamond League Rank in Google Cloud Arcade with 124 skill badges, 38,105 points, and 44-day streak.
+- #1 Diamond League Rank in Google Cloud Arcade with 171 skill badges, 38,105 points, and 44-day streak.
 - Google Data Analytics Professional Certificate with 94.87% score.
 - Active GDG Lucknow member and Google Developer Program premium member.
 Technical skills: Python (93%), Machine Learning (88%), Scikit-learn, RAG & GenAI (80%), FAISS, Pandas, NumPy, SQL, Streamlit, Flask, Java.
@@ -273,7 +273,7 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
     const helpKeywords = ["help", "need help", "guide", "what can you do", "options", "commands", "how to use", "how does this work", "assist"];
     if (helpKeywords.some((hk) => clean.includes(hk))) {
       return {
-        text: "I'd be glad to help! Here are a few great questions you can ask me:\n• **'Tell me about GyanVerse AI'** — his multilingual RAG system with Sentence Transformers\n• **'What did Sumit do at FlyRank AI?'** — ML ranking models & HuggingFace data contracts\n• **'What is his Google Cloud #1 ranking?'** — 124 badges and 38k points\n• **'Can I see his resume?'** — opens the interactive PDF document\n• **'What are his main skills?'** — Python, Scikit-learn, SQL, and GenAI",
+        text: "I'd be glad to help! Here are a few great questions you can ask me:\n• **'Tell me about GyanVerse AI'** — his multilingual RAG system with Sentence Transformers\n• **'What did Sumit do at FlyRank AI?'** — ML ranking models & HuggingFace data contracts\n• **'What is his Google Cloud #1 ranking?'** — 171 badges and 38k points\n• **'Can I see his resume?'** — opens the interactive PDF document\n• **'What are his main skills?'** — Python, Scikit-learn, SQL, and GenAI",
         action: { label: "Open Resume Preview", type: "resume" },
       };
     }
@@ -302,7 +302,7 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
       clean.includes("value")
     ) {
       return {
-        text: "Here is why Sumit is a strong fit for AI & Data Science teams:\n1. **Proven ML Delivery**: Hands-on industry internship at FlyRank AI, optimizing models against Precision@50.\n2. **Applied GenAI**: Architected GyanVerse, an end-to-end RAG system with Sentence Transformers & FAISS.\n3. **Relentless Drive**: #1 Diamond League rank on Google Cloud Skills Boost with 124 badges & a 44-day streak.\n4. **Production Stack**: Advanced Python (93%), Scikit-learn, SQL, Pandas, and versioned data contracts.",
+        text: "Here is why Sumit is a strong fit for AI & Data Science teams:\n1. **Proven ML Delivery**: Hands-on industry internship at FlyRank AI, optimizing models against Precision@50.\n2. **Applied GenAI**: Architected GyanVerse, an end-to-end RAG system with Sentence Transformers & FAISS.\n3. **Relentless Drive**: #1 Diamond League rank on Google Cloud Skills Boost with 171 badges & a 44-day streak.\n4. **Production Stack**: Advanced Python (93%), Scikit-learn, SQL, Pandas, and versioned data contracts.",
         action: { label: "Get in Touch / Hire", href: "#contact", type: "scroll" },
       };
     }
