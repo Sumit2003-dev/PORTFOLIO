@@ -7,7 +7,7 @@ import { useFadeUp } from "@/hooks/use-scroll";
 import { useMagnetic } from "@/hooks/use-interactions";
 import AiSphere3D from "./3d/AiSphere3D";
 
-const HOME_BG = "/uploads/homepage.png";
+const HOME_BG = `${import.meta.env.BASE_URL}uploads/homepage.png`;
 const ROLES = ["Data Scientist", "AI Engineer", "Machine Learning Developer"];
 
 function Magnetic({ children }: { children: React.ReactNode }) {

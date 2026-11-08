@@ -1,3 +1,5 @@
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+
 export const profile = {
   name: "Sumit Kumar",
   fullName: "Sumit Kumar Bharti",
@@ -15,7 +17,7 @@ export const profile = {
   email: "sumit.ku5981@gmail.com",
   phone: "+91 8810845474",
   location: "Lucknow, Uttar Pradesh, India",
-  resume: "/uploads/Sumit_Kumar_Bharti_Resume_Updated.pdf",
+  resume: asset("uploads/Sumit_Kumar_Bharti_Resume_Updated.pdf"),
   social: [
     { name: "GitHub", href: "https://github.com/Sumit2003-dev" },
     { name: "LinkedIn", href: "https://www.linkedin.com/in/sumit2003-dev/" },
@@ -282,7 +284,7 @@ export type CertificateItem = {
   hue: string;
 };
 
-export const certificates: CertificateItem[] = [
+const rawCertificates: CertificateItem[] = [
   {
     title: "Diamond League — #1 Rank",
     issuer: "Google Cloud Skills Boost",
@@ -405,6 +407,12 @@ export const certificates: CertificateItem[] = [
     hue: "180 60% 45%",
   },
 ];
+
+export const certificates: CertificateItem[] = rawCertificates.map((c) => ({
+  ...c,
+  img: asset(c.img),
+  pdf: c.pdf ? asset(c.pdf) : undefined,
+}));
 
 /* ================= ACHIEVEMENTS ================= */
 export const achievements = [
