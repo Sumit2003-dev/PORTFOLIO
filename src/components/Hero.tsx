@@ -91,19 +91,19 @@ export default function Hero({ onOpenResume }: HeroProps) {
         <img
           src={HOME_BG}
           alt=""
-          className="h-[120%] w-full object-cover object-center opacity-25 transition-opacity duration-700"
+          className="h-[120%] w-full object-cover object-center opacity-12 transition-opacity duration-700"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#071018]/85 via-[#071018]/45 to-[#08131E]/30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#071018]/50 via-transparent to-[#071018]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#071018]/90 via-[#071018]/65 to-[#08131E]/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#071018]/60 via-transparent to-[#071018]" />
         <div
           className="absolute inset-0 mix-blend-screen pointer-events-none"
-          style={{ background: "radial-gradient(55% 60% at 70% 40%, rgba(255,106,0,0.18), transparent 65%)" }}
+          style={{ background: "radial-gradient(55% 60% at 70% 40%, rgba(255,106,0,0.12), transparent 65%)" }}
         />
       </motion.div>
 
       {/* Giant background text */}
       <div
-        className="giant-bg absolute left-0 top-1/2 w-full -translate-y-1/2 pl-2 text-left opacity-30 select-none pointer-events-none"
+        className="giant-bg absolute left-0 top-1/2 w-full -translate-y-1/2 pl-2 text-left opacity-15 select-none pointer-events-none"
         aria-hidden
       >
         PORTFOLIO
@@ -152,9 +152,9 @@ export default function Hero({ onOpenResume }: HeroProps) {
             </AnimatePresence>
           </div>
 
-          <p data-reveal className="mt-4 max-w-xl text-base sm:text-lg leading-relaxed text-white/65">
-            Turning raw data into cinematic intelligence — building RAG systems that reason, models that predict,
-            and end-to-end ML applications that feel alive.
+          <p data-reveal className="mt-4 max-w-xl text-base sm:text-lg leading-relaxed text-white/70">
+            I'm a Data Scientist and AI/ML developer interested in building practical machine learning systems.
+            I work with Python, predictive modelling, NLP and RAG, turning ideas and real-world problems into working applications.
           </p>
 
           <div data-reveal className="mt-7 flex flex-wrap items-center gap-3.5">
@@ -280,18 +280,16 @@ export default function Hero({ onOpenResume }: HeroProps) {
 
                   {/* Card Top Header Bar */}
                   <div className="mb-2.5 flex items-center justify-between px-1.5 pt-0.5">
-                    <div className="flex items-center gap-1.5">
-                      <span className="flex h-1.5 w-1.5 rounded-full bg-ember-500 shadow-glow animate-ping" />
-                      <span className="font-condensed text-[10px] uppercase tracking-[0.22em] text-ember-400 font-semibold">
-                        AI ENGINEER PASS
+                    <div className="flex items-center gap-2">
+                      <span className="flex h-1.5 w-1.5 rounded-full bg-ember-500 shadow-glow" />
+                      <span className="font-condensed text-[11px] uppercase tracking-[0.2em] text-white/80 font-medium">
+                        Sumit Kumar Bharti
                       </span>
                     </div>
 
-                    {/* Gold Smart-Chip Visual */}
-                    <div className="flex items-center gap-1 rounded-md border border-amber-400/40 bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-transparent px-1.5 py-0.5">
-                      <Cpu className="h-3 w-3 text-amber-400" />
-                      <span className="font-mono text-[8px] text-amber-300">RFID 2.0</span>
-                    </div>
+                    <span className="font-mono text-[9px] text-white/45 tracking-wider">
+                      SRMU · 2023–2027
+                    </span>
                   </div>
 
                   {/* Portrait Display Frame */}
@@ -306,11 +304,18 @@ export default function Hero({ onOpenResume }: HeroProps) {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#060c14] via-[#060c14]/20 to-transparent" />
 
-                    {/* Top Left Verified Badge */}
+                    {/* Top Left Verified Badge linked to evidence */}
                     <div className="absolute left-2.5 top-2.5">
-                      <span className="inline-flex items-center gap-1 rounded-full border border-ember-500/40 bg-[#060c14]/85 px-2.5 py-0.5 text-[9px] font-condensed uppercase tracking-wider text-ember-400 backdrop-blur-md">
-                        <ShieldCheck className="h-3 w-3 text-ember-500" /> Verified
-                      </span>
+                      <a
+                        href="https://www.linkedin.com/in/sumit2003-dev/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-ember-500/40 bg-[#060c14]/85 px-2.5 py-0.5 text-[9px] font-condensed uppercase tracking-wider text-ember-400 backdrop-blur-md transition-all hover:border-ember-500 hover:text-white hover:bg-[#060c14]"
+                        title="Verified on LinkedIn (Sumit Kumar Bharti)"
+                      >
+                        <ShieldCheck className="h-3 w-3 text-ember-500" />
+                        <span>Verified Profile</span>
+                      </a>
                     </div>
 
                     {/* Card Bottom Details Overlay */}
@@ -320,7 +325,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
                           SUMIT KUMAR
                         </p>
                         <p className="mt-1 font-condensed text-[10px] uppercase tracking-[0.18em] text-ember-500">
-                          AI & Data Science · SRMU
+                          AI &amp; Data Science · SRMU
                         </p>
                       </div>
                       <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary font-display text-sm text-[#120800] font-bold shadow-glow">
@@ -342,42 +347,11 @@ export default function Hero({ onOpenResume }: HeroProps) {
                     />
                   </motion.div>
                 </motion.div>
-
-                {/* Floating Parallax Chips (Responsive Offset) */}
-                <motion.div
-                  className="glass pointer-events-none absolute -left-2 sm:-left-3 lg:-left-4 top-8 z-30 rounded-lg px-2 py-1 backdrop-blur-xl border border-white/15 shadow-lg"
-                  animate={shouldReduceMotion ? { y: 0 } : { y: [0, -6, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ transform: "translateZ(35px)" }}
-                >
-                  <div className="flex items-center gap-1.5">
-                    <Sparkles className="h-3 w-3 text-ember-500" />
-                    <div>
-                      <p className="font-display text-sm text-ember-500 text-glow leading-none">92%</p>
-                      <p className="text-[8px] uppercase tracking-wider text-white/50">Accuracy</p>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  className="glass pointer-events-none absolute -right-2 sm:-right-3 lg:-right-4 top-12 z-30 rounded-lg px-2 py-1 backdrop-blur-xl border border-white/15 shadow-lg"
-                  animate={shouldReduceMotion ? { y: 0 } : { y: [0, 6, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ transform: "translateZ(50px)" }}
-                >
-                  <div className="flex items-center gap-1.5">
-                    <Cpu className="h-3 w-3 text-ember-500" />
-                    <div>
-                      <p className="font-display text-sm text-ember-500 text-glow leading-none">RAG</p>
-                      <p className="text-[8px] uppercase tracking-wider text-white/50">GyanVerse</p>
-                    </div>
-                  </div>
-                </motion.div>
               </motion.div>
             </div>
 
             <p className="pointer-events-none mt-5 text-center font-condensed text-[10px] uppercase tracking-[0.28em] text-white/35">
-              3D Holographic ID Pass · Move cursor &amp; Click
+              Interactive 3D Card · Move cursor to tilt
             </p>
           </div>
         </div>

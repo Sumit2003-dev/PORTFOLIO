@@ -7,8 +7,8 @@ export const profile = {
   roles: ["Data Scientist", "AI Engineer", "Machine Learning Developer"],
   currentRole: "Machine Learning Intern · FlyRank AI",
   tagline:
-    "Turning raw data into cinematic intelligence — building models that predict, systems that learn, and products that feel alive.",
-  short: "Final-year Computer Science & Engineering student (AI & Data Science) and Machine Learning Intern — building RAG systems, predictive models and end-to-end ML applications.",
+    "I'm a Data Scientist and AI/ML developer interested in building practical machine learning systems. I work with Python, predictive modelling, NLP and RAG, turning ideas and real-world problems into working applications.",
+  short: "Data Scientist and AI/ML developer building practical machine learning systems, predictive models, and context-grounded RAG applications.",
   description: [
     "Final-year Computer Science & Engineering student specialising in Artificial Intelligence and Data Science, currently gaining hands-on industry experience as a Machine Learning Intern at FlyRank AI.",
     "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I currently hold the #1 Diamond League ranking on Google Cloud Skills Boost with 171 skill badges and a 44-day learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",

@@ -11,9 +11,9 @@ type Particle = {
 };
 
 /**
- * Floating orange dust / particle layer. Lightweight canvas, GPU-friendly.
+ * Floating orange dust / particle layer. Lightweight canvas, GPU-friendly with subtle density.
  */
-export default function ParticleField({ density = 55 }: { density?: number }) {
+export default function ParticleField({ density = 24 }: { density?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function ParticleField({ density = 55 }: { density?: number }) {
 
     const gen = () => {
       particles.length = 0;
-      const n = Math.min(density, Math.floor((w * h) / 26000));
+      const n = Math.min(density, Math.floor((w * h) / 45000));
       for (let i = 0; i < n; i++) {
         particles.push({
           x: rand(0, w),
@@ -122,7 +122,7 @@ export default function ParticleField({ density = 55 }: { density?: number }) {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-[2] opacity-70"
+      className="pointer-events-none fixed inset-0 z-[2] opacity-40"
       aria-hidden
     />
   );
