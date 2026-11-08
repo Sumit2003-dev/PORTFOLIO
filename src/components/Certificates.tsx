@@ -47,7 +47,7 @@ export default function Certificates() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 rounded-full border border-ember-500/30 bg-ember-500/10 px-3 py-1.5 text-xs text-ember-400 transition-all hover:border-ember-500 hover:bg-ember-500/20 hover:text-white"
-              title="View live 178 Google Cloud badges on Google Skills Boost"
+              title="View public profile on Google Cloud Skills Boost"
             >
               <SiGooglecloud className="h-3.5 w-3.5 text-ember-500" />
               <span>Google Skills (178 Badges)</span>
@@ -171,7 +171,7 @@ export default function Certificates() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 rounded-full border border-ember-500/50 bg-ember-500/15 px-3 py-1.5 text-xs font-semibold text-ember-400 transition-colors hover:bg-ember-500 hover:text-black"
                   >
-                    <ExternalLink className="h-3.5 w-3.5" /> Verify Live Profile
+                    <ExternalLink className="h-3.5 w-3.5" /> View Credential / Profile
                   </a>
                 )}
                 {selectedCert.pdf && (

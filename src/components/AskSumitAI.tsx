@@ -72,7 +72,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["arcade", "cloud", "badge", "diamond", "rank", "streak", "points", "gcp", "vertex", "bigquery", "google journey"],
     answer:
-      "Sumit is in the **Diamond League (Position #18)** on Google Cloud Skills Boost! He has earned **178 verified skill badges**, accumulated **47,957 points**, and maintains a continuous learning streak across Vertex AI, BigQuery ML, GKE, Cloud Run, and Terraform. He also holds a Google Developer Program Premium membership.",
+      "Sumit stands in the **Diamond League (Position #18)** on Google Cloud Skills Boost (November 2026 snapshot), having earned **178 skill badges** and accumulated **47,957 points** across Vertex AI, BigQuery ML, GKE, and Terraform. He also holds a Google Developer Program Premium membership.",
     action: { label: "Explore Google Developer Journey", href: "#google-journey", type: "scroll" },
   },
   // 6. Student Performance / NextGrade
@@ -149,7 +149,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["gdg", "community", "google developer group", "developer program", "membership", "lucknow", "g.dev", "builder hub", "developer profile"],
     answer:
-      "Sumit is an active member of **Google Developer Group (GDG) Lucknow** and holds a **Google Developer Program premium tier membership** (verified at https://g.dev/sumit2003dev), actively engaging with fellow AI practitioners and developer summits.",
+      "Sumit is a community member of **Google Developer Group (GDG) Lucknow** and holds a **Google Developer Program premium tier membership** (view profile at https://g.dev/sumit2003dev), connecting with fellow developers across Uttar Pradesh.",
     action: { label: "View Google Dev Profile", href: profile.googleDev, type: "external" },
   },
 ];

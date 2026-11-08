@@ -161,3 +161,4 @@ console.log('Category distribution:', catCounts);
 // Save to JSON file
 fs.writeFileSync('src/lib/googleSkillsBadges.json', JSON.stringify(badges, null, 2));
 console.log('Saved all badges to src/lib/googleSkillsBadges.json');
+

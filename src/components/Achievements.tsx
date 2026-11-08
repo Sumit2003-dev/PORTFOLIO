@@ -45,7 +45,7 @@ export default function Achievements() {
                   href: profile.googleSkills,
                   target: "_blank",
                   rel: "noopener noreferrer",
-                  title: "Verify on Google Cloud Skills Boost public profile",
+                  title: "View public profile on Google Cloud Skills Boost",
                 }
               : {};
             return (

@@ -5,8 +5,6 @@ import {
   googleDevProgram,
   gdgLucknow,
   verifiedSkillBadges,
-  GoogleSkillBadge,
-  GoogleDevBadge,
 } from "@/lib/googleDeveloperData";
 import { useFadeUp, useCounter } from "@/hooks/use-scroll";
 import {
@@ -17,19 +15,16 @@ import {
   Search,
   X,
   CheckCircle2,
-  Calendar,
   MapPin,
   Users,
   Award,
   ShieldCheck,
-  Layers,
-  Cpu,
   Star,
   ChevronDown,
   RotateCcw,
+  Info,
 } from "lucide-react";
 import { SiGooglecloud, SiGoogle } from "react-icons/si";
-import { motion, AnimatePresence } from "framer-motion";
 
 function StatCounter({ value, suffix }: { value: number; suffix?: string }) {
   const ref = useCounter(value);
@@ -49,50 +44,6 @@ function GoogleColorStrip({ className = "" }: { className?: string }) {
       <span className="h-2 w-2 rounded-full bg-[#EA4335]" />
       <span className="h-2 w-2 rounded-full bg-[#FBBC05]" />
       <span className="h-2 w-2 rounded-full bg-[#34A853]" />
-    </div>
-  );
-}
-
-// Crisp Vector Badge Artwork for badges without static screenshot
-function BadgeVectorArtwork({
-  category,
-  iconType,
-}: {
-  category: GoogleSkillBadge["category"];
-  iconType: GoogleSkillBadge["iconType"];
-}) {
-  const colors: Record<string, { bg: string; border: string; accent: string }> = {
-    "Generative AI": { bg: "from-amber-500/20 to-ember-500/10", border: "border-ember-500/40", accent: "#FF6A00" },
-    "Data & BigQuery": { bg: "from-blue-500/20 to-cyan-500/10", border: "border-blue-500/40", accent: "#4285F4" },
-    "Cloud Infrastructure": { bg: "from-green-500/20 to-emerald-500/10", border: "border-green-500/40", accent: "#34A853" },
-    "Security & IAM": { bg: "from-red-500/20 to-orange-500/10", border: "border-red-500/40", accent: "#EA4335" },
-    "DevOps & SRE": { bg: "from-purple-500/20 to-indigo-500/10", border: "border-purple-500/40", accent: "#A855F7" },
-  };
-
-  const scheme = colors[category] || colors["Cloud Infrastructure"];
-
-  return (
-    <div
-      className={`relative grid h-14 w-14 sm:h-16 sm:w-16 place-items-center rounded-2xl border bg-gradient-to-br ${scheme.bg} ${scheme.border} shadow-lg transition-transform duration-300 group-hover:scale-105`}
-    >
-      <div className="absolute inset-0 rounded-2xl bg-black/40" />
-      <div className="relative z-10 flex flex-col items-center justify-center">
-        {iconType === "gemini" ? (
-          <Sparkles className="h-6 w-6 text-ember-400" />
-        ) : iconType === "deepmind" ? (
-          <Cpu className="h-6 w-6 text-ember-400" />
-        ) : iconType === "security" ? (
-          <ShieldCheck className="h-6 w-6 text-red-400" />
-        ) : iconType === "kubernetes" ? (
-          <Layers className="h-6 w-6 text-emerald-400" />
-        ) : (
-          <SiGooglecloud className="h-6 w-6 text-blue-400" />
-        )}
-      </div>
-      <span
-        className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full border border-black/80"
-        style={{ backgroundColor: scheme.accent }}
-      />
     </div>
   );
 }
@@ -152,14 +103,14 @@ export default function GoogleDeveloperJourney() {
             </p>
           </div>
 
-          {/* Quick Verified Profile Links */}
+          {/* Public Profile Links */}
           <div data-reveal className="flex flex-wrap items-center gap-2">
             <a
               href={skillsBoostStats.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-1.5 rounded-full border border-ember-500/40 bg-ember-500/10 px-3.5 py-1.5 text-xs text-ember-400 transition-all hover:bg-ember-500 hover:text-black hover:shadow-glow"
-              title="View live transcript on Google Cloud Skills Boost"
+              title="View public profile on Google Cloud Skills Boost"
             >
               <SiGooglecloud className="h-3.5 w-3.5 transition-transform group-hover:scale-110" />
               <span>Skills Boost Public Profile</span>
@@ -192,7 +143,7 @@ export default function GoogleDeveloperJourney() {
             <SiGooglecloud className="h-3.5 w-3.5 text-blue-400" />
             <span>Cloud Skills Boost</span>
             <span className="rounded-full bg-ember-500/20 px-2 py-0.5 text-[10px] font-mono text-ember-400">
-              {verifiedSkillBadges.length} Badges
+              {skillsBoostStats.skillBadges} Badges
             </span>
           </button>
 
@@ -207,7 +158,7 @@ export default function GoogleDeveloperJourney() {
             <Star className="h-3.5 w-3.5 text-yellow-400" />
             <span>Developer Program</span>
             <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-mono text-white/70">
-              12 Badges · Premium
+              {googleDevProgram.totalBadges} Badges · {googleDevProgram.membershipTier}
             </span>
           </button>
 
@@ -232,7 +183,7 @@ export default function GoogleDeveloperJourney() {
            ========================================================================= */}
         {activeTab === "skills-boost" && (
           <div className="mt-8 space-y-8">
-            {/* Live Verified Stats HUD */}
+            {/* Profile Statistics (Snapshot) */}
             <div data-reveal className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5">
               {/* Skill Badges */}
               <div
@@ -253,8 +204,8 @@ export default function GoogleDeveloperJourney() {
                   <StatCounter value={skillsBoostStats.skillBadges} suffix="+" />
                 </p>
                 <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">Skill Badges</p>
-                <span className="mt-2 inline-block rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-400">
-                  Verified Record
+                <span className="mt-2 inline-block rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[10px] text-white/60">
+                  Profile Snapshot
                 </span>
               </div>
 
@@ -277,7 +228,7 @@ export default function GoogleDeveloperJourney() {
                   <StatCounter value={skillsBoostStats.points} />
                 </p>
                 <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">Arcade Points</p>
-                <span className="mt-2 inline-block text-[10px] text-white/40 font-mono">Accumulated</span>
+                <span className="mt-2 inline-block text-[10px] text-white/40 font-mono">Profile Total</span>
               </div>
 
               {/* League Standing */}
@@ -347,17 +298,17 @@ export default function GoogleDeveloperJourney() {
               </div>
             </div>
 
-            {/* Sync Timestamp & Provenance Bar */}
+            {/* Provenance & Verified Notice */}
             <div data-reveal className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-2.5 text-xs text-white/60 backdrop-blur">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                <Info className="h-4 w-4 text-ember-500" />
                 <span>
-                  Last verified from Google Cloud Skills Boost transcript:{" "}
-                  <strong className="text-white">{skillsBoostStats.lastVerified}</strong>
+                  Last manually verified snapshot:{" "}
+                  <strong className="text-white">{skillsBoostStats.lastVerified}</strong> (Not live API feed)
                 </span>
               </div>
               <div className="flex items-center gap-4 text-[11px] text-white/40">
-                <span>Manually verified figures</span>
+                <span>Total profile badges: {skillsBoostStats.skillBadges}</span>
                 <span className="h-3 w-px bg-white/10" />
                 <a
                   href={skillsBoostStats.profileUrl}
@@ -365,7 +316,7 @@ export default function GoogleDeveloperJourney() {
                   rel="noopener noreferrer"
                   className="text-ember-400 hover:underline"
                 >
-                  Verify Live Public Transcript ↗
+                  View Public Profile ↗
                 </a>
               </div>
             </div>
@@ -375,10 +326,10 @@ export default function GoogleDeveloperJourney() {
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <h3 className="font-display text-xl uppercase tracking-wide text-white">
-                    Skill Badge Explorer
+                    Badge Collection Explorer
                   </h3>
                   <p className="text-xs text-white/50">
-                    Search and filter verified skill credentials earned across Vertex AI, BigQuery, GKE, and Infrastructure.
+                    Search and inspect individual Google Cloud skill badge credentials with direct links to their official records.
                   </p>
                 </div>
 
@@ -426,7 +377,7 @@ export default function GoogleDeveloperJourney() {
                   </button>
                 ))}
                 <span className="ml-auto text-[11px] text-white/40">
-                  Showing {displayedBadges.length} of {filteredBadges.length} badges
+                  Showing {displayedBadges.length} of {filteredBadges.length} entries · Profile total: {skillsBoostStats.skillBadges}
                 </span>
               </div>
             </div>
@@ -437,7 +388,7 @@ export default function GoogleDeveloperJourney() {
                 <Search className="h-8 w-8 text-white/30" />
                 <h4 className="mt-3 font-display text-lg uppercase text-white">No badges found</h4>
                 <p className="mt-1 max-w-sm text-xs text-white/50">
-                  No skill badges match "{searchQuery}" in category "{selectedCategory}".
+                  No badges match "{searchQuery}" in category "{selectedCategory}".
                 </p>
                 <button
                   onClick={() => {
@@ -469,20 +420,16 @@ export default function GoogleDeveloperJourney() {
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent" />
 
                     <div>
-                      {/* Top: Artwork & Category */}
+                      {/* Top: Official CDN Badge Artwork & Earned Date */}
                       <div className="flex items-start justify-between gap-3">
-                        {badge.imageUrl || badge.localImage ? (
-                          <div className="relative h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-2xl border border-white/15 bg-black/40 p-1.5 shadow-md transition-transform duration-300 group-hover:scale-105">
-                            <img
-                              src={badge.imageUrl || badge.localImage}
-                              alt={badge.title}
-                              loading="lazy"
-                              className="h-full w-full object-contain filter drop-shadow"
-                            />
-                          </div>
-                        ) : (
-                          <BadgeVectorArtwork category={badge.category} iconType={badge.iconType} />
-                        )}
+                        <div className="relative h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-2xl border border-white/15 bg-black/40 p-1.5 shadow-md transition-transform duration-300 group-hover:scale-105">
+                          <img
+                            src={badge.imageUrl}
+                            alt={badge.title}
+                            loading="lazy"
+                            className="h-full w-full object-contain filter drop-shadow"
+                          />
+                        </div>
 
                         <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white/50">
                           {badge.earnedDate}
@@ -498,7 +445,7 @@ export default function GoogleDeveloperJourney() {
                         {badge.category}
                       </p>
 
-                      <p className="mt-2 text-xs leading-relaxed text-white/60 line-clamp-3">
+                      <p className="mt-2 text-xs leading-relaxed text-white/60 line-clamp-2">
                         {badge.description}
                       </p>
 
@@ -520,7 +467,7 @@ export default function GoogleDeveloperJourney() {
                       </div>
                     </div>
 
-                    {/* Bottom verification link */}
+                    {/* Bottom individual verification link */}
                     <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
                       <span className="text-[10px] text-emerald-400 flex items-center gap-1">
                         <CheckCircle2 className="h-3 w-3" /> Skill Badge
@@ -530,9 +477,9 @@ export default function GoogleDeveloperJourney() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-1 text-[11px] text-ember-500 hover:underline"
-                        title="View badge on Google Cloud Skills Boost transcript"
+                        title={`View credential for ${badge.title}`}
                       >
-                        Verify ↗
+                        View Credential ↗
                       </a>
                     </div>
                   </div>
@@ -547,7 +494,7 @@ export default function GoogleDeveloperJourney() {
                   onClick={() => setVisibleCount((prev) => prev + 16)}
                   className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-2.5 font-condensed text-xs uppercase tracking-wider text-white transition-all hover:border-ember-500/60 hover:bg-ember-500/10 hover:text-ember-400"
                 >
-                  <span>Load More (+16 Badges)</span>
+                  <span>Load More Badges (+16)</span>
                   <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
                 </button>
                 <button
@@ -566,39 +513,57 @@ export default function GoogleDeveloperJourney() {
            ========================================================================= */}
         {activeTab === "dev-program" && (
           <div className="mt-8 space-y-6">
-            {/* Membership Header Card */}
+            {/* Membership & Profile Card */}
             <div data-reveal className="glass-strong relative overflow-hidden rounded-2xl border border-white/15 p-6 sm:p-8">
               <div className="absolute right-0 top-0 -mr-16 -mt-16 h-48 w-48 rounded-full bg-gradient-to-br from-blue-500/20 to-transparent blur-3xl pointer-events-none" />
 
-              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                 <div>
                   <div className="flex items-center gap-2">
                     <GoogleColorStrip />
                     <span className="font-condensed text-xs uppercase tracking-[0.25em] text-blue-400 font-semibold">
-                      Official Membership
+                      Google Developer Platform
                     </span>
                   </div>
                   <h3 className="mt-2 font-display text-2xl sm:text-3xl uppercase text-white">
                     Google Developer Program
                   </h3>
-                  <p className="mt-2 max-w-xl text-xs sm:text-sm text-white/60">
-                    Verified presence on Google's unified developer platform (g.dev). Distinct from Skills Boost learning challenges, recognizing active ecosystem engagement and solution development.
+                  <p className="mt-2 max-w-2xl text-xs sm:text-sm text-white/60 leading-relaxed">
+                    Public developer profile on Google's unified developer platform (<strong className="text-white">g.dev</strong>). This is a distinct achievement system from Google Cloud Skills Boost, recognizing platform engagement and cloud development.
                   </p>
 
-                  <div className="mt-4 flex flex-wrap items-center gap-2.5">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-yellow-500/40 bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400">
-                      <Star className="h-3.5 w-3.5" /> {googleDevProgram.membershipTier}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/40 bg-blue-500/10 px-3 py-1 text-xs font-semibold text-blue-400">
-                      <SiGooglecloud className="h-3.5 w-3.5" /> {googleDevProgram.innovatorStatus}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-white/70">
-                      <Award className="h-3.5 w-3.5 text-ember-500" /> {googleDevProgram.totalBadges} Program Badges
-                    </span>
+                  <div className="mt-5 flex flex-wrap items-center gap-3">
+                    <div className="flex items-center gap-2 rounded-xl border border-yellow-500/30 bg-yellow-500/10 px-3.5 py-2">
+                      <Star className="h-4 w-4 text-yellow-400" />
+                      <div>
+                        <p className="text-[10px] uppercase font-condensed text-yellow-300">Membership Tier</p>
+                        <p className="text-xs font-semibold text-white">{googleDevProgram.membershipTier}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 rounded-xl border border-blue-500/30 bg-blue-500/10 px-3.5 py-2">
+                      <SiGooglecloud className="h-4 w-4 text-blue-400" />
+                      <div>
+                        <p className="text-[10px] uppercase font-condensed text-blue-300">Recognition</p>
+                        <p className="text-xs font-semibold text-white">{googleDevProgram.innovatorStatus}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2">
+                      <Award className="h-4 w-4 text-ember-400" />
+                      <div>
+                        <p className="text-[10px] uppercase font-condensed text-white/50">Confirmed Total</p>
+                        <p className="text-xs font-semibold text-white">{googleDevProgram.totalBadges} Developer Badges</p>
+                      </div>
+                    </div>
                   </div>
+
+                  <p className="mt-5 max-w-2xl text-xs text-white/50 leading-relaxed">
+                    {googleDevProgram.notice}
+                  </p>
                 </div>
 
-                <div className="flex flex-col items-start md:items-end gap-2.5 shrink-0">
+                <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
                   <a
                     href={googleDevProgram.profileUrl}
                     target="_blank"
@@ -606,76 +571,14 @@ export default function GoogleDeveloperJourney() {
                     className="btn-ember flex items-center gap-2 px-5 py-2.5 text-xs font-semibold"
                   >
                     <SiGoogle className="h-3.5 w-3.5" />
-                    <span>View g.dev Profile</span>
+                    <span>View Public Profile</span>
                     <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                   <span className="text-[11px] text-white/40 font-mono">
-                    Authenticated: {googleDevProgram.lastVerified}
+                    Snapshot: {googleDevProgram.lastVerified}
                   </span>
                 </div>
               </div>
-            </div>
-
-            {/* 12 Badges Grid */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {googleDevProgram.badges.map((b: GoogleDevBadge) => (
-                <div
-                  key={b.id}
-                  data-reveal
-                  onMouseMove={onMove}
-                  className="group glass relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 transition-all duration-500 hover:-translate-y-0.5 hover:border-blue-500/40 hover:shadow-glow"
-                >
-                  <div
-                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                    style={{
-                      background:
-                        "radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(66,133,244,0.14), transparent 70%)",
-                    }}
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent" />
-
-                  <div>
-                    <div className="flex items-start justify-between">
-                      <div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-500/15 text-blue-400">
-                        {b.iconType === "cloud" ? (
-                          <SiGooglecloud className="h-5 w-5" />
-                        ) : b.iconType === "gemini" ? (
-                          <Sparkles className="h-5 w-5 text-ember-400" />
-                        ) : b.iconType === "shield" ? (
-                          <ShieldCheck className="h-5 w-5 text-emerald-400" />
-                        ) : b.iconType === "star" ? (
-                          <Star className="h-5 w-5 text-yellow-400" />
-                        ) : (
-                          <SiGoogle className="h-5 w-5" />
-                        )}
-                      </div>
-                      <span className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-white/45">
-                        {b.date}
-                      </span>
-                    </div>
-
-                    <h4 className="mt-3.5 font-display text-base uppercase leading-snug text-white transition-colors group-hover:text-blue-400">
-                      {b.title}
-                    </h4>
-                    <p className="mt-1 font-condensed text-[11px] uppercase tracking-wider text-blue-400">
-                      {b.category}
-                    </p>
-                    <p className="mt-2 text-xs leading-relaxed text-white/60">{b.description}</p>
-                  </div>
-
-                  <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
-                    <span className="text-[10px] text-white/40">Developer Program</span>
-                    <a
-                      href={googleDevProgram.profileUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-[11px] text-blue-400 hover:underline"
-                    >
-                      g.dev ↗
-                    </a>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         )}
@@ -687,7 +590,7 @@ export default function GoogleDeveloperJourney() {
           <div className="mt-8 space-y-6">
             {/* GDG Community Header Card */}
             <div data-reveal className="glass-strong relative overflow-hidden rounded-2xl border border-white/15 p-6 sm:p-8">
-              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                 <div>
                   <div className="flex items-center gap-2">
                     <GoogleColorStrip />
@@ -702,15 +605,19 @@ export default function GoogleDeveloperJourney() {
                     {gdgLucknow.description}
                   </p>
 
-                  <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-white/60">
-                    <span className="flex items-center gap-1.5 text-emerald-400">
-                      <CheckCircle2 className="h-4 w-4" /> {gdgLucknow.membershipStatus}
+                  <div className="mt-5 flex flex-wrap items-center gap-3 text-xs text-white/60">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-medium text-emerald-400">
+                      <CheckCircle2 className="h-3.5 w-3.5" /> {gdgLucknow.membershipStatus}
                     </span>
                     <span className="h-3 w-px bg-white/10" />
                     <span className="flex items-center gap-1.5">
                       <MapPin className="h-3.5 w-3.5 text-ember-500" /> {gdgLucknow.location}
                     </span>
                   </div>
+
+                  <p className="mt-4 text-[11px] text-white/45">
+                    * Community membership is distinct from organizer, speaker, or volunteer roles.
+                  </p>
                 </div>
 
                 <div className="shrink-0">
@@ -721,63 +628,11 @@ export default function GoogleDeveloperJourney() {
                     className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-xs text-white/80 transition-all hover:border-emerald-500/60 hover:text-white"
                   >
                     <Users className="h-3.5 w-3.5 text-emerald-400" />
-                    <span>GDG Community Chapter</span>
+                    <span>Official Chapter Page</span>
                     <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                 </div>
               </div>
-            </div>
-
-            {/* Event Highlights Grid */}
-            <div className="grid gap-4 sm:grid-cols-2">
-              {gdgLucknow.events.map((ev) => (
-                <div
-                  key={ev.title}
-                  data-reveal
-                  onMouseMove={onMove}
-                  className="group glass relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-5 sm:p-6 transition-all duration-500 hover:-translate-y-0.5 hover:border-emerald-500/40 hover:shadow-glow"
-                >
-                  <div
-                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                    style={{
-                      background:
-                        "radial-gradient(240px circle at var(--mx,50%) var(--my,50%), rgba(52,168,83,0.14), transparent 70%)",
-                    }}
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent" />
-
-                  <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-emerald-400">
-                        {ev.type}
-                      </span>
-                      <span className="font-mono text-xs text-white/45">{ev.year}</span>
-                    </div>
-
-                    <h4 className="mt-3 font-display text-lg uppercase text-white transition-colors group-hover:text-emerald-400">
-                      {ev.title}
-                    </h4>
-
-                    <p className="mt-2 text-xs leading-relaxed text-white/65">{ev.highlight}</p>
-
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {ev.topics.map((tp) => (
-                        <span
-                          key={tp}
-                          className="rounded-full border border-white/10 bg-black/20 px-2.5 py-0.5 text-[10px] text-white/60"
-                        >
-                          {tp}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mt-4 border-t border-white/5 pt-3 text-[11px] text-white/40 flex items-center justify-between">
-                    <span>GDG Lucknow Community Track</span>
-                    <span className="text-emerald-400 font-medium">Participant</span>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         )}
@@ -785,4 +640,3 @@ export default function GoogleDeveloperJourney() {
     </Section>
   );
 }
-
