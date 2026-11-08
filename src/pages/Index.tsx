@@ -45,11 +45,13 @@ const Index = () => {
       <main id="main-content" className="relative z-[2]">
         <Hero onOpenResume={() => setResumeOpen(true)} />
         <About />
+        <Suspense fallback={<div className="min-h-[200px]" />}>
+          <Education />
+        </Suspense>
         <Skills />
         <Projects />
         <Suspense fallback={<div className="min-h-[200px]" />}>
           <GithubStats />
-          <Education />
           <Certificates />
           <Achievements />
         </Suspense>

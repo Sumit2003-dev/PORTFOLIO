@@ -5,9 +5,9 @@ import { FileText, Sparkles } from "lucide-react";
 const NAV = [
   { name: "HOME", href: "#home" },
   { name: "ABOUT", href: "#about" },
+  { name: "EDUCATION", href: "#education" },
   { name: "SKILLS", href: "#skills" },
   { name: "WORK", href: "#projects" },
-  { name: "EDUCATION", href: "#education" },
   { name: "CERTIFICATES", href: "#certificates" },
   { name: "CONTACT", href: "#contact" },
 ];
@@ -22,7 +22,7 @@ export default function Navigation({ onOpenResume }: NavigationProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const ids = ["home", "about", "skills", "projects", "education", "certificates", "contact"];
+    const ids = ["home", "about", "education", "skills", "projects", "certificates", "contact"];
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
       let current = "#home";
