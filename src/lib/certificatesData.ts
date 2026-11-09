@@ -146,7 +146,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     issueDate: "Jul 14, 2026",
     year: "2026",
     image: "/uploads/previews/google-adv-capstone.png",
-    thumbnail: "/uploads/thumbs/all.webp",
+    thumbnail: "/uploads/thumbs/google-adv-capstone.webp",
     credentialId: "BRIIQMV6TCP1",
     score: "100%",
     verificationUrl: "https://coursera.org/verify/BRIIQMV6TCP1",
