@@ -281,9 +281,9 @@ export default function Hero({ onOpenResume }: HeroProps) {
                     transformStyle: "preserve-3d",
                   }}
                 >
-                  {/* Dynamic Mouse Cursor Holographic Spotlight */}
+                  {/* Dynamic Mouse Cursor Holographic Spotlight (Desktop cursor only) */}
                   <motion.div
-                    className="pointer-events-none absolute inset-0 rounded-[1.8rem] opacity-60"
+                    className="pointer-events-none hidden md:block absolute inset-0 rounded-[1.8rem] opacity-60"
                     style={{
                       background: useMotionTemplate`radial-gradient(300px circle at ${glowX} ${glowY}, rgba(255,106,0,0.3), transparent 70%)`,
                     }}

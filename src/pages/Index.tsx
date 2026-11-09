@@ -4,7 +4,6 @@ import ParticleField, { FogField, CursorGlow } from "@/components/Atmosphere";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Footer from "@/components/Footer";
 
 // Lazy-loaded below-the-fold components for ultra-fast initial paint & stream hydration
 const Skills = lazy(() => import("@/components/Skills"));
@@ -15,6 +14,7 @@ const GithubStats = lazy(() => import("@/components/GithubStats"));
 const Certificates = lazy(() => import("@/components/Certificates"));
 const Achievements = lazy(() => import("@/components/Achievements"));
 const Contact = lazy(() => import("@/components/Contact"));
+const Footer = lazy(() => import("@/components/Footer"));
 const AskSumitAI = lazy(() => import("@/components/AskSumitAI"));
 const ResumeModal = lazy(() => import("@/components/ResumeModal"));
 
@@ -72,7 +72,9 @@ const Index = () => {
         </Suspense>
       </main>
 
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
 
       {/* Floating Interactive RAG AI Assistant */}
       <Suspense fallback={null}>

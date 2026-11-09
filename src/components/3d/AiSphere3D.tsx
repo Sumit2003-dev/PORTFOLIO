@@ -8,8 +8,13 @@ type AiSphere3DProps = {
 export default function AiSphere3D({ className = "relative h-full w-full" }: AiSphere3DProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasError, setHasError] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const mobile = window.innerWidth < 768 || "ontouchstart" in window;
+    setIsMobile(mobile);
+    if (mobile) return; // Use high-performance CSS animated orbital core on mobile
+
     const container = containerRef.current;
     if (!container) return;
 
@@ -277,13 +282,13 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
     }
   }, []);
 
-  if (hasError) {
+  if (hasError || isMobile) {
     return (
-      <div className={`${className} flex items-center justify-center`}>
-        <div className="relative h-64 w-64 rounded-full border border-ember-500/30 animate-pulse bg-gradient-radial from-ember-500/20 via-transparent to-transparent">
-          <div className="absolute inset-4 rounded-full border border-burnt-red/40 animate-spin [animation-duration:12s]" />
-          <div className="absolute inset-12 rounded-full border border-white/20 animate-spin [animation-duration:8s] [animation-direction:reverse]" />
-          <div className="absolute inset-20 rounded-full bg-ember-500/30 blur-md" />
+      <div className={`${className} flex items-center justify-center pointer-events-none`}>
+        <div className="relative h-60 w-60 sm:h-64 sm:w-64 rounded-full border border-ember-500/30 animate-pulse bg-gradient-radial from-ember-500/20 via-transparent to-transparent">
+          <div className="absolute inset-4 rounded-full border border-burnt-red/40 animate-spin [animation-duration:14s]" />
+          <div className="absolute inset-10 rounded-full border border-white/20 animate-spin [animation-duration:9s] [animation-direction:reverse]" />
+          <div className="absolute inset-16 rounded-full bg-ember-500/25 blur-md" />
         </div>
       </div>
     );
