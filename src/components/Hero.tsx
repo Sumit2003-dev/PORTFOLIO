@@ -93,8 +93,10 @@ export default function Hero({ onOpenResume }: HeroProps) {
         <img
           src={HOME_BG}
           alt=""
-          loading="eager"
+          loading="lazy"
           decoding="async"
+          // @ts-expect-error React 18 HTML attribute
+          fetchpriority="low"
           className="h-[120%] w-full object-cover object-center opacity-12 transition-opacity duration-700"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#071018]/90 via-[#071018]/65 to-[#08131E]/45" />
@@ -308,6 +310,8 @@ export default function Hero({ onOpenResume }: HeroProps) {
                       alt="Sumit Kumar — AI & Data Science Engineer"
                       loading="eager"
                       decoding="async"
+                      // @ts-expect-error React 18 HTML attribute
+                      fetchpriority="high"
                       className="h-full w-full object-cover object-center filter saturate-[1.15] contrast-[1.05]"
                       style={{ scale: imgScale }}
                     />

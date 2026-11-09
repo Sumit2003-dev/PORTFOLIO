@@ -75,6 +75,7 @@ export default function SkillCosmos3D() {
     try {
       container.style.touchAction = "none";
 
+      const isMobile = typeof window !== "undefined" && (window.innerWidth < 768 || "ontouchstart" in window);
       const width = container.clientWidth || 600;
       const height = container.clientHeight || 400;
 
@@ -87,8 +88,12 @@ export default function SkillCosmos3D() {
       );
       camera.position.z = 4.8;
 
-      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: !isMobile,
+        powerPreference: isMobile ? "low-power" : "high-performance",
+      });
+      renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
       renderer.setSize(width, height);
       container.appendChild(renderer.domElement);
 
@@ -297,17 +302,36 @@ export default function SkillCosmos3D() {
 
       animate();
 
+      let isInViewport = false;
       const onVisibilityChange = () => {
         if (document.hidden) {
           isPaused = true;
           cancelAnimationFrame(animId);
-        } else {
+        } else if (isInViewport) {
           isPaused = false;
           clock.getDelta();
           animate();
         }
       };
       document.addEventListener("visibilitychange", onVisibilityChange);
+
+      const intersectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            isInViewport = entry.isIntersecting;
+            if (!isInViewport) {
+              isPaused = true;
+              cancelAnimationFrame(animId);
+            } else if (!document.hidden) {
+              isPaused = false;
+              clock.getDelta();
+              animate();
+            }
+          });
+        },
+        { threshold: 0.05 }
+      );
+      intersectionObserver.observe(container);
 
       return () => {
         container.removeEventListener("pointerdown", onPointerDown);
@@ -316,6 +340,7 @@ export default function SkillCosmos3D() {
         container.removeEventListener("click", onClick);
         window.removeEventListener("resize", onResize);
         document.removeEventListener("visibilitychange", onVisibilityChange);
+        intersectionObserver.disconnect();
         cancelAnimationFrame(animId);
 
         disposables.forEach((fn) => fn());

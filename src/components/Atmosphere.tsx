@@ -22,16 +22,18 @@ export default function ParticleField({ density = 24 }: { density?: number }) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const isMobile = typeof window !== "undefined" && (window.innerWidth < 768 || "ontouchstart" in window);
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
     const particles: Particle[] = [];
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const DPR = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
 
     const rand = (min: number, max: number) => min + Math.random() * (max - min);
 
     const gen = () => {
       particles.length = 0;
-      const n = Math.min(density, Math.floor((w * h) / 45000));
+      const effectiveDensity = isMobile ? Math.min(density, 6) : density;
+      const n = Math.min(effectiveDensity, Math.floor((w * h) / (isMobile ? 80000 : 45000)));
       for (let i = 0; i < n; i++) {
         particles.push({
           x: rand(0, w),
@@ -132,8 +134,9 @@ export default function ParticleField({ density = 24 }: { density?: number }) {
 export function FogField() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+      {/* Cinematic animated gaussian blur layers (Desktop & tablet) */}
       <div
-        className="absolute -left-1/4 top-[-10%] h-[70vh] w-[140%] rounded-full opacity-30"
+        className="hidden md:block absolute -left-1/4 top-[-10%] h-[70vh] w-[140%] rounded-full opacity-30"
         style={{
           background:
             "radial-gradient(circle at 50% 50%, rgba(255,106,0,0.18), rgba(184,78,2,0.06) 45%, transparent 70%)",
@@ -143,13 +146,21 @@ export function FogField() {
         }}
       />
       <div
-        className="absolute -right-1/3 top-1/3 h-[60vh] w-[120%] rounded-full opacity-25"
+        className="hidden md:block absolute -right-1/3 top-1/3 h-[60vh] w-[120%] rounded-full opacity-25"
         style={{
           background:
             "radial-gradient(circle at 50% 50%, rgba(184,78,2,0.16), transparent 65%)",
           filter: "blur(70px)",
           animation: "drift 28s ease-in-out infinite alternate-reverse",
           mixBlendMode: "screen",
+        }}
+      />
+      {/* High-performance CSS radial gradient for mobile without expensive 60px filter rasterization */}
+      <div
+        className="md:hidden absolute inset-0 opacity-20 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 25%, rgba(255,106,0,0.14), transparent 65%)",
         }}
       />
     </div>

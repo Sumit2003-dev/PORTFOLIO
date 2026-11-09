@@ -4,17 +4,17 @@ import ParticleField, { FogField, CursorGlow } from "@/components/Atmosphere";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-// Lazy-loaded components for optimal initial paint & bundle splitting
-const GithubStats = lazy(() => import("@/components/GithubStats"));
+// Lazy-loaded below-the-fold components for ultra-fast initial paint & stream hydration
+const Skills = lazy(() => import("@/components/Skills"));
+const Projects = lazy(() => import("@/components/Projects"));
 const Education = lazy(() => import("@/components/Education"));
 const GoogleDeveloperJourney = lazy(() => import("@/components/GoogleDeveloperJourney"));
+const GithubStats = lazy(() => import("@/components/GithubStats"));
 const Certificates = lazy(() => import("@/components/Certificates"));
 const Achievements = lazy(() => import("@/components/Achievements"));
+const Contact = lazy(() => import("@/components/Contact"));
 const AskSumitAI = lazy(() => import("@/components/AskSumitAI"));
 const ResumeModal = lazy(() => import("@/components/ResumeModal"));
 
@@ -49,8 +49,12 @@ const Index = () => {
         <Suspense fallback={<div className="min-h-[200px]" />}>
           <Education />
         </Suspense>
-        <Skills />
-        <Projects />
+        <Suspense fallback={<div className="min-h-[300px]" />}>
+          <Skills />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[300px]" />}>
+          <Projects />
+        </Suspense>
         <Suspense fallback={<div className="min-h-[200px]" />}>
           <GoogleDeveloperJourney />
         </Suspense>
@@ -63,7 +67,9 @@ const Index = () => {
         <Suspense fallback={<div className="min-h-[200px]" />}>
           <Achievements />
         </Suspense>
-        <Contact />
+        <Suspense fallback={<div className="min-h-[200px]" />}>
+          <Contact />
+        </Suspense>
       </main>
 
       <Footer />

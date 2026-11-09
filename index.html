@@ -10,10 +10,17 @@
     <meta name="author" content="Sumit Kumar Bharti" />
     <link rel="canonical" href="https://sumit2003-dev.github.io/PORTFOLIO/" />
     
-    <!-- Google Fonts with display=swap for zero FOIT -->
+    <!-- Preload Hero Portrait LCP Image -->
+    <link rel="preload" as="image" type="image/webp" href="%BASE_URL%uploads/homepage.webp" fetchpriority="high">
+
+    <!-- Google Fonts with display=swap for zero FOIT and non-blocking asynchronous delivery -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:site_name" content="Sumit Kumar Portfolio" />
@@ -21,14 +28,14 @@
     <meta property="og:url" content="https://sumit2003-dev.github.io/PORTFOLIO/" />
     <meta property="og:title" content="Sumit Kumar | Data Scientist · AI Engineer" />
     <meta property="og:description" content="Portfolio of Sumit Kumar — Data Scientist and AI/ML developer building practical machine learning systems, predictive models, and RAG applications." />
-    <meta property="og:image" content="https://sumit2003-dev.github.io/PORTFOLIO/uploads/homepage.png" />
+    <meta property="og:image" content="https://sumit2003-dev.github.io/PORTFOLIO/uploads/homepage.webp" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://sumit2003-dev.github.io/PORTFOLIO/" />
     <meta name="twitter:title" content="Sumit Kumar | Data Scientist · AI Engineer" />
     <meta name="twitter:description" content="Portfolio of Sumit Kumar — Data Scientist and AI/ML developer building practical machine learning systems, predictive models, and RAG applications." />
-    <meta name="twitter:image" content="https://sumit2003-dev.github.io/PORTFOLIO/uploads/homepage.png" />
+    <meta name="twitter:image" content="https://sumit2003-dev.github.io/PORTFOLIO/uploads/homepage.webp" />
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
