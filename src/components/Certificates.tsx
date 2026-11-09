@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useMemo, memo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Section from "./Section";
 import {
   CERTIFICATION_VAULT,
@@ -426,7 +427,7 @@ export default function Certificates() {
     setVisibleCount(PAGE_SIZE);
   };
 
-  // Keyboard and scroll lock for modal
+  // Keyboard and background scroll lock for modal
   useEffect(() => {
     if (!selectedCert) return;
 
@@ -435,13 +436,17 @@ export default function Certificates() {
     };
     window.addEventListener("keydown", onKey);
 
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     const lenis = window.__lenis;
     lenis?.stop();
 
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
       lenis?.start();
     };
   }, [selectedCert]);
@@ -818,207 +823,216 @@ export default function Certificates() {
         )}
 
         {/* ========================================================================
-            5. Certificate Detail Modal
+            5. Certificate Detail Modal (Mounted in body portal to avoid stacking clips)
             ======================================================================== */}
-        {selectedCert && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6"
-            role="dialog"
-            aria-modal="true"
-            aria-label={selectedCert.title}
-          >
-            {/* Backdrop */}
+        {selectedCert &&
+          typeof document !== "undefined" &&
+          createPortal(
             <div
-              className="absolute inset-0 bg-black/85 backdrop-blur-md transition-opacity"
-              onClick={() => setSelectedCertId(null)}
-            />
+              className="fixed inset-0 z-[100] flex flex-col items-center justify-start overflow-hidden pt-[5.125rem] pb-3 px-3 sm:pt-[5.25rem] sm:pb-4 sm:px-4 md:px-6"
+              style={{
+                paddingBottom: "max(0.75rem, env(safe-area-inset-bottom, 0px))",
+              }}
+              role="dialog"
+              aria-modal="true"
+              aria-label={selectedCert.title}
+            >
+              {/* Backdrop */}
+              <div
+                className="absolute inset-0 bg-black/85 backdrop-blur-md transition-opacity touch-none"
+                onClick={() => setSelectedCertId(null)}
+              />
 
-            {/* Modal Dialog Card */}
-            <div className="glass-strong relative z-10 flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl border border-white/20 bg-[#071018] shadow-2xl">
-              {/* Modal Header */}
-              <div className="flex items-start justify-between border-b border-white/10 p-4 sm:p-6">
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="flex items-center gap-1 rounded-full border border-white/20 bg-white/[0.05] px-2.5 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white">
-                      <ProviderLogo provider={selectedCert.provider} className="h-3 w-3" />
-                      <span>{selectedCert.issuer}</span>
-                    </span>
+              {/* Modal Dialog Card */}
+              <div
+                className="glass-strong relative z-10 flex w-full max-w-3xl flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20 bg-[#071018] shadow-2xl my-auto max-h-[calc(100dvh-5.875rem)] sm:max-h-[calc(100dvh-6.25rem)]"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Region 1: Header (Pinned & Non-shrinking) */}
+                <div className="shrink-0 flex items-start justify-between border-b border-white/10 bg-[#071018]/90 backdrop-blur-md p-4 sm:p-6">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="flex items-center gap-1 rounded-full border border-white/20 bg-white/[0.05] px-2.5 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white">
+                        <ProviderLogo provider={selectedCert.provider} className="h-3 w-3" />
+                        <span>{selectedCert.issuer}</span>
+                      </span>
 
-                    <span className="rounded-full border border-ember-500/40 bg-ember-500/15 px-2.5 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-ember-400">
-                      {selectedCert.credentialType}
-                    </span>
+                      <span className="rounded-full border border-ember-500/40 bg-ember-500/15 px-2.5 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-ember-400">
+                        {selectedCert.credentialType}
+                      </span>
 
-                    <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[10px] text-white/50">
-                      {selectedCert.category}
-                    </span>
+                      <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[10px] text-white/50">
+                        {selectedCert.category}
+                      </span>
+                    </div>
+
+                    <h3 className="mt-2 font-display text-lg sm:text-2xl uppercase text-white">
+                      {selectedCert.title}
+                    </h3>
+
+                    <p className="mt-0.5 text-xs text-white/60">
+                      Offered via <strong className="text-white/80">{selectedCert.platform}</strong> · Completed {selectedCert.issueDate}
+                    </p>
                   </div>
 
-                  <h3 className="mt-2 font-display text-lg sm:text-2xl uppercase text-white">
-                    {selectedCert.title}
-                  </h3>
-
-                  <p className="mt-0.5 text-xs text-white/60">
-                    Offered via <strong className="text-white/80">{selectedCert.platform}</strong> · Completed {selectedCert.issueDate}
-                  </p>
+                  <button
+                    onClick={() => setSelectedCertId(null)}
+                    className="shrink-0 ml-3 rounded-full border border-white/10 p-2 text-white/60 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
+                    aria-label="Close certificate modal"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
                 </div>
 
-                <button
-                  onClick={() => setSelectedCertId(null)}
-                  className="rounded-full border border-white/10 p-2 text-white/60 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
-                  aria-label="Close certificate modal"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-
-              {/* Modal Scrollable Body */}
-              <div className="overflow-y-auto p-4 sm:p-6 space-y-5">
-                {/* Visual Preview Stage */}
-                <div className="overflow-hidden rounded-2xl border border-white/15 bg-black/60">
-                  {selectedCert.image || selectedCert.thumbnail ? (
-                    <div className="flex items-center justify-center p-2 bg-black/80">
-                      <img
-                        src={asset(selectedCert.image || selectedCert.thumbnail || "")}
-                        alt={`Full certificate preview for ${selectedCert.title}`}
-                        decoding="async"
-                        className="max-h-[380px] sm:max-h-[460px] w-full object-contain rounded-lg"
-                      />
-                    </div>
-                  ) : (
-                    /* High-fidelity Fallback Display */
-                    <div className="flex flex-col items-center justify-center p-8 sm:p-12 text-center bg-gradient-to-b from-[#091522] to-[#040910]">
-                      <div className="grid h-16 w-16 place-items-center rounded-2xl border border-white/15 bg-white/[0.04]">
-                        <ProviderLogo provider={selectedCert.provider} className="h-8 w-8" />
+                {/* Region 2: Body (Independently scrollable preview and metadata) */}
+                <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-6 space-y-5">
+                  {/* Visual Preview Stage */}
+                  <div className="overflow-hidden rounded-2xl border border-white/15 bg-black/60">
+                    {selectedCert.image || selectedCert.thumbnail ? (
+                      <div className="flex items-center justify-center p-2 bg-black/80">
+                        <img
+                          src={asset(selectedCert.image || selectedCert.thumbnail || "")}
+                          alt={`Full certificate preview for ${selectedCert.title}`}
+                          decoding="async"
+                          className="max-h-[380px] sm:max-h-[460px] w-full object-contain rounded-lg"
+                        />
                       </div>
-                      <h4 className="mt-4 font-sans text-lg font-semibold text-white max-w-md">
-                        {selectedCert.title}
-                      </h4>
-                      <p className="mt-1 text-xs text-white/60">
-                        {selectedCert.issuer} · {selectedCert.platform}
-                      </p>
-                      <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-white/50">
-                        <span>Preview unavailable</span>
+                    ) : (
+                      /* High-fidelity Fallback Display */
+                      <div className="flex flex-col items-center justify-center p-8 sm:p-12 text-center bg-gradient-to-b from-[#091522] to-[#040910]">
+                        <div className="grid h-16 w-16 place-items-center rounded-2xl border border-white/15 bg-white/[0.04]">
+                          <ProviderLogo provider={selectedCert.provider} className="h-8 w-8" />
+                        </div>
+                        <h4 className="mt-4 font-sans text-lg font-semibold text-white max-w-md">
+                          {selectedCert.title}
+                        </h4>
+                        <p className="mt-1 text-xs text-white/60">
+                          {selectedCert.issuer} · {selectedCert.platform}
+                        </p>
+                        <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-white/50">
+                          <span>Preview unavailable</span>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Metadata Details Grid */}
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3 text-xs">
-                    <span className="text-[10px] font-condensed uppercase tracking-wider text-white/40 flex items-center gap-1">
-                      <Calendar className="h-3 w-3 text-ember-500" /> Completion Date
-                    </span>
-                    <p className="mt-1 font-semibold text-white">{selectedCert.issueDate}</p>
+                    )}
                   </div>
 
-                  {selectedCert.score && (
+                  {/* Metadata Details Grid */}
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3 text-xs">
                       <span className="text-[10px] font-condensed uppercase tracking-wider text-white/40 flex items-center gap-1">
-                        <Percent className="h-3 w-3 text-emerald-400" /> Performance / Grade
+                        <Calendar className="h-3 w-3 text-ember-500" /> Completion Date
                       </span>
-                      <p className="mt-1 font-semibold text-emerald-300 font-mono">{selectedCert.score}</p>
+                      <p className="mt-1 font-semibold text-white">{selectedCert.issueDate}</p>
+                    </div>
+
+                    {selectedCert.score && (
+                      <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3 text-xs">
+                        <span className="text-[10px] font-condensed uppercase tracking-wider text-white/40 flex items-center gap-1">
+                          <Percent className="h-3 w-3 text-emerald-400" /> Performance / Grade
+                        </span>
+                        <p className="mt-1 font-semibold text-emerald-300 font-mono">{selectedCert.score}</p>
+                      </div>
+                    )}
+
+                    {selectedCert.credentialId && (
+                      <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3 text-xs sm:col-span-2 lg:col-span-1">
+                        <span className="text-[10px] font-condensed uppercase tracking-wider text-white/40 flex items-center gap-1">
+                          <Hash className="h-3 w-3 text-ember-500" /> Credential ID
+                        </span>
+                        <p className="mt-1 font-mono text-[11px] text-white/80 break-all">{selectedCert.credentialId}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Description / Summary */}
+                  {selectedCert.description && (
+                    <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3.5 text-xs text-white/70">
+                      <span className="text-[10px] font-condensed uppercase tracking-wider text-ember-500 flex items-center gap-1 mb-1">
+                        <Info className="h-3 w-3" /> Credential Overview
+                      </span>
+                      <p className="leading-relaxed">{selectedCert.description}</p>
                     </div>
                   )}
 
-                  {selectedCert.credentialId && (
-                    <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3 text-xs sm:col-span-2 lg:col-span-1">
-                      <span className="text-[10px] font-condensed uppercase tracking-wider text-white/40 flex items-center gap-1">
-                        <Hash className="h-3 w-3 text-ember-500" /> Credential ID
-                      </span>
-                      <p className="mt-1 font-mono text-[11px] text-white/80 break-all">{selectedCert.credentialId}</p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Description / Summary */}
-                {selectedCert.description && (
-                  <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3.5 text-xs text-white/70">
-                    <span className="text-[10px] font-condensed uppercase tracking-wider text-ember-500 flex items-center gap-1 mb-1">
-                      <Info className="h-3 w-3" /> Credential Overview
+                  {/* Skills Tag Cloud */}
+                  <div>
+                    <span className="text-[10px] font-condensed uppercase tracking-wider text-white/40 flex items-center gap-1 mb-2">
+                      <Sparkles className="h-3 w-3 text-ember-500" /> Validated Competencies &amp; Skills
                     </span>
-                    <p className="leading-relaxed">{selectedCert.description}</p>
-                  </div>
-                )}
-
-                {/* Skills Tag Cloud */}
-                <div>
-                  <span className="text-[10px] font-condensed uppercase tracking-wider text-white/40 flex items-center gap-1 mb-2">
-                    <Sparkles className="h-3 w-3 text-ember-500" /> Validated Competencies &amp; Skills
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {selectedCert.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-lg border border-white/15 bg-white/[0.04] px-2.5 py-1 text-xs text-white/80"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                    <div className="flex flex-wrap gap-1.5">
+                      {selectedCert.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="rounded-lg border border-white/15 bg-white/[0.04] px-2.5 py-1 text-xs text-white/80"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Modal Actions Footer */}
-              <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 bg-black/40 p-4 sm:p-6">
-                <div className="flex flex-wrap items-center gap-2">
-                  {selectedCert.pdf ? (
-                    <>
-                      <a
-                        href={asset(selectedCert.pdf)}
-                        download={`${selectedCert.title.replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`}
-                        className="btn-ember flex items-center gap-2 px-4 py-2 text-xs font-semibold"
-                        aria-label={`Download PDF for ${selectedCert.title}`}
+                {/* Region 3: Footer (Pinned Actions) */}
+                <div className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 bg-[#060c14]/95 backdrop-blur-md p-4 sm:p-6">
+                  <div className="flex flex-wrap items-center gap-2">
+                    {selectedCert.pdf ? (
+                      <>
+                        <a
+                          href={asset(selectedCert.pdf)}
+                          download={`${selectedCert.title.replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`}
+                          className="btn-ember flex items-center gap-2 px-4 py-2 text-xs font-semibold"
+                          aria-label={`Download PDF for ${selectedCert.title}`}
+                        >
+                          <Download className="h-4 w-4" />
+                          <span>Download PDF</span>
+                        </a>
+
+                        <a
+                          href={asset(selectedCert.pdf)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/[0.03] px-3.5 py-2 text-xs text-white/80 transition-colors hover:border-ember-500 hover:text-ember-400"
+                          aria-label={`Open PDF in new tab for ${selectedCert.title}`}
+                        >
+                          <FileText className="h-3.5 w-3.5" />
+                          <span>Open PDF ↗</span>
+                        </a>
+                      </>
+                    ) : (
+                      <button
+                        disabled
+                        className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-xs text-white/40 cursor-not-allowed opacity-60"
+                        title="PDF document is currently unavailable"
                       >
-                        <Download className="h-4 w-4" />
-                        <span>Download PDF</span>
-                      </a>
+                        <FileText className="h-4 w-4 text-white/30" />
+                        <span>PDF Unavailable</span>
+                      </button>
+                    )}
+                  </div>
 
+                  <div className="flex items-center gap-2">
+                    {selectedCert.verificationUrl ? (
                       <a
-                        href={asset(selectedCert.pdf)}
+                        href={selectedCert.verificationUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/[0.03] px-3.5 py-2 text-xs text-white/80 transition-colors hover:border-ember-500 hover:text-ember-400"
-                        aria-label={`Open PDF in new tab for ${selectedCert.title}`}
+                        className="flex items-center gap-1.5 rounded-full border border-ember-500/50 bg-ember-500/15 px-4 py-2 text-xs font-semibold text-ember-400 transition-colors hover:bg-ember-500 hover:text-black"
                       >
-                        <FileText className="h-3.5 w-3.5" />
-                        <span>Open PDF ↗</span>
+                        <ExternalLink className="h-3.5 w-3.5" />
+                        <span>Verify Credential ↗</span>
                       </a>
-                    </>
-                  ) : (
-                    <button
-                      disabled
-                      className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-xs text-white/40 cursor-not-allowed opacity-60"
-                      title="PDF document is currently unavailable"
-                    >
-                      <FileText className="h-4 w-4 text-white/30" />
-                      <span>PDF Unavailable</span>
-                    </button>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-2">
-                  {selectedCert.verificationUrl ? (
-                    <a
-                      href={selectedCert.verificationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 rounded-full border border-ember-500/50 bg-ember-500/15 px-4 py-2 text-xs font-semibold text-ember-400 transition-colors hover:bg-ember-500 hover:text-black"
-                    >
-                      <ExternalLink className="h-3.5 w-3.5" />
-                      <span>Verify Credential ↗</span>
-                    </a>
-                  ) : (
-                    <span className="text-[11px] text-white/50 flex items-center gap-1.5">
-                      <FileText className="h-3.5 w-3.5 text-white/40" />
-                      <span>Certificate on file in portfolio archive</span>
-                    </span>
-                  )}
+                    ) : (
+                      <span className="text-[11px] text-white/50 flex items-center gap-1.5">
+                        <FileText className="h-3.5 w-3.5 text-white/40" />
+                        <span>Certificate on file in portfolio archive</span>
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            </div>,
+            document.body
+          )}
       </div>
     </Section>
   );
