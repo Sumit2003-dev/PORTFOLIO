@@ -3,10 +3,10 @@ import { useLenis } from "@/hooks/use-lenis";
 import ParticleField, { FogField, CursorGlow } from "@/components/Atmosphere";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
 import LazySection from "@/components/LazySection";
 
 // Lazy-loaded below-the-fold components for ultra-fast initial paint & stream hydration
+const About = lazy(() => import("@/components/About"));
 const Skills = lazy(() => import("@/components/Skills"));
 const Projects = lazy(() => import("@/components/Projects"));
 const Education = lazy(() => import("@/components/Education"));
@@ -60,7 +60,12 @@ const Index = () => {
 
       <main id="main-content" className="relative z-[2]">
         <Hero onOpenResume={() => setResumeOpen(true)} />
-        <About />
+
+        <LazySection id="about" minHeight="600px">
+          <Suspense fallback={<div className="min-h-[600px]" />}>
+            <About />
+          </Suspense>
+        </LazySection>
 
         <LazySection id="education" minHeight="500px">
           <Suspense fallback={<div className="min-h-[500px]" />}>

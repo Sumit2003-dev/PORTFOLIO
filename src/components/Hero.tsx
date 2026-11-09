@@ -329,8 +329,8 @@ export default function Hero({ onOpenResume }: HeroProps) {
                       decoding="async"
                       // @ts-expect-error React 18 HTML attribute
                       fetchpriority="high"
-                      className="h-full w-full object-cover object-center filter saturate-[1.15] contrast-[1.05]"
-                      style={{ scale: isDesktop ? imgScale : 1.05 }}
+                      className="h-full w-full object-cover object-center md:filter md:saturate-[1.15] md:contrast-[1.05]"
+                      style={{ scale: isDesktop ? imgScale : undefined }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#060c14] via-[#060c14]/20 to-transparent" />
 
