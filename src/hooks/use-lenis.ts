@@ -18,6 +18,7 @@ declare global {
 export function useLenis() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (typeof window !== "undefined" && ("ontouchstart" in window || window.innerWidth < 768)) return;
 
     const lenis = new Lenis({
       duration: 1.15,

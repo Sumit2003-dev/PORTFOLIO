@@ -29,8 +29,11 @@ export default defineConfig(({ mode }) => ({
             if (id.includes("three")) {
               return "vendor-three";
             }
-            if (id.includes("gsap") || id.includes("framer-motion") || id.includes("lenis")) {
-              return "vendor-animation";
+            if (id.includes("framer-motion")) {
+              return "vendor-motion";
+            }
+            if (id.includes("gsap") || id.includes("lenis")) {
+              return "vendor-scroll";
             }
             if (id.includes("lucide-react") || id.includes("react-icons")) {
               return "vendor-icons";

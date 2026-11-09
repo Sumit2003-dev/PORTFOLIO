@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
 
 /**
  * Magnetic pull: the wrapped element drifts toward the cursor and

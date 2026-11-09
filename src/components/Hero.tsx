@@ -2,9 +2,7 @@ import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { Github, Linkedin, Mail, Download, ArrowRight, Eye, Sparkles, Cpu, ShieldCheck } from "lucide-react";
 import { SiLeetcode, SiGooglecloud } from "react-icons/si";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useMotionTemplate, useReducedMotion } from "framer-motion";
-import { scrollToId } from "@/hooks/use-lenis";
 import { profile } from "@/lib/data";
-import { useFadeUp } from "@/hooks/use-scroll";
 import { useMagnetic } from "@/hooks/use-interactions";
 
 const AiSphere3D = lazy(() => import("./3d/AiSphere3D"));
@@ -36,7 +34,6 @@ type HeroProps = {
 
 export default function Hero({ onOpenResume }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
-  useFadeUp(ref);
   const shouldReduceMotion = useReducedMotion();
   const [isDesktop, setIsDesktop] = useState(
     () => typeof window !== "undefined" && window.innerWidth >= 768 && !("ontouchstart" in window)
@@ -392,7 +389,10 @@ export default function Hero({ onOpenResume }: HeroProps) {
 
       {/* Mouse Scroll Indicator */}
       <button
-        onClick={() => scrollToId("#about")}
+        onClick={() => {
+          const el = document.getElementById("about");
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }}
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40 transition-colors hover:text-ember-500"
         aria-label="Scroll down"
       >
