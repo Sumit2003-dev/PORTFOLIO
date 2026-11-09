@@ -113,9 +113,10 @@ console.table(providerCounts);
 
 console.log("\n--- 2. ASSET & PROVENANCE SUMMARY ---");
 console.log(`• Total Cataloged Credentials:        ${ids.size}`);
-console.log(`• Credentials with Verified PDFs:     ${totalWithPdfs - missingPdfs} / ${totalWithPdfs}`);
+console.log(`• PDF-Backed Credentials:             ${totalWithPdfs} (Verified on disk: ${totalWithPdfs - missingPdfs})`);
+console.log(`• Digital Badge (Image-Backed) Items: ${ids.size - totalWithPdfs} (Verified on disk: ${ids.size - totalWithPdfs})`);
 console.log(`• Credentials with Dedicated Preview: ${totalWithImages - missingImages} / ${ids.size}`);
-console.log(`• Credentials using Clean Fallback:   ${ids.size - totalWithImages}`);
+console.log(`• Credentials with NO Preview:        ${ids.size - totalWithImages}`);
 console.log(`• Records with Live Verification URL: ${verifiedUrls}`);
 console.log(`• Duplicate Certificate IDs:          ${duplicates}`);
 console.log(`• Missing PDF Files on Disk:          ${missingPdfs}`);
