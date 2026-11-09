@@ -51,8 +51,10 @@ export function useFadeUp(ref: React.RefObject<HTMLElement>, deps: React.Depende
           changed = true;
         }
       });
-      if (changed) ScrollTrigger.refresh();
-    }, 2500);
+      if (changed) {
+        requestAnimationFrame(() => ScrollTrigger.refresh());
+      }
+    }, 4500);
 
     return () => {
       ctx.revert();

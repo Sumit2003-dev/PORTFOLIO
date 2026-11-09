@@ -11,13 +11,13 @@ interface LazySectionProps {
 /**
  * High-performance viewport-deferred section wrapper.
  * Defers dynamic chunk import and rendering until the section is within
- * 600px of the viewport, or until the browser reaches an idle state.
+ * 250px of the viewport.
  * Maintains placeholder dimensions to guarantee CLS = 0.00.
  */
 export default function LazySection({
   children,
   fallback,
-  rootMargin = "600px",
+  rootMargin = "250px",
   minHeight = "400px",
   id,
 }: LazySectionProps) {
@@ -54,18 +54,8 @@ export default function LazySection({
 
     observer.observe(el);
 
-    // Idle fallback: render after critical load window (2.5s) if user hasn't scrolled yet
-    const idleId = (window.requestIdleCallback || ((cb) => setTimeout(cb, 2500)))(() => {
-      setShouldRender(true);
-    });
-
     return () => {
       observer.disconnect();
-      if (window.cancelIdleCallback) {
-        window.cancelIdleCallback(idleId as number);
-      } else {
-        clearTimeout(idleId as number);
-      }
     };
   }, [id, rootMargin, shouldRender]);
 

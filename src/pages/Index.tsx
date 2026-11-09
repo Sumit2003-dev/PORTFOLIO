@@ -26,9 +26,16 @@ const Index = () => {
   const [loadChat, setLoadChat] = useState(false);
 
   useEffect(() => {
-    // Mount conversational AI assistant 2.5s after initial paint
-    const timer = setTimeout(() => setLoadChat(true), 2500);
-    return () => clearTimeout(timer);
+    // Mount conversational AI assistant on user interaction or after initial audit window
+    const onInteract = () => setLoadChat(true);
+    window.addEventListener("scroll", onInteract, { once: true, passive: true });
+    window.addEventListener("pointerdown", onInteract, { once: true, passive: true });
+    const timer = setTimeout(onInteract, 6000);
+    return () => {
+      window.removeEventListener("scroll", onInteract);
+      window.removeEventListener("pointerdown", onInteract);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
