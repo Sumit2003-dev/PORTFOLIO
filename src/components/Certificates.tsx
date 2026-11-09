@@ -28,6 +28,9 @@ import {
   ShieldCheck,
   Building2,
   Percent,
+  ArrowUp,
+  ArrowUpDown,
+  ChevronDown,
 } from "lucide-react";
 import { SiGooglecloud, SiCredly, SiAnthropic } from "react-icons/si";
 
@@ -84,6 +87,10 @@ function ProviderLogo({ provider, className = "h-4 w-4" }: { provider: ProviderI
   }
 }
 
+type SortOption = "newest" | "oldest" | "alphabetical";
+
+const PAGE_SIZE = 12;
+
 export default function Certificates() {
   const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
@@ -92,7 +99,15 @@ export default function Certificates() {
   const [selectedCategory, setSelectedCategory] = useState<CredentialCategory>("All");
   const [selectedYear, setSelectedYear] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedCert, setSelectedCert] = useState<VaultCertificate | null>(null);
+  const [sortBy, setSortBy] = useState<SortOption>("newest");
+  const [selectedCertId, setSelectedCertId] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
+
+  // Derive the active certificate deterministically from the vault
+  const selectedCert = useMemo(() => {
+    if (!selectedCertId) return null;
+    return CERTIFICATION_VAULT.find((c) => c.id === selectedCertId) || null;
+  }, [selectedCertId]);
 
   // Dynamic header metrics
   const totalCredentialsCount = CERTIFICATION_VAULT.length;
@@ -128,9 +143,9 @@ export default function Certificates() {
 
   const years = ["All", "2026", "2025"];
 
-  // Filtered certificates
-  const filteredCertificates = useMemo(() => {
-    return CERTIFICATION_VAULT.filter((cert) => {
+  // Filtered and sorted certificates
+  const filteredAndSortedCertificates = useMemo(() => {
+    const list = CERTIFICATION_VAULT.filter((cert) => {
       // Provider filter
       if (selectedProvider !== "all" && cert.provider !== selectedProvider) {
         return false;
@@ -151,25 +166,61 @@ export default function Certificates() {
         const inPlatform = cert.platform.toLowerCase().includes(q);
         const inSkills = cert.skills.some((s) => s.toLowerCase().includes(q));
         const inId = cert.credentialId?.toLowerCase().includes(q);
-        if (!inTitle && !inIssuer && !inPlatform && !inSkills && !inId) {
+        const inCategory = cert.category.toLowerCase().includes(q);
+        if (!inTitle && !inIssuer && !inPlatform && !inSkills && !inId && !inCategory) {
           return false;
         }
       }
       return true;
     });
-  }, [selectedProvider, selectedCategory, selectedYear, searchQuery]);
+
+    // Apply sorting
+    return list.sort((a, b) => {
+      if (sortBy === "alphabetical") {
+        return a.title.localeCompare(b.title);
+      }
+      if (sortBy === "oldest") {
+        const yA = parseInt(a.year, 10) || 2026;
+        const yB = parseInt(b.year, 10) || 2026;
+        return yA - yB;
+      }
+      // Default: newest first
+      const yA = parseInt(a.year, 10) || 2026;
+      const yB = parseInt(b.year, 10) || 2026;
+      return yB - yA;
+    });
+  }, [selectedProvider, selectedCategory, selectedYear, searchQuery, sortBy]);
+
+  // Reset pagination whenever filters or search query changes
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [selectedProvider, selectedCategory, selectedYear, searchQuery, sortBy]);
+
+  // Slice certificates for pagination
+  const visibleCertificates = useMemo(() => {
+    return filteredAndSortedCertificates.slice(0, visibleCount);
+  }, [filteredAndSortedCertificates, visibleCount]);
+
+  const hasMore = visibleCount < filteredAndSortedCertificates.length;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, filteredAndSortedCertificates.length));
+  };
 
   const isFilterActive =
     selectedProvider !== "all" ||
     selectedCategory !== "All" ||
     selectedYear !== "All" ||
-    searchQuery.trim().length > 0;
+    searchQuery.trim().length > 0 ||
+    sortBy !== "newest";
 
   const handleResetFilters = () => {
     setSelectedProvider("all");
     setSelectedCategory("All");
     setSelectedYear("All");
     setSearchQuery("");
+    setSortBy("newest");
+    setVisibleCount(PAGE_SIZE);
   };
 
   // Keyboard and scroll lock for modal
@@ -177,7 +228,7 @@ export default function Certificates() {
     if (!selectedCert) return;
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedCert(null);
+      if (e.key === "Escape") setSelectedCertId(null);
     };
     window.addEventListener("keydown", onKey);
 
@@ -198,7 +249,7 @@ export default function Certificates() {
 
   return (
     <Section id="certificates" word="CERTIFICATION VAULT">
-      <div ref={ref}>
+      <div ref={ref} className="relative pb-16">
         {/* ========================================================================
             1. Section Header & Dynamic Stats HUD
             ======================================================================== */}
@@ -342,7 +393,7 @@ export default function Certificates() {
 
             <button
               onClick={() => setSelectedProvider("all")}
-              className="self-start text-xs text-ember-400 hover:text-ember-300 sm:self-center"
+              className="self-start text-xs text-ember-400 hover:text-ember-300 sm:self-center font-medium"
             >
               View All Providers ↗
             </button>
@@ -350,7 +401,7 @@ export default function Certificates() {
         )}
 
         {/* ========================================================================
-            3. Search & Category Filters
+            3. Search, Category, Year & Sorting Controls
             ======================================================================== */}
         <div data-reveal className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           {/* Search Input */}
@@ -374,9 +425,9 @@ export default function Certificates() {
             )}
           </div>
 
-          {/* Category & Year Filter Controls */}
+          {/* Filter Controls Bar */}
           <div className="flex flex-wrap items-center gap-2">
-            {/* Category Pills */}
+            {/* Category Filter Pills */}
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
               {categories.map((cat) => {
                 const isCatActive = selectedCategory === cat;
@@ -386,7 +437,7 @@ export default function Certificates() {
                     onClick={() => setSelectedCategory(cat)}
                     className={`rounded-lg px-2.5 py-1 text-[11px] font-medium transition-colors ${
                       isCatActive
-                        ? "bg-white/20 text-white"
+                        ? "bg-white/20 text-white shadow-sm"
                         : "bg-white/[0.03] text-white/50 hover:bg-white/[0.08] hover:text-white/80"
                     }`}
                   >
@@ -411,12 +462,47 @@ export default function Certificates() {
               ))}
             </div>
 
+            {/* Sort Selector */}
+            <div className="flex items-center gap-1 rounded-lg border border-white/10 bg-white/[0.03] p-0.5 text-[11px]">
+              <span className="flex items-center gap-1 px-1.5 text-white/40 font-medium">
+                <ArrowUpDown className="h-3 w-3 text-ember-500" />
+                <span className="hidden sm:inline">Sort:</span>
+              </span>
+              <button
+                onClick={() => setSortBy("newest")}
+                className={`rounded px-2 py-0.5 transition-colors ${
+                  sortBy === "newest" ? "bg-ember-500 text-black font-semibold" : "text-white/60 hover:text-white"
+                }`}
+                title="Sort by newest first"
+              >
+                Newest
+              </button>
+              <button
+                onClick={() => setSortBy("oldest")}
+                className={`rounded px-2 py-0.5 transition-colors ${
+                  sortBy === "oldest" ? "bg-ember-500 text-black font-semibold" : "text-white/60 hover:text-white"
+                }`}
+                title="Sort by oldest first"
+              >
+                Oldest
+              </button>
+              <button
+                onClick={() => setSortBy("alphabetical")}
+                className={`rounded px-2 py-0.5 transition-colors ${
+                  sortBy === "alphabetical" ? "bg-ember-500 text-black font-semibold" : "text-white/60 hover:text-white"
+                }`}
+                title="Sort alphabetically A to Z"
+              >
+                A–Z
+              </button>
+            </div>
+
             {/* Reset Filters Button */}
             {isFilterActive && (
               <button
                 onClick={handleResetFilters}
                 className="flex items-center gap-1 rounded-lg border border-ember-500/30 bg-ember-500/10 px-2.5 py-1 text-[11px] text-ember-400 hover:bg-ember-500/20"
-                title="Reset all filters"
+                title="Reset all filters and sorting"
               >
                 <RotateCcw className="h-3 w-3" />
                 <span>Reset</span>
@@ -425,14 +511,15 @@ export default function Certificates() {
           </div>
         </div>
 
-        {/* Filter Results Counter */}
+        {/* Filter Results & Pagination Counter */}
         <div className="mt-3 flex items-center justify-between text-xs text-white/45">
           <span>
-            Showing <strong className="text-white">{filteredCertificates.length}</strong> of{" "}
-            <strong className="text-white">
-              {selectedProvider === "all" ? totalCredentialsCount : providerCounts[selectedProvider] || 0}
-            </strong>{" "}
+            Showing <strong className="text-white">{visibleCertificates.length}</strong> of{" "}
+            <strong className="text-white">{filteredAndSortedCertificates.length}</strong>{" "}
             credentials
+            {filteredAndSortedCertificates.length !== totalCredentialsCount && (
+              <span className="text-white/40"> (filtered from {totalCredentialsCount})</span>
+            )}
           </span>
 
           {selectedProvider === "google" && (
@@ -445,7 +532,7 @@ export default function Certificates() {
         {/* ========================================================================
             4. Certificates Grid or Clean Empty States
             ======================================================================== */}
-        {selectedProvider === "ets" && filteredCertificates.length === 0 ? (
+        {selectedProvider === "ets" && filteredAndSortedCertificates.length === 0 ? (
           /* Specialized Clean ETS State (Authentic — 0 fabricated credentials) */
           <div data-reveal className="glass mt-8 rounded-2xl border border-white/10 p-10 text-center">
             <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl border border-[#0071BC]/40 bg-[#0071BC]/10 text-[#0071BC]">
@@ -460,7 +547,7 @@ export default function Certificates() {
               <span>Strict Authenticity Standard · Zero Fabricated Records</span>
             </div>
           </div>
-        ) : filteredCertificates.length === 0 ? (
+        ) : filteredAndSortedCertificates.length === 0 ? (
           /* General Filter/Search Empty State */
           <div data-reveal className="glass mt-8 rounded-2xl border border-white/10 p-10 text-center">
             <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] text-white/40">
@@ -479,183 +566,232 @@ export default function Certificates() {
             </button>
           </div>
         ) : (
-          /* Main Certificate Cards Grid */
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredCertificates.map((c) => {
-              const hasImage = Boolean(c.image);
-              const providerMeta = PROVIDERS_META.find((p) => p.id === c.provider);
+          /* Main Certificate Cards Grid (3 cols desktop, 2 cols tablet, 1 col mobile) */
+          <>
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {visibleCertificates.map((c) => {
+                const hasImage = Boolean(c.image);
+                const providerMeta = PROVIDERS_META.find((p) => p.id === c.provider);
 
-              return (
-                <div
-                  key={c.id}
-                  data-reveal
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`View certificate for ${c.title}`}
-                  onClick={() => setSelectedCert(c)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setSelectedCert(c);
-                    }
-                  }}
-                  className="group glass relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 text-left transition-all duration-500 hover:-translate-y-0.5 hover:border-ember-500/40 hover:shadow-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
-                >
-                  {/* Card Thumbnail / Provider Fallback Canvas */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-white/10 bg-[#060c14]">
-                    {hasImage && c.image ? (
-                      <>
-                        <img
-                          src={asset(c.image)}
-                          alt={c.title}
-                          loading="lazy"
-                          className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#060c14] via-[#060c14]/30 to-transparent" />
-                      </>
-                    ) : (
-                      /* Clean Provider-Branded Fallback Card (Authentic — No Fake Artwork) */
-                      <div className="relative flex h-full w-full flex-col justify-between p-4 bg-gradient-to-br from-[#0c1622] via-[#08111a] to-[#04080e]">
-                        <div
-                          className="pointer-events-none absolute inset-0 opacity-20"
-                          style={{
-                            background: `radial-gradient(circle at 80% 20%, ${providerMeta?.brandColor || "#FF6A00"}, transparent 70%)`,
-                          }}
-                        />
-                        <div className="relative flex items-center justify-between">
-                          <div className="flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-2 py-0.5 text-[10px] text-white/70 backdrop-blur">
-                            <ProviderLogo provider={c.provider} className="h-3 w-3" />
-                            <span>{c.issuer}</span>
+                return (
+                  <div
+                    key={c.id}
+                    data-reveal
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View certificate details for ${c.title}`}
+                    onClick={() => setSelectedCertId(c.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setSelectedCertId(c.id);
+                      }
+                    }}
+                    className="group glass relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:border-ember-500/40 hover:shadow-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
+                  >
+                    {/* Card Thumbnail / Provider Fallback Canvas */}
+                    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-white/10 bg-[#060c14]">
+                      {hasImage && c.image ? (
+                        <>
+                          <img
+                            src={asset(c.image)}
+                            alt={`Certificate preview for ${c.title} issued by ${c.issuer}`}
+                            loading="lazy"
+                            className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#060c14] via-[#060c14]/20 to-transparent" />
+                        </>
+                      ) : (
+                        /* Clean Provider-Branded Fallback Card (Authentic — No Fake Artwork) */
+                        <div className="relative flex h-full w-full flex-col justify-between p-4 bg-gradient-to-br from-[#0c1622] via-[#08111a] to-[#04080e]">
+                          <div
+                            className="pointer-events-none absolute inset-0 opacity-20"
+                            style={{
+                              background: `radial-gradient(circle at 80% 20%, ${providerMeta?.brandColor || "#FF6A00"}, transparent 70%)`,
+                            }}
+                          />
+                          <div className="relative flex items-center justify-between">
+                            <div className="flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-2 py-0.5 text-[10px] text-white/70 backdrop-blur">
+                              <ProviderLogo provider={c.provider} className="h-3 w-3" />
+                              <span>{c.issuer}</span>
+                            </div>
+                            <span className="rounded bg-white/10 px-1.5 py-0.5 text-[9px] font-mono text-white/50">
+                              Preview unavailable
+                            </span>
                           </div>
-                          <span className="text-[10px] font-mono text-white/50">{c.year}</span>
+
+                          <div className="relative my-auto py-2">
+                            <h4 className="font-sans text-sm font-medium text-white/90 group-hover:text-ember-400 transition-colors line-clamp-2">
+                              {c.title}
+                            </h4>
+                            <p className="mt-1 text-[11px] text-white/50">{c.platform}</p>
+                          </div>
+
+                          <div className="relative flex items-center justify-between text-[10px] text-white/40">
+                            <span>{c.credentialType}</span>
+                            <span className="flex items-center gap-1 text-ember-400">
+                              <Eye className="h-3 w-3" /> View Details
+                            </span>
+                          </div>
                         </div>
-
-                        <div className="relative my-auto">
-                          <h4 className="font-display text-sm font-semibold uppercase leading-snug text-white/90 group-hover:text-ember-400 transition-colors line-clamp-2">
-                            {c.title}
-                          </h4>
-                          <p className="mt-1 font-condensed text-[11px] text-white/50">
-                            {c.platform}
-                          </p>
-                        </div>
-
-                        <div className="relative flex items-center justify-between text-[10px] text-white/40">
-                          <span>{c.credentialType}</span>
-                          <span className="flex items-center gap-1 text-ember-400">
-                            <Eye className="h-3 w-3" /> View Details
-                          </span>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Top Corner Badges (Provider & Credential Type) */}
-                    <div className="absolute left-2.5 top-2.5 flex flex-wrap items-center gap-1.5">
-                      <span className="flex items-center gap-1 rounded-full border border-white/20 bg-black/75 px-2.5 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white backdrop-blur-md">
-                        <ProviderLogo provider={c.provider} className="h-3 w-3" />
-                        <span>{providerMeta?.badgeLabel || c.issuer}</span>
-                      </span>
-
-                      <span className="rounded-full border border-ember-500/30 bg-ember-500/20 px-2 py-0.5 text-[9px] font-condensed uppercase tracking-wider text-ember-300 backdrop-blur-md">
-                        {c.credentialType}
-                      </span>
-                    </div>
-
-                    {/* Score Badge (if verified score exists) */}
-                    {c.score && (
-                      <div className="absolute right-2.5 top-2.5">
-                        <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-950/80 px-2 py-0.5 text-[10px] font-mono font-semibold text-emerald-300 backdrop-blur-md">
-                          <Percent className="h-2.5 w-2.5" />
-                          <span>{c.score}</span>
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Bottom Title Bar Overlay for image cards */}
-                    {hasImage && (
-                      <div className="absolute inset-x-2.5 bottom-2.5 flex items-end justify-between">
-                        <span className="rounded-lg bg-black/85 px-2 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white/70 backdrop-blur-md border border-white/10">
-                          {c.platform}
-                        </span>
-                        <span className="text-[10px] font-mono text-white/50 bg-black/60 px-1.5 py-0.5 rounded">
-                          {c.year}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Card Content Information */}
-                  <div className="mt-3.5 flex flex-1 flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between text-xs text-ember-500">
-                        <span className="font-condensed uppercase tracking-wider">
-                          {c.issuer}
-                        </span>
-                        <span className="text-[11px] text-white/40 font-mono">{c.issueDate}</span>
-                      </div>
-
-                      <h3 className="mt-1 font-display text-base font-semibold uppercase text-white transition-colors group-hover:text-ember-400 line-clamp-2">
-                        {c.title}
-                      </h3>
-
-                      {c.credentialId && (
-                        <p className="mt-1 flex items-center gap-1 text-[11px] font-mono text-white/45 truncate">
-                          <Hash className="h-3 w-3 shrink-0 text-white/30" />
-                          <span className="truncate">{c.credentialId}</span>
-                        </p>
                       )}
 
-                      {/* Skills Tags List */}
-                      <div className="mt-2.5 flex flex-wrap gap-1">
-                        {c.skills.slice(0, 3).map((skill) => (
-                          <span
-                            key={skill}
-                            className="rounded-md border border-white/10 bg-white/[0.03] px-1.5 py-0.5 text-[10px] text-white/60"
-                          >
-                            {skill}
+                      {/* Top Corner Badges (Provider & Credential Type) */}
+                      <div className="absolute left-2.5 top-2.5 flex flex-wrap items-center gap-1.5">
+                        <span className="flex items-center gap-1 rounded-full border border-white/20 bg-black/75 px-2.5 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white backdrop-blur-md">
+                          <ProviderLogo provider={c.provider} className="h-3 w-3" />
+                          <span>{providerMeta?.badgeLabel || c.issuer}</span>
+                        </span>
+
+                        <span className="rounded-full border border-ember-500/30 bg-ember-500/20 px-2 py-0.5 text-[9px] font-condensed uppercase tracking-wider text-ember-300 backdrop-blur-md">
+                          {c.credentialType}
+                        </span>
+                      </div>
+
+                      {/* Score Badge (if verified score exists) */}
+                      {c.score && (
+                        <div className="absolute right-2.5 top-2.5">
+                          <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-950/80 px-2 py-0.5 text-[10px] font-mono font-semibold text-emerald-300 backdrop-blur-md">
+                            <Percent className="h-2.5 w-2.5" />
+                            <span>{c.score}</span>
                           </span>
-                        ))}
-                        {c.skills.length > 3 && (
-                          <span className="rounded-md border border-white/5 px-1.5 py-0.5 text-[10px] text-white/40">
-                            +{c.skills.length - 3}
+                        </div>
+                      )}
+
+                      {/* Bottom Title Bar Overlay for image cards */}
+                      {hasImage && (
+                        <div className="absolute inset-x-2.5 bottom-2.5 flex items-end justify-between">
+                          <span className="rounded-lg bg-black/85 px-2 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white/70 backdrop-blur-md border border-white/10">
+                            {c.platform}
+                          </span>
+                          <span className="rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-mono text-white/50">
+                            {c.year}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Card Content Information */}
+                    <div className="mt-3.5 flex flex-1 flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between text-xs text-ember-500">
+                          <span className="font-condensed uppercase tracking-wider font-medium">
+                            {c.issuer}
+                          </span>
+                          <span className="text-[11px] text-white/40 font-mono">{c.issueDate}</span>
+                        </div>
+
+                        {/* Title using clean readable sans typography */}
+                        <h3 className="mt-1.5 font-sans text-sm sm:text-base font-semibold text-white/95 transition-colors group-hover:text-ember-400 leading-snug line-clamp-2 min-h-[2.6rem]">
+                          {c.title}
+                        </h3>
+
+                        {c.credentialId && (
+                          <p className="mt-1 flex items-center gap-1 text-[11px] font-mono text-white/45 truncate">
+                            <Hash className="h-3 w-3 shrink-0 text-white/30" />
+                            <span className="truncate">{c.credentialId}</span>
+                          </p>
+                        )}
+
+                        {/* Skills Tags List */}
+                        <div className="mt-2.5 flex flex-wrap gap-1">
+                          {c.skills.slice(0, 3).map((skill) => (
+                            <span
+                              key={skill}
+                              className="rounded-md border border-white/10 bg-white/[0.03] px-1.5 py-0.5 text-[10px] text-white/60"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                          {c.skills.length > 3 && (
+                            <span className="rounded-md border border-white/5 px-1.5 py-0.5 text-[10px] text-white/40">
+                              +{c.skills.length - 3}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Card Actions Footer */}
+                      <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3 text-xs">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedCertId(c.id);
+                          }}
+                          className="flex items-center gap-1 text-white/70 group-hover:text-ember-400 transition-colors font-medium hover:underline"
+                          aria-label={`View details for ${c.title}`}
+                        >
+                          <Eye className="h-3.5 w-3.5 text-ember-500" />
+                          <span>View Details</span>
+                        </button>
+
+                        {c.verificationUrl ? (
+                          <a
+                            href={c.verificationUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex items-center gap-1 text-[11px] text-ember-400 hover:text-white transition-colors"
+                            title="Open official credential verification page"
+                          >
+                            <span>Verify</span>
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        ) : (
+                          <span
+                            className="flex items-center gap-1 text-[11px] text-white/40"
+                            title="Certificate document on file in portfolio archive"
+                          >
+                            <FileText className="h-3 w-3 text-white/30" />
+                            <span>On file</span>
                           </span>
                         )}
                       </div>
                     </div>
-
-                    {/* Card Actions Footer */}
-                    <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3 text-xs">
-                      <span className="flex items-center gap-1 text-white/60 group-hover:text-ember-400 transition-colors font-medium">
-                        <Eye className="h-3.5 w-3.5 text-ember-500" />
-                        <span>View Details</span>
-                      </span>
-
-                      {c.verificationUrl ? (
-                        <a
-                          href={c.verificationUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center gap-1 text-[11px] text-ember-400 hover:text-white transition-colors"
-                          title="Open official credential verification page"
-                        >
-                          <span>Verify</span>
-                          <ExternalLink className="h-3 w-3" />
-                        </a>
-                      ) : (
-                        <span
-                          className="flex items-center gap-1 text-[11px] text-white/40"
-                          title="Certificate document on file in portfolio archive"
-                        >
-                          <FileText className="h-3 w-3 text-white/30" />
-                          <span>On file</span>
-                        </span>
-                      )}
-                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+
+            {/* ========================================================================
+                Pagination / Load More & Back to Top Controls
+                ======================================================================== */}
+            <div data-reveal className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:justify-between border-t border-white/10 pt-6">
+              <span className="text-xs text-white/50">
+                Showing <strong className="text-white">{visibleCertificates.length}</strong> of{" "}
+                <strong className="text-white">{filteredAndSortedCertificates.length}</strong> credentials
+              </span>
+
+              <div className="flex items-center gap-2.5">
+                {hasMore && (
+                  <button
+                    onClick={handleLoadMore}
+                    className="btn-ember flex items-center gap-2 px-5 py-2.5 text-xs font-semibold shadow-glow transition-all"
+                  >
+                    <span>Load More</span>
+                    <span className="rounded-full bg-black/25 px-1.5 py-0.2 font-mono text-[10px]">
+                      +{Math.min(PAGE_SIZE, filteredAndSortedCertificates.length - visibleCount)}
+                    </span>
+                    <ChevronDown className="h-3.5 w-3.5" />
+                  </button>
+                )}
+
+                {visibleCount > PAGE_SIZE && (
+                  <button
+                    onClick={() => {
+                      document.getElementById("certificates")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs text-white/70 transition-all hover:border-ember-500/50 hover:bg-ember-500/10 hover:text-white"
+                    aria-label="Back to top of certificates vault"
+                  >
+                    <ArrowUp className="h-3.5 w-3.5 text-ember-500" />
+                    <span>Back to Top</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          </>
         )}
 
         {/* ========================================================================
@@ -671,7 +807,7 @@ export default function Certificates() {
             {/* Backdrop */}
             <div
               className="absolute inset-0 bg-black/85 backdrop-blur-md transition-opacity"
-              onClick={() => setSelectedCert(null)}
+              onClick={() => setSelectedCertId(null)}
             />
 
             {/* Modal Dialog Card */}
@@ -704,7 +840,7 @@ export default function Certificates() {
                 </div>
 
                 <button
-                  onClick={() => setSelectedCert(null)}
+                  onClick={() => setSelectedCertId(null)}
                   className="rounded-full border border-white/10 p-2 text-white/60 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
                   aria-label="Close certificate modal"
                 >
@@ -717,30 +853,27 @@ export default function Certificates() {
                 {/* Visual Preview Stage */}
                 <div className="overflow-hidden rounded-2xl border border-white/15 bg-black/60">
                   {selectedCert.image ? (
-                    <img
-                      src={asset(selectedCert.image)}
-                      alt={selectedCert.title}
-                      className="max-h-[380px] w-full object-contain bg-black"
-                    />
+                    <div className="flex items-center justify-center p-2 bg-black/80">
+                      <img
+                        src={asset(selectedCert.image)}
+                        alt={`Full certificate preview for ${selectedCert.title}`}
+                        className="max-h-[380px] sm:max-h-[460px] w-full object-contain rounded-lg"
+                      />
+                    </div>
                   ) : (
                     /* High-fidelity Fallback Display */
                     <div className="flex flex-col items-center justify-center p-8 sm:p-12 text-center bg-gradient-to-b from-[#091522] to-[#040910]">
                       <div className="grid h-16 w-16 place-items-center rounded-2xl border border-white/15 bg-white/[0.04]">
                         <ProviderLogo provider={selectedCert.provider} className="h-8 w-8" />
                       </div>
-                      <h4 className="mt-4 font-display text-lg uppercase text-white max-w-md">
+                      <h4 className="mt-4 font-sans text-lg font-semibold text-white max-w-md">
                         {selectedCert.title}
                       </h4>
                       <p className="mt-1 text-xs text-white/60">
                         {selectedCert.issuer} · {selectedCert.platform}
                       </p>
-                      <div className="mt-4 flex items-center gap-2 text-xs text-white/60">
-                        <FileText className="h-4 w-4 text-ember-400" />
-                        <span>
-                          {selectedCert.verificationUrl
-                            ? "Official certificate with live verification link"
-                            : "Official certificate on file in portfolio archive"}
-                        </span>
+                      <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-white/50">
+                        <span>Preview unavailable</span>
                       </div>
                     </div>
                   )}
@@ -805,27 +938,38 @@ export default function Certificates() {
               {/* Modal Actions Footer */}
               <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 bg-black/40 p-4 sm:p-6">
                 <div className="flex flex-wrap items-center gap-2">
-                  {selectedCert.pdf && (
-                    <a
-                      href={asset(selectedCert.pdf)}
-                      download={`${selectedCert.title.replace(/\s+/g, "_")}.pdf`}
-                      className="btn-ember flex items-center gap-2 px-4 py-2 text-xs font-semibold"
-                    >
-                      <Download className="h-4 w-4" />
-                      <span>Download PDF</span>
-                    </a>
-                  )}
+                  {selectedCert.pdf ? (
+                    <>
+                      <a
+                        href={asset(selectedCert.pdf)}
+                        download={`${selectedCert.title.replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`}
+                        className="btn-ember flex items-center gap-2 px-4 py-2 text-xs font-semibold"
+                        aria-label={`Download PDF for ${selectedCert.title}`}
+                      >
+                        <Download className="h-4 w-4" />
+                        <span>Download PDF</span>
+                      </a>
 
-                  {selectedCert.pdf && (
-                    <a
-                      href={asset(selectedCert.pdf)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/[0.03] px-3.5 py-2 text-xs text-white/80 transition-colors hover:border-ember-500 hover:text-ember-400"
+                      <a
+                        href={asset(selectedCert.pdf)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/[0.03] px-3.5 py-2 text-xs text-white/80 transition-colors hover:border-ember-500 hover:text-ember-400"
+                        aria-label={`Open PDF in new tab for ${selectedCert.title}`}
+                      >
+                        <FileText className="h-3.5 w-3.5" />
+                        <span>Open PDF ↗</span>
+                      </a>
+                    </>
+                  ) : (
+                    <button
+                      disabled
+                      className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-xs text-white/40 cursor-not-allowed opacity-60"
+                      title="PDF document is currently unavailable"
                     >
-                      <FileText className="h-3.5 w-3.5" />
-                      <span>Open PDF ↗</span>
-                    </a>
+                      <FileText className="h-4 w-4 text-white/30" />
+                      <span>PDF Unavailable</span>
+                    </button>
                   )}
                 </div>
 
