@@ -207,7 +207,7 @@ export default function Certificates() {
             <div data-reveal className="flex items-center gap-2">
               <span className="flex h-2 w-2 rounded-full bg-ember-500 shadow-glow" />
               <span className="font-condensed text-xs uppercase tracking-[0.22em] text-ember-500">
-                Verified Credentials Archive
+                Certification Vault &amp; Course Archive
               </span>
             </div>
             <h2 data-reveal className="mt-2 font-display text-huge uppercase leading-[1.05] text-white">
@@ -230,7 +230,7 @@ export default function Certificates() {
             <div className="flex items-center gap-2 rounded-full border border-ember-500/30 bg-ember-500/10 px-3.5 py-1.5 text-xs text-ember-400">
               <CheckCircle2 className="h-3.5 w-3.5 text-ember-500" />
               <span>
-                <strong className="text-white">{totalCredentialsCount}</strong> Total Credentials
+                <strong className="text-white">{totalCredentialsCount}</strong> Credentials on File
               </span>
             </div>
 
@@ -629,7 +629,7 @@ export default function Certificates() {
                         <span>View Details</span>
                       </span>
 
-                      {c.verificationUrl && (
+                      {c.verificationUrl ? (
                         <a
                           href={c.verificationUrl}
                           target="_blank"
@@ -641,6 +641,14 @@ export default function Certificates() {
                           <span>Verify</span>
                           <ExternalLink className="h-3 w-3" />
                         </a>
+                      ) : (
+                        <span
+                          className="flex items-center gap-1 text-[11px] text-white/40"
+                          title="Certificate document on file in portfolio archive"
+                        >
+                          <FileText className="h-3 w-3 text-white/30" />
+                          <span>On file</span>
+                        </span>
                       )}
                     </div>
                   </div>
@@ -726,9 +734,13 @@ export default function Certificates() {
                       <p className="mt-1 text-xs text-white/60">
                         {selectedCert.issuer} · {selectedCert.platform}
                       </p>
-                      <div className="mt-4 flex items-center gap-2 text-xs text-ember-400">
-                        <FileText className="h-4 w-4" />
-                        <span>Official PDF record verified in portfolio repository</span>
+                      <div className="mt-4 flex items-center gap-2 text-xs text-white/60">
+                        <FileText className="h-4 w-4 text-ember-400" />
+                        <span>
+                          {selectedCert.verificationUrl
+                            ? "Official certificate with live verification link"
+                            : "Official certificate on file in portfolio archive"}
+                        </span>
                       </div>
                     </div>
                   )}
@@ -829,9 +841,9 @@ export default function Certificates() {
                       <span>Verify Credential ↗</span>
                     </a>
                   ) : (
-                    <span className="text-[11px] text-white/40 flex items-center gap-1">
-                      <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-                      <span>Authenticated via Portfolio Repository</span>
+                    <span className="text-[11px] text-white/50 flex items-center gap-1.5">
+                      <FileText className="h-3.5 w-3.5 text-white/40" />
+                      <span>Certificate on file in portfolio archive</span>
                     </span>
                   )}
                 </div>

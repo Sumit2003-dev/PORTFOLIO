@@ -1,6 +1,10 @@
 /**
  * Provider-Wise Certification Vault Data Architecture
- * Strictly verified against actual local PDF records, credentials, and uploaded certificates.
+ * Strictly audited and verified against actual local PDF documents, Coursera verification links,
+ * IBM Skills Network certificates, NPTEL records, and Forage completion files.
+ *
+ * NOTE: Achievements (such as Google Cloud Skills Boost Diamond League standing, streak, and points)
+ * are maintained separately in `googleDeveloperData.ts` and showcased in the Google Developer Journey dashboard.
  */
 
 export type ProviderId =
@@ -38,7 +42,6 @@ export interface ProviderMeta {
   badgeLabel: string;
   shortDesc: string;
   brandColor: string;
-  badgeCount?: number;
 }
 
 export interface VaultCertificate {
@@ -58,7 +61,7 @@ export interface VaultCertificate {
   pdf?: string;
   skills: string[];
   description?: string;
-  hue?: string;
+  hasVerifiedLink?: boolean;
 }
 
 export const PROVIDERS_META: ProviderMeta[] = [
@@ -66,49 +69,49 @@ export const PROVIDERS_META: ProviderMeta[] = [
     id: "all",
     name: "All Providers",
     badgeLabel: "Vault",
-    shortDesc: "Complete archive of industry-recognized credentials and job simulations.",
+    shortDesc: "Complete archive of course certificates, specializations, and verified job simulations.",
     brandColor: "#FF6A00",
   },
   {
     id: "google",
     name: "Google",
     badgeLabel: "Google",
-    shortDesc: "Google Data Analytics, DeepMind neural architectures, and enterprise agent credentials.",
+    shortDesc: "Google Data Analytics capstone, statistical modules, DeepMind SLM training, and GEAR agent readiness.",
     brandColor: "#4285F4",
   },
   {
     id: "ibm",
     name: "IBM",
     badgeLabel: "IBM",
-    shortDesc: "Enterprise AI Analyst specialization, deep learning fundamentals, and SkillsBuild GenAI series.",
+    shortDesc: "IBM Developer Skills Network credentials in data science, predictive modeling, and SkillsBuild GenAI.",
     brandColor: "#0F62FE",
   },
   {
     id: "microsoft",
     name: "Microsoft",
     badgeLabel: "Microsoft",
-    shortDesc: "Foundations of AI/ML and Azure ML Studio pipeline design authorized by Microsoft.",
+    shortDesc: "Foundations of AI/ML authorized by Microsoft and Coursera Project Network Azure ML Studio pipelines.",
     brandColor: "#00A4EF",
   },
   {
     id: "anthropic",
     name: "Anthropic",
     badgeLabel: "Anthropic",
-    shortDesc: "Official Claude API, agent skills, Model Context Protocol (MCP), and AI fluency frameworks.",
+    shortDesc: "Official Claude API, agent skills, Model Context Protocol (MCP), and AI fluency course certificates.",
     brandColor: "#D97706",
   },
   {
     id: "tata-tcs",
     name: "Tata / TCS",
     badgeLabel: "Tata / TCS",
-    shortDesc: "Tata Forage job simulations, business data storytelling, and TCS iON AI For All essentials.",
+    shortDesc: "Tata Forage job simulations in predictive analytics and TCS iON MPIT-CoE AI For All essentials.",
     brandColor: "#00539B",
   },
   {
     id: "nptel",
     name: "NPTEL / IIT Roorkee",
     badgeLabel: "NPTEL",
-    shortDesc: "12-week Ministry of Education (Swayam) proctored exam in Data Analytics with Python.",
+    shortDesc: "12-week Ministry of Education (Swayam) proctored exam in Data Analytics with Python (Elite).",
     brandColor: "#E35205",
   },
   {
@@ -122,14 +125,14 @@ export const PROVIDERS_META: ProviderMeta[] = [
     id: "others",
     name: "Other Organizations",
     badgeLabel: "Industry",
-    shortDesc: "Deloitte, Quantium, Mastercard, Saylor Academy, and university academic workshops.",
+    shortDesc: "Deloitte Australia, Quantium, Mastercard, Saylor Academy, and university academic workshops.",
     brandColor: "#A855F7",
   },
 ];
 
 export const CERTIFICATION_VAULT: VaultCertificate[] = [
   /* ========================================================================
-     1. GOOGLE (9 Credentials)
+     1. GOOGLE (8 Credentials)
      ======================================================================== */
   {
     id: "google-adv-capstone",
@@ -138,20 +141,20 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     provider: "google",
     platform: "Coursera",
     category: "Data Science & Analytics",
-    credentialType: "Professional Certificate",
+    credentialType: "Course Certificate",
     issueDate: "Jul 14, 2026",
     year: "2026",
     credentialId: "BRIIQMV6TCP1",
     score: "100%",
     verificationUrl: "https://coursera.org/verify/BRIIQMV6TCP1",
-    image: "/uploads/google/34h2yX22_TdOiKGd+JpYh9qm5Hi4bsyrnfgLzq27hP8=.png",
     pdf: "/uploads/google/Google_Advanced_Data_Analytics_Capstone.pdf",
-    skills: ["Machine Learning", "Python", "Statistical Modeling", "Predictive Analytics", "Capstone Architecture"],
+    skills: ["Machine Learning", "Python", "Statistical Modeling", "Predictive Analytics", "Executive Reporting"],
     description: "Capstone project completing Google's Advanced Data Analytics curriculum, building end-to-end ML models and executive reports.",
+    hasVerifiedLink: true,
   },
   {
-    id: "google-data-analytics-pro",
-    title: "Google Data Analytics Professional Certificate",
+    id: "google-data-analytics-curriculum",
+    title: "Google Data Analytics Professional Curriculum",
     issuer: "Google",
     provider: "google",
     platform: "Coursera",
@@ -160,10 +163,9 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     issueDate: "2025–2026",
     year: "2026",
     score: "94.87%",
-    image: "/uploads/google/34h2yX22_TdOiKGd+JpYh9qm5Hi4bsyrnfgLzq27hP8=.png",
-    pdf: "/uploads/google/Coursera ML Certificate.pdf",
     skills: ["Data Analysis", "SQL", "R", "Tableau", "Data Cleaning", "Spreadsheets"],
-    description: "Comprehensive 8-course professional certificate covering the complete data lifecycle: ask, prepare, process, analyze, share, and act.",
+    description: "Comprehensive Google career curriculum completed with 94.87% aggregate score, covering data preparation, processing, statistical analysis, and visualization.",
+    hasVerifiedLink: false,
   },
   {
     id: "google-foundations-data",
@@ -177,10 +179,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     year: "2026",
     credentialId: "5NT1SR5RAZSX",
     verificationUrl: "https://coursera.org/verify/5NT1SR5RAZSX",
-    image: "/uploads/google/34h2yX22_TdOiKGd+JpYh9qm5Hi4bsyrnfgLzq27hP8=.png",
     pdf: "/uploads/google/Foundations Data, Data, Everywhere.pdf",
     skills: ["Data Ecosystem", "SQL Basics", "Analytical Thinking", "Data Ethics"],
     description: "First course in Google's Data Analytics sequence, focusing on data ecosystem paradigms and spreadsheet modeling.",
+    hasVerifiedLink: true,
   },
   {
     id: "google-data-insights",
@@ -195,10 +197,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialId: "4P0EGP3VFHDN",
     score: "100%",
     verificationUrl: "https://coursera.org/verify/4P0EGP3VFHDN",
-    image: "/uploads/google/34h2yX22_TdOiKGd+JpYh9qm5Hi4bsyrnfgLzq27hP8=.png",
     pdf: "/uploads/google/Go Beyond the NumbersTranslate Data into Insights.pdf",
     skills: ["Data Storytelling", "Executive Dashboards", "Tableau", "Communicating Insights"],
     description: "Advanced data storytelling and visualization course focusing on translating statistical findings into actionable business strategy.",
+    hasVerifiedLink: true,
   },
   {
     id: "google-foundations-ds",
@@ -211,10 +213,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     issueDate: "Jul 2026",
     year: "2026",
     score: "99%",
-    image: "/uploads/google/34h2yX22_TdOiKGd+JpYh9qm5Hi4bsyrnfgLzq27hP8=.png",
     pdf: "/uploads/google/Google_Foundations_of_Data_Science_Certificate.pdf",
     skills: ["Python", "Exploratory Data Analysis", "Data Science Lifecycle", "Analytics"],
     description: "Core statistical computing and Python data structures course from the Google Advanced Data Analytics track.",
+    hasVerifiedLink: false,
   },
   {
     id: "google-power-statistics",
@@ -229,10 +231,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialId: "4V081A2V0XJX",
     score: "97.91%",
     verificationUrl: "https://coursera.org/verify/4V081A2V0XJX",
-    image: "/uploads/google/34h2yX22_TdOiKGd+JpYh9qm5Hi4bsyrnfgLzq27hP8=.png",
     pdf: "/uploads/google/The_Power_of_Statistics.pdf",
     skills: ["Hypothesis Testing", "Probability Distributions", "Inferential Statistics", "Confidence Intervals"],
     description: "Rigorous statistical analysis module covering parametric and non-parametric tests, p-values, and hypothesis formulation.",
+    hasVerifiedLink: true,
   },
   {
     id: "google-deepmind-slm",
@@ -241,12 +243,13 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     provider: "google",
     platform: "Google DeepMind Learning",
     category: "Generative AI",
-    credentialType: "Specialization",
+    credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
     image: "/uploads/Google skills/DEEP MIND/DeepMind Train A Small Language Model.png",
     skills: ["DeepMind", "Small Language Models (SLMs)", "Transformer Architecture", "Fine-Tuning", "Neural Networks"],
     description: "DeepMind hands-on track: Language Data Representation, Neural Network Training, Transformer Mechanics, and SLM Fine-Tuning.",
+    hasVerifiedLink: false,
   },
   {
     id: "google-gear-agents",
@@ -261,23 +264,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     image: "/uploads/Google skills/Screenshot 2026-07-27 005104.png",
     skills: ["Gemini Enterprise", "Autonomous Agents", "ADK", "Production Agents", "Enterprise Scaling"],
     description: "Google enterprise agent readiness credential covering Agent Development Kit (ADK), multi-agent architectures, and production scaling.",
-  },
-  {
-    id: "google-cloud-arcade-diamond",
-    title: "Google Cloud Skills Boost — Diamond League",
-    issuer: "Google Cloud",
-    provider: "google",
-    platform: "Google Cloud Skills Boost",
-    category: "Cloud & DevOps",
-    credentialType: "Specialization",
-    issueDate: "November 2026 Snapshot",
-    year: "2026",
-    score: "178 Badges · 47,957 Pts · #18 Diamond",
-    verificationUrl: "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
-    image: "/uploads/homepage.png",
-    pdf: "/uploads/ALL CERTIFICATES_compressed.pdf",
-    skills: ["Vertex AI", "BigQuery ML", "Kubernetes (GKE)", "Cloud Run", "Terraform", "IAM Security", "Cloud Architecture"],
-    description: "Top-tier Diamond League standing on Google Cloud Skills Boost across 178 badges. Full badge catalog browsable in the Google Developer Journey dashboard.",
+    hasVerifiedLink: false,
   },
 
   /* ========================================================================
@@ -295,10 +282,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     year: "2026",
     credentialId: "0d632840-be25-433e-ab77-44723d07ced0",
     verificationUrl: "https://srmcem.skillsnetwork.site/certificates/0d632840-be25-433e-ab77-44723d07ced0",
-    image: "/uploads/IBM/Data analysis with python.png",
     pdf: "/uploads/IBM/Data Science & Artificial Intelligence.pdf",
     skills: ["Data Science", "Artificial Intelligence", "Python", "Deep Learning", "Methodology"],
     description: "Complete IBM learning path covering data science methodology, machine learning workflows, and practical Python implementations.",
+    hasVerifiedLink: true,
   },
   {
     id: "ibm-ai-analyst",
@@ -312,10 +299,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     year: "2026",
     credentialId: "b6a8e91aa7474a06a79ae95315fc8fbf",
     verificationUrl: "https://courses.srmcem.skillsnetwork.site/certificates/b6a8e91aa7474a06a79ae95315fc8fbf",
-    image: "/uploads/IBM/Data analysis with python.png",
     pdf: "/uploads/IBM/Artificial Intelligence Analyst.pdf",
     skills: ["AI Systems", "Watson Studio", "Predictive Modeling", "Feature Engineering"],
     description: "Certified by IBM India Country Manager for proficiency in enterprise AI analysis, model validation, and deployment pipelines.",
+    hasVerifiedLink: true,
   },
   {
     id: "ibm-data-analysis-python",
@@ -333,6 +320,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/IBM/Data Analysis with Python.pdf",
     skills: ["Python", "Pandas", "NumPy", "SciPy", "Data Wrangling", "Statistical Testing"],
     description: "Hands-on data analysis course utilizing Pandas, NumPy, and Scipy for data wrangling, exploratory analysis, and model building.",
+    hasVerifiedLink: true,
   },
   {
     id: "ibm-ds-methodology",
@@ -346,10 +334,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     year: "2026",
     credentialId: "1d44ddc7d6ec447cb418fcb0e6a5100f",
     verificationUrl: "https://courses.srmcem.skillsnetwork.site/certificates/1d44ddc7d6ec447cb418fcb0e6a5100f",
-    image: "/uploads/IBM/Data analysis with python.png",
     pdf: "/uploads/IBM/Data Science Methodology.pdf",
     skills: ["Business Understanding", "Data Requirements", "Modeling", "Evaluation", "Deployment"],
     description: "Systematic methodology guiding enterprise data science problem formulation, pipeline execution, and model governance.",
+    hasVerifiedLink: true,
   },
   {
     id: "ibm-deep-learning",
@@ -363,10 +351,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     year: "2026",
     credentialId: "9e214119149049b085af4fdcc783d2f9",
     verificationUrl: "https://courses.srmcem.skillsnetwork.site/certificates/9e214119149049b085af4fdcc783d2f9",
-    image: "/uploads/IBM/Data analysis with python.png",
     pdf: "/uploads/IBM/Deep Learning Fundamentals.pdf",
     skills: ["Deep Learning", "Neural Networks", "TensorFlow", "Keras", "Backpropagation"],
     description: "Foundational neural network design covering multi-layer perceptrons, activation functions, loss optimization, and deep representations.",
+    hasVerifiedLink: true,
   },
   {
     id: "ibm-predictive-modeling",
@@ -380,10 +368,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     year: "2026",
     credentialId: "cf05e716656941f88314c540b3c107bb",
     verificationUrl: "https://courses.srmcem.skillsnetwork.site/certificates/cf05e716656941f88314c540b3c107bb",
-    image: "/uploads/IBM/Data analysis with python.png",
     pdf: "/uploads/IBM/Predictive Modeling Fundamentals I.pdf",
     skills: ["Predictive Analytics", "Regression", "Classification", "Model Validation"],
     description: "Core algorithms of predictive modeling including decision trees, linear regression, and classification boundaries.",
+    hasVerifiedLink: true,
   },
   {
     id: "ibm-prompt-engineering",
@@ -398,6 +386,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     image: "/uploads/IBM/Prompt Engineering- Shaping Better AI Responses.png",
     skills: ["Prompt Engineering", "Few-Shot Prompting", "Chain-of-Thought", "LLM Optimization"],
     description: "Advanced prompting strategies, context grounding, few-shot formatting, and steering techniques for production LLMs.",
+    hasVerifiedLink: false,
   },
   {
     id: "ibm-foundations-genai",
@@ -412,6 +401,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     image: "/uploads/IBM/Digital Sticker_Foundations in Generative AI.png",
     skills: ["Generative AI", "Foundation Models", "Diffusion", "Transformers"],
     description: "Conceptual and practical grounding in generative architectures, pretraining paradigms, and enterprise application patterns.",
+    hasVerifiedLink: false,
   },
   {
     id: "ibm-intro-llm",
@@ -426,6 +416,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     image: "/uploads/IBM/Digital Sticker_Introduction to Large Language Models.png",
     skills: ["LLMs", "Attention Mechanism", "NLP", "Model Architecture"],
     description: "Comprehensive introduction to transformer tokenization, self-attention mechanics, and generative language modeling.",
+    hasVerifiedLink: false,
   },
   {
     id: "ibm-ethical-genai",
@@ -440,6 +431,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     image: "/uploads/IBM/Digital sticker_Ethical Considerations for Generative AI.png",
     skills: ["AI Ethics", "Bias Mitigation", "Data Privacy", "Responsible AI Governance"],
     description: "Ethical frameworks, copyright governance, data safety, and alignment strategies for generative AI deployments.",
+    hasVerifiedLink: false,
   },
   {
     id: "ibm-intro-python",
@@ -453,10 +445,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     year: "2026",
     credentialId: "f68399695df54a3c856b953b672d3a45",
     verificationUrl: "https://courses.srmcem.skillsnetwork.site/certificates/f68399695df54a3c856b953b672d3a45",
-    image: "/uploads/IBM/Data analysis with python.png",
     pdf: "/uploads/IBM/Introduction to Python.pdf",
     skills: ["Python", "Control Flow", "Data Structures", "Functions", "OOP"],
     description: "Foundational programming coursework in Python syntax, standard library modules, and algorithm formulation.",
+    hasVerifiedLink: true,
   },
   {
     id: "ibm-java-fundamentals",
@@ -470,14 +462,14 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     year: "2026",
     credentialId: "4a24d07700dd468b9a55545ba0084ea5",
     verificationUrl: "https://courses.srmcem.skillsnetwork.site/certificates/4a24d07700dd468b9a55545ba0084ea5",
-    image: "/uploads/IBM/Data analysis with python.png",
     pdf: "/uploads/IBM/Java Fundamentals.pdf",
     skills: ["Java", "OOP", "Classes & Methods", "Exception Handling"],
     description: "Object-oriented software development fundamentals in Java covering inheritance, polymorphism, and memory management.",
+    hasVerifiedLink: true,
   },
 
   /* ========================================================================
-     3. MICROSOFT (2 Credentials)
+     3. MICROSOFT & COURSERA PROJECT NETWORK (2 Credentials)
      ======================================================================== */
   {
     id: "ms-foundations-ai-ml",
@@ -494,14 +486,15 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     verificationUrl: "https://coursera.org/verify/C0B3VQE95X0B",
     pdf: "/uploads/Microsoft/Foundations of AI and Machine Learning.pdf",
     skills: ["Artificial Intelligence", "Machine Learning", "Azure AI", "Cognitive Services", "Model Evaluation"],
-    description: "Comprehensive foundational certification authorized by Microsoft covering core ML paradigms, neural computation, and Azure AI architecture.",
+    description: "Foundational artificial intelligence course authorized by Microsoft and offered through Coursera.",
+    hasVerifiedLink: true,
   },
   {
     id: "ms-azure-ml-pipelines",
     title: "Machine Learning Pipelines with Azure ML Studio",
     issuer: "Coursera Project Network",
     provider: "microsoft",
-    platform: "Coursera (Azure ML Studio)",
+    platform: "Coursera (Microsoft Azure ML Studio)",
     category: "Machine Learning & AI",
     credentialType: "Course Certificate",
     issueDate: "Jul 14, 2026",
@@ -509,13 +502,15 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialId: "H60VNNV2184W",
     score: "97.22%",
     verificationUrl: "https://coursera.org/verify/H60VNNV2184W",
-    pdf: "/uploads/google/Coursera ML Certificate.pdf",
+    pdf: "/uploads/Microsoft/Coursera_Azure_ML_Pipelines_Certificate.pdf",
     skills: ["Azure ML Studio", "ML Pipelines", "Automated ML", "Model Deployment", "Data Preprocessing"],
-    description: "Practical project engineering automated machine learning training and evaluation workflows using Microsoft Azure ML Studio.",
+    description: "Hands-on guided project authorized by Coursera Project Network focusing on engineering automated ML pipelines using Azure ML Studio.",
+    hasVerifiedLink: true,
   },
 
   /* ========================================================================
-     4. ANTHROPIC (20 Credentials)
+     4. ANTHROPIC (20 Course Completion Certificates)
+     All 20 verified against individual completion documents.
      ======================================================================== */
   {
     id: "anthropic-claude-101",
@@ -527,10 +522,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Claude-101.pdf",
     skills: ["Claude", "Prompting", "Anthropic Principles", "LLMs"],
     description: "Core introduction to Anthropic's Claude, covering conversational mechanics, reasoning capabilities, and ethical alignment.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-claude-platform-101",
@@ -542,10 +537,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Claude Platform 101.pdf",
     skills: ["Claude Platform", "Console", "API Keys", "Workspaces"],
     description: "Architectural overview of the Anthropic Developer Console, workspace management, and security boundaries.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-claude-api",
@@ -557,10 +552,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Building with the Claude API.pdf",
     skills: ["Claude API", "Python SDK", "Streaming", "Tool Use", "Structured Output"],
     description: "Hands-on engineering course connecting applications to the Claude Messages API with function calling and JSON output.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-claude-code-101",
@@ -572,10 +567,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Claude Code 101.pdf",
     skills: ["Claude Code", "CLI Workflows", "Terminal Agents", "Code Generation"],
     description: "Foundational training on Claude Code CLI for autonomous terminal workflows, file manipulation, and project navigation.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-claude-code-action",
@@ -587,10 +582,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Claude Code in Action.pdf",
     skills: ["Refactoring", "Testing", "Git Automation", "Multi-File Editing"],
     description: "Applied software engineering with Claude Code: bug localization, automated testing suites, and git workflow integration.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-claude-cowork",
@@ -602,10 +597,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Introduction to Claude Cowork.pdf",
     skills: ["Pair Programming", "Workflow Collaboration", "AI Cowork"],
     description: "Frameworks for interactive human-AI developer collaboration and augmented workflows.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-vertex-ai",
@@ -617,10 +612,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Claude with Google Cloud's Vertex AI.pdf",
     skills: ["Vertex AI", "Google Cloud", "Model Garden", "IAM Auth", "Enterprise Security"],
     description: "Deploying and orchestrating Claude 3.5 Sonnet and Haiku via Google Cloud Vertex AI Model Garden.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-bedrock",
@@ -632,10 +627,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Claude with Amazon Bedrock.pdf",
     skills: ["Amazon Bedrock", "AWS Boto3", "Serverless AI", "Cloud Governance"],
     description: "Enterprise deployment and invocation of Claude models inside AWS infrastructure using Amazon Bedrock.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-subagents",
@@ -647,10 +642,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Introduction to subagents.pdf",
     skills: ["Subagents", "Multi-Agent Systems", "Task Delegation", "Hierarchical Planning"],
     description: "Architecting hierarchical multi-agent teams where specialist subagents execute scoped domain tasks in parallel.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-agent-skills",
@@ -662,10 +657,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Introduction to agent skills.pdf",
     skills: ["Agent Skills", "Tool Use", "Function Calling", "Agent Workflows"],
     description: "Building reusable skill libraries and tool harnesses that augment agent capabilities with external services.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-mcp-intro",
@@ -677,10 +672,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Introduction to Model Context Protocol.pdf",
     skills: ["Model Context Protocol", "MCP Clients", "MCP Servers", "Open Standard"],
     description: "Foundational mastery of the open Model Context Protocol standard connecting LLMs to data sources and developer tools.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-mcp-advanced",
@@ -692,10 +687,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Model Context Protocol- Advanced Topics.pdf",
     skills: ["Custom MCP Servers", "Bidirectional RPC", "Dynamic Resources", "Prompts API"],
     description: "Advanced engineering of custom MCP servers, state synchronization, security sandboxing, and dynamic prompt templates.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-fluency-framework",
@@ -707,10 +702,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/AI-Fluency-Framework&Foundations.pdf",
     skills: ["AI Fluency", "Cognitive Frameworks", "Evaluation", "Responsible AI"],
     description: "Structured mental frameworks for evaluating AI reasoning, identifying hallucination patterns, and optimizing collaboration.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-fluency-builders",
@@ -722,10 +717,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/AI Fluency for Builders.pdf",
     skills: ["System Design", "Prompt Architectures", "Builder Workflows"],
     description: "Tailored for software builders constructing durable software components powered by Claude.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-capabilities-limits",
@@ -737,10 +732,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/AI Capabilities and Limitations.pdf",
     skills: ["Model Boundaries", "Hallucination Mitigation", "Safety Guardrails"],
     description: "Deep dive into model capabilities, boundary conditions, context limits, and mitigation strategies.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-fluency-students",
@@ -752,10 +747,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/AI Fluency for students.pdf",
     skills: ["Academic Integrity", "Socratic Learning", "Research Augmentation"],
     description: "Effective utilization of conversational models for accelerated learning and critical literature inquiry.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-fluency-educators",
@@ -767,10 +762,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/AI Fluency for educators.pdf",
     skills: ["Pedagogical Design", "Assessment Adaptation", "AI Literacy"],
     description: "Guiding pedagogical adaptation and student assessment in an era of conversational intelligence.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-fluency-nonprofits",
@@ -782,10 +777,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/AI Fluency for nonprofits.pdf",
     skills: ["Social Impact", "Resource Optimization", "Community Outreach"],
     description: "Applying AI systems to amplify social initiatives and streamline operational overhead for mission-driven teams.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-fluency-smb",
@@ -797,10 +792,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/AI Fluency for Small Businesses.pdf",
     skills: ["Business Automation", "Customer Experience", "Lean Operations"],
     description: "Practical operational automation and client interaction strategies for small business teams.",
+    hasVerifiedLink: false,
   },
   {
     id: "anthropic-teaching-fluency",
@@ -812,10 +807,10 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Course Certificate",
     issueDate: "2026",
     year: "2026",
-    image: "/uploads/fd360144-edaf-4922-bdb1-d0ca65819477.png",
     pdf: "/uploads/Anthropic/Teaching AI Fluency.pdf",
     skills: ["Curriculum Delivery", "Mentorship", "AI Literacy Evangelism"],
     description: "Pedagogy and curriculum techniques for instructing and mentoring others in modern AI fluency.",
+    hasVerifiedLink: false,
   },
 
   /* ========================================================================
@@ -836,6 +831,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/others/AI FOR ALL.pdf",
     skills: ["Generative AI", "AI for All", "AI Literacy", "Prompting", "TCS iON"],
     description: "Official generative AI literacy credential issued by MPIT Centre of Excellence and Tata Consultancy Services Foundation via TCS iON.",
+    hasVerifiedLink: false,
   },
   {
     id: "tata-genai-analytics",
@@ -851,6 +847,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/others/GenAI Powered Data Analytics Job Simulation.pdf",
     skills: ["Exploratory Data Analysis", "Risk Profiling", "Predictive Delinquency Modeling", "Data Storytelling"],
     description: "Practical job simulation completing tasks in delinquency prediction with AI and executive business storytelling for collections strategy.",
+    hasVerifiedLink: false,
   },
   {
     id: "tata-data-visualisation",
@@ -864,7 +861,8 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     year: "2025",
     pdf: "/uploads/others/Data Visualisation Empowering Business.pdf",
     skills: ["Framing Business Scenarios", "Choosing Visuals", "Effective Dashboards", "Communicating Insights"],
-    description: "Hands-on corporate simulation framing business problems, selecting effective charts, and presenting visual analytics to C-suite leadership.",
+    description: "Corporate simulation framing business problems, selecting effective charts, and presenting visual analytics to C-suite leadership.",
+    hasVerifiedLink: false,
   },
 
   /* ========================================================================
@@ -886,6 +884,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/others/NPTEL.pdf",
     skills: ["Python", "Data Analytics", "Hypothesis Testing", "NumPy", "Pandas", "Statistical Analysis"],
     description: "Ministry of Education (Govt. of India) accredited 12-week proctored exam from IIT Roorkee, validating advanced statistical computing with Python.",
+    hasVerifiedLink: false,
   },
 
   /* ========================================================================
@@ -906,6 +905,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/others/Data Analytics Job Simulation.PDF",
     skills: ["Data Analysis", "Forensic Technology", "Pattern Recognition", "Insights Delivery"],
     description: "Completed practical tasks in forensic analytics and forensic technology investigation for enterprise audit clients.",
+    hasVerifiedLink: false,
   },
   {
     id: "quantium-data-analytics",
@@ -920,6 +920,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/others/Data Analytics Job Simulation(Quantium).pdf",
     skills: ["Customer Analytics", "Data Preparation", "Uplift Testing", "Commercial Application"],
     description: "Commercial supermarket analytics simulation evaluating customer segments, trial vs. control store uplift testing, and executive recommendations.",
+    hasVerifiedLink: false,
   },
   {
     id: "deloitte-technology",
@@ -935,6 +936,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/others/Technology Job Simulation.pdf",
     skills: ["Coding", "System Development", "Cloud Architecture"],
     description: "Hands-on software development and technical systems design tasks simulating enterprise client engagements.",
+    hasVerifiedLink: false,
   },
   {
     id: "mastercard-cybersecurity",
@@ -949,6 +951,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/others/Cybersecurity Analyst Job Simulation.pdf",
     skills: ["IAM Fundamentals", "Security Assessment", "Access Controls", "Platform Integration"],
     description: "Practical security simulation analyzing enterprise identity and access management (IAM) strategies and custom access security controls.",
+    hasVerifiedLink: false,
   },
   {
     id: "saylor-intro-python",
@@ -964,6 +967,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/others/INTRODUCTION TO PYTHON.pdf",
     skills: ["Python", "Algorithms", "Object-Oriented Programming", "Data Structures"],
     description: "36-hour collegiate-level computer science examination in Python language semantics, control structures, and computational algorithms.",
+    hasVerifiedLink: false,
   },
   {
     id: "simplilearn-nlp-text-mining",
@@ -979,6 +983,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/others/Natural Language Processing (NLP) and Text Mining Tutorial for Beginners.pdf",
     skills: ["NLP", "Text Mining", "Sentiment Analysis", "Tokenization", "TF-IDF"],
     description: "Specialized training on computational linguistics, tokenization pipelines, sentiment classification, and semantic vector extraction.",
+    hasVerifiedLink: false,
   },
   {
     id: "srmu-jumpstart-ml",
@@ -994,6 +999,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/others/E-Certificate for Jumpstart ML_ Python Made Easy - Sumit kumar .pdf",
     skills: ["Machine Learning", "Scikit-Learn", "Python", "Data Science"],
     description: "Certified intensive workshop on foundational machine learning, supervised learning workflows, and practical Python implementations.",
+    hasVerifiedLink: false,
   },
   {
     id: "srmu-national-workshop-ai",
@@ -1008,5 +1014,6 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     pdf: "/uploads/others/National Workshop.pdf",
     skills: ["AI Systems", "NLP", "Text Mining", "Python"],
     description: "Hands-on participation in national technical workshop on artificial intelligence architectures and modern data science practices.",
+    hasVerifiedLink: false,
   },
 ];

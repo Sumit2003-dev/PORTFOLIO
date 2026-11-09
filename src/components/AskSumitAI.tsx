@@ -114,8 +114,8 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["certificate", "certification", "credential", "google data analytics", "coursera", "nptel", "ibm", "anthropic", "deloitte", "tata"],
     answer:
-      "Sumit holds **55 verified professional credentials and certifications** categorized across Google, Anthropic, IBM, Microsoft, Tata/TCS, NPTEL/IIT Roorkee, and Deloitte, notably:\n• **Google Data Analytics Professional Certificate & Capstone** (100% capstone, 94.87% pro)\n• **20 Anthropic Claude & Model Context Protocol (MCP) Certifications**\n• **12 IBM AI Analyst & Data Science Credentials**\n• **Microsoft Foundations of AI & Azure ML Pipelines**\n• **NPTEL Data Analytics with Python** (IIT Roorkee, Elite)\n• **Tata & Deloitte Job Simulations**",
-    action: { label: "View Verified Certificates", href: "#certificates", type: "scroll" },
+      "Sumit's **Certification Vault catalogs 54 credentials across courses, specializations, and industry job simulations** (with official Coursera, IBM Skills Network, and NPTEL verified certificates, and all completion documentation on file):\n• **Google**: Data Analytics Professional Curriculum (94.87%), Capstone (100%), and DeepMind/GEAR program credentials\n• **Anthropic**: 20 Claude & Model Context Protocol (MCP) course completion certificates\n• **IBM**: 12 AI Analyst, Generative AI & Data Science credentials\n• **Microsoft / Coursera**: Azure ML Studio pipelines & Foundations of AI\n• **NPTEL / IIT Roorkee**: Data Analytics with Python (Elite Certificate)\n• **Tata, TCS & Deloitte**: Practical job simulations & GenAI essentials\n*(Note: Google Cloud achievements like Diamond League #18 and 178 skill badges are tracked separately in the Google Developer Journey dashboard).* ",
+    action: { label: "View Certification Vault", href: "#certificates", type: "scroll" },
   },
   // 12. Education & Academic Marks
   {
@@ -135,7 +135,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["resume", "cv", "download resume", "view resume", "profile document", "pdf"],
     answer:
-      "Sumit's verified resume is available for preview right inside this portfolio or as a direct PDF download. It highlights his FlyRank ML internship, GyanVerse RAG capstone, BeyondWord, 171 Google Cloud badges, and technical proficiencies.",
+      "Sumit's verified resume is available for preview right inside this portfolio or as a direct PDF download. It highlights his FlyRank ML internship, GyanVerse RAG capstone, BeyondWord, 178 Google Cloud badges, and technical proficiencies.",
     action: { label: "Open Resume Preview", type: "resume" },
   },
   // 15. Contact & Hiring
@@ -167,7 +167,7 @@ Key achievements:
 - Credly verified badges profile: https://www.credly.com/users/sumitdev2003/badges
 - LeetCode profile (@sumit2003dev) with 341+ problems solved: https://leetcode.com/u/sumit2003dev/
 - Google Developer Profile: https://g.dev/sumit2003dev
-- Google Data Analytics Professional Certificate with 94.87% score.
+- Google Data Analytics Professional Curriculum with 94.87% overall performance.
 - Active GDG Lucknow member and Google Developer Program premium member.
 Technical skills: Python (93%), Machine Learning (88%), Scikit-learn, RAG & GenAI (80%), FAISS, Pandas, NumPy, SQL, Streamlit, Flask, Java.
 Contact: sumit.ku5981@gmail.com, +91 8810845474, Lucknow, India.
@@ -224,7 +224,7 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
     {
       id: "welcome",
       sender: "ai",
-      text: "Hello! I am Sumit's AI Portfolio Assistant. Ask me about his RAG projects, Machine Learning models, FlyRank AI internship, Google Cloud Arcade #1 ranking, or skills!",
+      text: "Hello! I am Sumit's AI Portfolio Assistant. Ask me about his RAG projects, Machine Learning models, FlyRank AI internship, Google Cloud Arcade Diamond League standing, or skills!",
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
