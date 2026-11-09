@@ -61,6 +61,14 @@ test_targets = [
     {"name": "Deloitte Data Analytics PDF", "url": "/uploads/others/Data Analytics Job Simulation.PDF", "expected_type": "application/pdf"},
     {"name": "Quantium Analytics PDF", "url": "/uploads/others/Data Analytics Job Simulation(Quantium).pdf", "expected_type": "application/pdf"},
     {"name": "Saylor Python PDF", "url": "/uploads/others/INTRODUCTION TO PYTHON.pdf", "expected_type": "application/pdf"},
+
+    # 6. Optimized High-Performance Assets
+    {"name": "Hero Homepage WebP (25.9 KB)", "url": "/uploads/homepage.webp", "expected_type": "image/webp"},
+    {"name": "IBM Prompt Eng Modal WebP (56.7 KB)", "url": "/uploads/IBM/prompt-engineering-modal.webp", "expected_type": "image/webp"},
+    {"name": "Google Capstone WebP Thumbnail", "url": "/uploads/thumbs/google-adv-capstone.webp", "expected_type": "image/webp"},
+    {"name": "IBM Prompt Eng WebP Thumbnail", "url": "/uploads/thumbs/ibm-prompt-engineering.webp", "expected_type": "image/webp"},
+    {"name": "Anthropic Claude 101 WebP Thumbnail", "url": "/uploads/thumbs/anthropic-claude-101.webp", "expected_type": "image/webp"},
+    {"name": "NPTEL WebP Thumbnail", "url": "/uploads/thumbs/nptel-iit-roorkee-python.webp", "expected_type": "image/webp"},
 ]
 
 results = []

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { Github, Linkedin, Mail, Download, ArrowRight, Eye, Sparkles, Cpu, ShieldCheck } from "lucide-react";
 import { SiLeetcode, SiGooglecloud } from "react-icons/si";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useMotionTemplate, useReducedMotion } from "framer-motion";
@@ -6,9 +6,10 @@ import { scrollToId } from "@/hooks/use-lenis";
 import { profile } from "@/lib/data";
 import { useFadeUp } from "@/hooks/use-scroll";
 import { useMagnetic } from "@/hooks/use-interactions";
-import AiSphere3D from "./3d/AiSphere3D";
 
-const HOME_BG = `${import.meta.env.BASE_URL}uploads/homepage.png`;
+const AiSphere3D = lazy(() => import("./3d/AiSphere3D"));
+
+const HOME_BG = `${import.meta.env.BASE_URL}uploads/homepage.webp`;
 const ROLES = ["Data Scientist", "AI Engineer", "Machine Learning Developer"];
 
 function Magnetic({ children }: { children: React.ReactNode }) {
@@ -92,6 +93,8 @@ export default function Hero({ onOpenResume }: HeroProps) {
         <img
           src={HOME_BG}
           alt=""
+          loading="eager"
+          decoding="async"
           className="h-[120%] w-full object-cover object-center opacity-12 transition-opacity duration-700"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#071018]/90 via-[#071018]/65 to-[#08131E]/45" />
@@ -229,9 +232,11 @@ export default function Hero({ onOpenResume }: HeroProps) {
                 </div>
               </div>
 
-              {/* Perfectly Centered 3D WebGL Sphere */}
+              {/* Perfectly Centered 3D WebGL Sphere (Lazy loaded with fallback to avoid render blocking) */}
               <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-85">
-                <AiSphere3D className="h-[480px] w-[480px] sm:h-[540px] sm:w-[540px] lg:h-[580px] lg:w-[580px]" />
+                <Suspense fallback={<div className="h-[480px] w-[480px] sm:h-[540px] sm:w-[540px] lg:h-[580px] lg:w-[580px]" />}>
+                  <AiSphere3D className="h-[480px] w-[480px] sm:h-[540px] sm:w-[540px] lg:h-[580px] lg:w-[580px]" />
+                </Suspense>
               </div>
 
               {/* Interactive 3D Card Stage */}

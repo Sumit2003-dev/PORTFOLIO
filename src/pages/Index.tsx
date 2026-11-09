@@ -53,8 +53,14 @@ const Index = () => {
         <Projects />
         <Suspense fallback={<div className="min-h-[200px]" />}>
           <GoogleDeveloperJourney />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[200px]" />}>
           <GithubStats />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
           <Certificates />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[200px]" />}>
           <Achievements />
         </Suspense>
         <Contact />

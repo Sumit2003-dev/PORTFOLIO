@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect, useMemo, memo, useCallback } from "react";
 import Section from "./Section";
 import {
   CERTIFICATION_VAULT,
@@ -91,6 +91,205 @@ type SortOption = "newest" | "oldest" | "alphabetical";
 
 const PAGE_SIZE = 12;
 
+/* ========================================================================
+   Memoized Certificate Card
+   Decouples card re-renders from parent filter/search/sort state changes,
+   uses lightweight WebP thumbnails, explicit dimensions, and async decoding
+   to eliminate Cumulative Layout Shift (CLS) and GPU memory bloat.
+   ======================================================================== */
+const CertificateCard = memo(function CertificateCard({
+  cert: c,
+  onSelect,
+}: {
+  cert: VaultCertificate;
+  onSelect: (id: string) => void;
+}) {
+  const thumbSrc = c.thumbnail || c.image;
+  const hasImage = Boolean(thumbSrc);
+  const providerMeta = PROVIDERS_META.find((p) => p.id === c.provider);
+
+  return (
+    <div
+      data-reveal
+      role="button"
+      tabIndex={0}
+      aria-label={`View certificate details for ${c.title}`}
+      onClick={() => onSelect(c.id)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onSelect(c.id);
+        }
+      }}
+      className="group glass relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:border-ember-500/40 hover:shadow-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
+    >
+      {/* Card Thumbnail / Provider Fallback Canvas */}
+      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-white/10 bg-[#060c14]">
+        {hasImage && thumbSrc ? (
+          <>
+            <img
+              src={asset(thumbSrc)}
+              alt={`Certificate preview for ${c.title} issued by ${c.issuer}`}
+              loading="lazy"
+              decoding="async"
+              width={400}
+              height={250}
+              className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#060c14] via-[#060c14]/20 to-transparent" />
+          </>
+        ) : (
+          /* Clean Provider-Branded Fallback Card (Authentic — No Fake Artwork) */
+          <div className="relative flex h-full w-full flex-col justify-between p-4 bg-gradient-to-br from-[#0c1622] via-[#08111a] to-[#04080e]">
+            <div
+              className="pointer-events-none absolute inset-0 opacity-20"
+              style={{
+                background: `radial-gradient(circle at 80% 20%, ${providerMeta?.brandColor || "#FF6A00"}, transparent 70%)`,
+              }}
+            />
+            <div className="relative flex items-center justify-between">
+              <div className="flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-2 py-0.5 text-[10px] text-white/70 backdrop-blur">
+                <ProviderLogo provider={c.provider} className="h-3 w-3" />
+                <span>{c.issuer}</span>
+              </div>
+              <span className="rounded bg-white/10 px-1.5 py-0.5 text-[9px] font-mono text-white/50">
+                Preview unavailable
+              </span>
+            </div>
+
+            <div className="relative my-auto py-2">
+              <h4 className="font-sans text-sm font-medium text-white/90 group-hover:text-ember-400 transition-colors line-clamp-2">
+                {c.title}
+              </h4>
+              <p className="mt-1 text-[11px] text-white/50">{c.platform}</p>
+            </div>
+
+            <div className="relative flex items-center justify-between text-[10px] text-white/40">
+              <span>{c.credentialType}</span>
+              <span className="flex items-center gap-1 text-ember-400">
+                <Eye className="h-3 w-3" /> View Details
+              </span>
+            </div>
+          </div>
+        )}
+
+        {/* Top Corner Badges (Provider & Credential Type) */}
+        <div className="absolute left-2.5 top-2.5 flex flex-wrap items-center gap-1.5">
+          <span className="flex items-center gap-1 rounded-full border border-white/20 bg-black/75 px-2.5 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white backdrop-blur-md">
+            <ProviderLogo provider={c.provider} className="h-3 w-3" />
+            <span>{providerMeta?.badgeLabel || c.issuer}</span>
+          </span>
+
+          <span className="rounded-full border border-ember-500/30 bg-ember-500/20 px-2 py-0.5 text-[9px] font-condensed uppercase tracking-wider text-ember-300 backdrop-blur-md">
+            {c.credentialType}
+          </span>
+        </div>
+
+        {/* Score Badge (if verified score exists) */}
+        {c.score && (
+          <div className="absolute right-2.5 top-2.5">
+            <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-950/80 px-2 py-0.5 text-[10px] font-mono font-semibold text-emerald-300 backdrop-blur-md">
+              <Percent className="h-2.5 w-2.5" />
+              <span>{c.score}</span>
+            </span>
+          </div>
+        )}
+
+        {/* Bottom Title Bar Overlay for image cards */}
+        {hasImage && (
+          <div className="absolute inset-x-2.5 bottom-2.5 flex items-end justify-between">
+            <span className="rounded-lg bg-black/85 px-2 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white/70 backdrop-blur-md border border-white/10">
+              {c.platform}
+            </span>
+            <span className="rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-mono text-white/50">
+              {c.year}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Card Content Information */}
+      <div className="mt-3.5 flex flex-1 flex-col justify-between">
+        <div>
+          <div className="flex items-center justify-between text-xs text-ember-500">
+            <span className="font-condensed uppercase tracking-wider font-medium">
+              {c.issuer}
+            </span>
+            <span className="text-[11px] text-white/40 font-mono">{c.issueDate}</span>
+          </div>
+
+          {/* Title using clean readable sans typography */}
+          <h3 className="mt-1.5 font-sans text-sm sm:text-base font-semibold text-white/95 transition-colors group-hover:text-ember-400 leading-snug line-clamp-2 min-h-[2.6rem]">
+            {c.title}
+          </h3>
+
+          {c.credentialId && (
+            <p className="mt-1 flex items-center gap-1 text-[11px] font-mono text-white/45 truncate">
+              <Hash className="h-3 w-3 shrink-0 text-white/30" />
+              <span className="truncate">{c.credentialId}</span>
+            </p>
+          )}
+
+          {/* Skills Tags List */}
+          <div className="mt-2.5 flex flex-wrap gap-1">
+            {c.skills.slice(0, 3).map((skill) => (
+              <span
+                key={skill}
+                className="rounded-md border border-white/10 bg-white/[0.03] px-1.5 py-0.5 text-[10px] text-white/60"
+              >
+                {skill}
+              </span>
+            ))}
+            {c.skills.length > 3 && (
+              <span className="rounded-md border border-white/5 px-1.5 py-0.5 text-[10px] text-white/40">
+                +{c.skills.length - 3}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Card Actions Footer */}
+        <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3 text-xs">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect(c.id);
+            }}
+            className="flex items-center gap-1 text-white/70 group-hover:text-ember-400 transition-colors font-medium hover:underline"
+            aria-label={`View details for ${c.title}`}
+          >
+            <Eye className="h-3.5 w-3.5 text-ember-500" />
+            <span>View Details</span>
+          </button>
+
+          {c.verificationUrl ? (
+            <a
+              href={c.verificationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-1 text-[11px] text-ember-400 hover:text-white transition-colors"
+              title="Open official credential verification page"
+            >
+              <span>Verify</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          ) : (
+            <span
+              className="flex items-center gap-1 text-[11px] text-white/40"
+              title="Certificate document on file in portfolio archive"
+            >
+              <FileText className="h-3 w-3 text-white/30" />
+              <span>On file</span>
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+});
+
 export default function Certificates() {
   const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
@@ -102,6 +301,10 @@ export default function Certificates() {
   const [sortBy, setSortBy] = useState<SortOption>("newest");
   const [selectedCertId, setSelectedCertId] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
+
+  const handleSelectCert = useCallback((id: string) => {
+    setSelectedCertId(id);
+  }, []);
 
   // Derive the active certificate deterministically from the vault
   const selectedCert = useMemo(() => {
@@ -569,189 +772,9 @@ export default function Certificates() {
           /* Main Certificate Cards Grid (3 cols desktop, 2 cols tablet, 1 col mobile) */
           <>
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {visibleCertificates.map((c) => {
-                const hasImage = Boolean(c.image);
-                const providerMeta = PROVIDERS_META.find((p) => p.id === c.provider);
-
-                return (
-                  <div
-                    key={c.id}
-                    data-reveal
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`View certificate details for ${c.title}`}
-                    onClick={() => setSelectedCertId(c.id)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setSelectedCertId(c.id);
-                      }
-                    }}
-                    className="group glass relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-4 sm:p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:border-ember-500/40 hover:shadow-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
-                  >
-                    {/* Card Thumbnail / Provider Fallback Canvas */}
-                    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-white/10 bg-[#060c14]">
-                      {hasImage && c.image ? (
-                        <>
-                          <img
-                            src={asset(c.image)}
-                            alt={`Certificate preview for ${c.title} issued by ${c.issuer}`}
-                            loading="lazy"
-                            className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                          />
-                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#060c14] via-[#060c14]/20 to-transparent" />
-                        </>
-                      ) : (
-                        /* Clean Provider-Branded Fallback Card (Authentic — No Fake Artwork) */
-                        <div className="relative flex h-full w-full flex-col justify-between p-4 bg-gradient-to-br from-[#0c1622] via-[#08111a] to-[#04080e]">
-                          <div
-                            className="pointer-events-none absolute inset-0 opacity-20"
-                            style={{
-                              background: `radial-gradient(circle at 80% 20%, ${providerMeta?.brandColor || "#FF6A00"}, transparent 70%)`,
-                            }}
-                          />
-                          <div className="relative flex items-center justify-between">
-                            <div className="flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-2 py-0.5 text-[10px] text-white/70 backdrop-blur">
-                              <ProviderLogo provider={c.provider} className="h-3 w-3" />
-                              <span>{c.issuer}</span>
-                            </div>
-                            <span className="rounded bg-white/10 px-1.5 py-0.5 text-[9px] font-mono text-white/50">
-                              Preview unavailable
-                            </span>
-                          </div>
-
-                          <div className="relative my-auto py-2">
-                            <h4 className="font-sans text-sm font-medium text-white/90 group-hover:text-ember-400 transition-colors line-clamp-2">
-                              {c.title}
-                            </h4>
-                            <p className="mt-1 text-[11px] text-white/50">{c.platform}</p>
-                          </div>
-
-                          <div className="relative flex items-center justify-between text-[10px] text-white/40">
-                            <span>{c.credentialType}</span>
-                            <span className="flex items-center gap-1 text-ember-400">
-                              <Eye className="h-3 w-3" /> View Details
-                            </span>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Top Corner Badges (Provider & Credential Type) */}
-                      <div className="absolute left-2.5 top-2.5 flex flex-wrap items-center gap-1.5">
-                        <span className="flex items-center gap-1 rounded-full border border-white/20 bg-black/75 px-2.5 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white backdrop-blur-md">
-                          <ProviderLogo provider={c.provider} className="h-3 w-3" />
-                          <span>{providerMeta?.badgeLabel || c.issuer}</span>
-                        </span>
-
-                        <span className="rounded-full border border-ember-500/30 bg-ember-500/20 px-2 py-0.5 text-[9px] font-condensed uppercase tracking-wider text-ember-300 backdrop-blur-md">
-                          {c.credentialType}
-                        </span>
-                      </div>
-
-                      {/* Score Badge (if verified score exists) */}
-                      {c.score && (
-                        <div className="absolute right-2.5 top-2.5">
-                          <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-950/80 px-2 py-0.5 text-[10px] font-mono font-semibold text-emerald-300 backdrop-blur-md">
-                            <Percent className="h-2.5 w-2.5" />
-                            <span>{c.score}</span>
-                          </span>
-                        </div>
-                      )}
-
-                      {/* Bottom Title Bar Overlay for image cards */}
-                      {hasImage && (
-                        <div className="absolute inset-x-2.5 bottom-2.5 flex items-end justify-between">
-                          <span className="rounded-lg bg-black/85 px-2 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white/70 backdrop-blur-md border border-white/10">
-                            {c.platform}
-                          </span>
-                          <span className="rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-mono text-white/50">
-                            {c.year}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Card Content Information */}
-                    <div className="mt-3.5 flex flex-1 flex-col justify-between">
-                      <div>
-                        <div className="flex items-center justify-between text-xs text-ember-500">
-                          <span className="font-condensed uppercase tracking-wider font-medium">
-                            {c.issuer}
-                          </span>
-                          <span className="text-[11px] text-white/40 font-mono">{c.issueDate}</span>
-                        </div>
-
-                        {/* Title using clean readable sans typography */}
-                        <h3 className="mt-1.5 font-sans text-sm sm:text-base font-semibold text-white/95 transition-colors group-hover:text-ember-400 leading-snug line-clamp-2 min-h-[2.6rem]">
-                          {c.title}
-                        </h3>
-
-                        {c.credentialId && (
-                          <p className="mt-1 flex items-center gap-1 text-[11px] font-mono text-white/45 truncate">
-                            <Hash className="h-3 w-3 shrink-0 text-white/30" />
-                            <span className="truncate">{c.credentialId}</span>
-                          </p>
-                        )}
-
-                        {/* Skills Tags List */}
-                        <div className="mt-2.5 flex flex-wrap gap-1">
-                          {c.skills.slice(0, 3).map((skill) => (
-                            <span
-                              key={skill}
-                              className="rounded-md border border-white/10 bg-white/[0.03] px-1.5 py-0.5 text-[10px] text-white/60"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                          {c.skills.length > 3 && (
-                            <span className="rounded-md border border-white/5 px-1.5 py-0.5 text-[10px] text-white/40">
-                              +{c.skills.length - 3}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Card Actions Footer */}
-                      <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3 text-xs">
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedCertId(c.id);
-                          }}
-                          className="flex items-center gap-1 text-white/70 group-hover:text-ember-400 transition-colors font-medium hover:underline"
-                          aria-label={`View details for ${c.title}`}
-                        >
-                          <Eye className="h-3.5 w-3.5 text-ember-500" />
-                          <span>View Details</span>
-                        </button>
-
-                        {c.verificationUrl ? (
-                          <a
-                            href={c.verificationUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="flex items-center gap-1 text-[11px] text-ember-400 hover:text-white transition-colors"
-                            title="Open official credential verification page"
-                          >
-                            <span>Verify</span>
-                            <ExternalLink className="h-3 w-3" />
-                          </a>
-                        ) : (
-                          <span
-                            className="flex items-center gap-1 text-[11px] text-white/40"
-                            title="Certificate document on file in portfolio archive"
-                          >
-                            <FileText className="h-3 w-3 text-white/30" />
-                            <span>On file</span>
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+              {visibleCertificates.map((c) => (
+                <CertificateCard key={c.id} cert={c} onSelect={handleSelectCert} />
+              ))}
             </div>
 
             {/* ========================================================================
@@ -852,11 +875,12 @@ export default function Certificates() {
               <div className="overflow-y-auto p-4 sm:p-6 space-y-5">
                 {/* Visual Preview Stage */}
                 <div className="overflow-hidden rounded-2xl border border-white/15 bg-black/60">
-                  {selectedCert.image ? (
+                  {selectedCert.image || selectedCert.thumbnail ? (
                     <div className="flex items-center justify-center p-2 bg-black/80">
                       <img
-                        src={asset(selectedCert.image)}
+                        src={asset(selectedCert.image || selectedCert.thumbnail || "")}
                         alt={`Full certificate preview for ${selectedCert.title}`}
+                        decoding="async"
                         className="max-h-[380px] sm:max-h-[460px] w-full object-contain rounded-lg"
                       />
                     </div>
