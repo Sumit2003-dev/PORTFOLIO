@@ -322,16 +322,28 @@ export default function Hero({ onOpenResume }: HeroProps) {
 
                   {/* Portrait Display Frame */}
                   <div className="relative aspect-[4/4.4] overflow-hidden rounded-[1.3rem] border border-white/10">
-                    <motion.img
-                      src={HOME_BG}
-                      alt="Sumit Kumar — AI & Data Science Engineer"
-                      loading="eager"
-                      decoding="async"
-                      // @ts-expect-error React 18 HTML attribute
-                      fetchpriority="high"
-                      className="h-full w-full object-cover object-center md:filter md:saturate-[1.15] md:contrast-[1.05]"
-                      style={{ scale: isDesktop ? imgScale : undefined }}
-                    />
+                    {isDesktop ? (
+                      <motion.img
+                        src={HOME_BG}
+                        alt="Sumit Kumar — AI & Data Science Engineer"
+                        loading="eager"
+                        decoding="async"
+                        // @ts-expect-error React 18 HTML attribute
+                        fetchpriority="high"
+                        className="h-full w-full object-cover object-center filter saturate-[1.15] contrast-[1.05]"
+                        style={{ scale: imgScale }}
+                      />
+                    ) : (
+                      <img
+                        src={HOME_BG}
+                        alt="Sumit Kumar — AI & Data Science Engineer"
+                        loading="eager"
+                        decoding="async"
+                        // @ts-expect-error React 18 HTML attribute
+                        fetchpriority="high"
+                        className="h-full w-full object-cover object-center"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#060c14] via-[#060c14]/20 to-transparent" />
 
                     {/* Top Left Verified Badge linked to evidence */}
