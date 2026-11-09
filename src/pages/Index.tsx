@@ -1,9 +1,10 @@
-import { useRef, useState, lazy, Suspense } from "react";
+import { useRef, useState, useEffect, lazy, Suspense } from "react";
 import { useLenis } from "@/hooks/use-lenis";
 import ParticleField, { FogField, CursorGlow } from "@/components/Atmosphere";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import LazySection from "@/components/LazySection";
 
 // Lazy-loaded below-the-fold components for ultra-fast initial paint & stream hydration
 const Skills = lazy(() => import("@/components/Skills"));
@@ -22,6 +23,13 @@ const Index = () => {
   useLenis();
   const mainRef = useRef<HTMLDivElement>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [loadChat, setLoadChat] = useState(false);
+
+  useEffect(() => {
+    // Mount conversational AI assistant 2.5s after initial paint
+    const timer = setTimeout(() => setLoadChat(true), 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div ref={mainRef} className="ambient relative min-h-screen w-full overflow-x-hidden text-white grain">
@@ -46,45 +54,75 @@ const Index = () => {
       <main id="main-content" className="relative z-[2]">
         <Hero onOpenResume={() => setResumeOpen(true)} />
         <About />
-        <Suspense fallback={<div className="min-h-[200px]" />}>
-          <Education />
-        </Suspense>
-        <Suspense fallback={<div className="min-h-[300px]" />}>
-          <Skills />
-        </Suspense>
-        <Suspense fallback={<div className="min-h-[300px]" />}>
-          <Projects />
-        </Suspense>
-        <Suspense fallback={<div className="min-h-[200px]" />}>
-          <GoogleDeveloperJourney />
-        </Suspense>
-        <Suspense fallback={<div className="min-h-[200px]" />}>
-          <GithubStats />
-        </Suspense>
-        <Suspense fallback={<div className="min-h-[400px]" />}>
-          <Certificates />
-        </Suspense>
-        <Suspense fallback={<div className="min-h-[200px]" />}>
-          <Achievements />
-        </Suspense>
-        <Suspense fallback={<div className="min-h-[200px]" />}>
-          <Contact />
-        </Suspense>
+
+        <LazySection id="education" minHeight="500px">
+          <Suspense fallback={<div className="min-h-[500px]" />}>
+            <Education />
+          </Suspense>
+        </LazySection>
+
+        <LazySection id="skills" minHeight="600px">
+          <Suspense fallback={<div className="min-h-[600px]" />}>
+            <Skills />
+          </Suspense>
+        </LazySection>
+
+        <LazySection id="projects" minHeight="600px">
+          <Suspense fallback={<div className="min-h-[600px]" />}>
+            <Projects />
+          </Suspense>
+        </LazySection>
+
+        <LazySection id="google-journey" minHeight="500px">
+          <Suspense fallback={<div className="min-h-[500px]" />}>
+            <GoogleDeveloperJourney />
+          </Suspense>
+        </LazySection>
+
+        <LazySection id="github" minHeight="400px">
+          <Suspense fallback={<div className="min-h-[400px]" />}>
+            <GithubStats />
+          </Suspense>
+        </LazySection>
+
+        <LazySection id="certificates" minHeight="700px">
+          <Suspense fallback={<div className="min-h-[700px]" />}>
+            <Certificates />
+          </Suspense>
+        </LazySection>
+
+        <LazySection id="achievements" minHeight="400px">
+          <Suspense fallback={<div className="min-h-[400px]" />}>
+            <Achievements />
+          </Suspense>
+        </LazySection>
+
+        <LazySection id="contact" minHeight="500px">
+          <Suspense fallback={<div className="min-h-[500px]" />}>
+            <Contact />
+          </Suspense>
+        </LazySection>
       </main>
 
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
+      <LazySection minHeight="200px">
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
+      </LazySection>
 
       {/* Floating Interactive RAG AI Assistant */}
-      <Suspense fallback={null}>
-        <AskSumitAI onOpenResume={() => setResumeOpen(true)} />
-      </Suspense>
+      {loadChat && (
+        <Suspense fallback={null}>
+          <AskSumitAI onOpenResume={() => setResumeOpen(true)} />
+        </Suspense>
+      )}
 
       {/* In-Browser PDF Resume Modal */}
-      <Suspense fallback={null}>
-        <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
-      </Suspense>
+      {resumeOpen && (
+        <Suspense fallback={null}>
+          <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
+        </Suspense>
+      )}
     </div>
   );
 };

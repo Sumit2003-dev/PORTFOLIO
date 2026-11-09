@@ -38,6 +38,17 @@ export default function Hero({ onOpenResume }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
   useFadeUp(ref);
   const shouldReduceMotion = useReducedMotion();
+  const [isDesktop, setIsDesktop] = useState(
+    () => typeof window !== "undefined" && window.innerWidth >= 768 && !("ontouchstart" in window)
+  );
+
+  useEffect(() => {
+    const check = () => {
+      setIsDesktop(window.innerWidth >= 768 && !("ontouchstart" in window));
+    };
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const [roleIdx, setRoleIdx] = useState(0);
   useEffect(() => {
@@ -234,11 +245,19 @@ export default function Hero({ onOpenResume }: HeroProps) {
                 </div>
               </div>
 
-              {/* Perfectly Centered 3D WebGL Sphere (Lazy loaded with fallback to avoid render blocking) */}
+              {/* Perfectly Centered 3D WebGL Sphere on Desktop / High-Performance Orbital on Mobile */}
               <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-85">
-                <Suspense fallback={<div className="h-[480px] w-[480px] sm:h-[540px] sm:w-[540px] lg:h-[580px] lg:w-[580px]" />}>
-                  <AiSphere3D className="h-[480px] w-[480px] sm:h-[540px] sm:w-[540px] lg:h-[580px] lg:w-[580px]" />
-                </Suspense>
+                {isDesktop ? (
+                  <Suspense fallback={<div className="h-[480px] w-[480px] sm:h-[540px] sm:w-[540px] lg:h-[580px] lg:w-[580px]" />}>
+                    <AiSphere3D className="h-[480px] w-[480px] sm:h-[540px] sm:w-[540px] lg:h-[580px] lg:w-[580px]" />
+                  </Suspense>
+                ) : (
+                  <div className="relative h-60 w-60 sm:h-64 sm:w-64 rounded-full border border-ember-500/30 animate-pulse bg-gradient-radial from-ember-500/20 via-transparent to-transparent">
+                    <div className="absolute inset-4 rounded-full border border-burnt-red/40 animate-spin [animation-duration:14s]" />
+                    <div className="absolute inset-10 rounded-full border border-white/20 animate-spin [animation-duration:9s] [animation-direction:reverse]" />
+                    <div className="absolute inset-16 rounded-full bg-ember-500/25 blur-md" />
+                  </div>
+                )}
               </div>
 
               {/* Interactive 3D Card Stage */}
@@ -247,12 +266,12 @@ export default function Hero({ onOpenResume }: HeroProps) {
                 onMouseLeave={onLeave}
                 onClick={onCardClick}
                 style={{
-                  rotateX: rX,
-                  rotateY: rY,
-                  rotateZ: rZ,
-                  scaleX: sX,
-                  scaleY: sY,
-                  transformStyle: "preserve-3d",
+                  rotateX: isDesktop ? rX : 0,
+                  rotateY: isDesktop ? rY : 0,
+                  rotateZ: isDesktop ? rZ : 0,
+                  scaleX: isDesktop ? sX : 1,
+                  scaleY: isDesktop ? sY : 1,
+                  transformStyle: isDesktop ? "preserve-3d" : undefined,
                 }}
                 className="perspective-1000 relative z-10 cursor-pointer pt-3"
                 whileTap={{ scale: 0.97 }}
@@ -269,16 +288,17 @@ export default function Hero({ onOpenResume }: HeroProps) {
                 {/* Main ID Badge Frame */}
                 <motion.div
                   animate={
-                    shouldReduceMotion
+                    shouldReduceMotion || !isDesktop
                       ? { y: 0, rotateZ: 0 }
                       : { y: [0, -6, 0], rotateZ: [0.5, -0.5, 0.5] }
                   }
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   className="glass-strong relative overflow-hidden rounded-[1.8rem] border border-white/20 p-3.5 sm:p-4 shadow-2xl transition-all duration-500 hover:border-ember-500/60 hover:shadow-glow"
                   style={{
-                    background: "rgba(12, 18, 28, 0.75)",
-                    backdropFilter: "blur(24px)",
-                    transformStyle: "preserve-3d",
+                    background: "rgba(12, 18, 28, 0.82)",
+                    backdropFilter: isDesktop ? "blur(24px)" : undefined,
+                    WebkitBackdropFilter: isDesktop ? "blur(24px)" : undefined,
+                    transformStyle: isDesktop ? "preserve-3d" : undefined,
                   }}
                 >
                   {/* Dynamic Mouse Cursor Holographic Spotlight (Desktop cursor only) */}
@@ -313,7 +333,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
                       // @ts-expect-error React 18 HTML attribute
                       fetchpriority="high"
                       className="h-full w-full object-cover object-center filter saturate-[1.15] contrast-[1.05]"
-                      style={{ scale: imgScale }}
+                      style={{ scale: isDesktop ? imgScale : 1.05 }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#060c14] via-[#060c14]/20 to-transparent" />
 
