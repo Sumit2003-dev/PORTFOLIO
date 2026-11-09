@@ -76,7 +76,7 @@ export const PROVIDERS_META: ProviderMeta[] = [
     id: "google",
     name: "Google",
     badgeLabel: "Google",
-    shortDesc: "Google Data Analytics capstone, statistical modules, DeepMind SLM training, and GEAR agent readiness.",
+    shortDesc: "Google Advanced Data Analytics capstone, statistical modeling, and foundational data analytics courses.",
     brandColor: "#4285F4",
   },
   {
@@ -132,7 +132,7 @@ export const PROVIDERS_META: ProviderMeta[] = [
 
 export const CERTIFICATION_VAULT: VaultCertificate[] = [
   /* ========================================================================
-     1. GOOGLE (8 Credentials)
+     1. GOOGLE (5 Credentials)
      ======================================================================== */
   {
     id: "google-adv-capstone",
@@ -152,22 +152,6 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     skills: ["Machine Learning", "Python", "Statistical Modeling", "Predictive Analytics", "Executive Reporting"],
     description: "Capstone project completing Google's Advanced Data Analytics curriculum, building end-to-end ML models and executive reports.",
     hasVerifiedLink: true,
-  },
-  {
-    id: "google-data-analytics-curriculum",
-    title: "Google Data Analytics Professional Curriculum",
-    issuer: "Google",
-    provider: "google",
-    platform: "Coursera",
-    category: "Data Science & Analytics",
-    credentialType: "Professional Certificate",
-    issueDate: "2025–2026",
-    year: "2026",
-    image: "/uploads/previews/google-data-analytics-curriculum.png",
-    score: "94.87%",
-    skills: ["Data Analysis", "SQL", "R", "Tableau", "Data Cleaning", "Spreadsheets"],
-    description: "Comprehensive Google career curriculum completed with 94.87% aggregate score, covering data preparation, processing, statistical analysis, and visualization.",
-    hasVerifiedLink: false,
   },
   {
     id: "google-foundations-data",
@@ -243,36 +227,6 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     skills: ["Hypothesis Testing", "Probability Distributions", "Inferential Statistics", "Confidence Intervals"],
     description: "Rigorous statistical analysis module covering parametric and non-parametric tests, p-values, and hypothesis formulation.",
     hasVerifiedLink: true,
-  },
-  {
-    id: "google-deepmind-slm",
-    title: "Google DeepMind — Small Language Models & Neural Networks",
-    issuer: "Google DeepMind",
-    provider: "google",
-    platform: "Google DeepMind Learning",
-    category: "Generative AI",
-    credentialType: "Course Certificate",
-    issueDate: "2026",
-    year: "2026",
-    image: "/uploads/Google skills/DEEP MIND/DeepMind Train A Small Language Model.png",
-    skills: ["DeepMind", "Small Language Models (SLMs)", "Transformer Architecture", "Fine-Tuning", "Neural Networks"],
-    description: "DeepMind hands-on track: Language Data Representation, Neural Network Training, Transformer Mechanics, and SLM Fine-Tuning.",
-    hasVerifiedLink: false,
-  },
-  {
-    id: "google-gear-agents",
-    title: "Google GEAR: Gemini Enterprise Agent Ready",
-    issuer: "Google",
-    provider: "google",
-    platform: "Google Cloud / GEAR Program",
-    category: "Generative AI",
-    credentialType: "Digital Badge",
-    issueDate: "2026",
-    year: "2026",
-    image: "/uploads/Google skills/Screenshot 2026-07-27 005104.png",
-    skills: ["Gemini Enterprise", "Autonomous Agents", "ADK", "Production Agents", "Enterprise Scaling"],
-    description: "Google enterprise agent readiness credential covering Agent Development Kit (ADK), multi-agent architectures, and production scaling.",
-    hasVerifiedLink: false,
   },
 
   /* ========================================================================

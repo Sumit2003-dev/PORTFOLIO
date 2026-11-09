@@ -37,7 +37,7 @@ export const profile = {
 /* ============================ ABOUT ============================ */
 export const stats = [
   { label: "Projects", value: 6, suffix: "+" },
-  { label: "Certificates", value: 54, suffix: "+" },
+  { label: "Certificates", value: 51, suffix: "+" },
   { label: "Cloud Badges", value: 178, suffix: "+" },
   { label: "Internships", value: 1, suffix: "" },
 ];
@@ -393,16 +393,6 @@ const rawCertificates: CertificateItem[] = [
     pdf: "/uploads/google/Google_Advanced_Data_Analytics_Capstone.pdf",
     url: "https://coursera.org/verify/BRIIQMV6TCP1",
     hue: "215 85% 55%",
-  },
-  {
-    title: "Google Data Analytics Professional Curriculum",
-    issuer: "Google · Coursera",
-    date: "2025",
-    level: "Professional",
-    credential: "Score 94.87%",
-    skills: ["Data Analytics", "SQL", "R", "Spreadsheets"],
-    img: "/uploads/previews/google-data-analytics-curriculum.png",
-    hue: "200 80% 50%",
   },
   {
     title: "Machine Learning Pipelines with Azure ML Studio",
