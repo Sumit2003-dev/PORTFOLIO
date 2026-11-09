@@ -34,7 +34,7 @@ export default function Navigation({ onOpenResume }: NavigationProps) {
       setActive(current);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    if (window.scrollY > 40) setScrolled(true);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 

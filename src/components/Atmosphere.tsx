@@ -61,6 +61,7 @@ export default function ParticleField({ density = 24 }: { density?: number }) {
     let raf = 0;
     let t0 = performance.now();
     let isPaused = false;
+    let startTimer = 0;
 
     function draw(t: number) {
       if (isPaused) return;
@@ -97,7 +98,13 @@ export default function ParticleField({ density = 24 }: { density?: number }) {
       raf = requestAnimationFrame(draw);
     }
 
-    raf = requestAnimationFrame(draw);
+    if (isMobile) {
+      startTimer = window.setTimeout(() => {
+        raf = requestAnimationFrame(draw);
+      }, 1200);
+    } else {
+      raf = requestAnimationFrame(draw);
+    }
 
     const onVisibilityChange = () => {
       if (document.hidden) {
@@ -116,6 +123,7 @@ export default function ParticleField({ density = 24 }: { density?: number }) {
 
     return () => {
       cancelAnimationFrame(raf);
+      window.clearTimeout(startTimer);
       document.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("resize", onResize);
     };
@@ -172,6 +180,7 @@ export function CursorGlow() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth < 1024 || "ontouchstart" in window) return;
     const el = ref.current;
     if (!el) return;
     let x = window.innerWidth / 2;
