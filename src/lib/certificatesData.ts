@@ -163,6 +163,7 @@ export const CERTIFICATION_VAULT: VaultCertificate[] = [
     credentialType: "Professional Certificate",
     issueDate: "2025–2026",
     year: "2026",
+    image: "/uploads/previews/google-data-analytics-curriculum.png",
     score: "94.87%",
     skills: ["Data Analysis", "SQL", "R", "Tableau", "Data Cleaning", "Spreadsheets"],
     description: "Comprehensive Google career curriculum completed with 94.87% aggregate score, covering data preparation, processing, statistical analysis, and visualization.",

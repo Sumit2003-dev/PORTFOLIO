@@ -401,8 +401,7 @@ const rawCertificates: CertificateItem[] = [
     level: "Professional",
     credential: "Score 94.87%",
     skills: ["Data Analytics", "SQL", "R", "Spreadsheets"],
-    img: "/uploads/previews/google-adv-capstone.png",
-    pdf: "/uploads/google/Google_Advanced_Data_Analytics_Capstone.pdf",
+    img: "/uploads/previews/google-data-analytics-curriculum.png",
     hue: "200 80% 50%",
   },
   {
