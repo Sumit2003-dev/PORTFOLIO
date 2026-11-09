@@ -114,7 +114,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["certificate", "certification", "credential", "google data analytics", "coursera", "nptel", "ibm", "anthropic", "deloitte", "tata"],
     answer:
-      "Sumit holds **11+ verified professional credentials**, notably:\n• **Google Data Analytics Professional Certificate** (Coursera, 94.87% score)\n• **Google Advanced Data Analytics Capstone** (100%)\n• **Anthropic Claude Architecture & AI Fluency**\n• **NPTEL Data Analytics with Python** (IIT Roorkee, Elite)\n• **IBM Data Analysis & Generative AI**\n• **Deloitte Australia & Tata Job Simulations**",
+      "Sumit holds **55 verified professional credentials and certifications** categorized across Google, Anthropic, IBM, Microsoft, Tata/TCS, NPTEL/IIT Roorkee, and Deloitte, notably:\n• **Google Data Analytics Professional Certificate & Capstone** (100% capstone, 94.87% pro)\n• **20 Anthropic Claude & Model Context Protocol (MCP) Certifications**\n• **12 IBM AI Analyst & Data Science Credentials**\n• **Microsoft Foundations of AI & Azure ML Pipelines**\n• **NPTEL Data Analytics with Python** (IIT Roorkee, Elite)\n• **Tata & Deloitte Job Simulations**",
     action: { label: "View Verified Certificates", href: "#certificates", type: "scroll" },
   },
   // 12. Education & Academic Marks

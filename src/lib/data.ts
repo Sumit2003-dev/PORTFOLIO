@@ -1,4 +1,4 @@
-const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+export const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 
 export const profile = {
   name: "Sumit Kumar",
@@ -37,7 +37,7 @@ export const profile = {
 /* ============================ ABOUT ============================ */
 export const stats = [
   { label: "Projects", value: 6, suffix: "+" },
-  { label: "Certificates", value: 11, suffix: "+" },
+  { label: "Certificates", value: 55, suffix: "+" },
   { label: "Cloud Badges", value: 178, suffix: "+" },
   { label: "Internships", value: 1, suffix: "" },
 ];
