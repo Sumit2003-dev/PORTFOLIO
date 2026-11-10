@@ -1,20 +1,36 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-10T08:24:49.848010+00:00",
+  "syncedAt": "2026-11-10T08:59:53.547129+00:00",
   "source": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
   "profile": {
     "name": "Sumit Bharti",
     "league": "Diamond League",
-    "points": 48046,
-    "totalBadges": 180,
-    "streakDays": 12,
-    "streakProvenance": "Private Dashboard session snapshot (Nov 2026)",
-    "leaguePosition": 18,
-    "positionProvenance": "Private Dashboard session snapshot (Nov 2026)",
-    "lastVerified": "November 2026",
-    "provenance": "Direct server-side sync from public profile HTML"
+    "points": 48068,
+    "totalBadges": 181,
+    "provenance": "Direct server-side sync from public profile HTML",
+    "privateDashboard": {
+      "streakDays": 12,
+      "leaguePosition": 18,
+      "lastManualVerification": "November 2026",
+      "provenance": "Manually verified private dashboard session (not exposed in public profile HTML)"
+    }
   },
   "badges": [
+    {
+      "id": "gcp-29533343",
+      "title": "Arcade Voyage: Python Apps & Data Analytics",
+      "category": "Data & BigQuery",
+      "earnedDate": "Nov 10, 2026",
+      "description": "Building a great app is only half the battle—you also need to know how to scale it, optimize its performance, and make sense of the data it generates. In this voyage, you'll build a Python application from the ground up: setting up your dev environment, storing media files in Cloud Storage, adding user authentication, and deploying the whole thing to Kubernetes Engine. Once your app is live, you'll shift gears into operations and analytics—configuring networks via the CLI, tracking down performance bottlenecks with Cloud Profiler, cleaning up raw datasets in Cloud Dataprep, and building custom fields in Looker to turn your data into clear insights. Jump in and get building!",
+      "skills": [
+        "BigQuery",
+        "Data Engineering",
+        "SQL"
+      ],
+      "iconType": "data",
+      "imageUrl": "https://cdn.qwiklabs.com/K%2BnnNq330QsP7umOZxxUbiADWPm1JpailDKupQeV9EU%3D",
+      "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29533343"
+    },
     {
       "id": "gcp-29523317",
       "title": "Arcade Trail: Cloud Security & GKE Cost Control",

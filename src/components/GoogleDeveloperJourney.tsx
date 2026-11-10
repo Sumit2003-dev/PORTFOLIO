@@ -85,7 +85,9 @@ export default function GoogleDeveloperJourney() {
             skillBadges: data.profile?.totalBadges || data.badges.length,
             points: data.profile?.points || prev.points,
             league: data.profile?.league || prev.league,
-            lastVerified: data.profile?.lastVerified || prev.lastVerified,
+            streakDays: data.profile?.privateDashboard?.streakDays ?? data.profile?.streakDays ?? prev.streakDays,
+            leaguePosition: data.profile?.privateDashboard?.leaguePosition ?? data.profile?.leaguePosition ?? prev.leaguePosition,
+            lastVerified: data.profile?.privateDashboard?.lastManualVerification || data.profile?.lastVerified || prev.lastVerified,
           }));
           setLastSyncedTime(data.syncedAt || null);
           setSyncStatus(data.status === "success" ? "synced" : "cached");

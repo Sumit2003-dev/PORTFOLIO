@@ -1,5 +1,20 @@
 [
   {
+    "id": "gcp-29533343",
+    "title": "Arcade Voyage: Python Apps & Data Analytics",
+    "category": "Data & BigQuery",
+    "earnedDate": "Nov 10, 2026",
+    "description": "Building a great app is only half the battle—you also need to know how to scale it, optimize its performance, and make sense of the data it generates. In this voyage, you'll build a Python application from the ground up: setting up your dev environment, storing media files in Cloud Storage, adding user authentication, and deploying the whole thing to Kubernetes Engine. Once your app is live, you'll shift gears into operations and analytics—configuring networks via the CLI, tracking down performance bottlenecks with Cloud Profiler, cleaning up raw datasets in Cloud Dataprep, and building custom fields in Looker to turn your data into clear insights. Jump in and get building!",
+    "skills": [
+      "BigQuery",
+      "Data Engineering",
+      "SQL"
+    ],
+    "iconType": "data",
+    "imageUrl": "https://cdn.qwiklabs.com/K%2BnnNq330QsP7umOZxxUbiADWPm1JpailDKupQeV9EU%3D",
+    "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29533343"
+  },
+  {
     "id": "gcp-29523317",
     "title": "Arcade Trail: Cloud Security & GKE Cost Control",
     "category": "Security & IAM",
