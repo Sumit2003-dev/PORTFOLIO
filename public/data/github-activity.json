@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-10T10:26:47.808307+00:00",
+  "syncedAt": "2026-11-10T10:34:53.427657+00:00",
   "username": "Sumit2003-dev",
   "profile": {
     "name": "Sumit Kumar ",
@@ -1856,20 +1856,20 @@
   "languages": [
     {
       "name": "TypeScript",
-      "bytes": 1687614,
-      "percentage": 47.6,
+      "bytes": 1686014,
+      "percentage": 47.2,
       "color": "#3178C6"
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 1200033,
-      "percentage": 33.8,
+      "percentage": 33.6,
       "color": "#DA5B0B"
     },
     {
       "name": "Python",
-      "bytes": 569418,
-      "percentage": 16.1,
+      "bytes": 594964,
+      "percentage": 16.7,
       "color": "#3572A5"
     },
     {
@@ -1909,7 +1909,7 @@
       "color": "#384D54"
     }
   ],
-  "totalLanguageBytes": 3546383,
+  "totalLanguageBytes": 3570329,
   "repositories": [
     {
       "name": "Airlines-Delay-Prediction",
