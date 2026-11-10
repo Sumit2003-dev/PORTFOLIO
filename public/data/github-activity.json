@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-10T10:05:05.405185+00:00",
+  "syncedAt": "2026-11-10T10:26:47.808307+00:00",
   "username": "Sumit2003-dev",
   "profile": {
     "name": "Sumit Kumar ",
@@ -12,8 +12,6 @@
   },
   "contributions": {
     "total": 123,
-    "calculatedTotal": 123,
-    "totalLastYear": 123,
     "daysCount": 367,
     "startDate": "2025-11-09",
     "endDate": "2026-11-10",
@@ -1853,8 +1851,7 @@
         "count": 0,
         "level": 0
       }
-    ],
-    "provenance": "jogruber v4 verified GitHub contribution transcript"
+    ]
   },
   "languages": [
     {

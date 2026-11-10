@@ -11,7 +11,7 @@ const Skills = lazy(() => import("@/components/Skills"));
 const Projects = lazy(() => import("@/components/Projects"));
 const Education = lazy(() => import("@/components/Education"));
 const GoogleDeveloperJourney = lazy(() => import("@/components/GoogleDeveloperJourney"));
-const GithubStats = lazy(() => import("@/components/GithubStats"));
+const DeveloperActivity = lazy(() => import("@/components/DeveloperActivity"));
 const Certificates = lazy(() => import("@/components/Certificates"));
 const Achievements = lazy(() => import("@/components/Achievements"));
 const Contact = lazy(() => import("@/components/Contact"));
@@ -91,9 +91,9 @@ const Index = () => {
           </Suspense>
         </LazySection>
 
-        <LazySection id="github" minHeight="400px">
-          <Suspense fallback={<div className="min-h-[400px]" />}>
-            <GithubStats />
+        <LazySection id="activity" minHeight="500px">
+          <Suspense fallback={<div className="min-h-[500px]" />}>
+            <DeveloperActivity />
           </Suspense>
         </LazySection>
 
