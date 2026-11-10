@@ -5,7 +5,9 @@ import {
   googleDevProgram,
   gdgLucknow,
   verifiedSkillBadges,
+  googleDevBadges,
 } from "@/lib/googleDeveloperData";
+import { asset } from "@/lib/data";
 import { useFadeUp, useCounter } from "@/hooks/use-scroll";
 import {
   Trophy,
@@ -59,6 +61,30 @@ export default function GoogleDeveloperJourney() {
 
   // Filter skills boost badges
   const categories = ["All", "Generative AI", "Data & BigQuery", "Cloud Infrastructure", "Security & IAM", "DevOps & SRE"];
+
+  // Filter developer program badges
+  const devCategories = [
+    "All",
+    "Agent AI & Gemini",
+    "Cloud & Infrastructure",
+    "Developer Communities",
+    "Recognitions & Learning",
+  ];
+  const [selectedDevCategory, setSelectedDevCategory] = useState<string>("All");
+  const [devSearchQuery, setDevSearchQuery] = useState("");
+
+  const filteredDevBadges = useMemo(() => {
+    return googleDevBadges.filter((b) => {
+      const matchCat = selectedDevCategory === "All" || b.category === selectedDevCategory;
+      const q = devSearchQuery.trim().toLowerCase();
+      const matchSearch =
+        !q ||
+        b.title.toLowerCase().includes(q) ||
+        b.description.toLowerCase().includes(q) ||
+        b.skills.some((s) => s.toLowerCase().includes(q));
+      return matchCat && matchSearch;
+    });
+  }, [devSearchQuery, selectedDevCategory]);
 
   const filteredBadges = useMemo(() => {
     return verifiedSkillBadges.filter((b) => {
@@ -579,6 +605,180 @@ export default function GoogleDeveloperJourney() {
                   </span>
                 </div>
               </div>
+            </div>
+
+            {/* Developer Program Badges Section */}
+            <div className="space-y-4 pt-4">
+              <div data-reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between border-t border-white/10 pt-6">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <GoogleColorStrip />
+                    <span className="font-condensed text-xs uppercase tracking-[0.25em] text-blue-400 font-semibold">
+                      Credential Explorer
+                    </span>
+                  </div>
+                  <h4 className="mt-1 font-display text-xl sm:text-2xl uppercase text-white">
+                    Developer Program Badges ({googleDevBadges.length})
+                  </h4>
+                  <p className="mt-1 max-w-2xl text-xs sm:text-sm text-white/60 leading-relaxed">
+                    Verified achievements earned on the Google Developer Platform (<strong className="text-white">g.dev/sumit2003dev</strong>), covering Gemini Agent Ready engineering, Google Cloud Innovator tiers, and GDG community membership.
+                  </p>
+                </div>
+
+                {/* Search */}
+                <div className="relative w-full sm:w-64">
+                  <Search className="pointer-events-none absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/40" />
+                  <input
+                    type="text"
+                    value={devSearchQuery}
+                    onChange={(e) => setDevSearchQuery(e.target.value)}
+                    placeholder="Search developer badges..."
+                    className="w-full rounded-full border border-white/10 bg-black/40 pl-9 pr-8 py-2 text-xs text-white placeholder-white/40 outline-none transition-colors focus:border-blue-500/60 focus:bg-white/[0.04]"
+                  />
+                  {devSearchQuery && (
+                    <button
+                      onClick={() => setDevSearchQuery("")}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white"
+                      title="Clear search"
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Category Filter Pills */}
+              <div data-reveal className="flex flex-wrap items-center gap-2 pt-1">
+                {devCategories.map((cat) => {
+                  const count =
+                    cat === "All"
+                      ? googleDevBadges.length
+                      : googleDevBadges.filter((b) => b.category === cat).length;
+                  const isActive = selectedDevCategory === cat;
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => setSelectedDevCategory(cat)}
+                      className={`group flex items-center gap-2 rounded-full px-3.5 py-1.5 font-condensed text-xs uppercase tracking-wider transition-all ${
+                        isActive
+                          ? "border border-blue-500/60 bg-blue-500/20 text-white shadow-glow"
+                          : "border border-white/10 bg-white/[0.02] text-white/60 hover:border-white/20 hover:text-white"
+                      }`}
+                    >
+                      <span>{cat}</span>
+                      <span className="rounded-full bg-white/10 px-1.5 py-0.5 text-[9px] font-mono text-white/70">
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Badges Grid */}
+              {filteredDevBadges.length === 0 ? (
+                <div data-reveal className="glass rounded-2xl border border-white/10 p-8 text-center">
+                  <p className="text-sm text-white/60">No developer badges match "{devSearchQuery}".</p>
+                  <button
+                    onClick={() => {
+                      setDevSearchQuery("");
+                      setSelectedDevCategory("All");
+                    }}
+                    className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.03] px-4 py-1.5 text-xs text-white/80 hover:text-white hover:border-white/30"
+                  >
+                    <RotateCcw className="h-3 w-3" /> Reset Filters
+                  </button>
+                </div>
+              ) : (
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 pt-2">
+                  {filteredDevBadges.map((badge) => (
+                    <div
+                      key={badge.id}
+                      data-reveal
+                      onMouseMove={onMove}
+                      className="group glass relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-5 transition-all duration-500 hover:-translate-y-1 hover:border-blue-500/40 hover:shadow-glow"
+                    >
+                      <div
+                        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                        style={{
+                          background:
+                            "radial-gradient(240px circle at var(--mx,50%) var(--my,50%), rgba(66,133,244,0.15), transparent 70%)",
+                        }}
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent" />
+
+                      <div>
+                        {/* Top: Official Badge Artwork & Earned Date */}
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl border border-white/15 bg-black/40 p-2 shadow-md transition-transform duration-300 group-hover:scale-105">
+                            <img
+                              src={asset(badge.localImage)}
+                              alt={badge.title}
+                              loading="lazy"
+                              onError={(e) => {
+                                e.currentTarget.src = badge.cdnImage;
+                              }}
+                              className="h-full w-full object-contain filter drop-shadow"
+                            />
+                          </div>
+
+                          <div className="flex flex-col items-end gap-1">
+                            <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-[10px] font-condensed uppercase tracking-wider text-white/50">
+                              {badge.earnedDate}
+                            </span>
+                            {badge.badgeLevel && (
+                              <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-2 py-0.5 text-[9px] font-mono text-blue-300">
+                                {badge.badgeLevel}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Title */}
+                        <h4 className="mt-3.5 font-display text-base uppercase leading-snug text-white transition-colors group-hover:text-blue-300">
+                          {badge.title}
+                        </h4>
+
+                        <p className="mt-1 font-condensed text-[11px] uppercase tracking-wider text-blue-400">
+                          {badge.category}
+                        </p>
+
+                        <p className="mt-2 text-xs leading-relaxed text-white/60 line-clamp-3">
+                          {badge.description}
+                        </p>
+
+                        {/* Skills / Keywords */}
+                        <div className="mt-3 flex flex-wrap gap-1">
+                          {badge.skills.map((s) => (
+                            <span
+                              key={s}
+                              className="rounded-full border border-white/10 bg-black/30 px-2 py-0.5 text-[9px] text-white/70"
+                            >
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Bottom Bar: Direct Profile Link */}
+                      <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
+                        <span className="text-[10px] text-blue-400 flex items-center gap-1 font-mono">
+                          <CheckCircle2 className="h-3 w-3 text-blue-400" /> g.dev Badge
+                        </span>
+                        <a
+                          href={badge.verificationUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-[11px] font-medium text-ember-400 transition-colors hover:text-white hover:underline"
+                          title={`View ${badge.title} on g.dev`}
+                        >
+                          <span>Verify Credential</span>
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}
