@@ -44,13 +44,18 @@ jobs:
       - name: Sync Latest Skills Boost Profile
         run: python scripts/sync_skills_profile.py --build-step
 
+      - name: Sync GitHub Activity Data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/sync_github_activity.py --build-step
+
       - name: Commit and Push Snapshot (if updated)
         run: |
-          if [ -n "$(git status --porcelain public/data/skills-snapshot.json src/lib/googleSkillsBadges.json src/lib/googleDeveloperData.ts)" ]; then
+          if [ -n "$(git status --porcelain public/data/skills-snapshot.json public/data/github-activity.json src/lib/googleSkillsBadges.json src/lib/googleDeveloperData.ts)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add public/data/skills-snapshot.json src/lib/googleSkillsBadges.json src/lib/googleDeveloperData.ts
-            git commit -m "chore(skills): auto-sync Google Cloud Skills Boost snapshot [skip ci]"
+            git add public/data/skills-snapshot.json public/data/github-activity.json src/lib/googleSkillsBadges.json src/lib/googleDeveloperData.ts
+            git commit -m "chore(data): auto-sync Google Skills and GitHub activity snapshots [skip ci]"
             git push origin main
           else
             echo "No snapshot updates detected; repository is current."

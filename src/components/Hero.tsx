@@ -4,6 +4,7 @@ import { SiLeetcode, SiGooglecloud } from "react-icons/si";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useMotionTemplate, useReducedMotion } from "framer-motion";
 import { profile } from "@/lib/data";
 import { useMagnetic } from "@/hooks/use-interactions";
+import { scrollToId } from "@/hooks/use-lenis";
 
 const AiSphere3D = lazy(() => import("./3d/AiSphere3D"));
 
