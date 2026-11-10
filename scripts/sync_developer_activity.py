@@ -419,6 +419,7 @@ def main():
     os.makedirs(public_data_dir, exist_ok=True)
 
     snapshot_path = args.output or os.path.join(public_data_dir, "developer-activity.json")
+    lc_path = os.path.join(public_data_dir, "leetcode-activity.json")
     gh_legacy_path = os.path.join(public_data_dir, "github-activity.json")
 
     existing_snapshot = None
@@ -495,6 +496,31 @@ def main():
         json.dump(unified_snapshot, f, indent=2, ensure_ascii=False)
     os.replace(temp_snapshot, snapshot_path)
     print(f"[SYNC SUCCESS] Saved unified developer activity snapshot -> {snapshot_path}")
+
+    # Atomic write to leetcode-activity.json
+    leetcode_snapshot = {
+        "status": "success",
+        "syncedAt": now_iso,
+        "username": leetcode_data["username"],
+        "profileUrl": leetcode_data["profileUrl"],
+        "ranking": leetcode_data["ranking"],
+        "avatarUrl": leetcode_data.get("avatarUrl", ""),
+        "totalSolved": leetcode_data["totalSolved"],
+        "easySolved": leetcode_data["easySolved"],
+        "mediumSolved": leetcode_data["mediumSolved"],
+        "hardSolved": leetcode_data["hardSolved"],
+        "totalQuestions": leetcode_data["totalQuestions"],
+        "contestRating": leetcode_data["contestRating"],
+        "contestGlobalRank": leetcode_data["contestGlobalRank"],
+        "submissionsTotal": leetcode_data["submissionsTotal"],
+        "activityCalendar": leetcode_data["activityCalendar"],
+        "provenance": "Official LeetCode GraphQL public profile endpoint"
+    }
+    temp_lc = lc_path + ".tmp"
+    with open(temp_lc, "w", encoding="utf-8") as f:
+        json.dump(leetcode_snapshot, f, indent=2, ensure_ascii=False)
+    os.replace(temp_lc, lc_path)
+    print(f"[SYNC SUCCESS] Saved LeetCode activity snapshot -> {lc_path}")
 
     # Also atomically update legacy github-activity.json for compatibility
     legacy_github_snapshot = {

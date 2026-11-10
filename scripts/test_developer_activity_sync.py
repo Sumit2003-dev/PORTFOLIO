@@ -17,6 +17,7 @@ class TestDeveloperActivitySync(unittest.TestCase):
     def setUp(self):
         self.base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.snapshot_path = os.path.join(self.base_dir, "public", "data", "developer-activity.json")
+        self.lc_snapshot_path = os.path.join(self.base_dir, "public", "data", "leetcode-activity.json")
 
     def test_snapshot_exists_and_parses(self):
         self.assertTrue(os.path.exists(self.snapshot_path), f"Missing snapshot at {self.snapshot_path}")
@@ -83,6 +84,16 @@ class TestDeveloperActivitySync(unittest.TestCase):
             self.assertNotIn(date_str, seen_dates, f"Duplicate LeetCode date: {date_str}")
             seen_dates.add(date_str)
             self.assertIn(d.get("level", 0), [0, 1, 2, 3, 4])
+
+    def test_standalone_leetcode_snapshot(self):
+        self.assertTrue(os.path.exists(self.lc_snapshot_path), f"Missing standalone snapshot at {self.lc_snapshot_path}")
+        with open(self.lc_snapshot_path, "r", encoding="utf-8") as f:
+            lc = json.load(f)
+        self.assertEqual(lc.get("status"), "success")
+        self.assertEqual(lc.get("username"), "sumit2003dev")
+        self.assertGreaterEqual(lc.get("totalSolved", 0), 100)
+        self.assertEqual(lc["totalSolved"], lc["easySolved"] + lc["mediumSolved"] + lc["hardSolved"])
+        self.assertGreaterEqual(len(lc.get("activityCalendar", {}).get("days", [])), 350)
 
 if __name__ == "__main__":
     unittest.main()
