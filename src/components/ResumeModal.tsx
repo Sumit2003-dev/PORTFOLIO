@@ -16,13 +16,17 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
     };
     window.addEventListener("keydown", onKey);
 
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     const lenis = window.__lenis;
     lenis?.stop();
 
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
       lenis?.start();
     };
   }, [isOpen, onClose]);
@@ -34,22 +38,31 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
       role="dialog"
       aria-modal="true"
       aria-label="Resume document preview"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-2 sm:p-4 backdrop-blur-xl"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-start overflow-hidden pt-[5.125rem] pb-3 px-3 sm:pt-[5.25rem] sm:pb-4 sm:px-4 md:px-6"
+      style={{
+        paddingBottom: "max(0.75rem, env(safe-area-inset-bottom, 0px))",
+      }}
       onClick={onClose}
     >
+      {/* Backdrop */}
       <div
-        className="glass-strong relative flex h-[82vh] w-full max-w-3xl lg:max-w-4xl flex-col overflow-hidden rounded-2xl border border-white/15 bg-[#08131e]"
+        className="absolute inset-0 bg-black/85 backdrop-blur-xl transition-opacity touch-none"
+        onClick={onClose}
+      />
+
+      <div
+        className="glass-strong relative z-10 flex h-full max-h-[calc(100dvh-5.875rem)] sm:max-h-[calc(100dvh-6.25rem)] w-full max-w-3xl lg:max-w-4xl flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20 bg-[#08131e] shadow-2xl my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="flex items-center justify-between border-b border-white/10 px-4 py-2.5 sm:px-5 sm:py-3">
+        <div className="shrink-0 flex items-center justify-between border-b border-white/10 bg-[#08131e]/90 backdrop-blur-md px-4 py-3 sm:px-5 sm:py-3.5">
           <div className="flex items-center gap-2.5">
             <span className="grid h-8 w-8 place-items-center rounded-lg bg-ember-500/20 text-ember-500">
               <FileText className="h-4 w-4" />
             </span>
             <div>
               <h3 className="font-display text-base uppercase text-white">Sumit Kumar — Resume</h3>
-              <p className="text-[10px] text-white/50">Data Scientist & AI Engineer</p>
+              <p className="text-[10px] text-white/50">Data Scientist &amp; AI Engineer</p>
             </div>
           </div>
 
@@ -79,7 +92,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
         </div>
 
         {/* Embedded PDF iframe / viewer fallback */}
-        <div className="relative flex-1 bg-[#101822]">
+        <div className="relative flex-1 min-h-0 bg-[#101822]">
           <iframe
             src={`${profile.resume}#toolbar=0`}
             className="h-full w-full border-none"

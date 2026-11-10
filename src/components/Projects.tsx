@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Section from "./Section";
 import { projects } from "@/lib/data";
 import type { Project } from "@/lib/data";
@@ -36,12 +37,16 @@ export default function Projects() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = active ? "hidden" : "";
+    if (!active) return;
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     const lenis = window.__lenis;
-    if (active) lenis?.stop();
-    else lenis?.start();
+    lenis?.stop();
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
       lenis?.start();
     };
   }, [active]);
@@ -197,32 +202,35 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Case Study Detail Modal */}
-      <AnimatePresence>
-        {active && (
-          <motion.div
+      {/* Case Study Detail Modal (Mounted in body portal to avoid stacking clips) */}
+      {active &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-start overflow-hidden pt-[5.125rem] pb-3 px-3 sm:pt-[5.25rem] sm:pb-4 sm:px-4 md:px-6"
+            style={{
+              paddingBottom: "max(0.75rem, env(safe-area-inset-bottom, 0px))",
+            }}
             role="dialog"
             aria-modal="true"
             aria-label={`Case study: ${active.title}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[80] flex items-start justify-center overflow-y-auto bg-[#060b11]/90 p-3 py-6 sm:p-6 lg:p-8 sm:py-10 backdrop-blur-xl"
-            onClick={() => setActive(null)}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 30, scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 260, damping: 26 }}
-              className="w-full max-w-3xl lg:max-w-4xl"
+            {/* Backdrop */}
+            <div
+              className="absolute inset-0 bg-[#060b11]/90 backdrop-blur-xl transition-opacity touch-none"
+              onClick={() => setActive(null)}
+            />
+
+            {/* Modal Card */}
+            <div
+              className="glass-strong relative z-10 flex w-full max-w-3xl lg:max-w-4xl flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20 bg-[#08131e] shadow-2xl my-auto max-h-[calc(100dvh-5.875rem)] sm:max-h-[calc(100dvh-6.25rem)]"
               onClick={(e) => e.stopPropagation()}
             >
               <Modal project={active} onClose={() => setActive(null)} />
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>,
+          document.body
         )}
-      </AnimatePresence>
     </Section>
   );
 }
@@ -237,60 +245,64 @@ function Modal({ project, onClose }: { project: Project; onClose: () => void }) 
     .filter(Boolean);
 
   return (
-    <div className="glass-strong relative w-full overflow-hidden rounded-2xl border border-white/15 bg-[#08131e]">
-      <div className="absolute right-3.5 top-3.5 z-20">
-        <button
-          onClick={onClose}
-          className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full bg-black/50 text-white backdrop-blur transition-colors hover:bg-ember-500 hover:text-black"
-          aria-label="Close"
-        >
-          <X className="h-4 w-4" />
-        </button>
-      </div>
-
-      {/* Header visual */}
-      <div className="relative h-36 sm:h-44 lg:h-48 w-full overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{ background: GRADIENTS[Number(project.index) % GRADIENTS.length] }}
-        />
-        <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ember-500/20 blur-2xl" />
-        <p className="giant-bg absolute -bottom-6 left-0 select-none opacity-20">{project.index}</p>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h3 className="px-5 text-center font-display text-xl uppercase leading-none text-white drop-shadow-lg sm:text-2xl lg:text-3xl">
-            {project.title}
-          </h3>
+    <>
+      {/* Region 1: Header (Pinned & Non-shrinking) */}
+      <div className="shrink-0 relative">
+        <div className="absolute right-3.5 top-3.5 z-20">
+          <button
+            onClick={onClose}
+            className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full bg-black/60 text-white backdrop-blur border border-white/10 transition-colors hover:bg-ember-500 hover:text-black"
+            aria-label="Close"
+          >
+            <X className="h-4 w-4" />
+          </button>
         </div>
-        <div className="absolute bottom-0 h-12 w-full bg-gradient-to-t from-[#08131e] to-transparent" />
+
+        {/* Header visual banner */}
+        <div className="relative h-28 sm:h-36 w-full overflow-hidden">
+          <div
+            className="absolute inset-0"
+            style={{ background: GRADIENTS[Number(project.index) % GRADIENTS.length] }}
+          />
+          <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ember-500/20 blur-2xl" />
+          <p className="giant-bg absolute -bottom-6 left-0 select-none opacity-20">{project.index}</p>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <h3 className="px-5 text-center font-display text-xl uppercase leading-none text-white drop-shadow-lg sm:text-2xl lg:text-3xl max-w-xl">
+              {project.title}
+            </h3>
+          </div>
+          <div className="absolute bottom-0 h-10 w-full bg-gradient-to-t from-[#08131e] to-transparent" />
+        </div>
+
+        {/* Modal Tab Switcher */}
+        <div className="flex overflow-x-auto border-b border-white/10 bg-[#070e17] px-3 sm:px-5">
+          {[
+            { id: "overview", label: "Overview", icon: Layers },
+            { id: "architecture", label: "Architecture", icon: Cpu },
+            { id: "code", label: "Stack", icon: Code },
+          ].map((t) => {
+            const Icon = t.icon;
+            const isActive = modalTab === t.id;
+            return (
+              <button
+                key={t.id}
+                onClick={() => setModalTab(t.id as "overview" | "architecture" | "code")}
+                className={`flex items-center gap-1.5 border-b-2 px-3.5 py-2.5 text-xs font-condensed uppercase tracking-wider transition-colors ${
+                  isActive
+                    ? "border-ember-500 text-ember-500 font-bold"
+                    : "border-transparent text-white/50 hover:text-white"
+                }`}
+              >
+                <Icon className="h-3 w-3" />
+                <span>{t.label}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Modal Tab Switcher */}
-      <div className="flex overflow-x-auto border-b border-white/10 bg-[#070e17] px-3 sm:px-5">
-        {[
-          { id: "overview", label: "Overview", icon: Layers },
-          { id: "architecture", label: "Architecture", icon: Cpu },
-          { id: "code", label: "Stack", icon: Code },
-        ].map((t) => {
-          const Icon = t.icon;
-          const isActive = modalTab === t.id;
-          return (
-            <button
-              key={t.id}
-              onClick={() => setModalTab(t.id as "overview" | "architecture" | "code")}
-              className={`flex items-center gap-1.5 border-b-2 px-3.5 py-2.5 text-xs font-condensed uppercase tracking-wider transition-colors ${
-                isActive
-                  ? "border-ember-500 text-ember-500 font-bold"
-                  : "border-transparent text-white/50 hover:text-white"
-              }`}
-            >
-              <Icon className="h-3 w-3" />
-              <span>{t.label}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="space-y-5 p-4 sm:p-6 lg:p-7">
+      {/* Region 2: Body (Independently scrollable) */}
+      <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain space-y-5 p-4 sm:p-6 lg:p-7">
         {/* TAB 1: OVERVIEW */}
         {modalTab === "overview" && (
           <>
@@ -373,48 +385,56 @@ function Modal({ project, onClose }: { project: Project; onClose: () => void }) 
 
             <div className="rounded-2xl border border-white/10 bg-black/60 p-5 font-mono text-xs text-emerald-400 space-y-2">
               <p className="text-white/40">// Key Implementation Highlights</p>
-              {project.id === "gyanverse-ai" ? (
+              {project.id === "beyondword-emotion-reader" ? (
                 <>
-                  <p>• Vector Search Engine: FAISS &amp; ChromaDB similarity matrix indexing</p>
-                  <p>• Embeddings: Sentence Transformers (HuggingFace)</p>
-                  <p>• Interface &amp; API: Streamlit &amp; Flask responsive interface</p>
+                  <p>• Model Architecture: Hybrid PyTorch transformer classifier with calibrated probabilities</p>
+                  <p>• Psychometric Scoring: Continuous Valence, Arousal &amp; Dominance (VAD) dimension profiling</p>
+                  <p>• Serving &amp; UI: Async FastAPI backend gateway + React 19 frontend on Vercel</p>
                 </>
               ) : project.id === "flyrank-ml-internship" ? (
                 <>
-                  <p>• Core Evaluation Metric: Precision@50 validation benchmark</p>
-                  <p>• Data Contracts: HuggingFace warehouse reproducible pipeline</p>
-                  <p>• Model Architecture: Ranking algorithms with Scikit-learn</p>
+                  <p>• Core Evaluation Metric: Precision@50 ranking validation benchmark</p>
+                  <p>• Data Contracts: HuggingFace warehouse reproducible data pipelines</p>
+                  <p>• Model Architecture: Content opportunity ranking algorithms with Scikit-learn</p>
+                </>
+              ) : project.id === "gyanverse-ai" ? (
+                <>
+                  <p>• Vector Search Engine: FAISS &amp; ChromaDB similarity matrix indexing</p>
+                  <p>• Embeddings: Sentence Transformers (HuggingFace)</p>
+                  <p>• Interface &amp; API: Streamlit &amp; Flask responsive interface (&lt;1.2s retrieval latency)</p>
+                </>
+              ) : project.id === "railsaarthi-sih" ? (
+                <>
+                  <p>• Event &amp; Scope: Smart India Hackathon 2026 (Ministry of Railways, SIH26028, Team Garuda X)</p>
+                  <p>• Predictive Systems: Multi-factor train ETA deviations &amp; connecting-train miss risk analyzer</p>
+                  <p>• Root Cause Analysis: Scikit-learn delay root-cause classification pipeline</p>
                 </>
               ) : project.id === "student-record-intelligence" ? (
                 <>
-                  <p>• Data Ingestion &amp; Profiling: Multi-year Pandas ETL pipeline (1,000+ records)</p>
-                  <p>• Statistical Engine: Automated correlation &amp; risk profiling</p>
-                  <p>• Interactive Dashboard: Real-time filterable Streamlit UI</p>
-                </>
-              ) : project.id === "airline-delay-prediction" ? (
-                <>
-                  <p>• Modeling: Scikit-learn regression pipeline with cross-validation</p>
-                  <p>• Performance: ~0.85 R² score on held-out test split</p>
-                  <p>• Engineering: High-cardinality categorical encoding &amp; feature scaling</p>
+                  <p>• Data Ingestion &amp; Profiling: Multi-year 1,200 student record StandardScaler ETL pipeline</p>
+                  <p>• Modeling: Tuned Gradient Boosting (R² 0.85, 5-fold CV R² 0.83)</p>
+                  <p>• Interactive Dashboard: Flask REST API + Chart.js radar visualizer at nextgrade.netlify.app</p>
                 </>
               ) : (
                 <>
-                  <p>• Research Focus: Automated academic integrity monitoring via ML &amp; CV</p>
-                  <p>• Methodology: Supervised problem framing &amp; reproducible evaluation</p>
-                  <p>• Collaboration: Supervised by faculty at SRMU</p>
+                  <p>• Dataset: 124K flight records with class imbalance handling (34.4% delayed flights)</p>
+                  <p>• Benchmark: Random Forest (ROC-AUC 0.67) outperforming Decision Tree &amp; Logistic Regression</p>
+                  <p>• Feature Engineering: Cyclical departure-hour temporal encoding &amp; feature scaling</p>
                 </>
               )}
             </div>
           </div>
         )}
+      </div>
 
-        {/* Action Links */}
-        <div className="mt-8 flex flex-wrap gap-4 border-t border-white/10 pt-6">
+      {/* Region 3: Footer (Pinned Actions) */}
+      <div className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 bg-[#070e17]/95 backdrop-blur-md p-4 sm:p-6">
+        <div className="flex flex-wrap items-center gap-3">
           <a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-ember flex items-center gap-2 px-6 py-3 text-sm font-semibold"
+            className="btn-ember flex items-center gap-2 px-5 py-2.5 text-xs font-semibold"
           >
             <Github className="h-4 w-4" /> View GitHub Repository
           </a>
@@ -423,14 +443,18 @@ function Modal({ project, onClose }: { project: Project; onClose: () => void }) 
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm text-white/80 transition-colors hover:border-ember-500 hover:text-ember-500"
+              className="flex items-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-xs text-white/80 transition-colors hover:border-ember-500 hover:text-ember-400"
             >
-              <ExternalLink className="h-4 w-4" /> Launch Live Application
+              <ExternalLink className="h-3.5 w-3.5" /> Launch Live Application
             </a>
           )}
         </div>
+
+        <span className="text-xs font-mono text-white/40">
+          Project {project.index} · {project.category}
+        </span>
       </div>
-    </div>
+    </>
   );
 }
 
