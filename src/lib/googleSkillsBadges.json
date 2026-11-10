@@ -1,5 +1,35 @@
 [
   {
+    "id": "gcp-29549854",
+    "title": "Explore Generative AI in Agent Platform",
+    "category": "Generative AI",
+    "earnedDate": "Nov 10, 2026",
+    "description": "Complete the intermediate Explore Generative AI in Agent Platform skill badge to demonstrate skills in text generation, image and video analysis for enhanced content creation, and applying function calling techniques within the Gemini API. Discover how to leverage sophisticated Gemini techniques, explore multimodal content generation, and expand the capabilities of your AI-powered projects. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
+    "skills": [
+      "Gemini",
+      "Generative AI",
+      "Vertex AI"
+    ],
+    "iconType": "gemini",
+    "imageUrl": "https://cdn.qwiklabs.com/Ep488ur7qy53c%2Fwb0D1OS%2BeWzeTrNgXPu2ZbDDurm3E%3D",
+    "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29549854"
+  },
+  {
+    "id": "gcp-29549620",
+    "title": "Diwali in the Cloud",
+    "category": "Security & IAM",
+    "earnedDate": "Nov 10, 2026",
+    "description": "Light up your cloud learning journey with Diwali in the Arcade! Craft radiant Go-powered REST APIs and PDF generators on Cloud Run, and keep your cloud spending glowing and controlled with budget quotas. Keep your digital diyas shining bright by monitoring Apache web servers and Cloud Run functions with the Ops Agent, setting up Windows on Compute Engine, and protecting your pathways with IAM permissions and Privileged Access Manager. Play now to spark your skills and celebrate the festival of lights!",
+    "skills": [
+      "Cloud Security",
+      "IAM",
+      "Security Command Center"
+    ],
+    "iconType": "security",
+    "imageUrl": "https://cdn.qwiklabs.com/JzLcQe7WbdIkm1aT6VSlsrbzmHgDp9jEhg05wFVhezQ%3D",
+    "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29549620"
+  },
+  {
     "id": "gcp-29536112",
     "title": "Secure Software Delivery",
     "category": "Security & IAM",
