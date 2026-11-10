@@ -11,6 +11,7 @@ import os
 import re
 import sys
 import time
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from bs4 import BeautifulSoup
@@ -30,6 +31,19 @@ def clean_date(raw_date: str) -> str:
     cleaned = raw_date.replace("Earned", "").replace("EST", "").replace("EDT", "").strip()
     cleaned = re.sub(r"\s+", " ", cleaned)
     return cleaned
+
+def is_valid_https_url(url: str) -> bool:
+    """Validates that a URL is non-empty, well-formed, and strictly uses HTTPS with a valid network location."""
+    if not url or not isinstance(url, str) or not url.strip():
+        return False
+    url = url.strip()
+    if not url.startswith("https://"):
+        return False
+    try:
+        parsed = urllib.parse.urlparse(url)
+        return parsed.scheme == "https" and bool(parsed.netloc) and len(parsed.netloc.strip()) > 0
+    except Exception:
+        return False
 
 def determine_category(title: str, desc: str) -> tuple[str, list[str], str]:
     t = (title + " " + desc).lower()
@@ -82,7 +96,8 @@ def parse_profile(html_content: str, existing_badges: list[dict] = None) -> dict
     if not strong or not strong.get_text(strip=True):
         raise ValueError("Validation failed: Could not find <strong> points element in .profile-league.")
 
-    m_points = re.search(r"(\d+)", strong.get_text())
+    strong_text = strong.get_text().replace(",", "")
+    m_points = re.search(r"(\d+)", strong_text)
     if not m_points:
         raise ValueError(f"Validation failed: Could not extract integer points from string: '{strong.get_text()}'.")
     points = int(m_points.group(1))
@@ -122,8 +137,8 @@ def parse_profile(html_content: str, existing_badges: list[dict] = None) -> dict
         if not link_el:
             raise ValueError(f"Validation failed: Badge card #{idx} is missing /badges/ anchor link.")
         href = link_el.get("href", "").strip()
-        if not href.startswith("http"):
-            raise ValueError(f"Validation failed: Badge card #{idx} has invalid verification URL: '{href}'.")
+        if not is_valid_https_url(href):
+            raise ValueError(f"Validation failed: Badge card #{idx} has invalid or non-HTTPS verification URL: '{href}'.")
 
         m = re.search(r"/badges/(\d+)", href)
         if not m:
@@ -139,8 +154,8 @@ def parse_profile(html_content: str, existing_badges: list[dict] = None) -> dict
         if not img_el or not img_el.get("src"):
             raise ValueError(f"Validation failed: Badge '{badge_id}' is missing image element or src.")
         img_url = img_el.get("src", "").strip()
-        if not img_url.startswith("http"):
-            raise ValueError(f"Validation failed: Badge '{badge_id}' has invalid image URL: '{img_url}'.")
+        if not is_valid_https_url(img_url):
+            raise ValueError(f"Validation failed: Badge '{badge_id}' has invalid or non-HTTPS image URL: '{img_url}'.")
 
         title_el = card.find(class_=re.compile(r"ql-title", re.I))
         if not title_el or not title_el.get_text(strip=True):
@@ -211,25 +226,51 @@ def parse_profile(html_content: str, existing_badges: list[dict] = None) -> dict
     return snapshot
 
 def update_google_developer_data_file(filepath: str, total_badges: int, points: int, league: str) -> bool:
-    """Updates the static snapshot constants in googleDeveloperData.ts if changed."""
+    """Updates the static snapshot constants in googleDeveloperData.ts strictly scoped to skillsBoostStats."""
     if not os.path.exists(filepath):
+        print(f"[SYNC WARNING] Target file does not exist: {filepath}")
         return False
+
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Update skillsBoostStats block
-    pattern = r"(export const skillsBoostStats = \{[\s\S]*?skillBadges:\s*)\d+([\s\S]*?points:\s*)\d+([\s\S]*?league:\s*\"[^\"]*\")"
-    replacement = rf'\g<1>{total_badges}\g<2>{points}\g<3>'
-    # check if league text needs replacing
-    new_content = re.sub(r'skillBadges:\s*\d+', f'skillBadges: {total_badges}', content)
-    new_content = re.sub(r'points:\s*\d+', f'points: {points}', new_content)
-    new_content = re.sub(r'league:\s*"[^"]*"', f'league: "{league}"', new_content)
+    # Match the skillsBoostStats declaration block strictly:
+    # export const skillsBoostStats = { ... };
+    match = re.search(r"(export\s+const\s+skillsBoostStats\s*=\s*\{)([\s\S]*?)(\};)", content)
+    if not match:
+        print(f"[SYNC WARNING] Could not find 'export const skillsBoostStats = {{ ... }};' block in {filepath}")
+        return False
 
-    if new_content != content:
-        with open(filepath, "w", encoding="utf-8") as f:
-            f.write(new_content)
-        return True
-    return False
+    prefix, body, suffix = match.group(1), match.group(2), match.group(3)
+
+    # Validate that expected target fields are present inside skillsBoostStats
+    if not re.search(r"skillBadges:\s*\d+", body):
+        print(f"[SYNC WARNING] 'skillBadges' field not found inside skillsBoostStats in {filepath}")
+        return False
+    if not re.search(r"points:\s*\d+", body):
+        print(f"[SYNC WARNING] 'points' field not found inside skillsBoostStats in {filepath}")
+        return False
+    if not re.search(r'league:\s*"[^"]*"', body):
+        print(f"[SYNC WARNING] 'league' field not found inside skillsBoostStats in {filepath}")
+        return False
+
+    # Scoped replacements ONLY inside body of skillsBoostStats
+    updated_body = re.sub(r"(skillBadges:\s*)\d+", rf"\g<1>{total_badges}", body)
+    updated_body = re.sub(r"(points:\s*)\d+", rf"\g<1>{points}", updated_body)
+    escaped_league = league.replace("\\", "\\\\").replace('"', '\\"')
+    updated_body = re.sub(r'(league:\s*)"[^"]*"', rf'\g<1>"{escaped_league}"', updated_body)
+
+    if updated_body == body:
+        return False
+
+    # Splice strictly the modified block back into content, preserving everything else
+    new_content = content[:match.start()] + prefix + updated_body + suffix + content[match.end():]
+
+    temp_path = filepath + ".tmp"
+    with open(temp_path, "w", encoding="utf-8") as f:
+        f.write(new_content)
+    os.replace(temp_path, filepath)
+    return True
 
 def main():
     parser = argparse.ArgumentParser(description="Synchronize Google Cloud Skills Boost profile data")
