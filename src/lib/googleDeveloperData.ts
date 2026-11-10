@@ -37,8 +37,8 @@ export interface GoogleDevBadge {
    NOT live real-time API feeds.
    ======================================================================== */
 export const skillsBoostStats = {
-  skillBadges: 181,
-  points: 48090,
+  skillBadges: 183,
+  points: 48142,
   league: "Diamond League",
   streakDays: 12,
   leaguePosition: 18,

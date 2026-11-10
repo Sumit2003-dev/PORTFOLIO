@@ -1,5 +1,36 @@
 [
   {
+    "id": "gcp-29536112",
+    "title": "Secure Software Delivery",
+    "category": "Security & IAM",
+    "earnedDate": "Nov 10, 2026",
+    "description": "Complete the intermediate Secure Software Delivery skill badge to demonstrate your proficiency in proactively integrating security into the software development lifecycle (SDLC) with DevSecOps principles. You'll learn how to utilize Google Kubernetes Engine (GKE) and Cloud Run for secure container image deployment, implement automated vulnerability scanning to proactively identify risks, and streamline application development with Artifact Registry while maintaining a focus on security. Additionally, you'll gain skills in integrating Cloud Build for robust development processes and implementing Admission Control Policies for fine-grained control over your environment.",
+    "skills": [
+      "Cloud Security",
+      "IAM",
+      "Security Command Center"
+    ],
+    "iconType": "security",
+    "imageUrl": "https://cdn.qwiklabs.com/wPsKX9ooPyDhRzoyLxsCaz5VW%2B7hof8T9Qo0j5%2BRIG4%3D",
+    "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29536112"
+  },
+  {
+    "id": "gcp-29536110",
+    "title": "Arcade Simulator: Cloud Infrastructure Engineer",
+    "category": "DevOps & SRE",
+    "earnedDate": "Nov 10, 2026",
+    "description": "Welcome to this month's Arcade Simulator, where you'll step into the shoes of a Cloud Infrastructure Engineer responsible for building and scaling rock-solid environments from scratch. You will work extensively with Infrastructure as Code by using Terraform modules, handling state files, and putting your skills to the test in the Terraform challenge lab. From there, you'll set up multiple VPCs, lock down access controls, and finish up with the Secure Software Delivery challenge lab. Clear this challenge to prove you can spin up bulletproof infrastructure and keep it running securely.",
+    "skills": [
+      "DevOps",
+      "CI/CD",
+      "Cloud Build",
+      "Monitoring"
+    ],
+    "iconType": "devops",
+    "imageUrl": "https://cdn.qwiklabs.com/pzD1gQI0%2Bk2xie0jIutSjTPR%2BTmSaG%2FqT6fVxATZVTw%3D",
+    "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29536110"
+  },
+  {
     "id": "gcp-29533343",
     "title": "Arcade Voyage: Python Apps & Data Analytics",
     "category": "Data & BigQuery",

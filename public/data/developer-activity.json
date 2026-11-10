@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-10T10:34:53.427657+00:00",
+  "syncedAt": "2026-11-10T10:50:44.241514+00:00",
   "github": {
     "username": "Sumit2003-dev",
     "name": "Sumit Kumar ",
@@ -1856,19 +1856,19 @@
     "languages": [
       {
         "name": "TypeScript",
-        "bytes": 1686014,
-        "percentage": 47.2,
+        "bytes": 1692963,
+        "percentage": 47.3,
         "color": "#3178C6"
       },
       {
         "name": "Jupyter Notebook",
         "bytes": 1200033,
-        "percentage": 33.6,
+        "percentage": 33.5,
         "color": "#DA5B0B"
       },
       {
         "name": "Python",
-        "bytes": 594964,
+        "bytes": 596968,
         "percentage": 16.7,
         "color": "#3572A5"
       },
@@ -1909,7 +1909,7 @@
         "color": "#384D54"
       }
     ],
-    "totalLanguageBytes": 3570329,
+    "totalLanguageBytes": 3579282,
     "repositories": [
       {
         "name": "Airlines-Delay-Prediction",
@@ -1976,7 +1976,7 @@
   "leetcode": {
     "username": "sumit2003dev",
     "profileUrl": "https://leetcode.com/u/sumit2003dev/",
-    "ranking": 380408,
+    "ranking": 377270,
     "avatarUrl": "https://assets.leetcode.com/users/sumit2003dev/avatar_1793444124.png",
     "totalSolved": 370,
     "easySolved": 102,
