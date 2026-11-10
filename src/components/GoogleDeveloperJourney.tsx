@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import Section from "./Section";
 import {
   skillsBoostStats,
@@ -6,6 +6,7 @@ import {
   gdgLucknow,
   verifiedSkillBadges,
   googleDevBadges,
+  GoogleSkillBadge,
 } from "@/lib/googleDeveloperData";
 import { asset } from "@/lib/data";
 import { useFadeUp, useCounter } from "@/hooks/use-scroll";
@@ -59,6 +60,66 @@ export default function GoogleDeveloperJourney() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [visibleCount, setVisibleCount] = useState<number>(16);
 
+  // Live Snapshot Sync State for Google Cloud Skills Boost
+  const [skillBadges, setSkillBadges] = useState<GoogleSkillBadge[]>(verifiedSkillBadges);
+  const [skillsStats, setSkillsStats] = useState(skillsBoostStats);
+  const [syncStatus, setSyncStatus] = useState<"loading" | "synced" | "cached">("loading");
+  const [lastSyncedTime, setLastSyncedTime] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    const loadSnapshot = async () => {
+      try {
+        // Cache-busting 15-minute slice to fetch latest snapshot on GitHub Pages
+        const cacheWindow = Math.floor(Date.now() / (1000 * 60 * 15));
+        const snapshotUrl = `${asset("data/skills-snapshot.json")}?v=${cacheWindow}`;
+        const response = await fetch(snapshotUrl);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        const data = await response.json();
+        if (isMounted && data && Array.isArray(data.badges) && data.badges.length > 0) {
+          setSkillBadges(data.badges);
+          setSkillsStats((prev) => ({
+            ...prev,
+            skillBadges: data.profile?.totalBadges || data.badges.length,
+            points: data.profile?.points || prev.points,
+            league: data.profile?.league || prev.league,
+            lastVerified: data.profile?.lastVerified || prev.lastVerified,
+          }));
+          setLastSyncedTime(data.syncedAt || null);
+          setSyncStatus(data.status === "success" ? "synced" : "cached");
+        }
+      } catch (err) {
+        if (isMounted) {
+          console.warn("Using bundled Skills Boost snapshot fallback:", err);
+          setSyncStatus("cached");
+        }
+      }
+    };
+
+    loadSnapshot();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const formattedSyncTime = useMemo(() => {
+    if (!lastSyncedTime) return null;
+    try {
+      const d = new Date(lastSyncedTime);
+      return d.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    } catch {
+      return null;
+    }
+  }, [lastSyncedTime]);
+
   // Filter skills boost badges
   const categories = ["All", "Generative AI", "Data & BigQuery", "Cloud Infrastructure", "Security & IAM", "DevOps & SRE"];
 
@@ -87,7 +148,7 @@ export default function GoogleDeveloperJourney() {
   }, [devSearchQuery, selectedDevCategory]);
 
   const filteredBadges = useMemo(() => {
-    return verifiedSkillBadges.filter((b) => {
+    return skillBadges.filter((b) => {
       const matchCat = selectedCategory === "All" || b.category === selectedCategory;
       const query = searchQuery.trim().toLowerCase();
       const matchSearch =
@@ -97,7 +158,7 @@ export default function GoogleDeveloperJourney() {
         b.skills.some((s) => s.toLowerCase().includes(query));
       return matchCat && matchSearch;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [skillBadges, searchQuery, selectedCategory]);
 
   const displayedBadges = filteredBadges.slice(0, visibleCount);
   const hasMore = visibleCount < filteredBadges.length;
@@ -169,7 +230,7 @@ export default function GoogleDeveloperJourney() {
             <SiGooglecloud className="h-3.5 w-3.5 text-blue-400" />
             <span>Cloud Skills Boost</span>
             <span className="rounded-full bg-ember-500/20 px-2 py-0.5 text-[10px] font-mono text-ember-400">
-              {skillsBoostStats.skillBadges} Badges
+              {skillBadges.length} Badges
             </span>
           </button>
 
@@ -227,11 +288,11 @@ export default function GoogleDeveloperJourney() {
                   <Trophy className="h-4 w-4" />
                 </span>
                 <p className="mt-3 font-display text-2xl sm:text-3xl text-ember-500">
-                  <StatCounter value={skillsBoostStats.skillBadges} suffix="+" />
+                  <StatCounter value={skillBadges.length} />
                 </p>
                 <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">Skill Badges</p>
-                <span className="mt-2 inline-block rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[10px] text-white/60">
-                  Profile Snapshot
+                <span className="mt-2 inline-block rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[10px] text-white/60 font-mono">
+                  {syncStatus === "synced" ? "Synced Profile Count" : "Profile Snapshot"}
                 </span>
               </div>
 
@@ -251,10 +312,10 @@ export default function GoogleDeveloperJourney() {
                   <Flame className="h-4 w-4" />
                 </span>
                 <p className="mt-3 font-display text-2xl sm:text-3xl text-ember-500">
-                  <StatCounter value={skillsBoostStats.points} />
+                  <StatCounter value={skillsStats.points} />
                 </p>
                 <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">Arcade Points</p>
-                <span className="mt-2 inline-block text-[10px] text-white/40 font-mono">Profile Total</span>
+                <span className="mt-2 inline-block text-[10px] text-white/40 font-mono">Public Profile Score</span>
               </div>
 
               {/* League Standing */}
@@ -273,7 +334,7 @@ export default function GoogleDeveloperJourney() {
                   <Sparkles className="h-4 w-4" />
                 </span>
                 <p className="mt-3 font-display text-2xl sm:text-3xl text-blue-400">
-                  {skillsBoostStats.league}
+                  {skillsStats.league}
                 </p>
                 <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">League Tier</p>
                 <span className="mt-2 inline-block text-[10px] text-blue-300 font-mono">Diamond Division</span>
@@ -295,10 +356,10 @@ export default function GoogleDeveloperJourney() {
                   <Award className="h-4 w-4" />
                 </span>
                 <p className="mt-3 font-display text-2xl sm:text-3xl text-ember-500">
-                  #<StatCounter value={skillsBoostStats.leaguePosition} />
+                  #<StatCounter value={skillsStats.leaguePosition} />
                 </p>
                 <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">League Position</p>
-                <span className="mt-2 inline-block text-[10px] text-white/40 font-mono">Global Standing</span>
+                <span className="mt-2 inline-block text-[10px] text-white/40 font-mono">Private Dashboard</span>
               </div>
 
               {/* Current Streak */}
@@ -317,34 +378,60 @@ export default function GoogleDeveloperJourney() {
                   <Flame className="h-4 w-4" />
                 </span>
                 <p className="mt-3 font-display text-2xl sm:text-3xl text-red-400">
-                  <StatCounter value={skillsBoostStats.streakDays} suffix="d" />
+                  <StatCounter value={skillsStats.streakDays} suffix="d" />
                 </p>
                 <p className="mt-1 font-condensed text-xs uppercase tracking-wider text-white/60">Active Streak</p>
-                <span className="mt-2 inline-block text-[10px] text-white/40 font-mono">Continuous Labs</span>
+                <span className="mt-2 inline-block text-[10px] text-white/40 font-mono">Private Dashboard</span>
               </div>
             </div>
 
-            {/* Provenance & Verified Notice */}
-            <div data-reveal className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-2.5 text-xs text-white/60 backdrop-blur">
-              <div className="flex items-center gap-2">
-                <Info className="h-4 w-4 text-ember-500" />
-                <span>
-                  Last manually verified snapshot:{" "}
-                  <strong className="text-white">{skillsBoostStats.lastVerified}</strong> (Not live API feed)
-                </span>
+            {/* Provenance & Synchronization Notice Bar */}
+            <div data-reveal className="space-y-2">
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-2.5 text-xs text-white/60 backdrop-blur">
+                <div className="flex items-center gap-2">
+                  {syncStatus === "synced" ? (
+                    <span className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-mono text-emerald-400">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Sync Active
+                    </span>
+                  ) : syncStatus === "loading" ? (
+                    <span className="flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-2.5 py-0.5 text-[10px] font-mono text-blue-400">
+                      <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-ping" />
+                      Checking Sync...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-2.5 py-0.5 text-[10px] font-mono text-yellow-400" title="Using cached local snapshot">
+                      <span className="h-1.5 w-1.5 rounded-full bg-yellow-400" />
+                      Cached Fallback
+                    </span>
+                  )}
+                  <span>
+                    {syncStatus === "synced" && formattedSyncTime ? (
+                      <>Verified snapshot synced from public profile · Updated <strong className="text-white">{formattedSyncTime}</strong></>
+                    ) : syncStatus === "loading" ? (
+                      <>Checking public profile snapshot...</>
+                    ) : (
+                      <>Cached profile snapshot (<strong className="text-white">{skillsStats.lastVerified}</strong> fallback)</>
+                    )}
+                  </span>
+                </div>
+                <div className="flex items-center gap-4 text-[11px] text-white/40">
+                  <span className="font-mono">Profile badges: {skillBadges.length}</span>
+                  <span className="h-3 w-px bg-white/10" />
+                  <a
+                    href={skillsStats.profileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ember-400 hover:underline flex items-center gap-1"
+                  >
+                    <span>View Public Profile</span>
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                </div>
               </div>
-              <div className="flex items-center gap-4 text-[11px] text-white/40">
-                <span>Total profile badges: {skillsBoostStats.skillBadges}</span>
-                <span className="h-3 w-px bg-white/10" />
-                <a
-                  href={skillsBoostStats.profileUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-ember-400 hover:underline"
-                >
-                  View Public Profile ↗
-                </a>
-              </div>
+              <p className="text-[11px] text-white/45 pl-1">
+                * Badges, League, and Points are synced server-side from public profile HTML. Streak and Leaderboard Rank reflect verified private dashboard sessions.
+              </p>
             </div>
 
             {/* Badge Explorer Toolbar */}
@@ -403,7 +490,7 @@ export default function GoogleDeveloperJourney() {
                   </button>
                 ))}
                 <span className="ml-auto text-[11px] text-white/40">
-                  Showing {displayedBadges.length} of {filteredBadges.length} entries · Profile total: {skillsBoostStats.skillBadges}
+                  Showing {displayedBadges.length} of {filteredBadges.length} entries · Profile total: {skillBadges.length}
                 </span>
               </div>
             </div>

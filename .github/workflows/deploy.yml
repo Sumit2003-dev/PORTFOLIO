@@ -29,6 +29,17 @@ jobs:
         with:
           node-version: 20
 
+      - name: Setup Python for Profile Sync
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies
+        run: pip install beautifulsoup4
+
+      - name: Sync Latest Skills Boost Profile
+        run: python scripts/sync_skills_profile.py --build-step
+
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 

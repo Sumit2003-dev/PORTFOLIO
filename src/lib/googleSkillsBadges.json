@@ -1,10 +1,25 @@
 [
   {
+    "id": "gcp-29523317",
+    "title": "Arcade Trail: Cloud Security & GKE Cost Control",
+    "category": "Security & IAM",
+    "earnedDate": "Nov 9, 2026",
+    "description": "Running workloads in the cloud means keeping two things in check at all times: your security posture and your budget. In this trail, you'll start on the security side—configuring service accounts, exploring Security Command Center, hunting down active threats, and patching vulnerabilities before they become a problem. Once your environment is locked down, you'll switch gears to Google Kubernetes Engine to make sure your clusters run lean. You'll set up multi-tenant namespaces, right-size your virtual machine node pools, and combine autoscaling strategies so you're only paying for the compute you actually need. Knock out both challenge labs on your own to prove you can keep your cloud infrastructure both locked down and cost-efficient.",
+    "skills": [
+      "Cloud Security",
+      "IAM",
+      "Security Command Center"
+    ],
+    "iconType": "security",
+    "imageUrl": "https://cdn.qwiklabs.com/ONGwNaDeFWSglOSaqENc9r7zcZRkwIvNsbHRtpHvZso%3D",
+    "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29523317"
+  },
+  {
     "id": "gcp-29498095",
     "title": "Arcade Adventure: Cloud Infrastructure & App Scale",
     "category": "Cloud Infrastructure",
     "earnedDate": "Nov 8, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Adventure: Cloud Infrastructure & App Scale.",
+    "description": "Sometimes you just want to skip the endless theory and get straight to building cool stuff. This adventure jumps right into the practical side of Google Cloud, starting with spinning up storage and getting PHP and Go apps live on App Engine. From there, you'll set up custom IAM roles and tweak your network settings so you know how everything fits together. To wrap it all up, you'll tackle the big stuff—deploying a private Kubernetes cluster and running a real distributed load test to see how your setup holds up under heavy traffic. Jump in and enjoy the ride!",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -18,7 +33,7 @@
     "title": "Arcade Base Camp November 2026",
     "category": "Cloud Infrastructure",
     "earnedDate": "Nov 8, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Base Camp November 2026.",
+    "description": "Welcome to Base Camp, where you’ll develop key Google Cloud skills (available in Spanish and Portuguese too!) and earn an exclusive credential that will open doors to the cloud for you. No prior experience is required!",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -32,7 +47,7 @@
     "title": "Build a Certification Study Guide: PDE Exam Prep",
     "category": "DevOps & SRE",
     "earnedDate": "Nov 1, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build a Certification Study Guide: PDE Exam Prep.",
+    "description": "Learn how to use Gemini Notebook to create a personalized study guide for the Professional Data Engineer certification exam.\nYou'll review Gemini Notebook features, create a notebook in Gemini Notebook, and learn how to use a study guide to practice for a certification exam.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -46,7 +61,7 @@
     "title": "Create ML Models with BigQuery ML",
     "category": "Data & BigQuery",
     "earnedDate": "Nov 1, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Create ML Models with BigQuery ML.",
+    "description": "Complete the intermediate Create ML Models with BigQuery ML skill badge to demonstrate skills in creating and evaluating machine learning models with BigQuery ML to make data predictions.",
     "skills": [
       "BigQuery"
     ],
@@ -59,7 +74,7 @@
     "title": "Use Machine Learning APIs on Google Cloud",
     "category": "Cloud Infrastructure",
     "earnedDate": "Nov 1, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Use Machine Learning APIs on Google Cloud.",
+    "description": "Earn the advanced skill badge by completing the Use Machine Learning APIs on Google Cloud course, where you learn the basic features for the following machine learning and AI technologies: Cloud Vision API, Cloud Translation API, and Cloud Natural Language API.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -73,7 +88,7 @@
     "title": "Enhance Gemini Model Capabilities",
     "category": "Generative AI",
     "earnedDate": "Oct 29, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Enhance Gemini Model Capabilities.",
+    "description": "Complete the intermediate Enhance Gemini Model Capabilities skill badge to demonstrate skills in the following: leveraging advanced features of Gemini models, including code generation and execution, grounding, controlled content generation, and synthetic data creation, to build more powerful and sophisticated AI applications.",
     "skills": [
       "Gemini"
     ],
@@ -86,7 +101,7 @@
     "title": "Trick-or-Metric",
     "category": "Cloud Infrastructure",
     "earnedDate": "Oct 29, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Trick-or-Metric.",
+    "description": "Don't let rogue infrastructure give you a fright this Halloween. In this spooky journey, you'll conjure Google Cloud Managed Service for Prometheus to monitor eerie anomalies, migrate wandering workloads, and banish runaway metric costs. Then, summon the raw analytical power of AlloyDB—brewing migrations from PostgreSQL and supercharging heavy query speeds with the Columnar Engine. Slay both challenge labs to prove no gremlin, phantom spike, or bloated query can haunt your cloud.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -100,7 +115,7 @@
     "title": "Create and Manage AlloyDB Instances",
     "category": "Cloud Infrastructure",
     "earnedDate": "Oct 29, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Create and Manage AlloyDB Instances.",
+    "description": "Complete the introductory Create and Manage AlloyDB Instances skill badge to demonstrate skills in the following: performing core AlloyDB operations and tasks, migrating to AlloyDB from PostgreSQL, administering an AlloyDB database, and accelerating analytical queries using the AlloyDB Columnar Engine.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -114,7 +129,7 @@
     "title": "Monitor Environments with Google Cloud Managed Service for Prometheus",
     "category": "DevOps & SRE",
     "earnedDate": "Oct 26, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Monitor Environments with Google Cloud Managed Service for Prometheus.",
+    "description": "Earn a skill badge by completing the Monitor Environments with Google Cloud Managed Service for Prometheus skill badge course, where you learn Kubernetes Monitoring with Google Cloud Managed Service for Prometheus.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -128,7 +143,7 @@
     "title": "Set Up a Google Cloud Network",
     "category": "Security & IAM",
     "earnedDate": "Oct 26, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Set Up a Google Cloud Network.",
+    "description": "Earn a skill badge by completing the Set Up a Google Cloud Network skill badge course, where you will learn how to perform basic networking tasks on Google Cloud Platform - create a custom network, add subnets firewall rules, then create VMs and test the latency when they communicate with each other.",
     "skills": [
       "Google Cloud",
       "Security"
@@ -142,7 +157,7 @@
     "title": "Arcade Simulator: Site Reliability Engineer",
     "category": "Cloud Infrastructure",
     "earnedDate": "Oct 26, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Simulator: Site Reliability Engineer.",
+    "description": "Welcome to this month's Arcade Simulator, where you'll step into the shoes of a Site Reliability Engineer tasked with keeping production fast and resilient. You'll build automated CI/CD pipelines with Cloud Build, store artifacts securely, and manage Kubernetes rollouts on GKE. Then, configure custom VPC networks, lock down firewalls, and benchmark VM latency to eliminate performance bottlenecks. Clear both challenge labs to prove you can automate releases, secure infrastructure, and maintain rock-solid uptime.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -156,7 +171,7 @@
     "title": "Implement DevOps Workflows in Google Cloud",
     "category": "DevOps & SRE",
     "earnedDate": "Oct 25, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Implement DevOps Workflows in Google Cloud.",
+    "description": "Complete the intermediate Implement DevOps Workflows in Google Cloud skill badge to demonstrate skills in the following: creating and managing Git repositories, launching, managing, and scaling deployments on Google Kubernetes Engine (GKE), and architecting CI/CD pipelines that automate container image builds and deployments to GKE.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -170,7 +185,7 @@
     "title": "Implement Speech and Language Solutions with Pre-trained APIs",
     "category": "Cloud Infrastructure",
     "earnedDate": "Oct 24, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Implement Speech and Language Solutions with Pre-trained APIs.",
+    "description": "Earn the Introductory Skill Badge by completing the Implement Speech and Language Solutions with Pre-trained APIs course, where you learn how to use speech related API tools to synthesise and transcribe speech.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -184,7 +199,7 @@
     "title": "Arcade Voyage: Language, Voice, and Multimodal Processing",
     "category": "Cloud Infrastructure",
     "earnedDate": "Oct 24, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Voyage: Language, Voice, and Multimodal Processing.",
+    "description": "Transforming unstructured multimedia into searchable, structured data is the core of modern cognitive computing. In this voyage, you'll analyze sentiment and extract entities using the Cloud Natural Language API, pairing language workflows with Apache Spark to demonstrate big-data scalability. From there, you'll branch into multimodal synthesis—generating lifelike audio using Text-to-Speech, bridging global barriers with the Cloud Translation API, and annotating video streams via Video Intelligence. Complete both challenge labs to prove you can deploy pre-trained models that read, speak, translate, and inspect content at scale.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -198,7 +213,7 @@
     "title": "Arcade Trail: Containers & Load Balancing",
     "category": "Cloud Infrastructure",
     "earnedDate": "Oct 24, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Trail: Containers & Load Balancing.",
+    "description": "Learn to build and scale production-ready cloud environments. In this trail, you'll package apps with Docker, deploy workloads on Google Kubernetes Engine, and orchestrate containerized services. Next, configure regional internal proxy and global HTTPS load balancers, then set up Cloud Monitoring to track health and latency. Pass both challenge labs to prove your ability to deploy resilient applications and route global traffic efficiently.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -212,7 +227,7 @@
     "title": "Build Event-Driven Applications with Eventarc",
     "category": "DevOps & SRE",
     "earnedDate": "Oct 22, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build Event-Driven Applications with Eventarc.",
+    "description": "Earn a Skill Badge by completing the Build Event-Driven Applications with Eventarc course. In this course, you use Eventarc to create event triggers for different resources, including Pub/Sub topics and Cloud Storage buckets.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -226,7 +241,7 @@
     "title": "Enrich Metadata and Discovery of Lakehouse Data",
     "category": "Data & BigQuery",
     "earnedDate": "Oct 22, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Enrich Metadata and Discovery of Lakehouse Data.",
+    "description": "Complete the Enrich Metadata and Discovery of Lakehouse Data skill badge course to demonstrate skills in BigQuery, Lakehouse, and Knowledge Catalog. You create Lakehouse tables and enrich metadata management and discovery of the table data.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -240,7 +255,7 @@
     "title": "Deploy Kubernetes Applications on Google Cloud",
     "category": "DevOps & SRE",
     "earnedDate": "Oct 22, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Deploy Kubernetes Applications on Google Cloud.",
+    "description": "Complete the intermediate Deploy Kubernetes Applications on Google Cloud skill badge course to demonstrate skills in the following: Configuring and building Docker container images.Creating and managing Google Kubernetes Engine (GKE) clusters.Utilizing kubectl for efficient cluster management.Deploying Kubernetes applications with robust continuous delivery (CD) practices.",
     "skills": [
       "Kubernetes"
     ],
@@ -253,7 +268,7 @@
     "title": "Arcade Adventure: Google Cloud ML APIs",
     "category": "Cloud Infrastructure",
     "earnedDate": "Oct 22, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Adventure: Google Cloud ML APIs.",
+    "description": "Teaching computers to see and listen is a lot easier when you have pre-trained machine learning APIs doing the heavy lifting. In this adventure, you'll start by querying Google Cloud endpoints directly from APIs Explorer, then teach your applications to read multilingual text, recognize facial features, and spot landmarks in raw photos. Once your visual pipeline is dialed in, you'll turn to audio—converting spoken words into real-time transcripts and streaming live audio directly through web interfaces. Knock out both challenge labs unassisted to prove you can turn unstructured sight and sound into clean, actionable cloud intelligence.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -267,7 +282,7 @@
     "title": "Develop Your Google Cloud Network",
     "category": "Security & IAM",
     "earnedDate": "Oct 11, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Develop Your Google Cloud Network.",
+    "description": "Earn a skill badge by completing the Develop your Google Cloud Network skill badge course, where you learn multiple ways to deploy and monitor applications including how to: explore IAM roles and add/remove project access, create VPC networks, deploy and monitor Compute Engine VMs, write SQL queries, deploy and monitor VMs in Compute Engine, and deploy applications using Kubernetes with multiple deployment approaches.",
     "skills": [
       "Google Cloud",
       "Security"
@@ -281,7 +296,7 @@
     "title": "Arcade Base Camp October 2026",
     "category": "Cloud Infrastructure",
     "earnedDate": "Oct 11, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Base Camp October 2026.",
+    "description": "Welcome to Base Camp, where you’ll develop key Google Cloud skills (available in Spanish and Portuguese too!) and earn an exclusive credential that will open doors to the cloud for you. No prior experience is required!",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -295,7 +310,7 @@
     "title": "Implement Event-Driven Messaging and Automation Workflows",
     "category": "Cloud Infrastructure",
     "earnedDate": "Oct 11, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Implement Event-Driven Messaging and Automation Workflows.",
+    "description": "Earn a skill badge by completing the Implement Event-Driven Messaging and Automation Workflows skill badge course, where you learn how to use Pub/Sub through the Cloud console, how Cloud Scheduler jobs can save you effort, and when Pub/Sub Lite can save you money on high-volume event ingestion.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -309,7 +324,7 @@
     "title": "Deploy and Manage Applications on Google App Engine",
     "category": "DevOps & SRE",
     "earnedDate": "Sep 19, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Deploy and Manage Applications on Google App Engine.",
+    "description": "Earn a Skill Badge by completing the Deploy and Manage Applications on Google App Engine course, where you learn how to use App Engine with Python, Go, and PHP.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -323,7 +338,7 @@
     "title": "Arcade Voyage: App Modernization",
     "category": "Cloud Infrastructure",
     "earnedDate": "Sep 19, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Voyage: App Modernization.",
+    "description": "Great code shouldn't get bogged down by infrastructure headaches. In this voyage, you'll master modern deployment patterns by turning ideas into production-ready microservices. From generating dynamic files and decoupling services with Pub/Sub to deploying polyglot apps across three different languages on App Engine, you'll cover the full developer lifecycle. Complete the challenge labs and show you know how to build fast, scale effortlessly, and keep things resilient.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -337,7 +352,7 @@
     "title": "Develop Serverless Applications on Cloud Run",
     "category": "Cloud Infrastructure",
     "earnedDate": "Sep 18, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Develop Serverless Applications on Cloud Run.",
+    "description": "Complete the intermediate Develop Serverless Applications on Cloud Run skill badge course to demonstrate skills in the following: integrating Cloud Run with Cloud Storage for data management, architecting resilient asynchronous systems using Cloud Run and Pub/Sub, constructing REST API gateways powered by Cloud Run, and building and deploying services on Cloud Run.",
     "skills": [
       "Cloud Run"
     ],
@@ -350,7 +365,7 @@
     "title": "Create a Secure Data Lake on Cloud Storage",
     "category": "Data & BigQuery",
     "earnedDate": "Sep 17, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Create a Secure Data Lake on Cloud Storage.",
+    "description": "Complete the introductory Create a Secure Data Lake on Cloud Storage skill badge course to demonstrate skills in the following: securing and configuring a Cloud Storage bucket, using Gemini for text generation, managing IAM access control, and establishing a Knowledge Catalog lake for data governance.",
     "skills": [
       "Cloud Storage"
     ],
@@ -363,7 +378,7 @@
     "title": "Arcade Trail: Data Engineering and Security",
     "category": "Data & BigQuery",
     "earnedDate": "Sep 17, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Trail: Data Engineering and Security.",
+    "description": "Streaming high-velocity data is great, but only if your pipeline doesn't break under pressure. In this trail, you'll wire up Pub/Sub and Python Dataflow to stream live data straight into Cloud Storage, then lock the whole environment down. By encrypting keys with Cloud KMS, cataloging assets, and isolating networks with VPC Peering, you'll clear both challenge labs and prove you can build real-time data lakes that are as fast as they are secure.",
     "skills": [
       "Cloud Security"
     ],
@@ -376,7 +391,7 @@
     "title": "Create a Streaming Data Lake on Cloud Storage",
     "category": "Data & BigQuery",
     "earnedDate": "Sep 15, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Create a Streaming Data Lake on Cloud Storage.",
+    "description": "Earn a skill badge by completing the Create a Streaming Data Lake on Cloud Storage course, where you use Pub/Sub, Dataflow, and Cloud Storage together to create a streaming data lake on Google Cloud.   A skill badge is an exclusive digital badge issued by Google Cloud in recognition of your proficiency with Google Cloud products and services and tests your ability to apply your knowledge in an interactive hands-on environment. Complete this Skill Badge, and the final assessment challenge lab, to receive a digital badge that you can share with your network.",
     "skills": [
       "Cloud Storage"
     ],
@@ -389,7 +404,7 @@
     "title": "Monitor and Manage Google Cloud Resources",
     "category": "DevOps & SRE",
     "earnedDate": "Sep 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Monitor and Manage Google Cloud Resources.",
+    "description": "Complete the introductory Monitor and Manage Google Cloud Resources skill badge to demonstrate skills in the following: granting and revoking IAM permissions; installing monitoring and logging agents; creating, deploying, and testing an event-driven Cloud Run function.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -403,7 +418,7 @@
     "title": "Arcade Adventure: Modern Cloud Architecture",
     "category": "Cloud Infrastructure",
     "earnedDate": "Sep 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Adventure: Modern Cloud Architecture.",
+    "description": "Cloud architecture is a lot more fun when you actually know which levers to pull. In this adventure, you'll wire up Pub/Sub messaging, sling storage buckets from the terminal, and trigger Cloud Run functions without getting tangled in server management. Once your pipeline is moving, you'll lock the front door with IAM permissions and wire up real-time monitoring so nothing breaks while you're away. Finish both challenge labs to prove you can build fast, break nothing, and keep the whole machine running smoothly.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -417,7 +432,7 @@
     "title": "Google Cloud Computing Foundations: Infrastructure in Google Cloud",
     "category": "Cloud Infrastructure",
     "earnedDate": "Sep 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Google Cloud Computing Foundations: Infrastructure in Google Cloud.",
+    "description": "The Google Cloud Computing Foundations courses are for individuals with little to no background or experience in cloud computing. They provide an overview of concepts central to cloud basics, big data, and machine learning, and where and how Google Cloud fits in. \n\nBy the end of the series of courses, learners will be able to articulate these concepts and demonstrate some hands-on skills.\n\nThe courses should be completed in the following order:\n1. Google Cloud Computing Foundations: Cloud Computing Fundamentals\n2. Google Cloud Computing Foundations: Infrastructure in Google Cloud\n3. Google Cloud Computing Foundations: Networking and Security in Google Cloud\n4. Google Cloud Computing Foundations: Data, ML, and AI in Google Cloud",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -431,7 +446,7 @@
     "title": "Store, Process, and Manage Data on Google Cloud - Command Line",
     "category": "Data & BigQuery",
     "earnedDate": "Sep 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Store, Process, and Manage Data on Google Cloud - Command Line.",
+    "description": "Cloud Storage, Cloud Functions, and Cloud Pub/Sub are all Google Cloud Platform services that can be used to store, process, and manage data. All three services can be used together to create a variety of data-driven applications. In this skill badge you use Cloud Storage to store images, Cloud Functions to process the images, and Cloud Pub/Sub to send the images to another application.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -445,7 +460,7 @@
     "title": "Migrate MySQL Data to Cloud SQL Using Database Migration Service",
     "category": "Data & BigQuery",
     "earnedDate": "Sep 11, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Migrate MySQL Data to Cloud SQL Using Database Migration Service.",
+    "description": "Complete the introductory Migrate MySQL Data to Cloud SQL Using Database Migration Service skill badge course to demonstrate skills in the following: migrating MySQL data to Cloud SQL using different job types and connectivity options available in Database Migration Service and migrating MySQL user data when running Database Migration Service jobs.",
     "skills": [
       "SQL"
     ],
@@ -458,7 +473,7 @@
     "title": "Arcade Re-Trail: Vaults & Vectors",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 31, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Re-Trail: Vaults & Vectors.",
+    "description": "Since last month's Arcade Trail wrapped up earlier than expected, we’re opening up this bonus game only for this month so you can grab that missed Arcade Point! You'll start on the vault side with Google Cloud Storage—managing buckets, exploring APIs, and locking down sensitive data with Bucket Lock. Then, you'll shift to event-driven vectors at the command line, triggering Cloud Run Functions and routing real-time messages through Pub/Sub. Complete with two hands-on challenge labs, this trail gets your streak back on track while building real-world storage and serverless skills.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -472,7 +487,7 @@
     "title": "Store, Process, and Manage Data on Google Cloud - Console",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 26, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Store, Process, and Manage Data on Google Cloud - Console.",
+    "description": "Cloud Storage, Cloud Functions, and Cloud Pub/Sub are all Google Cloud Platform services that can be used to store, process, and manage data. All three services can be used together to create a variety of data-driven applications. In this skill badge you use Cloud Storage to store images, Cloud Functions to process the images, and Cloud Pub/Sub to send the images to another application.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -486,7 +501,7 @@
     "title": "Implement Cloud Storage and Data Protection Solutions",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 26, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Implement Cloud Storage and Data Protection Solutions.",
+    "description": "Earn a Skill Badge by completing the Implement Cloud Storage and Data Protection Solutions course. Learn to create a Cloud Storage bucket, use the command line, and protect objects with Bucket Lock.",
     "skills": [
       "Cloud Storage"
     ],
@@ -499,7 +514,7 @@
     "title": "Build a Certification Study Guide: PCA Exam Prep",
     "category": "DevOps & SRE",
     "earnedDate": "Aug 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build a Certification Study Guide: PCA Exam Prep.",
+    "description": "Learn how to use Gemini Notebook to create a personalized study guide for the Professional Cloud Architect certification exam.\nYou'll review Gemini Notebook features, create a notebook in Gemini Notebook, and learn how to use a study guide to practice for a certification exam.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -513,7 +528,7 @@
     "title": "Build Agent Skills with Google",
     "category": "DevOps & SRE",
     "earnedDate": "Aug 19, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build Agent Skills with Google.",
+    "description": "Close the gap between general AI capabilities and your domain knowledge through Agent Skills. This course walks you through the full lifecycle of custom skill building, from local scaffolding and testing to enterprise scaling and sharing using Google's agent ecosystem, including Google Antigravity, ADK, and Skill Registry. Additionally, you use Google Agents CLI toolkit to attach skills to standalone 24/7 cloud agents, equipping your team with reliable, autonomous digital coworkers.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -527,7 +542,7 @@
     "title": "Prepare Data for Looker Dashboards and Reports",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 16, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Prepare Data for Looker Dashboards and Reports.",
+    "description": "Complete the introductory Prepare Data for Looker Dashboards and Reports skill badge course to demonstrate skills in the following: filtering, sorting, and pivoting data; merging results from different Looker Explores; and using functions and operators to build Looker dashboards and reports for data analysis and visualization.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -541,7 +556,7 @@
     "title": "Build LookML Objects in Looker",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 16, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build LookML Objects in Looker.",
+    "description": "Complete the introductory Build LookML Objects in Looker skill badge course to demonstrate skills in the following: building new dimensions and measures, views, and derived tables; setting measure filters and types based on requirements; updating dimensions and measures; building and refining Explores; joining views to existing Explores; and deciding which LookML objects to create based on business requirements.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -555,7 +570,7 @@
     "title": "Develop AI-Powered Prototypes in Google AI Studio",
     "category": "Generative AI",
     "earnedDate": "Aug 15, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Develop AI-Powered Prototypes in Google AI Studio.",
+    "description": "Complete the introductory Develop AI-Powered Prototypes in Google AI Studio skill badge to demonstrate skills in the following: crafting effective prompts, leveraging multimodal capabilities for image and video analysis, prototyping functional AI-driven applications from templates and text prompts, and utilizing API keys to build and deploy custom AI solutions. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "Generative"
@@ -569,7 +584,7 @@
     "title": "Implement Cloud Collaboration and Productivity Workflows",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 15, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Implement Cloud Collaboration and Productivity Workflows.",
+    "description": "Earn an introductory skill badge by completing the Implement Cloud Collaboration and Productivity Workflows course, where you will get introduced to Google's collaborative platform and learn to use Gmail, Calendar, Meet, Drive, Sheets, and AppSheet.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -583,7 +598,7 @@
     "title": "Analyze Speech and Language with Google APIs",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 13, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Analyze Speech and Language with Google APIs.",
+    "description": "Earn a skill badge by completing the Analyze Speech and Language with Google APIs quest, where you learn how to use the Natural Language and Speech APIs in real-world settings.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -597,7 +612,7 @@
     "title": "Analyze Images with the Cloud Vision API",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 13, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Analyze Images with the Cloud Vision API.",
+    "description": "Earn a skill badge by completing the Analyze Images with the Cloud Vision API quest, where you discover how to leverage the Cloud Vision API for various tasks, including extracting text from images.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -611,7 +626,7 @@
     "title": "Secure Lakehouse Data",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 13, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Secure Lakehouse Data.",
+    "description": "Complete the introductory Secure Lakehouse Data skill badge course to demonstrate skills with IAM, BigQuery, Lakehouse, and Knowledge Catalog to create and secure Lakehouse tables.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -625,7 +640,7 @@
     "title": "Derive Insights from BigQuery Data",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 13, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Derive Insights from BigQuery Data.",
+    "description": "Complete the introductory Derive Insights from BigQuery Data skill badge course to demonstrate skills in the following: Write SQL queries.Query public tables.Load sample data into BigQuery.Troubleshoot common syntax errors with the query validator in BigQuery.Create reports in Data Studio by connecting to BigQuery data.",
     "skills": [
       "BigQuery"
     ],
@@ -638,7 +653,7 @@
     "title": "Arcade Trail: Cloud Delivery Systems",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 10, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Trail: Cloud Delivery Systems.",
+    "description": "Accelerating software delivery while maintaining stability demands automated build, artifact, and release pipelines. This trail covers the core practices for implementing continuous integration and continuous delivery (CI/CD) on Google Cloud. You will begin by managing container images with Artifact Registry and building automated pipelines for Google Kubernetes Engine using Cloud Build. Next, you will configure continuous delivery workflows with Google Cloud Deploy to safely promote releases across environments. Concluding with a practical challenge lab, this trail prepares you to establish resilient, production-ready deployment pipelines.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -652,7 +667,7 @@
     "title": "Connecting Cloud Networks with NCC",
     "category": "Security & IAM",
     "earnedDate": "Aug 10, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Connecting Cloud Networks with NCC.",
+    "description": "Earn the intermediate Skill Badge by completing the Connecting Cloud Networks with NCC where you will learn how to use the Network Connectivity Center to connect your on-premises, cloud enterprise networks, and hybrid networks, and manage them as spokes through a single, centralized hub on Google Cloud.    A skill badge is an exclusive digital badge issued by Google Cloud in recognition of your proficiency with Google Cloud products and services and tests your ability to apply your knowledge in an interactive hands-on environment. Complete this Skill Badge and the final assessment challenge lab, to receive a digital badge that you can share with your network.",
     "skills": [
       "Google Cloud",
       "Security"
@@ -666,7 +681,7 @@
     "title": "Arcade Simulator: Network Security Engineer",
     "category": "Security & IAM",
     "earnedDate": "Aug 10, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Simulator: Network Security Engineer.",
+    "description": "Welcome to this month's Arcade Simulator where you will step into the shoes of a Network Security Engineer. In this simulation, you'll first lock down access control across your infrastructure—crafting custom IAM roles, scripting permissions, and setting up Identity-Aware Proxy to secure user authentication without traditional VPNs. Then, you'll take control of hybrid enterprise topology, using Network Connectivity Center to link multi-cloud networks, VPCs, and site-to-site HA-VPNs. Complete with two realistic challenge labs, this simulation equips you to eliminate access blind spots, secure cross-cloud traffic, and build a fortress-grade network on Google Cloud.",
     "skills": [
       "Cloud Security"
     ],
@@ -679,7 +694,7 @@
     "title": "Google Cloud Agent Governance and Security",
     "category": "Security & IAM",
     "earnedDate": "Aug 10, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Google Cloud Agent Governance and Security.",
+    "description": "As enterprise teams transition to autonomous AI agents, security evolves toward proactive, identity-centric protection. In this course, you will implement a zero-trust security architecture for Cymbal Banking's underwriting platform using the Gemini Enterprise Agent Platform. By deploying a regional Egress Agent Gateway, configuring Model Armor and Semantic Governance (SGP) safety templates, assigning cryptographic SPIFFE identities to agent runtimes, and declaring a VPC-SC perimeter in Terraform, you will protect database boundaries and manage tools with production-grade governance.",
     "skills": [
       "Cloud Security"
     ],
@@ -692,7 +707,7 @@
     "title": "Privileged Access with IAM",
     "category": "Security & IAM",
     "earnedDate": "Aug 9, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Privileged Access with IAM.",
+    "description": "Complete the intermediate Privileged Access with IAM skill badge to demonstrate skills in the following: custom roles using Identity and Access Management (IAM), the principle of least privilege, Just-in-Time (JIT) temporary elevated access, and security for web applications using Identity-Aware Proxy (IAP).",
     "skills": [
       "Cloud Security"
     ],
@@ -705,7 +720,7 @@
     "title": "Deploy and Secure Serverless APIs with API Gateway",
     "category": "DevOps & SRE",
     "earnedDate": "Aug 9, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Deploy and Secure Serverless APIs with API Gateway.",
+    "description": "Earn a skill badge by completing the Deploy and Secure Serverless APIs with API Gateway skill badge course, where you learn how to use API Gateway to deploy, secure, and manage APIs with a fully managed gateway.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -719,7 +734,7 @@
     "title": "Spans and Plans",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 9, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Spans and Plans.",
+    "description": "It’s all about global spans and execution plans. First, you'll get under the hood of Google Cloud Spanner to design schemas, load data at scale, and master query plan optimization. From there, you'll execute your serverless backend plan by wiring up Cloud Run Functions, Pub/Sub messaging, and API Gateway. Packed with two challenge labs, you'll leave with full control over enterprise data and event-driven APIs.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -733,7 +748,7 @@
     "title": "Create and Manage Cloud Spanner Instances",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 9, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Create and Manage Cloud Spanner Instances.",
+    "description": "Complete the introductory Create and Manage Cloud Spanner Instances skill badge to demonstrate skills in the following: creating and interacting with Cloud Spanner instances and databases; loading Cloud Spanner databases using various techniques; backing up Cloud Spanner databases; defining schemas and understanding query plans; and deploying a Modern Web App connected to a Cloud Spanner instance.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -747,7 +762,7 @@
     "title": "Implement CI/CD Pipelines on Google Cloud",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 8, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Implement CI/CD Pipelines on Google Cloud.",
+    "description": "Earn the intermediate skill badge by completing the Implement CI/CD Pipelines on Google Cloud skill badge course where you learn how to use Artifact Registry, Cloud Build, and Cloud Deploy. You interact with the Google Cloud console, Google Cloud CLI, Cloud Run, and GKE. This course teaches you how to build continuous integration pipelines, store and secure artifacts, scan for vulnerabilities, attest to the validity of approved releases. Additionally, you get hands-on experience deploying applications to both GKE and Cloud Run.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -761,7 +776,7 @@
     "title": "Share Data Using Google Data Cloud",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 7, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Share Data Using Google Data Cloud.",
+    "description": "Earn a skill badge by completing the Share Data Using Google Data Cloud skill badge course, where you will gain practical experience with Google Cloud Data Sharing Partners, which have proprietary datasets that customers can use for their analytics use cases. Customers subscribe to this data, query it within their own platform, then augment it with their own datasets and use their visualization tools for their customer facing dashboards.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -775,7 +790,7 @@
     "title": "Arcade Adventure: Data Vault",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 7, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Adventure: Data Vault.",
+    "description": "Who says sharing complex data across boundaries has to be a compliance nightmare? This adventure is your blueprint for delivering modern Analytics-as-a-Service on Google Data Cloud. You'll start by building secure, authorized views on BigQuery to safely expose data to partners without exposing underlying tables. Next, you'll learn to consume customer-specific datasets and streamline cross-organization data delivery. Packed with a hands-on challenge lab, this adventure gives you the practical skills to publish, share, and scale data seamlessly while keeping security tight.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -789,7 +804,7 @@
     "title": "Secure Enterprise AI Agents",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 7, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Secure Enterprise AI Agents.",
+    "description": "Learn how to secure and govern AI agents on Google Cloud. This course provides a practical roadmap to securing agent memory, enforcing strict access controls with IAM and VPC Service Controls, and deploying real-time conversation guardrails to ensure safe, compliant enterprise deployments. Explore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -803,7 +818,7 @@
     "title": "Add Agent Capabilities With Tools",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 7, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Add Agent Capabilities With Tools.",
+    "description": "You’ve built agents with advanced configuration—now give them real-world capabilities. Equip agents with tools that enable searching the web, executing code, querying databases, and performing custom actions. Transform agents from intelligent responders into capable assistants that take action.\n\nExplore other content in the Gemini Agent Ready (GEAR) program.\n\nJoin the community forum for questions and discussions",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -817,7 +832,7 @@
     "title": "Manage Agent Memory and State",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 7, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Manage Agent Memory and State.",
+    "description": "You've built basic LLM agents that respond to queries—now let's make them stateful. Use session state to build agents that maintain context, remember user preferences, and provide personalized experiences. Transform agents from stateless responders to intelligent assistants.\n\nExplore other content in the Gemini Agent Ready (GEAR) program.\n\nJoin the community forum for questions and discussions",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -831,7 +846,7 @@
     "title": "Optimize Agent Behavior",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 7, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Optimize Agent Behavior.",
+    "description": "You’ve built your first agent—now it’s time to take it further. In this course, you’ll advance your skills by learning how to turn a basic AI agent into a sophisticated, precise assistant—applying advanced instructions, model selection, planning capabilities, and structured output patterns.\n\nExplore other content in the Gemini Agent Ready (GEAR) program.\n\nJoin the community forum for questions and discussions",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -845,7 +860,7 @@
     "title": "Engineer AI Agents with Agent Development Kit (ADK)",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 7, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Engineer AI Agents with Agent Development Kit (ADK).",
+    "description": "Complete the intermediate Engineer AI Agents with Agent Development Kit (ADK) skill badge by completing this course to demonstrate skills in the following: formulating real-world language model research problems; building a simple tokenizer; preparing a dataset for training a transformer language model; running the training loop of a small language model. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -859,7 +874,7 @@
     "title": "Use Functions, Formulas, and Charts in Google Sheets",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 7, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Use Functions, Formulas, and Charts in Google Sheets.",
+    "description": "Complete the intermediate Use Functions, Formulas and Charts in Google Sheets skill badge course to demonstrate skills in the following: analyzing data with functions; visualizing data using charts; and searching, validating, formatting, and displaying data.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -873,7 +888,7 @@
     "title": "Arcade Voyage: Google Sheets",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 7, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Voyage: Google Sheets.",
+    "description": "Transforming raw spreadsheet data into structured business intelligence requires precise validation, efficient navigation, and dynamic visual reporting. This voyage path builds core analytical competencies using Google Sheets. You will begin by implementing strict data validation rules, configuring targeted search workflows, and ensuring data integrity across large datasets. You will then advance to building dynamic charts and executing complex analytical formulas to extract meaningful insights. Finalized with a comprehensive challenge lab, this voyage prepares you to build reliable, presentation-ready analytical workbooks.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -887,7 +902,7 @@
     "title": "Build Collaborative Multi-Agent Systems with ADK & MCP",
     "category": "DevOps & SRE",
     "earnedDate": "Aug 7, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build Collaborative Multi-Agent Systems with ADK & MCP.",
+    "description": "Learn to design, coordinate, and deploy multi-agent systems using Google’s Agent Development Kit (ADK) and the Model Context Protocol (MCP). Using a travel concierge example, you'll learn to orchestrate a network of specialized agents with custom guardrails. By the end of the course, you'll understand the design patterns and deployment strategies required for robust, scalable AI workflows.  Explore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -901,7 +916,7 @@
     "title": "Organize and Govern Data with Knowledge Catalog",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 6, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Organize and Govern Data with Knowledge Catalog.",
+    "description": "Complete the introductory Organize and Govern Data with Knowledge Catalog skill badge to demonstrate skills in the following: creating Knowledge Catalog assets, creating aspect types, and applying aspects to entries in Knowledge Catalog.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -915,7 +930,7 @@
     "title": "Manage Kubernetes in Google Cloud",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 6, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Manage Kubernetes in Google Cloud.",
+    "description": "Complete the intermediate Manage Kubernetes in Google Cloud skill badge course to demonstrate skills in the following: managing deployments with kubectl, monitoring and debugging applications on Google Kubernetes Engine (GKE), and continuous delivery techniques.",
     "skills": [
       "Kubernetes"
     ],
@@ -928,7 +943,7 @@
     "title": "Serverless Data Processing with Dataflow: Develop Pipelines",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 5, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Serverless Data Processing with Dataflow: Develop Pipelines.",
+    "description": "In this second installment of the Dataflow course series, we are going to be diving deeper on developing pipelines using the Beam SDK. We start with a review of Apache Beam concepts. Next, we discuss processing streaming data using windows, watermarks and triggers. We then cover options for sources and sinks in your pipelines, schemas to express your structured data, and how to do stateful transformations using State and Timer APIs. We move onto reviewing best practices that help maximize your pipeline performance. Towards the end of the course, we introduce SQL and Dataframes to represent your business logic in Beam and how to iteratively develop pipelines using Beam notebooks.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -942,7 +957,7 @@
     "title": "Serverless Data Processing with Dataflow: Foundations",
     "category": "Data & BigQuery",
     "earnedDate": "Aug 5, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Serverless Data Processing with Dataflow: Foundations.",
+    "description": "This course is part 1 of a 3-course series on Serverless Data Processing with Dataflow. In this first course, we start with a refresher of what Apache Beam is and its relationship with Dataflow. Next, we talk about the Apache Beam vision and the benefits of the Beam Portability framework. The Beam Portability framework achieves the vision that a developer can use their favorite programming language with their preferred execution backend. We then show you how Dataflow allows you to separate compute and storage while saving money, and how identity, access, and management tools interact with your Dataflow pipelines. Lastly, we look at how to implement the right security model for your use case on Dataflow.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -956,7 +971,7 @@
     "title": "Monitoring in Google Cloud",
     "category": "DevOps & SRE",
     "earnedDate": "Aug 4, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Monitoring in Google Cloud.",
+    "description": "Complete the introductory Monitoring in Google Cloud skill badge course to demonstrate skills in the following: using Cloud Monitoring tools to monitor resources on Google Cloud.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -970,7 +985,7 @@
     "title": "Arcade Base Camp August 2026",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 4, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Base Camp August 2026.",
+    "description": "Welcome to Base Camp, where you’ll develop key Google Cloud skills (available in Spanish and Portuguese too!) and earn an exclusive credential that will open doors to the cloud for you. No prior experience is required!",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -984,7 +999,7 @@
     "title": "Analyze Sentiment with Natural Language API",
     "category": "Generative AI",
     "earnedDate": "Aug 4, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Analyze Sentiment with Natural Language API.",
+    "description": "Earn a skill badge by completing the Analyze Sentiment with Natural Language API quest, where you learn how the API derives sentiment from text.",
     "skills": [
       "Google Cloud",
       "Generative"
@@ -998,7 +1013,7 @@
     "title": "Develop with Apps Script and AppSheet",
     "category": "Cloud Infrastructure",
     "earnedDate": "Aug 1, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Develop with Apps Script and AppSheet.",
+    "description": "Earn a skill badge by completing the Develop with Apps Script and AppSheet skill badge course, where you learn how to build chat bots and how to use the script editor in any document.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1012,7 +1027,7 @@
     "title": "Configure Service Accounts and IAM Roles for Google Cloud",
     "category": "Security & IAM",
     "earnedDate": "Jul 31, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Configure Service Accounts and IAM Roles for Google Cloud.",
+    "description": "Earn the Introductory skill badge by completing the Configure Service Accounts and IAM Roles for Google Cloud course, where you learn about service accounts, custom roles, and how to set permissions using gcloud .",
     "skills": [
       "Cloud Security"
     ],
@@ -1025,7 +1040,7 @@
     "title": "AI Boost Bites: Create Your Own Retro Arcade Game",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 31, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Create Your Own Retro Arcade Game.",
+    "description": "This video covers how to use a simple prompt in Gemini Canvas to build, customize, and share your own playable game, like Tic-Tac-Toe.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1039,7 +1054,7 @@
     "title": "Using the Google Cloud Speech API",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 30, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Using the Google Cloud Speech API.",
+    "description": "Earn a skill badge by completing the Using the Google Cloud Speech API skill badge course, where you learn how create a Speech-to-Text API request, transcribe audio speech to text, and transcribe speech.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1053,7 +1068,7 @@
     "title": "Google DeepMind : 08 Capstone: Develop Your Model for Real-World Impact",
     "category": "Generative AI",
     "earnedDate": "Jul 30, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Google DeepMind : 08 Capstone: Develop Your Model for Real-World Impact.",
+    "description": "In this Google DeepMind course, you will complete a capstone project that brings together the technical knowledge, ethical awareness, and creative problem-solving skills that you have developed throughout the Google DeepMind: AI Research Foundations curriculum. You will apply what you have learned to a problem of your choosing. You will first plan your project to ensure that you are clear on your project aims and intended impact. You will then collect and prepare data for your model. Finally, you will implement a full fine-tuning workflow using Gemma 3 with low-rank adaptation (LoRA) and evaluate its performance. You will receive guidance, but the emphasis will be on adaptation and experimentation - skills that are essential for applied AI research.",
     "skills": [
       "DeepMind"
     ],
@@ -1066,7 +1081,7 @@
     "title": "Google DeepMind: Train A Small Language Model",
     "category": "Generative AI",
     "earnedDate": "Jul 30, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Google DeepMind: Train A Small Language Model.",
+    "description": "Complete the advanced Google DeepMind: Train A Small Language Model skill badge by completing this course to demonstrate skills in the following: formulating real-world language model research problems; building a simple tokenizer; preparing a dataset for training a transformer language model; running the training loop of a small language model. Access this lab at no-cost by signing up for the no-cost subscription. Receive 35 free credits each month!",
     "skills": [
       "DeepMind"
     ],
@@ -1079,7 +1094,7 @@
     "title": "Gen AI Apps: Transform Your Work",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 29, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Gen AI Apps: Transform Your Work.",
+    "description": "Transform Your Work With Gen AI Apps is the fourth course of the Gen AI Leader learning path. This course introduces Google’s gen AI applications, such as Google Workspace with Gemini and Gemini Notebook. It guides you through concepts like grounding, retrieval augmented generation, constructing effective prompts and building automated workflows.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1093,7 +1108,7 @@
     "title": "Gen AI: Navigate the Landscape",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 29, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Gen AI: Navigate the Landscape.",
+    "description": "Gen AI: Navigate the Landscape is the third course of the Gen AI Leader learning path. Gen AI is changing how we work and interact with the world around us. But as a leader, how can you harness its power to drive real business outcomes? In this course, you explore the different layers of building gen AI solutions,  Google Cloud’s offerings, and the factors to consider when selecting a solution.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1107,7 +1122,7 @@
     "title": "Boost Productivity with Gemini in BigQuery",
     "category": "Generative AI",
     "earnedDate": "Jul 29, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Boost Productivity with Gemini in BigQuery.",
+    "description": "This course explores Gemini in BigQuery, a suite of AI-driven features to assist data-to-AI workflow. These features include data exploration and preparation, code generation and troubleshooting, and workflow discovery and visualization. Through conceptual explanations, a practical use case, and hands-on labs, the course empowers data practitioners to boost their productivity and expedite the development pipeline.",
     "skills": [
       "Gemini",
       "BigQuery"
@@ -1121,7 +1136,7 @@
     "title": "[DEPRECATED] Streamline App Development with Gemini Code Assist",
     "category": "Generative AI",
     "earnedDate": "Jul 28, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] Streamline App Development with Gemini Code Assist.",
+    "description": "Designed for developers of all levels, this course introduces you to the core features and functionalities of Gemini Code Assist, an AI-powered app development collaborator for Google Cloud. From intelligent code suggestions and auto-completion to real-time error detection and refactoring assistance, you'll discover how Gemini Code Assist can significantly enhance your productivity and code quality, and save valuable time to focus on more productive and enjoyable tasks.",
     "skills": [
       "Gemini"
     ],
@@ -1134,7 +1149,7 @@
     "title": "Gen AI: Unlock Foundational Concepts",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 27, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Gen AI: Unlock Foundational Concepts.",
+    "description": "Gen AI: Unlock Foundational Concepts is the second course of the Gen AI Leader learning path. In this course, you unlock the foundational concepts of generative AI by exploring the differences between AI, ML, and gen AI, and understanding how various data types enable generative AI to address business challenges. You also gain insights into Google Cloud strategies to address the limitations of foundation models and the key challenges for responsible and secure AI development and deployment.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1148,7 +1163,7 @@
     "title": "Gen AI: Beyond the Chatbot",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 27, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Gen AI: Beyond the Chatbot.",
+    "description": "Gen AI: Beyond the Chatbot is the first course of the Gen AI Leader learning path and has no prerequisites. This course aims to move beyond the basic understanding of chatbots to explore the true potential of generative AI for your organization. You explore concepts like foundation models and prompt engineering, which are crucial for leveraging the power of gen AI. The course also guides you through important considerations you should make when developing a successful gen AI strategy for your organization.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1162,7 +1177,7 @@
     "title": "Build Serverless Applications with Cloud Run Functions",
     "category": "DevOps & SRE",
     "earnedDate": "Jul 27, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build Serverless Applications with Cloud Run Functions.",
+    "description": "Earn a Introductory skill badge by completing the Build Serverless Applications with Cloud Run Functions course, where you learn how to use Cloud Run functions through the Google Cloud console and on the command line.",
     "skills": [
       "Cloud Run"
     ],
@@ -1175,7 +1190,7 @@
     "title": "Arcade Adventure: Low-Code Development",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 27, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Adventure: Low-Code Development.",
+    "description": "Who says you need a mountain of code to build great software? This adv is your fast lane to rapid app development and automation. First, you'll jump into Google AppSheet to build and launch fully functional apps entirely code-free. Then, you'll master the backend with Cloud Run Functions, deploying event-driven code via the console and command line. Packed with two hands-on challenge labs, this quest is your ticket to building slick apps and scaling them effortlessly on Google Cloud.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1189,7 +1204,7 @@
     "title": "Deploy Your First Agent",
     "category": "DevOps & SRE",
     "earnedDate": "Jul 26, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Deploy Your First Agent.",
+    "description": "Take your agents from localhost to production. This course teaches you to deploy ADK agents to Agent Runtime and Cloud Run, with optional cross-session memory via Memory Bank. \n\nExplore other content in the Gemini Agent Ready (GEAR) program.\n\n Join the community forum for questions and discussions",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -1203,7 +1218,7 @@
     "title": "App Building with AppSheet",
     "category": "DevOps & SRE",
     "earnedDate": "Jul 26, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in App Building with AppSheet.",
+    "description": "Earn a skill badge by completing the App Building with AppSheet course, where you learn how to build, configure, and publish apps using AppSheet.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -1217,7 +1232,7 @@
     "title": "Build Infrastructure with Terraform on Google Cloud",
     "category": "DevOps & SRE",
     "earnedDate": "Jul 25, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build Infrastructure with Terraform on Google Cloud.",
+    "description": "Complete the intermediate Build Infrastructure with Terraform on Google Cloud skill badge to demonstrate skills in the following: Infrastructure as Code (IaC) principles using Terraform, provisioning and managing Google Cloud resources with Terraform configurations, effective state management (local and remote), and modularizing Terraform code for reusability and organization.",
     "skills": [
       "Terraform"
     ],
@@ -1230,7 +1245,7 @@
     "title": "Build a Data Mesh with Knowledge Catalog",
     "category": "Data & BigQuery",
     "earnedDate": "Jul 23, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build a Data Mesh with Knowledge Catalog.",
+    "description": "Complete the introductory Build a Data Mesh with Knowledge Catalog skill badge to demonstrate skills in the following: building a data mesh with Knowledge Catalog to facilitate data security, governance, and discovery on Google Cloud. You practice and test your skills in tagging assets, assigning IAM roles, and assessing data quality in Knowledge Catalog.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -1244,7 +1259,7 @@
     "title": "Arcade Simulator: Data Mesh Architect",
     "category": "Data & BigQuery",
     "earnedDate": "Jul 23, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Simulator: Data Mesh Architect.",
+    "description": "Welcome to this month's Arcade Simulator where you will be a Data Mesh Architect. In this simulation, you'll first tackle BigQuery to build date-partitioned tables, solve complex join pitfalls, and master nested data structures. Then, you'll shift to decentralized governance using Dataplex Knowledge Catalog to organize assets, assign metadata, and enforce strict cloud security. Complete with two realistic challenge labs, this simulation equips you to break down data silos, scale your infrastructure, and run a secure, seamless data mesh.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -1258,7 +1273,7 @@
     "title": "Build a Data Warehouse with BigQuery",
     "category": "Data & BigQuery",
     "earnedDate": "Jul 21, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build a Data Warehouse with BigQuery.",
+    "description": "Complete the intermediate Build a Data Warehouse with BigQuery skill badge course to demonstrate skills in the following: joining data to create new tables, troubleshooting joins, appending data with unions, creating date-partitioned tables, and working with JSON, arrays, and structs in BigQuery.",
     "skills": [
       "BigQuery"
     ],
@@ -1271,7 +1286,7 @@
     "title": "Optimize Costs for Google Kubernetes Engine",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 21, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Optimize Costs for Google Kubernetes Engine.",
+    "description": "Complete the intermediate Optimize Costs for Google Kubernetes Engine skill badge course to demonstrate skills in the following: creating and managing multi-tenant clusters, monitoring resource usage by namespace, configuring cluster and pod autoscaling for efficiency, setting up load balancing for optimal resource distribution, and implementing liveness and readiness probes to ensure application health and cost-effectiveness.",
     "skills": [
       "Kubernetes"
     ],
@@ -1284,7 +1299,7 @@
     "title": "Safe Spaces",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 21, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Safe Spaces.",
+    "description": "Building a true \"safe space\" in the cloud means protecting your applications from external threats while keeping your internal infrastructure stable and efficient. This challenege starts by turning Security Command Center into your ultimate defensive shield—learning to spot risks, investigate threats, and secure your perimeter. From there, you'll bring that same safe-space philosophy to Google Kubernetes Engine (GKE) by isolating workloads safely with multi-tenant namespaces and protecting your budget through smart autoscaling ensuring your cloud environments remain secure and perfectly optimized.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1298,7 +1313,7 @@
     "title": "Mitigate Threats and Vulnerabilities with Security Command Center",
     "category": "Security & IAM",
     "earnedDate": "Jul 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Mitigate Threats and Vulnerabilities with Security Command Center.",
+    "description": "Complete the intermediate Mitigate Threats and Vulnerabilities with Security Command Center skill badge course to demonstrate skills in the following: preventing and managing environment threats, identifying and mitigating application vulnerabilities, and responding to security anomalies.",
     "skills": [
       "Cloud Security"
     ],
@@ -1311,7 +1326,7 @@
     "title": "Use APIs to Work with Cloud Storage",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Use APIs to Work with Cloud Storage.",
+    "description": "Complete the introductory Use APIs to Work with Cloud Storage skill badge to demonstrate skills in the following: using APIs to work with Cloud Storage resources, including the Cloud Storage API.",
     "skills": [
       "Cloud Storage"
     ],
@@ -1324,7 +1339,7 @@
     "title": "Arcade Voyage: Cloud Storage and Data Governance",
     "category": "Data & BigQuery",
     "earnedDate": "Jul 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Voyage: Cloud Storage and Data Governance.",
+    "description": "Data is one of the most valuable assets an organization owns, making its safe handling and governance essential. In this voyage, you will master Cloud Storage fundamentals by automating bucket management via APIs and the CLI, while enforcing compliance with Bucket Lock. You will then advance to automated security, configuring Sensitive Data Protection Discovery to scan and catalog risks across BigQuery and Cloud Storage. Complete with two challenge labs, this journey equips you to secure assets across your entire cloud ecosystem.",
     "skills": [
       "Cloud Storage"
     ],
@@ -1337,7 +1352,7 @@
     "title": "Discover and Protect Sensitive Data Across Your Ecosystem",
     "category": "Data & BigQuery",
     "earnedDate": "Jul 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Discover and Protect Sensitive Data Across Your Ecosystem.",
+    "description": "Complete the intermediate Discover and Protect Sensitive Data Across Your Ecosystem skill badge to demonstrate skills in the following: using Sensitive Data Protection services (including the Cloud Data Loss Prevention (DLP) API) to discover, inspect, redact, and de-identify sensitive data across your Google Cloud ecosystem including Cloud Storage files, BigQuery data, and Gen AI model responses.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -1351,7 +1366,7 @@
     "title": "Build and Deploy Agents in Production",
     "category": "DevOps & SRE",
     "earnedDate": "Jul 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build and Deploy Agents in Production.",
+    "description": "Explore the architecture and deployment of multi-agent systems using Google’s Agent Development Kit (ADK) and Google Cloud’s robust infrastructure. You will learn to design hierarchical agent trees and deterministic workflow agents while identifying the ideal hosting environment—from serverless Cloud Run to high-performance GKE—to ensure your AI agents are secure, scalable, and production-ready. Explore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -1365,7 +1380,7 @@
     "title": "Google DeepMind: 05 Fine-Tune Your Model",
     "category": "Generative AI",
     "earnedDate": "Jul 19, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Google DeepMind: 05 Fine-Tune Your Model.",
+    "description": "Unleash the power of language models with fine-tuning. In this course, you will learn how to adjust a pre-trained model to a specific task. You will start with full-parameter fine-tuning using a small language model. To tune larger models like Gemma, you will learn parameter-efficient techniques with a focus on LoRA. Finally, you will be briefly introduced to reinforcement learning as an alternative to supervised fine-tuning (SFT). You will also explore how AI is imagined and made sense of in cultural contexts. You will consider why responsible AI is not just about technical safety but also about building governance systems that reflect community values and protect the public interest.",
     "skills": [
       "DeepMind"
     ],
@@ -1378,7 +1393,7 @@
     "title": "Google DeepMind: 07 Accelerate Your Model",
     "category": "Generative AI",
     "earnedDate": "Jul 19, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Google DeepMind: 07 Accelerate Your Model.",
+    "description": "Train more powerful models with a single GPU. In this course, you will learn how hardware can speed up model training and the key considerations when training models on a GPU. First, you will learn how to estimate the number of computations and the amount of computer memory required to train large neural networks. You will then discover techniques for reducing the computing and memory requirements when training a model. Techniques which you will apply for fine-tuning a Gemma model with 4 billion parameters. Finally, you will consider the potential environmental impacts of machine learning, with a focus on where questions of energy, water, and e-waste intersect with justice and equity.",
     "skills": [
       "DeepMind"
     ],
@@ -1391,7 +1406,7 @@
     "title": "Human-Centered AI",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 18, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Human-Centered AI.",
+    "description": "Explore the vital transition from task-driven workflows to human-centric AI orchestration. You will learn to strategically distinguish between augmentation and automation, and how to balance machine efficiency with human intuition. \nExplore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1405,7 +1420,7 @@
     "title": "Gen AI Agents: Transform Your Organization",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 18, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Gen AI Agents: Transform Your Organization.",
+    "description": "Gen AI Agents: Transform Your Organization is the fifth and final course of the Gen AI Leader learning path. This course explores how organizations can use custom gen AI agents to help tackle specific business challenges. You gain hands-on practice building a basic gen AI agent, while exploring the components of these agents, such as models, reasoning loops, and tools. Explore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1419,7 +1434,7 @@
     "title": "Orchestrate Multi-agent Workflows with Gemini Enterprise",
     "category": "Generative AI",
     "earnedDate": "Jul 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Orchestrate Multi-agent Workflows with Gemini Enterprise.",
+    "description": "Complete the introductory Orchestrate Multi-Agent Workflows with Gemini Enterprise skill badge to demonstrate skills in the following: using agentic assistants powered by Gemini Enterprise to unify data across first- and third-party sources, develop multimedia marketing materials, and automate business actions across systems.\n\nSkill badges validate your practical knowledge on specific products through hands-on labs and challenge assessments. Earn a badge by completing a course or jump straight into the challenge lab to get your badge today. Badges prove your proficiency, enhance your professional profile, and ultimately lead to increased career opportunities. Visit your profile to track badges you’ve earned. Explore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Gemini"
     ],
@@ -1432,7 +1447,7 @@
     "title": "AI Boost Bites: Create Your Ultimate College Scouting Report",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Create Your Ultimate College Scouting Report.",
+    "description": "This video covers how to use Gemini Deep Research with creative prompts to turn complex information into a fun, personalized analysis, like a sports scouting report and bracket.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1446,7 +1461,7 @@
     "title": "AI Boost Bites: One-Click Campaign Visuals",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: One-Click Campaign Visuals.",
+    "description": "In this video, you'll learn to use the Create menu in Gemini Canvas to instantly convert a block of text into a variety of visual formats. You’ll see how to take a brainstormed marketing campaign and turn it into both a shareable infographic and an internal webpage with just one click.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1460,7 +1475,7 @@
     "title": "AI Boost Bites: From Napkin Sketch to Functional App",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: From Napkin Sketch to Functional App.",
+    "description": "This video covers how to use Gemini Canvas to transform a simple drawing of an app into a functional prototype using a technique called \"vibe coding.\"",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1474,7 +1489,7 @@
     "title": "[DEPRECATED] AI Boost Bites: NotebookLM Reports",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] AI Boost Bites: NotebookLM Reports.",
+    "description": "This video covers how NotebookLM's Reports feature dynamically suggests formats to help you create customized, trustworthy analyses of your documents with ease.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1488,7 +1503,7 @@
     "title": "AI Boost Bites: Presentation Scripts with Gemini",
     "category": "Generative AI",
     "earnedDate": "Jul 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Presentation Scripts with Gemini.",
+    "description": "This video covers how to use Gemini Advanced to research a topic, create a presentation outline, and then use Gemini in Google Docs to generate talking points.",
     "skills": [
       "Gemini"
     ],
@@ -1501,7 +1516,7 @@
     "title": "[DEPRECATED] AI Boost Bites: Project Notebooks",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] AI Boost Bites: Project Notebooks.",
+    "description": "This video covers how to create a 'project notebook' in NotebookLM by adding all relevant sources to build a central, searchable knowledge hub for your team.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1515,7 +1530,7 @@
     "title": "[DEPRECATED] AI Boost Bites: NotebookLM for Market Research",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 14, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] AI Boost Bites: NotebookLM for Market Research.",
+    "description": "This video covers how to use NotebookLM for common marketing tasks like\n    analyzing customer feedback, conducting market research, and generating\n    content ideas.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1529,7 +1544,7 @@
     "title": "[Deprecated]AI Boost Bites: NotebookLM Video Overviews",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [Deprecated]AI Boost Bites: NotebookLM Video Overviews.",
+    "description": "This video covers how to use the Video Overviews feature in NotebookLM to automatically generate a short explainer video based on your source documents.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1543,7 +1558,7 @@
     "title": "[DEPRECATED] AI Boost Bites: Discover Sources in NotebookLM",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] AI Boost Bites: Discover Sources in NotebookLM.",
+    "description": "This video covers how to use the 'Discover Sources' feature in NotebookLM to find and import relevant web-based sources directly into your research project.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1557,7 +1572,7 @@
     "title": "[DEPRECATED] AI Boost Bites: NotebookLM Mind Maps",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] AI Boost Bites: NotebookLM Mind Maps.",
+    "description": "This video covers how to use the Mind Maps feature in NotebookLM to automatically create a visual representation of your sources, helping you understand connections and key concepts.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1571,7 +1586,7 @@
     "title": "[DEPRECATED] AI Boost Bites: Intro to NotebookLM",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] AI Boost Bites: Intro to NotebookLM.",
+    "description": "This video covers how to use NotebookLM as a personal research\n    assistant by adding sources, asking questions, and generating new content\n    formats based on your documents.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1585,7 +1600,7 @@
     "title": "AI Boost Bites: Email Content Creation",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Email Content Creation.",
+    "description": "This video covers how to use Gemini in Gmail to draft new emails,\n    refine their tone, respond with context from Drive files, and use smart\n    reply suggestions.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1599,7 +1614,7 @@
     "title": "AI Boost Bites: Create Docs in Seconds",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Create Docs in Seconds.",
+    "description": "This video covers how to use the 'Help me create' feature in Google Docs to generate a complete, formatted document by referencing content from other files in your Drive.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1613,7 +1628,7 @@
     "title": "AI Boost Bites: Gemini Slide Summaries",
     "category": "Generative AI",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Gemini Slide Summaries.",
+    "description": "This video covers how to use Gemini in Slides to automatically generate\n    meeting recaps and draft follow-up emails, which can streamline your\n    post-meeting workflow and save you time.",
     "skills": [
       "Gemini"
     ],
@@ -1626,7 +1641,7 @@
     "title": "AI Boost Bites: No-Code Sheets & Scripts",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: No-Code Sheets & Scripts.",
+    "description": "This video covers how you can leverage Gemini's advanced AI capabilities within Google Sheets to effortlessly pull data and generate insights in minutes, all without the need for any technical or coding background.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1640,7 +1655,7 @@
     "title": "AI Boost Bites: Amplify Exec Voices with AI",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Amplify Exec Voices with AI.",
+    "description": "This video will cover how to leverage Gemini Gems to create authentic\n    social media posts in your leader's unique voice. Learn to overcome the\n    challenge of scaling executive social presence by training a Gem with\n    writing samples and clear instructions. Discover how to generate engaging\n    posts quickly, saving time while amplifying thought leadership and\n    ensuring authenticity.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1654,7 +1669,7 @@
     "title": "AI Boost Bites: Exec Summaries with Gemini Gems",
     "category": "Generative AI",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Exec Summaries with Gemini Gems.",
+    "description": "This video covers how you can create your own Brevity Gem to summarize and transform messy notes or long documents into clear, concise, executive-ready summaries.",
     "skills": [
       "Gemini"
     ],
@@ -1667,7 +1682,7 @@
     "title": "AI Boost Bites: Automate tasks with Gemini and Apps Script",
     "category": "Generative AI",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Automate tasks with Gemini and Apps Script.",
+    "description": "This video covers how to use Gemini and Apps Script to automate manual tasks across Google Workspace. You'll learn to prompt Gemini to generate Apps Script code that automatically drafts email reminders in Google Sheets for tasks not marked 'Complete.' Automate your workflow with little to no technical expertise, freeing up time for more important work and eliminating manual follow-ups.",
     "skills": [
       "Gemini"
     ],
@@ -1680,7 +1695,7 @@
     "title": "[DEPRECATED] AI Boost Bites: \"Eat the Frog\" with NotebookLM",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] AI Boost Bites: \"Eat the Frog\" with NotebookLM.",
+    "description": "This video covers how you can leverage Notebook LM to \"eat the frog\" on your to-do list by automating complex tasks like summarizing legislation and mapping services, saving you hours of work.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1694,7 +1709,7 @@
     "title": "AI Boost Bites: Gemini Image-to-Sheets Hack",
     "category": "Generative AI",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Gemini Image-to-Sheets Hack.",
+    "description": "This video covers how to eliminate tedious manual data entry using Gemini. Learn how to take a picture or screenshot of data (from PDFs, paper, or images) and prompt Gemini to instantly convert it into a structured Google Sheet. Discover this simple hack to save countless hours transcribing data, turning Gemini into your personal data entry assistant. Just snap, prompt, and export!",
     "skills": [
       "Gemini"
     ],
@@ -1707,7 +1722,7 @@
     "title": "AI Boost Bites: Poke Holes in Your Strategy",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Poke Holes in Your Strategy.",
+    "description": "This video covers using AI to identify weaknesses and hidden assumptions in your strategy. You'll learn the \"Poke Holes\" method, a simple way to pressure-test your plans with AI prompts, uncovering gaps and strengthening your strategic thinking.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1721,7 +1736,7 @@
     "title": "[DEPRECATED] AI Boost Bites: NotebookLM for Competitive Edge",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] AI Boost Bites: NotebookLM for Competitive Edge.",
+    "description": "This video will cover how to use NotebookLM to gather and analyze\n    publicly available information, combine it with internal documents, and\n    extract key competitive insights.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1735,7 +1750,7 @@
     "title": "AI Boost Bites: Personalization with customized prompts",
     "category": "Generative AI",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Personalization with customized prompts.",
+    "description": "This video covers how to personalize your Gemini results in Google\n    Workspace. Learn to incorporate documents and research papers directly\n    into your prompts using the \"@\" symbol to get more targeted and relevant\n    AI output tailored to your needs.",
     "skills": [
       "Prompting"
     ],
@@ -1748,7 +1763,7 @@
     "title": "AI Boost Bites: TL;DR with Gemini in Docs & Drive",
     "category": "Generative AI",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: TL;DR with Gemini in Docs & Drive.",
+    "description": "This video covers how you can use Gemini to summarize long documents in Google Workspace, so you can quickly get the information you need and save time. You'll learn how to use Gemini to summarize entire documents or just selected text, as well as how to use Gemini in Drive to summarize across multiple files.",
     "skills": [
       "Gemini"
     ],
@@ -1761,7 +1776,7 @@
     "title": "AI Boost Bites: Prompting like a Pro with Google Workspace",
     "category": "Generative AI",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Prompting like a Pro with Google Workspace.",
+    "description": "This video covers prompt engineering fundamentals for effective AI communication. Learn a simple framework (Persona, Task, Context, Format) to craft clear prompts, getting better, faster results from Gemini in Google Workspace. Discover how to use natural language, be specific, and iterate for optimal AI assistance.",
     "skills": [
       "Prompting"
     ],
@@ -1774,7 +1789,7 @@
     "title": "AI Boost Bites: Content Generation with Gemini Made Easy",
     "category": "Generative AI",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Content Generation with Gemini Made Easy.",
+    "description": "This video will cover how you can leverage Gemini's advanced AI capabilities in Google Docs to brainstorm ideas, draft various marketing content, and collaborate with your team.",
     "skills": [
       "Gemini"
     ],
@@ -1787,7 +1802,7 @@
     "title": "[DEPRECATED] AI Boost Bites: Customer insights with NotebookLM",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] AI Boost Bites: Customer insights with NotebookLM.",
+    "description": "This video covers how NotebookLM can revolutionize customer insight gathering from call or chat transcripts. You'll learn to upload PDF transcripts of hundreds of conversations (even multilingual ones!) and quickly extract key themes, trending topics, and actionable insights without listening for hours. Discover how to save findings, share notebooks, and even generate interactive podcast summaries of your data.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1801,7 +1816,7 @@
     "title": "AI Boost Bites: Gemini Gems – Your ultimate marketing sidekick",
     "category": "Generative AI",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Gemini Gems – Your ultimate marketing sidekick.",
+    "description": "This video covers how to create your own Gemini Gems, advanced AI capabilities that can automate repetitive tasks and supercharge your productivity.",
     "skills": [
       "Gemini"
     ],
@@ -1814,7 +1829,7 @@
     "title": "Deploy and Scale AI Models with Cloud Run",
     "category": "DevOps & SRE",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Deploy and Scale AI Models with Cloud Run.",
+    "description": "AI inference is the process of using a trained machine learning model to make predictions on new, unseen data by applying learned patterns. This course is designed for developers, data scientists, and ML engineers interested in quickly deploying AI inference services on Cloud Run. It is useful for those familiar with cloud-based serverless application deployment solutions, but who may not have experience with running AI inference using Google Cloud serverless products.\n\nThe course includes examples that deploys a model for AI inference with GPUs and integrates gen AI apps with data storage services.",
     "skills": [
       "Cloud Run"
     ],
@@ -1827,7 +1842,7 @@
     "title": "Configure Gemini Code Assist for Organizations",
     "category": "Generative AI",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Configure Gemini Code Assist for Organizations.",
+    "description": "This course is designed for Google Cloud developers and DevOps engineers who have basic knowledge of the Google Cloud console and are responsible for configuring Gemini Code Assist for an organization. The course introduces the benefits of Gemini Code Assist and compares the features of the different Gemini Code Assist editions. The course also shows you how to configure and manage Gemini Code Assist within an organization.",
     "skills": [
       "Gemini"
     ],
@@ -1840,7 +1855,7 @@
     "title": "Google DeepMind: 04 Discover The Transformer Architecture",
     "category": "Generative AI",
     "earnedDate": "Jul 12, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Google DeepMind: 04 Discover The Transformer Architecture.",
+    "description": "In this Google DeepMind course you will discover the mechanisms of the transformer architecture. You will investigate how transformer language models process prompts to make context-sensitive next-token predictions. Through practical activities you will explore the attention mechanism, visualize attention weights, and encounter advanced concepts like masked attention and multi-head attention. You will also learn other techniques that are necessary to build neural networks that are well-suited to be used as language models. Finally, through activities on values, stakeholder mapping and community engagement, you will practice concrete tools for ensuring AI projects are developed with communities, not just for them.",
     "skills": [
       "DeepMind"
     ],
@@ -1853,7 +1868,7 @@
     "title": "Google DeepMind: 03 Design And Train Neural Networks",
     "category": "Generative AI",
     "earnedDate": "Jul 8, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Google DeepMind: 03 Design And Train Neural Networks.",
+    "description": "In this Google DeepMind course you will focus on the training process for machine learning models. You will learn how to spot and mitigate issues when training a model, such as overfitting and underfitting. In practical coding labs, you will implement and evaluate the multilayer perceptron for simple classification tasks. This will provide insights into the mechanics of training a neural network model and the backpropagation algorithm. Research case studies will demonstrate how neural networks power real-world models. Additionally, you will consider the broader social impacts of innovation by looking beyond immediate benefits to anticipate potential risks, safety concerns, and further-reaching societal consequences.",
     "skills": [
       "DeepMind"
     ],
@@ -1866,7 +1881,7 @@
     "title": "Google DeepMind: 02 Represent Your Language Data",
     "category": "Generative AI",
     "earnedDate": "Jul 8, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Google DeepMind: 02 Represent Your Language Data.",
+    "description": "In this Google DeepMind course you will learn how to prepare text data for language models to process. You will investigate the tools and techniques used to prepare, structure, and represent text data for language models, with a focus on tokenization and embeddings. You will be encouraged to think critically about the decisions behind data preparation, and what biases within the data may be introduced into models. You will analyze trade-offs, learn how to work with vectors and matrices, how meaning is represented in language models. Finally, you will practice designing a dataset ethically using the Data Cards process, ensuring transparency, accountability, and respect for community values in AI development.",
     "skills": [
       "DeepMind"
     ],
@@ -1879,7 +1894,7 @@
     "title": "Build Your First Agent with Agent Development Kit (ADK)",
     "category": "DevOps & SRE",
     "earnedDate": "Jul 5, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build Your First Agent with Agent Development Kit (ADK).",
+    "description": "Turn your understanding of agents into practical reality by building, configuring, and running your first AI agent using Google’s Agent Development Kit (ADK) in Gemini platform.\n\nIn this hands-on course, you’ll set up a complete ADK development environment, create agents with both Python code and YAML configuration, and run them through multiple interfaces. You’ll also learn the core parameters that define agent behavior\nExplore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -1893,7 +1908,7 @@
     "title": "Build Agents with Agent Development Kit (ADK)",
     "category": "DevOps & SRE",
     "earnedDate": "Jul 5, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build Agents with Agent Development Kit (ADK).",
+    "description": "Learn about how you can use Agent Development Kit (ADK) to build complex, production-ready AI agents. This course covers ADK’s open-source framework, moving from simple prompt engineering to a code-first, structured software development approach suitable for enterprise-grade, multi-agent systems. Explore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -1907,7 +1922,7 @@
     "title": "Enterprise Agents and Use Cases",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 5, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Enterprise Agents and Use Cases.",
+    "description": "Discover how AI agents drive business impact. You’ll map agent types to your KPIs and explore use cases that solve real bottlenecks. Then, learn how Gemini Enterprise empowers you to build and orchestrate the right agents—from no-code to high-code solutions. Explore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1921,7 +1936,7 @@
     "title": "Agent Fundamentals",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 5, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Agent Fundamentals.",
+    "description": "This course introduces the fundamentals of AI agents and explores where agents add value in the real world. It provides a foundation for developers, architects, and technical decision-makers who want to understand AI systems through the lens of autonomous, goal-directed behavior.\nExplore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1935,7 +1950,7 @@
     "title": "Introduction to AI Agents",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 5, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Introduction to AI Agents.",
+    "description": "Gain a conceptual overview of AI Agents. Discover how AI Agents use autonomous action and reasoning to solve complex problems. You’ll explore the technical architecture—models, tools, and orchestration—that enables agents to learn, plan, and achieve goals on your behalf.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -1949,7 +1964,7 @@
     "title": "Create Your First Gemini Enterprise Application",
     "category": "Generative AI",
     "earnedDate": "Jul 5, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Create Your First Gemini Enterprise Application.",
+    "description": "Create your first Gemini Enterprise application to earn a skill badge! Connect diverse data sources to your application to build a powerful, unified search and analysis engine. Master advanced capabilities like deep research agents, multi-agent ideation, and Gemini Notebook for focused analysis. Explore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Gemini"
     ],
@@ -1962,7 +1977,7 @@
     "title": "Google DeepMind: 01 Build Your Own Small Language Model",
     "category": "Generative AI",
     "earnedDate": "Jul 5, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Google DeepMind: 01 Build Your Own Small Language Model.",
+    "description": "In this Google DeepMind course, you will learn the fundamentals of language models and gain a high-level understanding of the machine learning development pipeline. You will consider the strengths and limitations of traditional n-gram models and advanced transformer models. Practical coding labs will enable you to develop insights into how machine learning models work and how they can be used to generate text and identify patterns in language. Through real-world case studies, you will build an understanding around how research engineers operate. Drawing on these insights you will identify problems that you wish to tackle in your own community and consider how to leverage the power of machine learning responsibly to address these problems within a global and local context.",
     "skills": [
       "DeepMind"
     ],
@@ -1975,7 +1990,7 @@
     "title": "Scaling with Google Cloud Operations",
     "category": "DevOps & SRE",
     "earnedDate": "Jul 3, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Scaling with Google Cloud Operations.",
+    "description": "Organizations of all sizes are embracing the power and flexibility of the cloud to transform how they operate. However, managing and scaling cloud resources effectively can be a complex task. This course explores the fundamental concepts of modern operations, reliability, and resilience in the cloud, and how Google Cloud can help support these efforts. \n\nAs part of the Cloud Digital Leader learning path, this course aims to help individuals grow in their role and build the future of their business.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -1989,7 +2004,7 @@
     "title": "Trust and Security with Google Cloud",
     "category": "Security & IAM",
     "earnedDate": "Jul 3, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Trust and Security with Google Cloud.",
+    "description": "As organizations move their data and applications to the cloud, they must address a rapidly evolving landscape of security challenges. This course explores the foundations of cloud security, the value of Google Cloud’s secure-by-design infrastructure, and the defense-in-depth strategy, while highlighting how AI-driven operations and compliance tools help organizations meet strict global regulatory requirements.\n\nAs part of the Cloud Digital Leader learning path, this course aims to help individuals grow in their role and build the future of their business.",
     "skills": [
       "Cloud Security"
     ],
@@ -2002,7 +2017,7 @@
     "title": "Modernize Infrastructure and Applications with Google Cloud",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 3, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Modernize Infrastructure and Applications with Google Cloud.",
+    "description": "Many traditional enterprises use legacy systems and apps that can't stay up-to-date with modern customer expectations. Business leaders often have to choose between maintaining their aging IT systems and investing in new products and services. This course explores these challenges and offers solutions to overcome them by using cloud technology.\n\nAs part of the Cloud Digital Leader learning path, this course aims to help individuals grow in their role and build the future of their business.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2016,7 +2031,7 @@
     "title": "Innovating with Google Cloud Artificial Intelligence",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 3, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Innovating with Google Cloud Artificial Intelligence.",
+    "description": "Artificial intelligence (AI) and machine learning (ML) represent an important evolution in information technologies that are quickly transforming a wide range of industries. Innovating with Google Cloud Artificial Intelligence explores how organizations can use AI and ML to transform their business processes.\n\nAs part of the Cloud Digital Leader learning path, this course aims to help individuals grow in their role and build the future of their business.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2030,7 +2045,7 @@
     "title": "Exploring Data Transformation with Google Cloud",
     "category": "Data & BigQuery",
     "earnedDate": "Jul 3, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Exploring Data Transformation with Google Cloud.",
+    "description": "Cloud technology is a powerful asset, and when paired with data, it becomes a catalyst for innovation and enhanced customer experiences. Exploring Data Transformation with Google Cloud examines how organizations can leverage the cloud to make their data more accessible, actionable, and valuable.\n\nAs part of the Cloud Digital Leader learning path, this course aims to help individuals grow in their role and build the future of their business.",
     "skills": [
       "Google Cloud",
       "Data"
@@ -2044,7 +2059,7 @@
     "title": "Digital Transformation with Google Cloud",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 3, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Digital Transformation with Google Cloud.",
+    "description": "Digital transformation is a critical journey for modern organizations, and establishing a strong baseline in cloud computing is the first step toward driving meaningful innovation. Digital Transformation with Google Cloud introduces the core technologies and strategic frameworks that help organizations modernize their operations. This course explores fundamental cloud concepts, global network infrastructure, and the shared responsibility model to help leaders navigate their path to the cloud with confidence.\n\nAs part of the Cloud Digital Leader learning path, this course aims to help individuals grow in their role and build the future of their business.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2058,7 +2073,7 @@
     "title": "Create Generative AI Apps on Google Cloud",
     "category": "Generative AI",
     "earnedDate": "Jul 1, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Create Generative AI Apps on Google Cloud.",
+    "description": "Generative AI applications can create new user experiences that were nearly impossible before the invention of large language models (LLMs). As an application developer, how can you use generative AI to build engaging, powerful apps on Google Cloud?\n\nIn this course, you'll learn about generative AI applications and how you can use prompt design and retrieval augmented generation (RAG) to build powerful applications using LLMs. You'll learn about a production-ready architecture that can be used for generative AI applications and you'll build an LLM and RAG-based chat application.  Explore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "Generative"
@@ -2072,7 +2087,7 @@
     "title": "[DEPRECATED] Gemini for end-to-end SDLC",
     "category": "Generative AI",
     "earnedDate": "Jun 30, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] Gemini for end-to-end SDLC.",
+    "description": "In this course, you learn how Gemini, a generative AI-powered collaborator from Google Cloud, helps you use Google products and services to develop, test, deploy, and manage applications. With help from Gemini, you learn how to develop and build a web application, fix errors in the application, develop tests, and query data. Using a hands-on lab, you experience how Gemini improves the software development lifecycle (SDLC).\n\nDuet AI was renamed to Gemini, our next-generation model.",
     "skills": [
       "Gemini"
     ],
@@ -2085,7 +2100,7 @@
     "title": "[DEPRECATED] Gemini for Application Developers",
     "category": "Generative AI",
     "earnedDate": "Jun 30, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] Gemini for Application Developers.",
+    "description": "In this course, you learn how Gemini, a generative AI-powered collaborator from Google Cloud, helps developers build applications. You learn how to prompt Gemini to explain code, recommend Google Cloud services, and generate code for your applications. Using a hands-on lab, you experience how Gemini improves the application development workflow.\n\nDuet AI was renamed to Gemini, our next-generation model.",
     "skills": [
       "Gemini"
     ],
@@ -2098,7 +2113,7 @@
     "title": "Introduction to AI and Machine Learning on Google Cloud",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 30, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Introduction to AI and Machine Learning on Google Cloud.",
+    "description": "This course introduces Google Cloud's AI and machine learning (ML) capabilities, with a focus on developing both generative and predictive AI projects. It explores the various technologies, products, and tools available throughout the data-to-AI lifecycle, empowering data scientists, AI developers, and ML engineers to enhance their expertise through interactive exercises.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2112,7 +2127,7 @@
     "title": "AI Boost Bites: Tame Your Inbox with AI",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 28, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Tame Your Inbox with AI.",
+    "description": "This video covers how to use Gemini in Gmail to summarize emails, find information, and draft replies, helping you manage your inbox more efficiently.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2126,7 +2141,7 @@
     "title": "[DEPRECATED] AI Boost Bites: AI Power-Ups for Google Workspace",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 28, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] AI Boost Bites: AI Power-Ups for Google Workspace.",
+    "description": "This video covers five key ways to use Google's AI tools, including Gemini in Workspace, the Gemini app, and NotebookLM, to enhance your daily productivity.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2140,7 +2155,7 @@
     "title": "AI Boost Bites: Your Personal Feedback Agent",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 28, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in AI Boost Bites: Your Personal Feedback Agent.",
+    "description": "This video covers how to build a personalized \"Work with Me\" agent using Gemini Gems, which helps streamline foundational feedback and makes your meetings more strategic and efficient.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2154,7 +2169,7 @@
     "title": "Build a Certification Study Guide: PMLE",
     "category": "DevOps & SRE",
     "earnedDate": "Jun 28, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build a Certification Study Guide: PMLE.",
+    "description": "Learn how to use Gemini Notebook to create a personalized study guide for the Professional Machine Learning Engineer (PMLE) certification exam. You'll review Gemini Notebook features, create a notebook, and use the study guide to practice for a certification exam.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -2168,7 +2183,7 @@
     "title": "Build Global and Regional Load Balancing Solutions",
     "category": "DevOps & SRE",
     "earnedDate": "Jun 26, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build Global and Regional Load Balancing Solutions.",
+    "description": "Complete the intermediate Build Global and Regional Load Balancing Solutions skill badge course to demonstrate skills in the following: deploy and utilize an internal client VM within the same VPC network and test traffic distribution, backend infrastructure suitable for a global external application Load Balancer, and backend VM instances and load balancer components using startup scripts and network tags to host a web application service.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -2182,7 +2197,7 @@
     "title": "Arcade Base Camp June 2026",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 26, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Arcade Base Camp June 2026.",
+    "description": "Welcome to Base Camp, where you’ll develop key Google Cloud skills (available in Spanish and Portuguese too!) and earn an exclusive credential that will open doors to the cloud for you. No prior experience is required!",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2196,7 +2211,7 @@
     "title": "Build a Certification Study Guide: ACE Exam Prep",
     "category": "DevOps & SRE",
     "earnedDate": "Jun 25, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Build a Certification Study Guide: ACE Exam Prep.",
+    "description": "Learn how to use Gemini Notebook to create a personalized study guide for the Associate Cloud Engineer certification exam.\nYou'll review Gemini Notebook  features, create a notebook in Gemini Notebook , and learn how to use a study guide to practice for a certification exam.",
     "skills": [
       "Google Cloud",
       "DevOps"
@@ -2210,7 +2225,7 @@
     "title": "Implementing Cloud Load Balancing for Compute Engine",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 23, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Implementing Cloud Load Balancing for Compute Engine.",
+    "description": "Complete the introductory Implementing Cloud Load Balancing for Compute Engine skill badge to demonstrate skills in the following: creating and deploying virtual machines in Compute Engine and configuring network and application load balancers.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2224,7 +2239,7 @@
     "title": "Model Armor: Securing AI Deployments",
     "category": "Security & IAM",
     "earnedDate": "Jun 22, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Model Armor: Securing AI Deployments.",
+    "description": "This course reviews the essential security features of Model Armor and equips you to work with the service. You’ll learn about the security risks associated with LLMs and how Model Armor protects your AI apps. Explore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "Security"
@@ -2238,7 +2253,7 @@
     "title": "Introduction to Security in the World of AI",
     "category": "Security & IAM",
     "earnedDate": "Jun 22, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Introduction to Security in the World of AI.",
+    "description": "Artificial Intelligence (AI) offers transformative possibilities, but it also introduces new security challenges. This course equips security and data protection leaders with strategies to securely manage AI within their organizations. Learn a framework for proactively identifying and mitigating AI-specific risks, protecting sensitive data, ensuring compliance, and building a resilient AI infrastructure. Pick use cases from four different industries to explore how these strategies apply in real-world scenarios.",
     "skills": [
       "Cloud Security"
     ],
@@ -2251,7 +2266,7 @@
     "title": "Responsible AI for Developers: Privacy & Safety",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 22, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Responsible AI for Developers: Privacy & Safety.",
+    "description": "This course introduces important topics of AI privacy and safety. It explores practical methods and tools to implement AI privacy and safety recommended practices through the use of Google Cloud products and open-source tools.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2265,7 +2280,7 @@
     "title": "Responsible AI for Developers: Interpretability & Transparency",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Responsible AI for Developers: Interpretability & Transparency.",
+    "description": "This course introduces concepts of AI interpretability and transparency. It discusses the importance of AI transparency for developers and engineers. It explores practical methods and tools to help achieve interpretability and transparency in both data and AI models.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2279,7 +2294,7 @@
     "title": "Responsible AI for Developers: Fairness & Bias",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Responsible AI for Developers: Fairness & Bias.",
+    "description": "This course introduces concepts of responsible AI and AI principles. It covers techniques to practically identify fairness and bias and mitigate bias in AI/ML practices. It explores practical methods and tools to implement Responsible AI best practices using Google Cloud products and open source tools.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2293,7 +2308,7 @@
     "title": "Machine Learning Operations (MLOps) with Agent Platform: Model Evaluation",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Machine Learning Operations (MLOps) with Agent Platform: Model Evaluation.",
+    "description": "This course equips machine learning practitioners with the essential tools, techniques, and best practices for evaluating both generative and predictive AI models. Model evaluation is a critical discipline for ensuring that ML systems deliver reliable, accurate, and high-performing results in production.\nParticipants will gain a deep understanding of various evaluation metrics, methodologies, and their appropriate application across different model types and tasks. The course will emphasize the unique challenges posed by generative AI models and provide strategies for tackling them effectively. By leveraging Google Cloud's Agent Platform, participants will learn how to implement robust evaluation processes for model selection, optimization, and continuous monitoring.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2307,7 +2322,7 @@
     "title": "Machine Learning Operations (MLOps) for Generative AI",
     "category": "Generative AI",
     "earnedDate": "Jun 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Machine Learning Operations (MLOps) for Generative AI.",
+    "description": "This course is dedicated to equipping you with the knowledge and tools needed to uncover the unique challenges faced by MLOps teams when deploying and managing Generative AI models, and exploring how Gemini Enterprise Agent Platform empowers AI teams to streamline MLOps processes and achieve success in Generative AI projects.",
     "skills": [
       "Google Cloud",
       "Generative"
@@ -2321,7 +2336,7 @@
     "title": "Set Up an App Dev Environment on Google Cloud",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Set Up an App Dev Environment on Google Cloud.",
+    "description": "Earn a skill badge by completing the Set Up an App Dev Environment on Google Cloud skill badge course, where you learn how to build and connect storage-centric cloud infrastructure using the basic capabilities of the following technologies: Cloud Storage, Identity and Access Management, Cloud Functions, and Pub/Sub.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2335,7 +2350,7 @@
     "title": "The Basics of Google Cloud Compute",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 20, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in The Basics of Google Cloud Compute.",
+    "description": "Earn a skill badge by completing the The Basics of Google Cloud Compute skill badge course, where you learn how to work with virtual machines (VMs), persistent disks, and web servers using Compute Engine.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2349,7 +2364,7 @@
     "title": "Responsible AI: Applying AI Principles with Google Cloud",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jun 19, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Responsible AI: Applying AI Principles with Google Cloud.",
+    "description": "As the use of enterprise Artificial Intelligence and Machine Learning continues to grow, so too does the importance of building it responsibly. A challenge for many is that talking about responsible AI can be easier than putting it into practice. If you’re interested in learning how to operationalize responsible AI in your organization, this course is for you. \n\nIn this course, you will learn how Google Cloud does this today, together with best practices and lessons learned, to serve as a framework for you to build your own responsible AI approach.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2363,7 +2378,7 @@
     "title": "Prompt Design in Agent Platform",
     "category": "Generative AI",
     "earnedDate": "Jun 19, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Prompt Design in Agent Platform.",
+    "description": "Complete the introductory Prompt Design in Agent Platform skill badge to demonstrate skills in the following: prompt engineering, image analysis, and multimodal generative techniques, within Agent Platform. Discover how to craft effective prompts, guide generative AI output, and apply Gemini models to real-world marketing scenarios. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
     "skills": [
       "Prompting"
     ],
@@ -2376,7 +2391,7 @@
     "title": "Work with Gemini Models in BigQuery",
     "category": "Generative AI",
     "earnedDate": "Jun 19, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Work with Gemini Models in BigQuery.",
+    "description": "This course demonstrates how to use AI/ML models for generative AI tasks in BigQuery. Through a practical use case involving customer relationship management,  you learn the workflow of solving a business problem with Gemini models. To facilitate comprehension, the course also provides step-by-step guidance through coding solutions using both SQL queries and Python notebooks.",
     "skills": [
       "Gemini",
       "BigQuery"
@@ -2390,7 +2405,7 @@
     "title": "[DEPRECATED]Introduction to Responsible AI",
     "category": "Cloud Infrastructure",
     "earnedDate": "May 29, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED]Introduction to Responsible AI.",
+    "description": "This is an introductory-level microlearning course aimed at explaining what responsible AI is, why it's important, and how Google implements responsible AI in their products. It also introduces Google's 3 AI principles.",
     "skills": [
       "Google Cloud",
       "Cloud"
@@ -2404,7 +2419,7 @@
     "title": "Introduction to Large Language Models",
     "category": "Generative AI",
     "earnedDate": "May 29, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Introduction to Large Language Models.",
+    "description": "This is an introductory level micro-learning course that explores what large language models (LLM) are, the use cases where they can be utilized, and how you can use prompt tuning to enhance LLM performance. It also covers Google tools to help you develop your own Gen AI apps. Explore other content in the Gemini Agent Ready (GEAR) program.",
     "skills": [
       "Google Cloud",
       "Generative"
@@ -2418,7 +2433,7 @@
     "title": "Using BigQuery Machine Learning for Inference",
     "category": "Data & BigQuery",
     "earnedDate": "Feb 13, 2026",
-    "description": "Official Google Cloud skill badge validating practical competency in Using BigQuery Machine Learning for Inference.",
+    "description": "Learn about BigQuery ML for Inference, why Data Analysts should use it, its use cases, and supported ML models. You will also learn how to create and manage these ML models in BigQuery.",
     "skills": [
       "BigQuery"
     ],
@@ -2431,7 +2446,7 @@
     "title": "[DEPRECATED] Gemini for Data Scientists and Analysts",
     "category": "Generative AI",
     "earnedDate": "Oct 27, 2025",
-    "description": "Official Google Cloud skill badge validating practical competency in [DEPRECATED] Gemini for Data Scientists and Analysts.",
+    "description": "In this course, you learn how Gemini, a generative AI-powered collaborator from Google Cloud, helps analyze customer data and predict product sales. You also learn how to identify, categorize, and develop new customers using customer data in BigQuery. Using hands-on labs, you experience how Gemini improves data analysis and machine learning workflows.",
     "skills": [
       "Gemini"
     ],
@@ -2444,7 +2459,7 @@
     "title": "Introduction to Generative AI",
     "category": "Generative AI",
     "earnedDate": "Oct 25, 2025",
-    "description": "Official Google Cloud skill badge validating practical competency in Introduction to Generative AI.",
+    "description": "This is an introductory level microlearning course aimed at explaining what Generative AI is, how it is used, and how it differs from traditional machine learning methods. It also covers Google Tools to help you develop your own Gen AI apps.",
     "skills": [
       "Google Cloud",
       "Generative"

@@ -37,13 +37,13 @@ export interface GoogleDevBadge {
    NOT live real-time API feeds.
    ======================================================================== */
 export const skillsBoostStats = {
-  skillBadges: 178,
-  points: 47957,
-  league: "Diamond",
+  skillBadges: 180,
+  points: 48046,
+  league: "Diamond League",
   streakDays: 12,
   leaguePosition: 18,
   lastVerified: "November 2026",
-  provenance: "Manually verified snapshot from public profile transcript",
+  provenance: "Server-side synchronization snapshot from public profile",
   profileUrl: "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
   credlyUrl: "https://www.credly.com/users/sumitdev2003/badges",
 };
