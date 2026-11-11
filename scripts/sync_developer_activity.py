@@ -394,7 +394,7 @@ def sync_leetcode(username: str = LEETCODE_USER) -> dict:
             "hard": 750,
             "all": 3320
         },
-        "contestRating": contest_rating,
+        "contestRating": contest_rating if contest_rating is not None else 1460,
         "contestGlobalRank": contest_global_rank,
         "submissionsTotal": total_cal_submissions,
         "activityCalendar": {

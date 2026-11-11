@@ -222,7 +222,7 @@ export default function DeveloperActivity() {
   const mediumSolved = data?.mediumSolved ?? 200;
   const hardSolved = data?.hardSolved ?? 68;
   const ranking = data?.ranking ?? 380408;
-  const contestRating = data?.contestRating ?? null;
+  const contestRating = data?.contestRating ?? 1460;
   const submissionsTotal = data?.submissionsTotal ?? 472;
 
   const startDateFormatted = data?.activityCalendar?.startDate ? formatDate(data.activityCalendar.startDate) : "Nov 8, 2025";
@@ -350,19 +350,13 @@ export default function DeveloperActivity() {
                 <Activity className="h-4 w-4" />
               </span>
               <span className="font-mono text-[10px] text-purple-400/90 bg-purple-500/10 px-2 py-0.5 rounded-full border border-purple-500/20">
-                {contestRating ? "Official Rating" : ranking ? `Rank #${ranking.toLocaleString()}` : "Weekly Contests"}
+                Official Rating
               </span>
             </div>
             <div className="mt-4">
-              {contestRating ? (
-                <p className="font-display text-2xl sm:text-3xl text-purple-300">
-                  <StatCounter value={contestRating} />
-                </p>
-              ) : (
-                <p className="font-display text-2xl sm:text-3xl text-purple-300">
-                  Unrated
-                </p>
-              )}
+              <p className="font-display text-2xl sm:text-3xl text-purple-300">
+                <StatCounter value={contestRating} />
+              </p>
               <p className="mt-0.5 font-condensed text-[11px] uppercase tracking-wider text-white/50">
                 Contest Rating
               </p>

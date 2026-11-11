@@ -512,9 +512,9 @@ export const achievements = [
 
 export const leetcode = [
   { label: "Problems Solved", value: 370, suffix: "+" },
+  { label: "Contest Rating", value: 1460, suffix: "" },
   { label: "Medium / Hard", value: 268, suffix: "" },
   { label: "Hard Solved", value: 68, suffix: "" },
-  { label: "Global Rank", value: 377270, suffix: "", prefix: "#" },
 ];
 
 export const githubStats = [

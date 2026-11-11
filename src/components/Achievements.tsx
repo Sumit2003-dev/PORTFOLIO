@@ -42,6 +42,7 @@ export default function Achievements() {
     hardSolved?: number;
     ranking?: number;
     submissionsTotal?: number;
+    contestRating?: number | null;
   } | null>(null);
 
   const [githubData, setGithubData] = useState<{
@@ -167,18 +168,18 @@ export default function Achievements() {
   // LeetCode live metrics
   const liveLeetcode = useMemo(() => {
     const totalSolved = leetcodeData?.totalSolved ?? defaultLeetcode[0].value;
+    const rating = leetcodeData?.contestRating ?? defaultLeetcode[1].value ?? 1460;
     const medHard =
       leetcodeData && typeof leetcodeData.mediumSolved === "number" && typeof leetcodeData.hardSolved === "number"
         ? leetcodeData.mediumSolved + leetcodeData.hardSolved
-        : defaultLeetcode[1].value;
-    const hardSolved = leetcodeData?.hardSolved ?? defaultLeetcode[2].value;
-    const ranking = leetcodeData?.ranking ?? defaultLeetcode[3].value;
+        : defaultLeetcode[2].value;
+    const hardSolved = leetcodeData?.hardSolved ?? defaultLeetcode[3].value;
 
     return [
       { label: "Problems Solved", value: totalSolved, suffix: "+" },
+      { label: "Contest Rating", value: rating, suffix: "" },
       { label: "Medium / Hard", value: medHard, suffix: "" },
       { label: "Hard Solved", value: hardSolved, suffix: "" },
-      { label: "Global Rank", value: ranking, suffix: "", prefix: "#" },
     ];
   }, [leetcodeData]);
 
@@ -275,7 +276,7 @@ export default function Achievements() {
               {liveLeetcode.map((l) => (
                 <div key={l.label} className="text-center rounded-xl bg-white/[0.02] border border-white/5 p-2.5">
                   <p className="font-display text-xl text-[#FFA116]">
-                    <Counter value={l.value} suffix={l.suffix} prefix={l.prefix} />
+                    <Counter value={l.value} suffix={l.suffix} />
                   </p>
                   <p className="mt-0.5 text-[11px] text-white/45 font-condensed uppercase tracking-wider">{l.label}</p>
                 </div>
