@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-11T09:38:37.144096+00:00",
+  "syncedAt": "2026-11-11T10:22:17.762747+00:00",
   "github": {
     "username": "Sumit2003-dev",
     "name": "Sumit Kumar ",
@@ -1861,8 +1861,8 @@
     "languages": [
       {
         "name": "TypeScript",
-        "bytes": 1692963,
-        "percentage": 47.3,
+        "bytes": 1700074,
+        "percentage": 47.4,
         "color": "#3178C6"
       },
       {
@@ -1873,8 +1873,8 @@
       },
       {
         "name": "Python",
-        "bytes": 596968,
-        "percentage": 16.7,
+        "bytes": 597008,
+        "percentage": 16.6,
         "color": "#3572A5"
       },
       {
@@ -1914,7 +1914,7 @@
         "color": "#384D54"
       }
     ],
-    "totalLanguageBytes": 3579282,
+    "totalLanguageBytes": 3586433,
     "repositories": [
       {
         "name": "Airlines-Delay-Prediction",

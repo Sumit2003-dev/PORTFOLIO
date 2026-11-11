@@ -1,12 +1,12 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-11T09:38:31.701167+00:00",
+  "syncedAt": "2026-11-11T10:22:11.920622+00:00",
   "source": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
   "profile": {
     "name": "Sumit Bharti",
     "league": "Diamond League",
-    "points": 48280,
-    "totalBadges": 186,
+    "points": 48300,
+    "totalBadges": 187,
     "provenance": "Direct server-side sync from public profile HTML",
     "privateDashboard": {
       "streakDays": 12,
@@ -16,6 +16,21 @@
     }
   },
   "badges": [
+    {
+      "id": "gcp-29560348",
+      "title": "Implement Sensitive Data Protection on Google Cloud",
+      "category": "Cloud Infrastructure",
+      "earnedDate": "Nov 11, 2026",
+      "description": "Complete the Implement Sensitive Data Protection on Google Cloud Skill Badge course to demonstrate skills in the following: using Sensitive Data Protection services (including the Cloud Data Loss Prevention API) to inspect, redact, and de-identify sensitive data in Google Cloud.",
+      "skills": [
+        "Google Cloud",
+        "Compute Engine",
+        "VPC"
+      ],
+      "iconType": "cloud",
+      "imageUrl": "https://cdn.qwiklabs.com/wkWJ0ZqoTzH9WptVKFbAwmJhbah%2B7SGzLw0ySDKNjSE%3D",
+      "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29560348"
+    },
     {
       "id": "gcp-29559621",
       "title": "Integrate BigQuery Data and Google Workspace using Apps Script",
