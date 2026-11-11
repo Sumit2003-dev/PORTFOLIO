@@ -11,7 +11,7 @@ export const profile = {
   short: "Data Scientist and AI/ML developer building practical machine learning systems, predictive models, and context-grounded RAG applications.",
   description: [
     "Final-year Computer Science & Engineering student specialising in Artificial Intelligence and Data Science, currently gaining hands-on industry experience as a Machine Learning Intern at FlyRank AI.",
-    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I actively learn and build on Google Cloud, standing in the Diamond League on Google Cloud Skills Boost with 178 skill badges, 47,957 points, and a continuous learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
+    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I actively learn and build on Google Cloud, standing in the Diamond League on Google Cloud Skills Boost with 183 skill badges, 48,142 points, and a continuous learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
     "I'm actively expanding my expertise in Generative AI, RAG systems and LLMs through applied academic and industry projects.",
   ],
   email: "sumit.ku5981@gmail.com",
@@ -504,21 +504,21 @@ export const certificates: CertificateItem[] = rawCertificates.map((c) => ({
 
 /* ================= ACHIEVEMENTS ================= */
 export const achievements = [
-  { label: "Diamond League Rank", value: 18, suffix: "th", icon: "trophy" },
-  { label: "Cloud Skill Badges", value: 178, suffix: "+", icon: "repo" },
-  { label: "Arcade Points", value: 47957, suffix: "", icon: "trophy" },
+  { label: "Diamond League Rank", value: 18, suffix: "th", prefix: "#", icon: "trophy" },
+  { label: "Cloud Skill Badges", value: 183, suffix: "+", icon: "repo" },
+  { label: "Arcade Points", value: 48142, suffix: "", icon: "trophy" },
   { label: "Events & Study Jams", value: 10, suffix: "+", icon: "git" },
 ];
 
 export const leetcode = [
-  { label: "Problems Solved", value: 341, suffix: "+" },
-  { label: "Contest Rating", value: 1460, suffix: "" },
-  { label: "Medium / Hard", value: 247, suffix: "" },
-  { label: "Badges Earned", value: 2, suffix: "x" },
+  { label: "Problems Solved", value: 370, suffix: "+" },
+  { label: "Medium / Hard", value: 268, suffix: "" },
+  { label: "Hard Solved", value: 68, suffix: "" },
+  { label: "Global Rank", value: 377270, suffix: "", prefix: "#" },
 ];
 
 export const githubStats = [
-  { label: "Repositories", value: 18, suffix: "+" },
+  { label: "Public Repos", value: 13, suffix: "" },
+  { label: "Contributions", value: 123, suffix: "+" },
   { label: "Live Apps", value: 6, suffix: "" },
-  { label: "Papers", value: 1, suffix: "" },
 ];
