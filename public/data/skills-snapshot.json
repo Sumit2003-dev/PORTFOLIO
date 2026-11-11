@@ -1,12 +1,12 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-11T09:16:41.259220+00:00",
+  "syncedAt": "2026-11-11T09:38:31.701167+00:00",
   "source": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
   "profile": {
     "name": "Sumit Bharti",
     "league": "Diamond League",
-    "points": 48259,
-    "totalBadges": 185,
+    "points": 48280,
+    "totalBadges": 186,
     "provenance": "Direct server-side sync from public profile HTML",
     "privateDashboard": {
       "streakDays": 12,
@@ -16,6 +16,21 @@
     }
   },
   "badges": [
+    {
+      "id": "gcp-29559621",
+      "title": "Integrate BigQuery Data and Google Workspace using Apps Script",
+      "category": "Data & BigQuery",
+      "earnedDate": "Nov 11, 2026",
+      "description": "Complete the introductory Integrate BigQuery Data and Google Workspace using Apps Script skill badge course to demonstrate skills in connecting Workspace products with BigQuery via AppSheet.",
+      "skills": [
+        "BigQuery",
+        "Data Engineering",
+        "SQL"
+      ],
+      "iconType": "data",
+      "imageUrl": "https://cdn.qwiklabs.com/PWrgdfhYPRi%2BC2jMkG7%2BXApLiDL8XHorA1rQ8QkRM10%3D",
+      "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29559621"
+    },
     {
       "id": "gcp-29549854",
       "title": "Explore Generative AI in Agent Platform",
