@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 
 const NotFound = () => {
@@ -19,12 +19,12 @@ const NotFound = () => {
         <p className="text-white/60 text-sm mb-8">
           The requested coordinate does not exist in this portfolio.
         </p>
-        <a
-          href="/"
+        <Link
+          to="/"
           className="btn-ember inline-flex items-center gap-2 px-8 py-3 text-xs font-semibold uppercase tracking-wider"
         >
           Return to Mission Control
-        </a>
+        </Link>
       </div>
     </div>
   );

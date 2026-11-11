@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Temporary audit & analysis artifacts
+lh-*.json
+lighthouse*.json
+triplicate_summary.json
+__pycache__/
+*.pyc

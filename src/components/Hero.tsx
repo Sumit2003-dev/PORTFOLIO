@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, lazy, Suspense } from "react";
-import { Github, Linkedin, Mail, Download, ArrowRight, Eye, Sparkles, Cpu, ShieldCheck } from "lucide-react";
+import { Github, Linkedin, Mail, Download, ArrowRight, Eye, ShieldCheck } from "lucide-react";
 import { SiLeetcode, SiGooglecloud } from "react-icons/si";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useMotionTemplate, useReducedMotion } from "framer-motion";
 import { profile } from "@/lib/data";
@@ -212,7 +212,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
               { icon: <Github className="h-4 w-4" />, href: "https://github.com/Sumit2003-dev", label: "GitHub" },
               { icon: <Linkedin className="h-4 w-4" />, href: "https://www.linkedin.com/in/sumit2003-dev/", label: "LinkedIn" },
               { icon: <SiLeetcode className="h-4 w-4" />, href: profile.leetcode, label: "LeetCode (@sumit2003dev)" },
-              { icon: <SiGooglecloud className="h-4 w-4" />, href: profile.googleSkills, label: "Google Skills (178 Badges · Diamond League)" },
+              { icon: <SiGooglecloud className="h-4 w-4" />, href: profile.googleSkills, label: "Google Skills (183 Badges · Diamond League)" },
               { icon: <Mail className="h-4 w-4" />, href: `mailto:${profile.email}`, label: "Email" },
             ].map((s) => (
               <a

@@ -253,14 +253,14 @@ export const gdgLucknow = {
    All 179 entries extracted directly from the public profile transcript,
    each with its original CDN artwork and individual verification URL.
    ======================================================================== */
-export const verifiedSkillBadges: GoogleSkillBadge[] = (rawSkillBadges as any[]).map((b) => ({
-  id: b.id,
-  title: b.title,
+export const verifiedSkillBadges: GoogleSkillBadge[] = (rawSkillBadges as Array<Record<string, unknown>>).map((b) => ({
+  id: String(b.id || ""),
+  title: String(b.title || ""),
   category: b.category as GoogleSkillBadge["category"],
-  earnedDate: b.earnedDate,
-  description: b.description || `Official Google Cloud skill badge validating competency in ${b.title}.`,
-  skills: b.skills && b.skills.length > 0 ? b.skills : ["Google Cloud"],
+  earnedDate: String(b.earnedDate || ""),
+  description: String(b.description || `Official Google Cloud skill badge validating competency in ${b.title}.`),
+  skills: Array.isArray(b.skills) && b.skills.length > 0 ? (b.skills as string[]) : ["Google Cloud"],
   iconType: b.iconType as GoogleSkillBadge["iconType"],
-  imageUrl: b.imageUrl,
-  verificationUrl: b.verificationUrl,
+  imageUrl: String(b.imageUrl || ""),
+  verificationUrl: String(b.verificationUrl || ""),
 }));

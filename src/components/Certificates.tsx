@@ -512,7 +512,7 @@ export default function Certificates() {
             title="View public profile on Google Cloud Skills Boost"
           >
             <SiGooglecloud className="h-3.5 w-3.5 text-ember-500" />
-            <span>Google Skills (178 Badges)</span>
+            <span>Google Skills (183 Badges)</span>
             <ExternalLink className="h-3 w-3" />
           </a>
 

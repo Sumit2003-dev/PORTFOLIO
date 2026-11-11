@@ -11,7 +11,7 @@ export const profile = {
   short: "Data Scientist and AI/ML developer building practical machine learning systems, predictive models, and context-grounded RAG applications.",
   description: [
     "Final-year Computer Science & Engineering student specialising in Artificial Intelligence and Data Science, currently gaining hands-on industry experience as a Machine Learning Intern at FlyRank AI.",
-    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I actively learn and build on Google Cloud, standing in the Diamond League on Google Cloud Skills Boost with 183 skill badges, 48,142 points, and a continuous learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
+    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I actively learn and build on Google Cloud, standing in the Diamond League on Google Cloud Skills Boost with 186 skill badges, 48,280 points, and a continuous learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
     "I'm actively expanding my expertise in Generative AI, RAG systems and LLMs through applied academic and industry projects.",
   ],
   email: "sumit.ku5981@gmail.com",
@@ -38,16 +38,8 @@ export const profile = {
 export const stats = [
   { label: "Projects", value: 6, suffix: "+" },
   { label: "Certificates", value: 51, suffix: "+" },
-  { label: "Cloud Badges", value: 178, suffix: "+" },
+  { label: "Cloud Badges", value: 186, suffix: "+" },
   { label: "Internships", value: 1, suffix: "" },
-];
-
-export const aboutTimeline = [
-  { year: "2026", title: "Google Cloud Arcade · Diamond League (#18)", text: "Ranked #18 in the Diamond League with 178 skill badges earned, 47,957 points, and a 12-day streak across Vertex AI, BigQuery ML, GKE, and Terraform." },
-  { year: "2026", title: "ML Intern · FlyRank AI", text: "Building a content-opportunity scoring framework as an ML ranking problem — validating models against Precision@50 and building HuggingFace data contracts." },
-  { year: "2026", title: "GyanVerse AI · RAG System", text: "Final-year project combining Sentence Transformers with FAISS/ChromaDB for intelligent, context-aware Q&A." },
-  { year: "2025", title: "Google Data Analytics Professional Certificate", text: "Completed Google's Data Analytics track via Coursera with a 94.87% score, building foundational skills in SQL, R, and spreadsheet-based analysis — laying the groundwork for the ML and GCP-focused work that followed." },
-  { year: "2023", title: "Started B.Tech AI & Data Science", text: "Began my engineering journey at SRMU, focused on AI, Machine Learning and Data Science (2023–2027)." },
 ];
 
 export const interests = [
@@ -367,153 +359,18 @@ export const education = [
   },
 ];
 
-/* ================= CERTIFICATES ================= */
-export type CertificateItem = {
-  title: string;
-  issuer: string;
-  date: string;
-  level: string;
-  credential: string;
-  skills: string[];
-  img: string;
-  pdf?: string;
-  url?: string;
-  hue: string;
-};
-
-const rawCertificates: CertificateItem[] = [
-  {
-    title: "Google Advanced Data Analytics Capstone",
-    issuer: "Google · Coursera",
-    date: "2026",
-    level: "Advanced",
-    credential: "Grade 100% · Credential ID: BRIIQMV6TCP1",
-    skills: ["Machine Learning", "Python", "Regression", "Statistics", "Statistical Modeling"],
-    img: "/uploads/previews/google-adv-capstone.png",
-    pdf: "/uploads/google/Google_Advanced_Data_Analytics_Capstone.pdf",
-    url: "https://coursera.org/verify/BRIIQMV6TCP1",
-    hue: "215 85% 55%",
-  },
-  {
-    title: "Machine Learning Pipelines with Azure ML Studio",
-    issuer: "Coursera Project Network",
-    date: "2026",
-    level: "Intermediate",
-    credential: "Credential ID: H60VNNV2184W",
-    skills: ["Azure ML Studio", "Machine Learning", "ML Pipelines", "Cloud ML"],
-    img: "/uploads/previews/ms-azure-ml-pipelines.png",
-    pdf: "/uploads/Microsoft/Coursera_Azure_ML_Pipelines_Certificate.pdf",
-    url: "https://coursera.org/verify/H60VNNV2184W",
-    hue: "210 90% 55%",
-  },
-  {
-    title: "AI Fluency · Framework & Foundations",
-    issuer: "Anthropic",
-    date: "2026",
-    level: "Course Certificate",
-    credential: "Claude & AI Agents",
-    skills: ["Anthropic", "Claude API", "LLMs", "Model Context Protocol"],
-    img: "/uploads/previews/anthropic-fluency-framework.png",
-    pdf: "/uploads/Anthropic/AI-Fluency-Framework&Foundations.pdf",
-    hue: "270 70% 60%",
-  },
-  {
-    title: "Data Analytics with Python",
-    issuer: "NPTEL · IIT Roorkee",
-    date: "Jan–Apr 2026",
-    level: "Elite",
-    credential: "Score 65%",
-    skills: ["Python", "Data Analytics", "NumPy", "Pandas"],
-    img: "/uploads/previews/nptel-iit-roorkee-python.png",
-    pdf: "/uploads/others/NPTEL.pdf",
-    hue: "25 90% 50%",
-  },
-  {
-    title: "Generative AI Essentials · AI for All",
-    issuer: "MPIT-CoE · TCS Foundation",
-    date: "Apr 2026",
-    level: "GenAI",
-    credential: "via TCS iON",
-    skills: ["Generative AI", "AI for All", "AI Literacy", "Prompting"],
-    img: "/uploads/previews/tcs-ai-for-all.png",
-    pdf: "/uploads/others/AI FOR ALL.pdf",
-    hue: "15 90% 50%",
-  },
-  {
-    title: "IBM Generative AI & Prompt Engineering",
-    issuer: "IBM",
-    date: "2026",
-    level: "IBM Certified",
-    credential: "LLMs & Prompting",
-    skills: ["Prompt Engineering", "LLMs", "Ethical AI", "Generative AI"],
-    img: "/uploads/IBM/Prompt Engineering- Shaping Better AI Responses.png",
-    pdf: "/uploads/others/ALL CERTIFICATES_compressed.pdf",
-    hue: "210 90% 50%",
-  },
-  {
-    title: "GenAI Powered Data Analytics",
-    issuer: "Tata · Forage",
-    date: "2026",
-    level: "Job Simulation",
-    credential: "Data Analytics",
-    skills: ["GenAI", "Predictive Analytics", "Risk Profiling"],
-    img: "/uploads/previews/tata-genai-analytics.png",
-    pdf: "/uploads/others/GenAI Powered Data Analytics Job Simulation.pdf",
-    hue: "330 75% 55%",
-  },
-  {
-    title: "Deloitte Data Analytics Job Simulation",
-    issuer: "Deloitte Australia · Forage",
-    date: "2026",
-    level: "Job Simulation",
-    credential: "Data Analytics",
-    skills: ["Data Analysis", "Forensic Tech", "Insights"],
-    img: "/uploads/previews/deloitte-data-analytics.png",
-    pdf: "/uploads/others/Data Analytics Job Simulation.PDF",
-    hue: "140 70% 45%",
-  },
-  {
-    title: "Jumpstart Machine Learning: Python Made Easy",
-    issuer: "E-Certificate",
-    date: "2025",
-    level: "ML Certified",
-    credential: "ML & Python",
-    skills: ["Machine Learning", "Scikit-Learn", "Python", "Data Science"],
-    img: "/uploads/previews/srmu-jumpstart-ml.png",
-    pdf: "/uploads/others/E-Certificate for Jumpstart ML_ Python Made Easy - Sumit kumar .pdf",
-    hue: "40 85% 50%",
-  },
-  {
-    title: "National Workshop on AI & Data Science",
-    issuer: "National Workshop",
-    date: "2025",
-    level: "Workshop",
-    credential: "Hands-on AI",
-    skills: ["AI Systems", "NLP", "Text Mining", "Python"],
-    img: "/uploads/previews/srmu-national-workshop-ai.png",
-    pdf: "/uploads/others/National Workshop.pdf",
-    hue: "180 60% 45%",
-  },
-];
-
-export const certificates: CertificateItem[] = rawCertificates.map((c) => ({
-  ...c,
-  img: asset(c.img),
-  pdf: c.pdf ? asset(c.pdf) : undefined,
-}));
-
 /* ================= ACHIEVEMENTS ================= */
 export const achievements = [
   { label: "Diamond League Rank", value: 18, suffix: "th", prefix: "#", icon: "trophy" },
-  { label: "Cloud Skill Badges", value: 183, suffix: "+", icon: "repo" },
-  { label: "Arcade Points", value: 48142, suffix: "", icon: "trophy" },
+  { label: "Cloud Skill Badges", value: 186, suffix: "+", icon: "repo" },
+  { label: "Arcade Points", value: 48280, suffix: "", icon: "trophy" },
   { label: "Events & Study Jams", value: 10, suffix: "+", icon: "git" },
 ];
 
 export const leetcode = [
-  { label: "Problems Solved", value: 370, suffix: "+" },
+  { label: "Problems Solved", value: 371, suffix: "+" },
   { label: "Contest Rating", value: 1460, suffix: "" },
-  { label: "Medium / Hard", value: 268, suffix: "" },
+  { label: "Medium / Hard", value: 269, suffix: "" },
   { label: "Hard Solved", value: 68, suffix: "" },
 ];
 

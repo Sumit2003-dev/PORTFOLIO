@@ -211,7 +211,7 @@ export default function SkillCosmos3D() {
       // Interactive Drag Controls
       let isDragging = false;
       let prevMousePos = { x: 0, y: 0 };
-      let dragVelocity = { x: 0, y: 0 };
+      const dragVelocity = { x: 0, y: 0 };
 
       const onPointerDown = (e: PointerEvent) => {
         isDragging = true;

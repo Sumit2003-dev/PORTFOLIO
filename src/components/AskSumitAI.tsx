@@ -72,7 +72,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["arcade", "cloud", "badge", "diamond", "rank", "streak", "points", "gcp", "vertex", "bigquery", "google journey"],
     answer:
-      "Sumit stands in the **Diamond League (Position #18)** on Google Cloud Skills Boost (November 2026 snapshot), having earned **178 skill badges** and accumulated **47,957 points** across Vertex AI, BigQuery ML, GKE, and Terraform. He also holds a Google Developer Program Premium membership.",
+      "Sumit stands in the **Diamond League (Position #18)** on Google Cloud Skills Boost (November 2026 snapshot), having earned **183 skill badges** and accumulated **48,142 points** across Vertex AI, BigQuery ML, GKE, and Terraform. He also holds a Google Developer Program Premium membership.",
     action: { label: "Explore Google Developer Journey", href: "#google-journey", type: "scroll" },
   },
   // 6. Student Performance / NextGrade
@@ -114,7 +114,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["certificate", "certification", "credential", "google data analytics", "coursera", "nptel", "ibm", "anthropic", "deloitte", "tata"],
     answer:
-      "Sumit's **Certification Vault catalogs 51 verified credentials across courses, specializations, and industry job simulations** (with official Coursera, IBM Skills Network, and NPTEL verified certificates, and all completion documentation on file):\n• **Google**: 5 verified Coursera course certificates including Google Advanced Data Analytics Capstone (100%), Foundations of Data Science, The Power of Statistics, and Data Storytelling\n• **Anthropic**: 20 Claude & Model Context Protocol (MCP) course completion certificates\n• **IBM**: 12 AI Analyst, Generative AI & Data Science credentials\n• **Microsoft / Coursera**: Azure ML Studio pipelines & Foundations of AI\n• **NPTEL / IIT Roorkee**: Data Analytics with Python (Elite Certificate)\n• **Tata, TCS & Deloitte**: Practical job simulations & GenAI essentials\n*(Note: Google Cloud achievements like Diamond League #18 and 178 skill badges are tracked separately in the Google Developer Journey dashboard).* ",
+      "Sumit's **Certification Vault catalogs 51 verified credentials across courses, specializations, and industry job simulations** (with official Coursera, IBM Skills Network, and NPTEL verified certificates, and all completion documentation on file):\n• **Google**: 5 verified Coursera course certificates including Google Advanced Data Analytics Capstone (100%), Foundations of Data Science, The Power of Statistics, and Data Storytelling\n• **Anthropic**: 20 Claude & Model Context Protocol (MCP) course completion certificates\n• **IBM**: 12 AI Analyst, Generative AI & Data Science credentials\n• **Microsoft / Coursera**: Azure ML Studio pipelines & Foundations of AI\n• **NPTEL / IIT Roorkee**: Data Analytics with Python (Elite Certificate)\n• **Tata, TCS & Deloitte**: Practical job simulations & GenAI essentials\n*(Note: Google Cloud achievements like Diamond League #18 and 183 skill badges are tracked separately in the Google Developer Journey dashboard).* ",
     action: { label: "View Certification Vault", href: "#certificates", type: "scroll" },
   },
   // 12. Education & Academic Marks
@@ -128,14 +128,14 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["leetcode", "coding", "dsa", "algorithms", "problem solving", "rating", "contest"],
     answer:
-      "Sumit is an active problem solver on **LeetCode** (@sumit2003dev):\n• **341 Problems Solved**: 94 Easy, 184 Medium, 63 Hard\n• **Contest Rating**: 1,460\n• Earned both **LeetCode 50-Day and 100-Day 2026 badges** with consistent practice in Python, Java, and MySQL.",
+      "Sumit is an active problem solver on **LeetCode** (@sumit2003dev):\n• **371 Problems Solved**: 102 Easy, 201 Medium, 68 Hard\n• **Contest Rating**: 1,460\n• Earned both **LeetCode 50-Day and 100-Day 2026 badges** with consistent practice in Python, Java, and MySQL.",
     action: { label: "Visit LeetCode Profile", href: profile.leetcode, type: "external" },
   },
   // 14. Resume / CV
   {
     keywords: ["resume", "cv", "download resume", "view resume", "profile document", "pdf"],
     answer:
-      "Sumit's verified resume is available for preview right inside this portfolio or as a direct PDF download. It highlights his FlyRank ML internship, GyanVerse RAG capstone, BeyondWord, 178 Google Cloud badges, and technical proficiencies.",
+      "Sumit's verified resume is available for preview right inside this portfolio or as a direct PDF download. It highlights his FlyRank ML internship, GyanVerse RAG capstone, BeyondWord, 183 Google Cloud badges, and technical proficiencies.",
     action: { label: "Open Resume Preview", type: "resume" },
   },
   // 15. Contact & Hiring
@@ -163,9 +163,9 @@ Key projects:
 3. Airline Delay Prediction: Scikit-learn regression model with R² score of ~0.85.
 4. AI-Based Exam Proctoring Research: Co-authored research on ML & Computer Vision for exam integrity under Mrs. Anamika Sharma.
 Key achievements:
-- Diamond League (Position #18) in Google Cloud Arcade with 178 skill badges, 47,957 points, and 12-day streak (verified at https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9).
+- Diamond League (Position #18) in Google Cloud Arcade with 183 skill badges, 48,142 points, and 12-day streak (verified at https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9).
 - Credly verified badges profile: https://www.credly.com/users/sumitdev2003/badges
-- LeetCode profile (@sumit2003dev) with 341+ problems solved: https://leetcode.com/u/sumit2003dev/
+- LeetCode profile (@sumit2003dev) with 371+ problems solved: https://leetcode.com/u/sumit2003dev/
 - Google Developer Profile: https://g.dev/sumit2003dev
 - Google Data Analytics Professional Curriculum with 94.87% overall performance.
 - Active GDG Lucknow member and Google Developer Program premium member.
@@ -379,7 +379,7 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
     setIsTyping(true);
 
     // Optional Server-Side AI Proxy endpoint (keeps API keys completely off client browsers)
-    const proxyUrl = (import.meta as any).env?.VITE_AI_PROXY_URL;
+    const proxyUrl = import.meta.env.VITE_AI_PROXY_URL;
     if (proxyUrl) {
       try {
         const response = await fetch(proxyUrl, {
@@ -485,7 +485,7 @@ export default function AskSumitAI({ onOpenResume }: AskSumitAIProps) {
                   <h3 className="font-display text-base sm:text-lg uppercase text-white">Ask Sumit AI</h3>
                   <p className="text-[10px] sm:text-[11px] text-ember-500 flex items-center gap-1">
                     <span>
-                      {(import.meta as any).env?.VITE_AI_PROXY_URL ? "Secure AI Proxy Mode" : "Smart Semantic Engine"}
+                      {import.meta.env.VITE_AI_PROXY_URL ? "Secure AI Proxy Mode" : "Smart Semantic Engine"}
                     </span>
                     <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   </p>

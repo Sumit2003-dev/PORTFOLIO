@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useMemo } from "react";
 import Section from "./Section";
 import { achievements as defaultAchievements, leetcode as defaultLeetcode, githubStats as defaultGithubStats, profile, asset } from "@/lib/data";
 import { useCounter, useFadeUp } from "@/hooks/use-scroll";
-import { Trophy, FolderGit2, GitBranch, Code2, Database, BarChart3, ExternalLink, Activity } from "lucide-react";
+import { Trophy, FolderGit2, GitBranch, Code2, Database, BarChart3, ExternalLink } from "lucide-react";
 
 interface CounterProps {
   value: number;
@@ -96,7 +96,9 @@ export default function Achievements() {
               setSkillsData(sJson);
               try {
                 localStorage.setItem("skills_snapshot", JSON.stringify(sJson));
-              } catch {}
+              } catch {
+                // Ignore storage quota errors
+              }
             }
           }
 
@@ -106,7 +108,9 @@ export default function Achievements() {
               setLeetcodeData(lJson);
               try {
                 localStorage.setItem("lc_activity_snapshot", JSON.stringify(lJson));
-              } catch {}
+              } catch {
+                // Ignore storage quota errors
+              }
             }
           }
 
@@ -116,7 +120,9 @@ export default function Achievements() {
               setGithubData(gJson);
               try {
                 localStorage.setItem("gh_activity_snapshot", JSON.stringify(gJson));
-              } catch {}
+              } catch {
+                // Ignore storage quota errors
+              }
             }
           }
 
