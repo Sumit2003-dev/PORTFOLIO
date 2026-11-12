@@ -10,7 +10,7 @@ const FIELD =
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null);
   useFadeUp(ref);
-  const [sent, setSent] = useState(false);
+  const [draftOpened, setDraftOpened] = useState(false);
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({ first: "", email: "", subject: "", message: "" });
 
@@ -22,20 +22,28 @@ export default function Contact() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    if (!formData.first.trim() || !formData.email.trim() || !formData.message.trim()) {
+      return;
+    }
 
     const mailtoUrl = `mailto:${profile.email}?subject=${encodeURIComponent(
-      formData.subject || "Portfolio Contact Inquiry"
+      formData.subject.trim() || "Portfolio Contact Inquiry"
     )}&body=${encodeURIComponent(
-      `Hello Sumit,\n\nName: ${formData.first}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      `Hello Sumit,\n\nName: ${formData.first.trim()}\nEmail: ${formData.email.trim()}\n\nMessage:\n${formData.message.trim()}`
     )}`;
 
-    window.open(mailtoUrl, "_blank");
+    try {
+      window.location.href = mailtoUrl;
+    } catch {
+      window.open(mailtoUrl, "_self");
+    }
+
+    setDraftOpened(true);
 
     setTimeout(() => {
-      setSent(false);
+      setDraftOpened(false);
       setFormData({ first: "", email: "", subject: "", message: "" });
-    }, 4000);
+    }, 6000);
   };
 
   const info = [
@@ -178,20 +186,26 @@ export default function Contact() {
             type="submit"
             className="btn-ember group flex w-full items-center justify-center gap-2 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider"
           >
-            {sent ? (
+            {draftOpened ? (
               <>
-                <Check className="h-4 w-4" /> Message Sent Successfully!
+                <Check className="h-4 w-4 text-emerald-400" /> Email Draft Opened!
               </>
             ) : (
               <>
                 <Send className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />{" "}
-                Send Message
+                Open Email Draft
               </>
             )}
           </button>
-          <p className="text-center text-[11px] text-white/60">
-            Sumit typically replies within 24 hours.
-          </p>
+          {draftOpened ? (
+            <p className="text-center text-[11px] text-emerald-400 font-mono">
+              Email draft opened — send it from your email application, or copy my email above.
+            </p>
+          ) : (
+            <p className="text-center text-[11px] text-white/60">
+              Opens your default mail client with a pre-filled draft. Sumit typically replies within 24 hours.
+            </p>
+          )}
         </form>
       </div>
     </Section>

@@ -11,7 +11,7 @@ export const profile = {
   short: "Data Scientist and AI/ML developer building practical machine learning systems, predictive models, and context-grounded RAG applications.",
   description: [
     "Final-year Computer Science & Engineering student specialising in Artificial Intelligence and Data Science, currently gaining hands-on industry experience as a Machine Learning Intern at FlyRank AI.",
-    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I actively learn and build on Google Cloud, standing in the Diamond League on Google Cloud Skills Boost with 187 skill badges, 48,322 points, and a continuous learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
+    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I actively learn and build on Google Cloud, standing in the Diamond League on Google Cloud Skills Boost with 188 skill badges, 48,371 points, and a continuous learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
     "I'm actively expanding my expertise in Generative AI, RAG systems and LLMs through applied academic and industry projects.",
   ],
   email: "sumit.ku5981@gmail.com",
@@ -38,7 +38,7 @@ export const profile = {
 export const stats = [
   { label: "Projects", value: 6, suffix: "+" },
   { label: "Certificates", value: 51, suffix: "+" },
-  { label: "Cloud Badges", value: 187, suffix: "+" },
+  { label: "Cloud Badges", value: 188, suffix: "+" },
   { label: "Internships", value: 1, suffix: "" },
 ];
 
@@ -121,25 +121,25 @@ export const projects: Project[] = [
   {
     id: "beyondword-emotion-reader",
     index: "01",
-    title: "Emotion Reader (BeyondWord) — Multilingual AI",
+    title: "BeyondWord — AI Emotion Recognition from Text",
     category: "Generative AI · NLP",
     blurb:
-      "Multilingual emotion and sentiment recognition classifying text into 6 core emotions and scoring psychometric VAD dimensions with calibrated probabilities.",
+      "Emotion and sentiment recognition classifying text into 8 emotion classes with calibrated probability distributions and confidence scoring.",
     description:
-      "Hybrid transformer model in PyTorch served through a FastAPI backend. Supports 100+ languages including English, Hindi, Hinglish, Spanish and French with calibrated probability outputs, single-text & batch CSV analysis, session history, and copyable communication response guidance. Deployed on Vercel with React 19 + TanStack.",
+      "PyTorch transformer classification model served through a FastAPI backend. Evaluates text across 8 emotion categories with calibrated probability outputs, single-text & batch analysis, and session response guidance. Deployed on Vercel with React frontend.",
     problem:
-      "Nuanced emotional cues, cross-language sentiment subtleties, and mixed-dialect expressions (such as Hinglish) are lost in standard sentiment classifiers.",
+      "Nuanced emotional cues and context-dependent expressions are lost in basic positive/negative sentiment classifiers.",
     solution:
-      "Built a hybrid PyTorch transformer classifier providing calibrated probability outputs across 6 core emotions along with psychometric Valence, Arousal, and Dominance (VAD) dimension scoring.",
+      "Trained a PyTorch transformer classifier providing calibrated probability outputs across 8 emotion classes with confidence distribution scoring.",
     architecture:
-      "Multilingual Input (Text / CSV) → FastAPI Inference Gateway → PyTorch Transformer Backbone → VAD Psychometric Scorer → Calibrated Probabilities → React 19 Client",
+      "Input Text → FastAPI Gateway → PyTorch Transformer Backbone → Softmax Probability Calibration → React Client",
     metrics: [
-      { label: "Languages", value: "100+" },
-      { label: "Emotions", value: "6 Core + VAD" },
-      { label: "Frontend", value: "React 19" },
+      { label: "Classification", value: "8 Emotion Classes" },
+      { label: "Architecture", value: "PyTorch & Transformers" },
+      { label: "Serving", value: "FastAPI" },
     ],
-    tech: ["Python", "PyTorch", "Transformers", "FastAPI", "React 19", "TanStack", "Vercel"],
-    github: "https://github.com/Sumit2003-dev",
+    tech: ["Python", "PyTorch", "Transformers", "FastAPI", "React", "Vercel"],
+    github: "https://github.com/Sumit2003-dev/AI-Based-Emotion-Recognition-from-Text",
     gradient: "from-[#FF6A00]/25 via-burnt-red/10 to-transparent",
   },
   {
@@ -148,9 +148,9 @@ export const projects: Project[] = [
     title: "FlyRank AI — ML Internship Case Study",
     category: "Machine Learning · Industry Internship",
     blurb:
-      "Content-opportunity scoring framework as an ML ranking problem — designing and validating models against Precision@50 as the primary benchmark.",
+      "Content-opportunity scoring framework as an ML ranking problem — evaluating models against Precision@50 across assignment milestones.",
     description:
-      "Designed and trained automated ML ranking models evaluated against Precision@50 as the core success metric across four assignment milestones (ML-01–ML-04). Built reproducible data contracts against FlyRank's HuggingFace warehouse, with hands-on modules on Vertex AI, LoRA, RLHF, and GenAI agent workflows.",
+      "Machine Learning Internship practical deliverables and experimental work at FlyRank AI. Developed and evaluated content-opportunity ranking models against Precision@50 across structured assignment milestones (ML-01–ML-04), building data ingestion pipelines and training experiments while exploring Vertex AI, fine-tuning fundamentals, and LLM evaluation workflows.",
     problem:
       "Identifying high-potential content opportunities requires scalable, automated ranking models rather than manual heuristics.",
     solution:
@@ -158,8 +158,8 @@ export const projects: Project[] = [
     architecture:
       "HuggingFace Warehouse → Data Contract Validation → Feature Extraction → ML Ranking Model → Precision@50 Evaluation",
     metrics: [
-      { label: "Metric", value: "P@50" },
-      { label: "Milestones", value: "ML-01-04" },
+      { label: "Evaluation", value: "Precision@50" },
+      { label: "Milestones", value: "ML-01–04" },
       { label: "Data Pipeline", value: "HuggingFace" },
     ],
     tech: ["Python", "Scikit-learn", "Ranking Models", "Data Contracts", "HuggingFace", "Git"],
@@ -169,36 +169,36 @@ export const projects: Project[] = [
   {
     id: "gyanverse-ai",
     index: "03",
-    title: "GyanVerse AI — RAG Intelligent QnA",
+    title: "GyanVerse AI — RAG Educational Assistant",
     category: "Generative AI · RAG",
     blurb:
-      "Context-aware multilingual educational chatbot powered by Sentence Transformers, FAISS/ChromaDB indexing, and GPT-4o-mini synthesis.",
+      "Context-grounded educational QnA assistant powered by Sentence Transformers, FAISS/ChromaDB indexing, and prompt-augmented LLM synthesis.",
     description:
-      "Final-year capstone project designed to reduce query-resolution time for students by grounding AI responses in indexed course materials. Built with a 3-member team under faculty guidance, featuring low-latency retrieval (<1.2s) in a Streamlit UI.",
+      "Final-year capstone project designed to reduce query-resolution time for university students by grounding AI responses in indexed course syllabi, lecture notes, and reference materials. Built in a 3-member team under faculty guidance using Sentence Transformers, FAISS/ChromaDB vector indexing, and prompt-engineered context augmentation with a Streamlit interface.",
     problem:
-      "Students waste hours sifting through static PDFs and lecture notes without direct, context-accurate answers.",
+      "Students spend excessive time searching through unindexed lecture notes and static PDFs without direct, context-grounded answers.",
     solution:
-      "Engineered an end-to-end RAG pipeline using Sentence Transformers, FAISS/ChromaDB vector search, and LLM synthesis with multilingual support.",
+      "Engineered an end-to-end RAG pipeline using Sentence Transformers, FAISS/ChromaDB vector search, and context-augmented LLM synthesis.",
     architecture:
-      "PDF Ingestion → Sentence Transformer Embeddings → FAISS Vector Store → Query Retrieval → Context Augmented LLM → Multilingual Response",
+      "Course PDFs → Sentence Transformer Embeddings → FAISS Vector Store → Query Retrieval → Context Augmented LLM → Streamlit UI",
     metrics: [
-      { label: "Accuracy", value: "~92%" },
-      { label: "Latency", value: "<1.2s" },
-      { label: "Model", value: "GPT-4o-mini" },
+      { label: "Architecture", value: "RAG Pipeline" },
+      { label: "Vector Search", value: "FAISS & ChromaDB" },
+      { label: "Embeddings", value: "Sentence Transformers" },
     ],
-    tech: ["Python", "RAG", "FAISS", "ChromaDB", "Sentence Transformers", "GPT-4o-mini", "Streamlit"],
+    tech: ["Python", "RAG", "FAISS", "ChromaDB", "Sentence Transformers", "LLMs", "Streamlit"],
     github: "https://github.com/Sumit2003-dev/GyanVerse-AI",
     gradient: "from-amber-400/25 via-burnt-red/10 to-transparent",
   },
   {
     id: "railsaarthi-sih",
     index: "04",
-    title: "RailSaarthi — Train ETA & Control-Room Platform",
-    category: "Machine Learning · Smart India Hackathon",
+    title: "RailSaarthi — Train ETA & Control-Room Prototype",
+    category: "Machine Learning · Hackathon Prototype",
     blurb:
-      "Multi-factor train ETA prediction engine, delay root-cause classifier, and connecting-train miss-risk analyser for Indian Railways (SIH26028).",
+      "Multi-factor train ETA prediction concept, delay root-cause classifier, and connecting-train miss-risk analyzer designed for SIH26028.",
     description:
-      "Designed an automated multi-factor ETA prediction engine, delay root-cause classifier, connecting-train miss-risk analyser, and control-room zonal dashboard for Indian Railways. Developed for Smart India Hackathon 2026 (Team Garuda X, SIH26028, Ministry of Railways) owning ML data handling and model evaluation.",
+      "Hackathon prototype developed for Smart India Hackathon (Problem Statement SIH26028 by Ministry of Railways, Team Garuda X). Designed a concept and machine learning prototype for multi-factor train ETA deviation forecasting, delay root-cause classification, and connecting-train miss probability analysis, alongside an interactive control-room dashboard concept.",
     problem:
       "Cascading rail delays and connecting-train misses create operational bottlenecks and poor passenger experience across railway zones.",
     solution:
@@ -211,7 +211,7 @@ export const projects: Project[] = [
       { label: "Problem ID", value: "SIH26028" },
     ],
     tech: ["Python", "Scikit-learn", "TypeScript", "TanStack Start", "Git"],
-    github: "https://github.com/Sumit2003-dev",
+    github: "https://github.com/Sumit2003-dev/RailDristhi",
     gradient: "from-ember-500/20 via-orange-500/10 to-transparent",
   },
   {
@@ -235,7 +235,7 @@ export const projects: Project[] = [
       { label: "Records", value: "1,200" },
     ],
     tech: ["Python", "Scikit-learn", "Flask", "JavaScript", "Chart.js", "Netlify"],
-    github: "https://github.com/Sumit2003-dev/Student-Record-Intelligence-System",
+    github: "",
     demo: "https://nextgrade.netlify.app",
     gradient: "from-orange-500/20 via-ember-600/10 to-transparent",
   },
@@ -245,9 +245,9 @@ export const projects: Project[] = [
     title: "Airline Delay Prediction — ML Classification",
     category: "Machine Learning · Classification",
     blurb:
-      "End-to-end ML classification pipeline on a 124K-row imbalanced flight dataset with Random Forest (ROC-AUC 0.67).",
+      "End-to-end ML classification pipeline on a 124K-row imbalanced flight dataset with Random Forest (ROC-AUC 0.70 validation, 0.67 holdout).",
     description:
-      "Engineered end-to-end pipeline on 124K flight records with class imbalance handling (34.4% delayed flights). Benchmarked Logistic Regression, Decision Tree, and Random Forest using F1-score and ROC-AUC, selecting Random Forest (ROC-AUC 0.67) with departure-hour feature engineering.",
+      "Engineered an end-to-end classification pipeline on 124K flight records with class imbalance handling (34.4% delayed flights). Evaluated Logistic Regression, Decision Tree, and Random Forest baselines, with Random Forest achieving 0.70 ROC-AUC in validation and 0.67 on holdout evaluation with departure-hour feature engineering.",
     problem:
       "Aviation delays cause schedule disruptions and passenger frustration, requiring predictive departure-time risk assessment.",
     solution:
@@ -257,7 +257,7 @@ export const projects: Project[] = [
     metrics: [
       { label: "Dataset", value: "124K Rows" },
       { label: "Model", value: "Random Forest" },
-      { label: "ROC-AUC", value: "0.67" },
+      { label: "ROC-AUC", value: "0.70 (Val) / 0.67 (Holdout)" },
     ],
     tech: ["Python", "Pandas", "NumPy", "Scikit-learn", "Matplotlib"],
     github: "https://github.com/Sumit2003-dev/Airlines-Delay-Prediction",
@@ -284,7 +284,7 @@ export const projects: Project[] = [
       { label: "Team", value: "CodeVengers" },
     ],
     tech: ["Python", "Web App", "Data Visualisation", "Git"],
-    github: "https://github.com/Sumit2003-dev",
+    github: "https://github.com/Sumit2003-dev/KarigarSetu",
     gradient: "from-[#FF8A2B]/25 via-burnt-orange/10 to-transparent",
   },
   {
@@ -308,7 +308,7 @@ export const projects: Project[] = [
       { label: "Domain", value: "ML + CV" },
     ],
     tech: ["Python", "Computer Vision", "Machine Learning", "Academic Writing"],
-    github: "https://github.com/Sumit2003-dev",
+    github: "https://github.com/Sumit2003-dev/Proctor-AI",
     gradient: "from-amber-400/25 via-burnt-red/10 to-transparent",
   },
 ];
@@ -340,20 +340,20 @@ export const education = [
   {
     degree: "Senior Secondary (XII)",
     major: "Physics, Chemistry, Mathematics (PCM)",
-    institution: "PM Shri Kendriya Vidyalaya",
+    institution: "PM SHRI Kendriya Vidyalaya, Aliganj, Lucknow",
     location: "Lucknow, Uttar Pradesh",
     duration: "2022 — 2023 · CBSE",
-    grade: "75.4%",
+    grade: "87.4%",
     status: "Completed",
     courses: ["Mathematics", "Physics", "Chemistry", "Computer Science"],
   },
   {
     degree: "Secondary (X)",
     major: "Science Stream",
-    institution: "Army School, Binaguri, West Bengal",
-    location: "West Bengal",
+    institution: "Army Public School, Binnaguri, West Bengal",
+    location: "Binnaguri, West Bengal",
     duration: "2020 — 2021 · CBSE",
-    grade: "87.4%",
+    grade: "75.4%",
     status: "Completed",
     courses: ["Mathematics", "Science", "Social Science", "English", "Hindi"],
   },
@@ -362,14 +362,14 @@ export const education = [
 /* ================= ACHIEVEMENTS ================= */
 export const achievements = [
   { label: "Diamond League Rank", value: 18, suffix: "th", prefix: "#", icon: "trophy" },
-  { label: "Cloud Skill Badges", value: 187, suffix: "+", icon: "repo" },
-  { label: "Arcade Points", value: 48322, suffix: "", icon: "trophy" },
+  { label: "Cloud Skill Badges", value: 188, suffix: "+", icon: "repo" },
+  { label: "Arcade Points", value: 48371, suffix: "", icon: "trophy" },
   { label: "Events & Study Jams", value: 10, suffix: "+", icon: "git" },
 ];
 
 export const leetcode = [
-  { label: "Problems Solved", value: 371, suffix: "+" },
-  { label: "Contest Rating", value: 1460, suffix: "" },
+  { label: "Problems Solved", value: 372, suffix: "+" },
+  { label: "Contest Rating", value: null as number | null, suffix: "" },
   { label: "Medium / Hard", value: 269, suffix: "" },
   { label: "Hard Solved", value: 68, suffix: "" },
 ];

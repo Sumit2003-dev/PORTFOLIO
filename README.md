@@ -7,13 +7,13 @@
 [![Vite](https://img.shields.io/badge/Vite-8.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Three.js](https://img.shields.io/badge/Three.js-0.185-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Google Cloud](https://img.shields.io/badge/Google_Cloud-Diamond_League_178_Badges-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
+[![Google Cloud](https://img.shields.io/badge/Google_Cloud-Diamond_League_188_Badges-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/)
 
 <p align="center">
   <b>Turning raw data into cinematic intelligence — building models that predict, systems that learn, and products that feel alive.</b>
 </p>
 
-[🌐 Live Portfolio](https://sumit2003-dev.github.io/PORTFOLIO/) • [📄 View Resume](https://github.com/Sumit2003-dev/PORTFOLIO/blob/main/public/uploads/Sumit_Kumar_Bharti_Resume_Updated.pdf) • [💼 LinkedIn](https://www.linkedin.com/in/sumit2003-dev/) • [☁️ Google Skills (178 Badges)](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9) • [⚡ LeetCode](https://leetcode.com/u/sumit2003dev/) • [📬 Contact](mailto:sumit.ku5981@gmail.com)
+[🌐 Live Portfolio](https://sumit2003-dev.github.io/PORTFOLIO/) • [📄 View Resume](https://github.com/Sumit2003-dev/PORTFOLIO/blob/main/public/uploads/Sumit_Kumar_Bharti_Resume_Updated.pdf) • [💼 LinkedIn](https://www.linkedin.com/in/sumit2003-dev/) • [☁️ Google Skills (188 Badges)](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9) • [⚡ LeetCode](https://leetcode.com/u/sumit2003dev/) • [📬 Contact](mailto:sumit.ku5981@gmail.com)
 
 </div>
 
@@ -32,10 +32,10 @@ Engineered with a **dark ember aesthetic** (`#060c14` / `#FF6A00`), real-time **
 | Metric / Milestone | Verified Record | Details |
 | :--- | :--- | :--- |
 | **B.Tech — CSE (AI & DS)** | **CGPA 7.98 / 10** | Shri Ramswaroop Memorial University (SRMU, 2023–2027) · Sem VI SGPA 8.26 |
-| **Senior Secondary (CBSE XII)** | **75.4%** | PM Shri Kendriya Vidyalaya, Lucknow (PCM, 2023) |
-| **Secondary (CBSE X)** | **87.4%** | Army School, Binaguri, West Bengal (2021) |
-| **Google Cloud Skills Boost** | **Diamond League (#18)** | [178 Verified Skill Badges · 47,957 Points · 12-Day Streak](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9) |
-| **Competitive Programming** | **341 Solved · Rating 1,460** | [LeetCode (@sumit2003dev)](https://leetcode.com/u/sumit2003dev/) · 94 Easy · 184 Medium · 63 Hard |
+| **Senior Secondary (CBSE XII)** | **87.4%** | PM SHRI Kendriya Vidyalaya, Aliganj, Lucknow (PCM, 2022–2023) |
+| **Secondary (CBSE X)** | **75.4%** | Army Public School, Binnaguri, West Bengal (2020–2021) |
+| **Google Cloud Skills Boost** | **Diamond League (#18)** | [188 Verified Skill Badges · 48,371 Points · 12-Day Streak](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9) |
+| **Competitive Programming** | **372 Solved · Contest Rating: Unavailable** | [LeetCode (@sumit2003dev)](https://leetcode.com/u/sumit2003dev/) · 103 Easy · 201 Medium · 68 Hard |
 | **Hackathons & Honors** | **Top 10 Finish** | VIVEKA: The Intelligence 5.0 (Techfest 2k26) · KarigarSetu |
 
 ---
@@ -59,24 +59,24 @@ Engineered with a **dark ember aesthetic** (`#060c14` / `#FF6A00`), real-time **
 
 | Project | Category | Key Highlights & Stack |
 | :--- | :--- | :--- |
-| **[BeyondWord (Emotion Reader)](https://github.com/Sumit2003-dev)** | Deep Learning / NLP | Multilingual text emotion classifier across 6 core emotions and psychometric VAD dimensions; PyTorch, FastAPI, React 19. |
+| **[BeyondWord](https://github.com/Sumit2003-dev/AI-Based-Emotion-Recognition-from-Text)** | Deep Learning / NLP | PyTorch transformer emotion classifier evaluating 8 emotion classes with calibrated confidence probabilities; FastAPI, React. |
 | **[FlyRank AI — ML Internship](https://github.com/Sumit2003-dev/flyrank-ml-internship)** | ML Ranking | Content-opportunity scoring framework evaluated against **Precision@50**; HuggingFace versioned data contracts. |
-| **[GyanVerse AI](https://github.com/Sumit2003-dev/GyanVerse-AI)** | GenAI / RAG | Capstone RAG system using Sentence Transformers, FAISS/ChromaDB vector indexing, and GPT-4o-mini (<1.2s latency). |
-| **[RailSaarthi](https://github.com/Sumit2003-dev)** | ML / Hackathon | Smart India Hackathon 2026 (SIH26028, Team Garuda X) train ETA prediction, delay root-cause analysis, and zonal control room. |
-| **[Student Performance Prediction](https://github.com/Sumit2003-dev/Student-Record-Intelligence-System)** | Analytics & ML | 1,200 records analyzed with Gradient Boosting (**R² 0.85**, 5-fold CV R² 0.83); Flask REST API, deployed at nextgrade.netlify.app. |
-| **[Airline Delay Prediction](https://github.com/Sumit2003-dev/Airlines-Delay-Prediction)** | ML Classification | End-to-end classification pipeline on 124K-row imbalanced flight dataset with Random Forest (ROC-AUC 0.67). |
-| **[KarigarSetu — Artisan's Ledger](https://github.com/Sumit2003-dev)** | Web & Data | Top 10 finish at VIVEKA 2k26 (Team CodeVengers) connecting Lucknow Chikankari artisans directly with transparent pricing. |
-| **[AI Exam Proctoring Research](https://github.com/Sumit2003-dev)** | Computer Vision | Co-authored research on ML & computer vision for automated academic-integrity monitoring under faculty supervision. |
+| **[GyanVerse AI](https://github.com/Sumit2003-dev/GyanVerse-AI)** | GenAI / RAG | Capstone RAG system using Sentence Transformers, FAISS/ChromaDB vector indexing, and prompt-augmented LLM synthesis with Streamlit. |
+| **[RailSaarthi](https://github.com/Sumit2003-dev/RailDristhi)** | ML / Hackathon | Smart India Hackathon prototype (SIH26028, Team Garuda X) train ETA prediction deviations, delay root-cause analysis, and zonal control room concept. |
+| **[Student Performance Prediction](https://nextgrade.netlify.app)** | Analytics & ML | 1,200 records analyzed with Gradient Boosting (**R² 0.85**, 5-fold CV R² 0.83); Flask REST API, deployed at nextgrade.netlify.app. |
+| **[Airline Delay Prediction](https://github.com/Sumit2003-dev/Airlines-Delay-Prediction)** | ML Classification | End-to-end classification pipeline on 124K-row imbalanced flight dataset with Random Forest (ROC-AUC 0.70 validation, 0.67 holdout). |
+| **[KarigarSetu — Artisan's Ledger](https://github.com/Sumit2003-dev/KarigarSetu)** | Web & Data | Top 10 finish at VIVEKA 2k26 (Team CodeVengers) connecting Lucknow Chikankari artisans directly with transparent pricing. |
+| **[AI Exam Proctoring Research](https://github.com/Sumit2003-dev/Proctor-AI)** | Computer Vision | Co-authored research on ML & computer vision for automated academic-integrity monitoring under faculty supervision. |
 
 ---
 
 ## 📊 Performance & Optimization Benchmarks
 
 * **⚡ 92.8% Entry Chunk Reduction**: Dropped initial bundle from `1.2 MB` down to **`87.8 kB`** (24.8 kB gzipped) using `React.lazy` and Vite vendor chunk splitting.
-* **🏎️ Sub-3-Second Production Build**: Compiles clean in **~2.8s** with 0 warnings.
-* **🎯 100% TypeScript Strictness**: Verified with zero compilation errors (`npx tsc --noEmit`).
+* **🏎️ Fast Production Build**: Compiles clean in **~2.4s** with 0 warnings.
+* **🎯 100% TypeScript Strictness**: Verified with zero compilation errors (`npx tsc -b`).
 * **🌐 Complete SEO & Social Sharing**: Complete Open Graph, Twitter cards, schema.org `Person` JSON-LD structured data, `robots.txt`, and `sitemap.xml`.
-* **♿ WCAG AA Accessible**: Semantic dialog roles, keyboard modal trapping (`Escape`), skip-to-content shortcuts, and optimized contrast.
+* **♿ Accessibility Focused**: High-contrast typography (>7:1 on micro-labels), OS `prefers-reduced-motion` support, keyboard-accessible dialog traps (`Escape`), and semantic HTML landmarks.
 
 ---
 
@@ -175,7 +175,7 @@ This repository includes a preconfigured GitHub Actions workflow in [`.github/wo
 * **LinkedIn**: [linkedin.com/in/sumit2003-dev](https://www.linkedin.com/in/sumit2003-dev/)
 * **GitHub**: [@Sumit2003-dev](https://github.com/Sumit2003-dev)
 * **LeetCode**: [@sumit2003dev](https://leetcode.com/u/sumit2003dev/)
-* **Google Skills Boost**: [178 Badges · Diamond League (#18)](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9)
+* **Google Skills Boost**: [188 Badges · Diamond League (#18)](https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9)
 * **Credly**: [sumitdev2003 Badges](https://www.credly.com/users/sumitdev2003/badges)
 * **Google Developer Profile**: [g.dev/sumit2003dev](https://g.dev/sumit2003dev)
 * **Location**: Lucknow, Uttar Pradesh, India

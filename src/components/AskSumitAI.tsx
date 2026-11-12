@@ -114,14 +114,14 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["certificate", "certification", "credential", "google data analytics", "coursera", "nptel", "ibm", "anthropic", "deloitte", "tata"],
     answer:
-      "Sumit's **Certification Vault catalogs 51 verified credentials across courses, specializations, and industry job simulations** (with official Coursera, IBM Skills Network, and NPTEL verified certificates, and all completion documentation on file):\n• **Google**: 5 verified Coursera course certificates including Google Advanced Data Analytics Capstone (100%), Foundations of Data Science, The Power of Statistics, and Data Storytelling\n• **Anthropic**: 20 Claude & Model Context Protocol (MCP) course completion certificates\n• **IBM**: 12 AI Analyst, Generative AI & Data Science credentials\n• **Microsoft / Coursera**: Azure ML Studio pipelines & Foundations of AI\n• **NPTEL / IIT Roorkee**: Data Analytics with Python (Elite Certificate)\n• **Tata, TCS & Deloitte**: Practical job simulations & GenAI essentials\n*(Note: Google Cloud achievements like Diamond League #18 and 187 skill badges are tracked separately in the Google Developer Journey dashboard).* ",
+      "Sumit's **Certification Vault catalogs 51 verified credentials across courses, specializations, and industry job simulations** (with official Coursera, IBM Skills Network, and NPTEL verified certificates, and all completion documentation on file):\n• **Google**: 5 verified Coursera course certificates including Google Advanced Data Analytics Capstone (100%), Foundations of Data Science, The Power of Statistics, and Data Storytelling\n• **Anthropic**: 20 Claude & Model Context Protocol (MCP) course completion certificates\n• **IBM**: 12 AI Analyst, Generative AI & Data Science credentials\n• **Microsoft / Coursera**: Azure ML Studio pipelines & Foundations of AI\n• **NPTEL / IIT Roorkee**: Data Analytics with Python (Elite Certificate)\n• **Tata, TCS & Deloitte**: Practical job simulations & GenAI essentials\n*(Note: Google Cloud achievements like Diamond League #18 and 188 skill badges are tracked separately in the Google Developer Journey dashboard).* ",
     action: { label: "View Certification Vault", href: "#certificates", type: "scroll" },
   },
   // 12. Education & Academic Marks
   {
     keywords: ["education", "srmu", "gpa", "cgpa", "sgpa", "degree", "b.tech", "college", "university", "school", "kendriya vidyalaya", "army school", "12th", "10th", "binaguri"],
     answer:
-      "Sumit's verified academic track record:\n• **B.Tech in CSE (AI & Data Science)**: Shri Ramswaroop Memorial University (SRMU, 2023–2027) — **CGPA 7.98 / 10 (SGPA 8.26 in Sem VI)**\n• **Senior Secondary (CBSE XII, PCM)**: PM Shri Kendriya Vidyalaya, Lucknow (2023) — **75.4%**\n• **Secondary (CBSE X)**: Army School, Binaguri, West Bengal (2021) — **87.4%**",
+      "Sumit's verified academic track record:\n• **B.Tech in CSE (AI & Data Science)**: Shri Ramswaroop Memorial University (SRMU, 2023–2027) — **CGPA 7.98 / 10 (SGPA 8.26 in Sem VI)**\n• **Senior Secondary (CBSE XII, PCM)**: PM SHRI Kendriya Vidyalaya, Aliganj, Lucknow (2022–2023) — **87.4%**\n• **Secondary (CBSE X)**: Army Public School, Binnaguri, West Bengal (2020–2021) — **75.4%**",
     action: { label: "View Education Details", href: "#education", type: "scroll" },
   },
   // 13. LeetCode & Competitive Programming
@@ -135,7 +135,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["resume", "cv", "download resume", "view resume", "profile document", "pdf"],
     answer:
-      "Sumit's verified resume is available for preview right inside this portfolio or as a direct PDF download. It highlights his FlyRank ML internship, GyanVerse RAG capstone, BeyondWord, 187 Google Cloud badges, and technical proficiencies.",
+      "Sumit's verified resume is available for preview right inside this portfolio or as a direct PDF download. It highlights his FlyRank ML internship, GyanVerse RAG capstone, BeyondWord, 188 Google Cloud badges, and technical proficiencies.",
     action: { label: "Open Resume Preview", type: "resume" },
   },
   // 15. Contact & Hiring
@@ -158,12 +158,13 @@ const SYSTEM_CONTEXT = `You are "Ask Sumit AI", the personal portfolio intellige
 Sumit Kumar is a final-year B.Tech CSE student (Artificial Intelligence & Data Science) at Shri Ramswaroop Memorial University (SRMU), graduating in 2027 with a CGPA of 7.98/10.
 He is currently a Machine Learning Intern at FlyRank AI, where he designs content-opportunity ranking models evaluated against Precision@50 and builds HuggingFace data contracts.
 Key projects:
-1. GyanVerse AI: Capstone RAG system using Sentence Transformers, FAISS/ChromaDB vector stores, Streamlit UI, <1.2s latency.
-2. Student Record Intelligence: Analytics platform for 1000+ student records using Python, Pandas, Streamlit.
-3. Airline Delay Prediction: Scikit-learn regression model with R² score of ~0.85.
-4. AI-Based Exam Proctoring Research: Co-authored research on ML & Computer Vision for exam integrity under Mrs. Anamika Sharma.
+1. BeyondWord: AI Emotion Recognition from text evaluating 8 emotion classes with PyTorch & FastAPI.
+2. GyanVerse AI: Capstone RAG system using Sentence Transformers, FAISS/ChromaDB vector stores, Streamlit UI.
+3. Student Performance Prediction (NextGrade): Gradient Boosting analytics for 1,200 student records (R² 0.85) at nextgrade.netlify.app.
+4. Airline Delay Prediction: Scikit-learn Random Forest classification pipeline with ROC-AUC of 0.70 (val) / 0.67 (holdout).
+5. AI-Based Exam Proctoring Research: Co-authored research on ML & Computer Vision for exam integrity under Mrs. Anamika Sharma.
 Key achievements:
-- Diamond League (Position #18) on Google Cloud Skills Boost with 187 skill badges, 48,322 points, and 12-day streak (verified at https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9).
+- Diamond League (Position #18) on Google Cloud Skills Boost with 188 skill badges, 48,371 points, and 12-day streak (verified at https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9).
 - Credly verified badges profile: https://www.credly.com/users/sumitdev2003/badges
 - LeetCode profile (@sumit2003dev) with 372 problems solved (103 Easy, 201 Medium, 68 Hard): https://leetcode.com/u/sumit2003dev/
 - Google Developer Profile: https://g.dev/sumit2003dev

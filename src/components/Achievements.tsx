@@ -173,8 +173,8 @@ export default function Achievements() {
 
   // LeetCode live metrics
   const liveLeetcode = useMemo(() => {
-    const totalSolved = leetcodeData?.totalSolved ?? defaultLeetcode[0].value;
-    const rating = leetcodeData?.contestRating ?? defaultLeetcode[1].value ?? 1460;
+    const totalSolved = leetcodeData?.totalSolved ?? defaultLeetcode[0].value ?? 372;
+    const rating = leetcodeData?.contestRating ?? defaultLeetcode[1].value;
     const medHard =
       leetcodeData && typeof leetcodeData.mediumSolved === "number" && typeof leetcodeData.hardSolved === "number"
         ? leetcodeData.mediumSolved + leetcodeData.hardSolved
@@ -282,7 +282,11 @@ export default function Achievements() {
               {liveLeetcode.map((l) => (
                 <div key={l.label} className="text-center rounded-xl bg-white/[0.02] border border-white/5 p-2.5">
                   <p className="font-display text-xl text-[#FFA116]">
-                    <Counter value={l.value} suffix={l.suffix} />
+                    {typeof l.value === "number" && l.value > 0 ? (
+                      <Counter value={l.value} suffix={l.suffix} />
+                    ) : (
+                      <span className="font-sans text-sm text-white/60">Unavailable</span>
+                    )}
                   </p>
                   <p className="mt-0.5 text-[11px] text-white/65 font-condensed uppercase tracking-wider">{l.label}</p>
                 </div>

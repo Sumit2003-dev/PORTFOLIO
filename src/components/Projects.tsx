@@ -387,27 +387,27 @@ function Modal({ project, onClose }: { project: Project; onClose: () => void }) 
               <p className="text-white/40">// Key Implementation Highlights</p>
               {project.id === "beyondword-emotion-reader" ? (
                 <>
-                  <p>• Model Architecture: Hybrid PyTorch transformer classifier with calibrated probabilities</p>
-                  <p>• Psychometric Scoring: Continuous Valence, Arousal &amp; Dominance (VAD) dimension profiling</p>
-                  <p>• Serving &amp; UI: Async FastAPI backend gateway + React 19 frontend on Vercel</p>
+                  <p>• Model Architecture: PyTorch transformer classifier with confidence probabilities</p>
+                  <p>• Classification: 8 discrete emotion classes with calibrated probability outputs</p>
+                  <p>• Serving &amp; UI: Async FastAPI backend gateway + React frontend on Vercel</p>
                 </>
               ) : project.id === "flyrank-ml-internship" ? (
                 <>
                   <p>• Core Evaluation Metric: Precision@50 ranking validation benchmark</p>
                   <p>• Data Contracts: HuggingFace warehouse reproducible data pipelines</p>
-                  <p>• Model Architecture: Content opportunity ranking algorithms with Scikit-learn</p>
+                  <p>• Internship Scope: Content opportunity ranking algorithms &amp; evaluation milestones (ML-01–ML-04)</p>
                 </>
               ) : project.id === "gyanverse-ai" ? (
                 <>
                   <p>• Vector Search Engine: FAISS &amp; ChromaDB similarity matrix indexing</p>
                   <p>• Embeddings: Sentence Transformers (HuggingFace)</p>
-                  <p>• Interface &amp; API: Streamlit &amp; Flask responsive interface (&lt;1.2s retrieval latency)</p>
+                  <p>• Interface: Streamlit interactive interface with context-grounded retrieval</p>
                 </>
               ) : project.id === "railsaarthi-sih" ? (
                 <>
-                  <p>• Event &amp; Scope: Smart India Hackathon 2026 (Ministry of Railways, SIH26028, Team Garuda X)</p>
-                  <p>• Predictive Systems: Multi-factor train ETA deviations &amp; connecting-train miss risk analyzer</p>
-                  <p>• Root Cause Analysis: Scikit-learn delay root-cause classification pipeline</p>
+                  <p>• Prototype Scope: Smart India Hackathon prototype (SIH26028, Ministry of Railways, Team Garuda X)</p>
+                  <p>• Predictive Systems: Train ETA deviations &amp; connecting-train miss risk analysis concept</p>
+                  <p>• Root Cause Analysis: Delay root-cause classification pipeline with Scikit-learn</p>
                 </>
               ) : project.id === "student-record-intelligence" ? (
                 <>
@@ -418,7 +418,7 @@ function Modal({ project, onClose }: { project: Project; onClose: () => void }) 
               ) : (
                 <>
                   <p>• Dataset: 124K flight records with class imbalance handling (34.4% delayed flights)</p>
-                  <p>• Benchmark: Random Forest (ROC-AUC 0.67) outperforming Decision Tree &amp; Logistic Regression</p>
+                  <p>• Benchmark: Random Forest (ROC-AUC 0.70 validation, 0.67 holdout) baseline evaluation</p>
                   <p>• Feature Engineering: Cyclical departure-hour temporal encoding &amp; feature scaling</p>
                 </>
               )}
@@ -430,14 +430,16 @@ function Modal({ project, onClose }: { project: Project; onClose: () => void }) 
       {/* Region 3: Footer (Pinned Actions) */}
       <div className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 bg-[#070e17]/95 backdrop-blur-md p-4 sm:p-6">
         <div className="flex flex-wrap items-center gap-3">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-ember flex items-center gap-2 px-5 py-2.5 text-xs font-semibold"
-          >
-            <Github className="h-4 w-4" /> View GitHub Repository
-          </a>
+          {project.github ? (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ember flex items-center gap-2 px-5 py-2.5 text-xs font-semibold"
+            >
+              <Github className="h-4 w-4" /> View GitHub Repository
+            </a>
+          ) : null}
           {project.demo && (
             <a
               href={project.demo}
