@@ -251,7 +251,7 @@ export default function Achievements() {
               <p className="mt-3.5 font-display text-2xl sm:text-3xl lg:text-4xl text-ember-500">
                 <Counter value={a.value} suffix={a.suffix} prefix={a.prefix} />
               </p>
-              <p className="mt-1 font-condensed text-xs sm:text-sm uppercase tracking-wider text-white/55 flex items-center justify-center gap-1">
+              <p className="mt-1 font-condensed text-xs sm:text-sm uppercase tracking-wider text-white/70 flex items-center justify-center gap-1">
                 <span>{a.label}</span>
                 <ExternalLink className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100 text-ember-500" />
               </p>
@@ -284,7 +284,7 @@ export default function Achievements() {
                   <p className="font-display text-xl text-[#FFA116]">
                     <Counter value={l.value} suffix={l.suffix} />
                   </p>
-                  <p className="mt-0.5 text-[11px] text-white/45 font-condensed uppercase tracking-wider">{l.label}</p>
+                  <p className="mt-0.5 text-[11px] text-white/65 font-condensed uppercase tracking-wider">{l.label}</p>
                 </div>
               ))}
             </div>
@@ -313,7 +313,7 @@ export default function Achievements() {
                   <p className="font-display text-xl text-ember-500">
                     <Counter value={g.value} suffix={g.suffix} />
                   </p>
-                  <p className="mt-0.5 text-[11px] text-white/45 font-condensed uppercase tracking-wider">{g.label}</p>
+                  <p className="mt-0.5 text-[11px] text-white/65 font-condensed uppercase tracking-wider">{g.label}</p>
                 </div>
               ))}
             </div>

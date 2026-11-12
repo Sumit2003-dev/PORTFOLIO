@@ -304,10 +304,10 @@ export default function DeveloperActivity() {
                 {totalSolved !== null ? (
                   <StatCounter value={totalSolved} />
                 ) : (
-                  <span className="font-sans text-xl text-white/40">Unavailable</span>
+                  <span className="font-sans text-xl text-white/60">Unavailable</span>
                 )}
               </p>
-              <p className="mt-0.5 font-condensed text-[11px] uppercase tracking-wider text-white/50">
+              <p className="mt-0.5 font-condensed text-[11px] uppercase tracking-wider text-white/65">
                 Total Problems Solved
               </p>
             </div>
@@ -328,10 +328,10 @@ export default function DeveloperActivity() {
                 {easySolved !== null ? (
                   <StatCounter value={easySolved} />
                 ) : (
-                  <span className="font-sans text-xl text-white/40">Unavailable</span>
+                  <span className="font-sans text-xl text-white/60">Unavailable</span>
                 )}
               </p>
-              <p className="mt-0.5 font-condensed text-[11px] uppercase tracking-wider text-white/50">
+              <p className="mt-0.5 font-condensed text-[11px] uppercase tracking-wider text-white/65">
                 Easy Problems Solved
               </p>
             </div>
@@ -352,10 +352,10 @@ export default function DeveloperActivity() {
                 {mediumSolved !== null ? (
                   <StatCounter value={mediumSolved} />
                 ) : (
-                  <span className="font-sans text-xl text-white/40">Unavailable</span>
+                  <span className="font-sans text-xl text-white/60">Unavailable</span>
                 )}
               </p>
-              <p className="mt-0.5 font-condensed text-[11px] uppercase tracking-wider text-white/50">
+              <p className="mt-0.5 font-condensed text-[11px] uppercase tracking-wider text-white/65">
                 Medium Problems Solved
               </p>
             </div>
@@ -376,10 +376,10 @@ export default function DeveloperActivity() {
                 {contestRating !== null ? (
                   <StatCounter value={Math.round(contestRating)} />
                 ) : (
-                  <span className="font-sans text-xl text-white/40">Unavailable</span>
+                  <span className="font-sans text-xl text-white/60">Unavailable</span>
                 )}
               </p>
-              <p className="mt-0.5 font-condensed text-[11px] uppercase tracking-wider text-white/50">
+              <p className="mt-0.5 font-condensed text-[11px] uppercase tracking-wider text-white/65">
                 Contest Rating
               </p>
             </div>
@@ -489,7 +489,7 @@ export default function DeveloperActivity() {
             {calendarData.weeks.length > 0 ? (
               <div className="min-w-[840px] select-none">
                 {/* Month Labels Header */}
-                <div className="relative mb-2 h-4 text-[10px] font-mono text-white/45">
+                <div className="relative mb-2 h-4 text-[10px] font-mono text-white/60">
                   {calendarData.monthHeaders.map((m, idx) => {
                     const leftPx = 32 + m.colIndex * 15.5;
                     return (
@@ -507,7 +507,7 @@ export default function DeveloperActivity() {
                 {/* Heatmap Grid with Weekday Labels on Left */}
                 <div className="flex items-start gap-1.5">
                   {/* Weekday Names (Mon, Wed, Fri) */}
-                  <div className="flex flex-col justify-between py-[2px] pr-2 text-[10px] font-mono text-white/35 h-[105px]">
+                  <div className="flex flex-col justify-between py-[2px] pr-2 text-[10px] font-mono text-white/60 h-[105px]">
                     <span>Mon</span>
                     <span>Wed</span>
                     <span>Fri</span>
@@ -604,13 +604,13 @@ export default function DeveloperActivity() {
             ))}
           </div>
 
-          <p className="mt-4 text-[10px] text-white/40 border-t border-white/5 pt-3">
+          <p className="mt-4 text-[10px] text-white/60 border-t border-white/5 pt-3">
             * Difficulty proportions derived directly from verified LeetCode problem solve statistics.
           </p>
         </div>
 
         {/* Global Section Provenance Note */}
-        <p data-reveal className="mt-4 text-[11px] text-white/45 pl-1">
+        <p data-reveal className="mt-4 text-[11px] text-white/60 pl-1">
           * {data?.provenance || "Daily submission records and problem-solving statistics retrieved server-side from official LeetCode public profile."}
         </p>
       </div>

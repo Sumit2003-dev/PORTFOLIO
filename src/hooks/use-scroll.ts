@@ -15,6 +15,14 @@ export function useFadeUp(ref: React.RefObject<HTMLElement>, deps: React.Depende
 
     const items = el.querySelectorAll("[data-reveal]");
 
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      items.forEach((item) => {
+        (item as HTMLElement).style.opacity = "1";
+        (item as HTMLElement).style.transform = "none";
+      });
+      return;
+    }
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         items,
@@ -79,6 +87,11 @@ export function useCounter(
     if (!el) return;
 
     let ctx: gsap.Context | null = null;
+
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.textContent = formatThousands ? end.toLocaleString("en-US") : String(end);
+      return;
+    }
 
     if (start) {
       ctx = gsap.context(() => {

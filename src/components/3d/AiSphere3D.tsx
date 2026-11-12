@@ -46,6 +46,14 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
       renderer.setSize(width, height);
       container.appendChild(renderer.domElement);
 
+      const canvasEl = renderer.domElement;
+      const onContextLost = (e: Event) => {
+        e.preventDefault();
+        cancelAnimationFrame(animId);
+        setHasError(true);
+      };
+      canvasEl.addEventListener("webglcontextlost", onContextLost, false);
+
       const mainGroup = new THREE.Group();
       scene.add(mainGroup);
 
@@ -250,6 +258,7 @@ export default function AiSphere3D({ className = "relative h-full w-full" }: AiS
         }
         window.removeEventListener("resize", onResize);
         document.removeEventListener("visibilitychange", onVisibilityChange);
+        canvasEl.removeEventListener("webglcontextlost", onContextLost);
         intersectionObserver.disconnect();
         cancelAnimationFrame(animId);
 

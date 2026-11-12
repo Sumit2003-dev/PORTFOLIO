@@ -97,6 +97,17 @@ export default function SkillCosmos3D() {
       renderer.setSize(width, height);
       container.appendChild(renderer.domElement);
 
+      const canvasEl = renderer.domElement;
+      const onContextLost = (e: Event) => {
+        e.preventDefault();
+        cancelAnimationFrame(animId);
+        setHasError(true);
+      };
+      canvasEl.addEventListener("webglcontextlost", onContextLost, false);
+      disposables.push(() => {
+        canvasEl.removeEventListener("webglcontextlost", onContextLost);
+      });
+
       const cosmosGroup = new THREE.Group();
       scene.add(cosmosGroup);
 

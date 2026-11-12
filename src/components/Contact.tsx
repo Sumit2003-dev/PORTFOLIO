@@ -69,7 +69,7 @@ export default function Contact() {
                 </span>
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="text-[10px] uppercase tracking-widest text-white/40">{i.label}</p>
+                    <p className="text-[10px] uppercase tracking-widest text-white/60">{i.label}</p>
                     {i.label === "Email" && (
                       <button
                         type="button"

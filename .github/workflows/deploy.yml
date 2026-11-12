@@ -41,6 +41,9 @@ jobs:
       - name: Install Python Dependencies
         run: pip install beautifulsoup4
 
+      - name: Install Node Dependencies
+        run: npm install --legacy-peer-deps
+
       - name: Sync Latest Skills Boost Profile
         run: python scripts/sync_skills_profile.py --build-step
 
@@ -49,7 +52,25 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/sync_developer_activity.py --build-step
 
-      - name: Commit and Push Snapshot (if updated)
+      - name: Run Python Regression Test Suites
+        run: python -m unittest discover -s scripts -p "test_*.py"
+
+      - name: Validate Certificate Vault Integrity
+        run: node scripts/validate_vault.cjs
+
+      - name: Run ESLint Check
+        run: npm run lint
+
+      - name: Run TypeScript Check
+        run: npx tsc -b
+
+      - name: Build Production Bundle
+        run: npm run build
+
+      - name: Create 404 Fallback for Single-Page Routing
+        run: cp dist/index.html dist/404.html
+
+      - name: Commit and Push Snapshot (if updated and verified)
         run: |
           if [ -n "$(git status --porcelain public/data/skills-snapshot.json public/data/developer-activity.json public/data/leetcode-activity.json public/data/github-activity.json src/lib/googleSkillsBadges.json src/lib/googleDeveloperData.ts)" ]; then
             git config user.name "github-actions[bot]"
@@ -60,15 +81,6 @@ jobs:
           else
             echo "No snapshot updates detected; repository is current."
           fi
-
-      - name: Install Dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: Build Production Bundle
-        run: npm run build
-
-      - name: Create 404 Fallback for Single-Page Routing
-        run: cp dist/index.html dist/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
