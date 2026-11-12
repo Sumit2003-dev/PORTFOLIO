@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-12T16:25:16.124520+00:00",
+  "syncedAt": "2026-11-12T18:00:08.076245+00:00",
   "github": {
     "username": "Sumit2003-dev",
     "name": "Sumit Kumar ",
@@ -1984,6 +1984,8 @@
     ]
   },
   "leetcode": {
+    "provider": "leetcode-graphql",
+    "provenance": "Official LeetCode GraphQL public profile endpoint",
     "username": "sumit2003dev",
     "profileUrl": "https://leetcode.com/u/sumit2003dev/",
     "ranking": 375883,
@@ -1993,12 +1995,12 @@
     "mediumSolved": 201,
     "hardSolved": 68,
     "totalQuestions": {
-      "easy": 830,
-      "medium": 1740,
-      "hard": 750,
-      "all": 3320
+      "all": 4110,
+      "easy": 975,
+      "medium": 2146,
+      "hard": 989
     },
-    "contestRating": 1460,
+    "contestRating": null,
     "contestGlobalRank": null,
     "submissionsTotal": 431,
     "activityCalendar": {
@@ -3842,7 +3844,9 @@
           "level": 1
         }
       ]
-    }
+    },
+    "status": "success",
+    "syncedAt": "2026-11-12T18:00:08.076245+00:00"
   },
   "provenance": {
     "github": "Official GitHub REST API v3 & jogruber contribution transcript",

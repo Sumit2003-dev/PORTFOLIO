@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-12T16:25:16.124520+00:00",
+  "syncedAt": "2026-11-12T18:00:08.076245+00:00",
   "username": "Sumit2003-dev",
   "profile": {
     "name": "Sumit Kumar ",
@@ -8,7 +8,7 @@
     "followers": 1,
     "profileUrl": "https://github.com/Sumit2003-dev",
     "avatarUrl": "https://avatars.githubusercontent.com/u/179593423?v=4",
-    "provenance": "GitHub REST API v3 server-side synchronization"
+    "provenance": "Official GitHub REST API v3 & jogruber contribution transcript"
   },
   "contributions": {
     "total": 123,
