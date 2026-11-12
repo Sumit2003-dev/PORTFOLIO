@@ -192,6 +192,10 @@ def sync_leetcode(username: str = LEETCODE_USER) -> dict:
     # Primary: LeetCode official GraphQL API
     graphql_query = """
     query getUserProfile($username: String!) {
+      allQuestionsCount {
+        difficulty
+        count
+      }
       matchedUser(username: $username) {
         username
         profile {
@@ -220,6 +224,9 @@ def sync_leetcode(username: str = LEETCODE_USER) -> dict:
     """
     
     lc_data = None
+    provider = None
+    provenance = None
+
     try:
         url = "https://leetcode.com/graphql"
         payload = json.dumps({"query": graphql_query, "variables": {"username": username}}).encode("utf-8")
@@ -231,6 +238,8 @@ def sync_leetcode(username: str = LEETCODE_USER) -> dict:
         resp = fetch_json(url, headers=headers, data=payload, retries=2, timeout=12)
         if resp and resp.get("data", {}).get("matchedUser"):
             lc_data = resp["data"]
+            provider = "leetcode-graphql"
+            provenance = "Official LeetCode GraphQL public profile endpoint"
             print("[SYNC] LeetCode GraphQL fetch succeeded.")
     except Exception as e:
         print(f"[SYNC WARNING] LeetCode GraphQL direct error: {e}")
@@ -246,22 +255,24 @@ def sync_leetcode(username: str = LEETCODE_USER) -> dict:
                     "matchedUser": {
                         "username": username,
                         "profile": {
-                            "ranking": alfa_resp.get("ranking", 380408),
+                            "ranking": alfa_resp.get("ranking"),
                             "realName": username,
-                            "userAvatar": ""
+                            "userAvatar": alfa_resp.get("avatar") or ""
                         },
                         "submitStatsGlobal": {
                           "acSubmissionNum": [
-                            {"difficulty": "All", "count": alfa_resp.get("totalSolved", 0)},
-                            {"difficulty": "Easy", "count": alfa_resp.get("easySolved", 0)},
-                            {"difficulty": "Medium", "count": alfa_resp.get("mediumSolved", 0)},
-                            {"difficulty": "Hard", "count": alfa_resp.get("hardSolved", 0)}
+                            {"difficulty": "All", "count": alfa_resp.get("totalSolved")},
+                            {"difficulty": "Easy", "count": alfa_resp.get("easySolved")},
+                            {"difficulty": "Medium", "count": alfa_resp.get("mediumSolved")},
+                            {"difficulty": "Hard", "count": alfa_resp.get("hardSolved")}
                           ]
                         },
                         "submissionCalendar": alfa_resp.get("submissionCalendar", "{}")
                     },
                     "userContestRanking": None
                 }
+                provider = "alfa-leetcode-api"
+                provenance = "Alfa LeetCode public API endpoint (https://alfa-leetcode-api.onrender.com)"
                 print("[SYNC] Alfa LeetCode fallback succeeded.")
         except Exception as e:
             print(f"[SYNC WARNING] Alfa LeetCode API error: {e}")
@@ -277,22 +288,24 @@ def sync_leetcode(username: str = LEETCODE_USER) -> dict:
                     "matchedUser": {
                         "username": username,
                         "profile": {
-                            "ranking": faisal_resp.get("ranking", 380408),
+                            "ranking": faisal_resp.get("ranking"),
                             "realName": username,
-                            "userAvatar": ""
+                            "userAvatar": faisal_resp.get("avatar") or ""
                         },
                         "submitStatsGlobal": {
                           "acSubmissionNum": [
-                            {"difficulty": "All", "count": faisal_resp.get("totalSolved", 0)},
-                            {"difficulty": "Easy", "count": faisal_resp.get("easySolved", 0)},
-                            {"difficulty": "Medium", "count": faisal_resp.get("mediumSolved", 0)},
-                            {"difficulty": "Hard", "count": faisal_resp.get("hardSolved", 0)}
+                            {"difficulty": "All", "count": faisal_resp.get("totalSolved")},
+                            {"difficulty": "Easy", "count": faisal_resp.get("easySolved")},
+                            {"difficulty": "Medium", "count": faisal_resp.get("mediumSolved")},
+                            {"difficulty": "Hard", "count": faisal_resp.get("hardSolved")}
                           ]
                         },
                         "submissionCalendar": faisal_resp.get("submissionCalendar", "{}")
                     },
                     "userContestRanking": None
                 }
+                provider = "faisalshohag-leetcode-api"
+                provenance = "Faisal Shohag LeetCode public API endpoint (https://leetcode-api-faisalshohag.vercel.app)"
                 print("[SYNC] Faisal Shohag LeetCode fallback succeeded.")
         except Exception as e:
             print(f"[SYNC WARNING] Faisal Shohag LeetCode API error: {e}")
@@ -301,23 +314,66 @@ def sync_leetcode(username: str = LEETCODE_USER) -> dict:
         raise RuntimeError("Validation failed: Could not retrieve LeetCode profile data from any endpoint.")
 
     matched_user = lc_data["matchedUser"]
-    profile_info = matched_user.get("profile", {})
-    ranking = profile_info.get("ranking", 0)
+    profile_info = matched_user.get("profile") or {}
+    ranking = profile_info.get("ranking")
+    if ranking is not None and not isinstance(ranking, int):
+        try:
+            ranking = int(ranking)
+        except Exception:
+            ranking = None
 
     # Submission stats breakdown
     submit_stats = matched_user.get("submitStatsGlobal", {}).get("acSubmissionNum", [])
-    counts_by_diff = {item["difficulty"]: item["count"] for item in submit_stats}
-    total_solved = counts_by_diff.get("All", 0)
-    easy_solved = counts_by_diff.get("Easy", 0)
-    medium_solved = counts_by_diff.get("Medium", 0)
-    hard_solved = counts_by_diff.get("Hard", 0)
+    counts_by_diff = {item["difficulty"]: item["count"] for item in submit_stats if isinstance(item, dict) and "difficulty" in item}
+    total_solved = counts_by_diff.get("All")
+    easy_solved = counts_by_diff.get("Easy")
+    medium_solved = counts_by_diff.get("Medium")
+    hard_solved = counts_by_diff.get("Hard")
+
+    if total_solved is None or not isinstance(total_solved, int):
+        raise ValueError("LeetCode validation failed: missing or invalid totalSolved count.")
+    if easy_solved is None or medium_solved is None or hard_solved is None:
+        raise ValueError("LeetCode validation failed: missing difficulty breakdown (Easy/Medium/Hard).")
+
+    # Difficulty sum verification (Requirement 8)
+    if easy_solved + medium_solved + hard_solved != total_solved:
+        raise ValueError(
+            f"LeetCode difficulty breakdown ({easy_solved} Easy + {medium_solved} Medium + {hard_solved} Hard = "
+            f"{easy_solved + medium_solved + hard_solved}) does not equal totalSolved ({total_solved})."
+        )
 
     if total_solved < 100:
         raise ValueError(f"LeetCode validation failed: totalSolved ({total_solved}) suspiciously low.")
 
     contest_ranking_obj = lc_data.get("userContestRanking")
-    contest_rating = contest_ranking_obj.get("rating") if contest_ranking_obj else None
-    contest_global_rank = contest_ranking_obj.get("globalRanking") if contest_ranking_obj else None
+    contest_rating = None
+    contest_global_rank = None
+    if contest_ranking_obj and isinstance(contest_ranking_obj, dict):
+        raw_rating = contest_ranking_obj.get("rating")
+        if raw_rating is not None:
+            try:
+                contest_rating = round(float(raw_rating))
+            except Exception:
+                contest_rating = None
+        raw_rank = contest_ranking_obj.get("globalRanking")
+        if raw_rank is not None:
+            try:
+                contest_global_rank = int(raw_rank)
+            except Exception:
+                contest_global_rank = None
+
+    # Dynamic question-bank count (Requirement 5: remove hardcoded question totals)
+    total_questions = None
+    all_q_raw = lc_data.get("allQuestionsCount")
+    if isinstance(all_q_raw, list) and all_q_raw:
+        q_map = {item.get("difficulty"): item.get("count") for item in all_q_raw if isinstance(item, dict) and "difficulty" in item}
+        if "All" in q_map and "Easy" in q_map and "Medium" in q_map and "Hard" in q_map:
+            total_questions = {
+                "all": q_map["All"],
+                "easy": q_map["Easy"],
+                "medium": q_map["Medium"],
+                "hard": q_map["Hard"]
+            }
 
     # Parse submissionCalendar for mini heatmap
     sub_cal_raw = matched_user.get("submissionCalendar", "{}")
@@ -347,7 +403,6 @@ def sync_leetcode(username: str = LEETCODE_USER) -> dict:
             continue
 
     # Generate 53 weeks ending on today
-    # Find last Sunday to match standard calendar layout
     days_back = 367
     start_day = today - timedelta(days=days_back - 1)
     
@@ -379,7 +434,17 @@ def sync_leetcode(username: str = LEETCODE_USER) -> dict:
         })
         curr += timedelta(days=1)
 
+    # Calendar sum verification (Requirement 8)
+    calendar_sum = sum(d["count"] for d in lc_calendar_days)
+    if total_cal_submissions != calendar_sum:
+        raise ValueError(
+            f"LeetCode calendar sum mismatch: submissionsTotal ({total_cal_submissions}) != "
+            f"sum of daily counts ({calendar_sum})."
+        )
+
     return {
+        "provider": provider,
+        "provenance": provenance,
         "username": username,
         "profileUrl": f"https://leetcode.com/u/{username}/",
         "ranking": ranking,
@@ -388,13 +453,8 @@ def sync_leetcode(username: str = LEETCODE_USER) -> dict:
         "easySolved": easy_solved,
         "mediumSolved": medium_solved,
         "hardSolved": hard_solved,
-        "totalQuestions": {
-            "easy": 830,
-            "medium": 1740,
-            "hard": 750,
-            "all": 3320
-        },
-        "contestRating": contest_rating if contest_rating is not None else 1460,
+        "totalQuestions": total_questions,
+        "contestRating": contest_rating,
         "contestGlobalRank": contest_global_rank,
         "submissionsTotal": total_cal_submissions,
         "activityCalendar": {
@@ -412,10 +472,11 @@ def main():
     parser = argparse.ArgumentParser(description="Synchronize authentic GitHub and LeetCode activity")
     parser.add_argument("--build-step", action="store_true", help="Run as build-step: exit 0 gracefully on error if snapshot exists")
     parser.add_argument("--output", help="Custom output path for developer activity snapshot")
+    parser.add_argument("--public-dir", help="Custom public/data directory for testing")
     args = parser.parse_args()
 
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    public_data_dir = os.path.join(base_dir, "public", "data")
+    public_data_dir = args.public_dir or os.path.join(base_dir, "public", "data")
     os.makedirs(public_data_dir, exist_ok=True)
 
     snapshot_path = args.output or os.path.join(public_data_dir, "developer-activity.json")
@@ -429,64 +490,102 @@ def main():
                 existing_snapshot = json.load(f)
         except Exception as e:
             print("[SYNC WARNING] Error reading existing snapshot:", e)
-    elif os.path.exists(gh_legacy_path):
+
+    existing_lc = None
+    if os.path.exists(lc_path):
         try:
-            with open(gh_legacy_path, "r", encoding="utf-8") as f:
-                gh_cached = json.load(f)
-                existing_snapshot = {
-                    "github": {
-                        "username": gh_cached.get("username", GITHUB_USER),
-                        "name": gh_cached.get("profile", {}).get("name", "Sumit Kumar"),
-                        "publicRepos": gh_cached.get("profile", {}).get("publicRepos", 13),
-                        "followers": gh_cached.get("profile", {}).get("followers", 1),
-                        "profileUrl": gh_cached.get("profile", {}).get("profileUrl", f"https://github.com/{GITHUB_USER}"),
-                        "avatarUrl": gh_cached.get("profile", {}).get("avatarUrl", ""),
-                        "topLanguage": gh_cached.get("languages", [{}])[0].get("name", "TypeScript"),
-                        "totalContributions": gh_cached.get("contributions", {}).get("total", 123),
-                        "contributions": gh_cached.get("contributions", {}),
-                        "languages": gh_cached.get("languages", []),
-                        "totalLanguageBytes": gh_cached.get("totalLanguageBytes", 3546383),
-                        "repositories": gh_cached.get("repositories", [])
-                    }
-                }
+            with open(lc_path, "r", encoding="utf-8") as f:
+                existing_lc = json.load(f)
         except Exception as e:
-            print("[SYNC WARNING] Error reading legacy GitHub snapshot:", e)
+            print("[SYNC WARNING] Error reading existing leetcode snapshot:", e)
+
+    # 1. Sync GitHub
+    github_data = None
+    now_iso = datetime.now(timezone.utc).isoformat()
+    github_status = "success"
+    github_synced_at = now_iso
+    github_provenance = "Official GitHub REST API v3 & jogruber contribution transcript"
 
     try:
         github_data = sync_github(GITHUB_USER)
     except Exception as e:
         print(f"[GITHUB-SYNC ERROR] {e}")
-        if existing_snapshot and "github" in existing_snapshot:
+        cached_gh = None
+        if os.path.exists(gh_legacy_path):
+            try:
+                with open(gh_legacy_path, "r", encoding="utf-8") as f:
+                    cached_gh = json.load(f)
+            except Exception:
+                pass
+        if not cached_gh and existing_snapshot and "github" in existing_snapshot:
+            cached_gh = existing_snapshot["github"]
+
+        if cached_gh:
             print("[SYNC] Retaining previous GitHub activity snapshot.")
-            github_data = existing_snapshot["github"]
+            github_data = cached_gh.get("github") if "github" in cached_gh else cached_gh
+            github_status = "cached"
+            github_synced_at = cached_gh.get("syncedAt") or (existing_snapshot.get("syncedAt") if existing_snapshot else github_synced_at)
+            github_provenance = f"Cached snapshot: GitHub REST API (preserved from {github_synced_at})"
         elif args.build_step:
             print("[BUILD-STEP] Retaining existing files without failing build.")
             sys.exit(0)
         else:
             raise
+
+    # 2. Sync LeetCode
+    leetcode_data = None
+    leetcode_status = "success"
+    leetcode_synced_at = now_iso
+    leetcode_provider = None
+    leetcode_provenance = None
 
     try:
         leetcode_data = sync_leetcode(LEETCODE_USER)
+        leetcode_status = "success"
+        leetcode_synced_at = now_iso
+        leetcode_provider = leetcode_data.get("provider", "leetcode-graphql")
+        leetcode_provenance = leetcode_data.get("provenance", "Official LeetCode GraphQL public profile endpoint")
     except Exception as e:
         print(f"[LEETCODE-SYNC ERROR] {e}")
-        if existing_snapshot and "leetcode" in existing_snapshot:
-            print("[SYNC] Retaining previous LeetCode activity snapshot.")
-            leetcode_data = existing_snapshot["leetcode"]
+        cached_lc = None
+        if existing_lc and existing_lc.get("activityCalendar"):
+            cached_lc = existing_lc
+        elif existing_snapshot and "leetcode" in existing_snapshot:
+            cached_lc = existing_snapshot["leetcode"]
+
+        if cached_lc and cached_lc.get("activityCalendar"):
+            print("[SYNC] Reusing previous cached LeetCode activity snapshot.")
+            leetcode_data = dict(cached_lc)
+            # Requirement 7: preserve original syncedAt timestamp and mark as stale/cached. Never report as freshly synchronized.
+            leetcode_status = "cached"
+            leetcode_synced_at = cached_lc.get("syncedAt") or (existing_snapshot.get("syncedAt") if existing_snapshot else None)
+            orig_prov = cached_lc.get("provenance") or cached_lc.get("provider") or "previous sync"
+            leetcode_provider = "cached"
+            leetcode_provenance = f"Cached snapshot: {orig_prov} (preserved from {leetcode_synced_at or 'prior sync'})"
         elif args.build_step:
             print("[BUILD-STEP] Retaining existing files without failing build.")
             sys.exit(0)
         else:
             raise
 
-    now_iso = datetime.now(timezone.utc).isoformat()
+    # Unified snapshot
+    unified_status = "success" if (github_status == "success" and leetcode_status == "success") else "cached"
+    unified_synced_at = now_iso if unified_status == "success" else (existing_snapshot.get("syncedAt") if existing_snapshot else now_iso)
+
     unified_snapshot = {
-        "status": "success",
-        "syncedAt": now_iso,
+        "status": unified_status,
+        "syncedAt": unified_synced_at,
         "github": github_data,
-        "leetcode": leetcode_data,
+        "leetcode": {
+            **leetcode_data,
+            "status": leetcode_status,
+            "syncedAt": leetcode_synced_at,
+            "provider": leetcode_provider,
+            "provenance": leetcode_provenance
+        },
         "provenance": {
-            "github": "Official GitHub REST API v3 & jogruber contribution transcript",
-            "leetcode": "Official LeetCode GraphQL public profile endpoint"
+            "github": github_provenance,
+            "leetcode": leetcode_provenance
         }
     }
 
@@ -499,22 +598,23 @@ def main():
 
     # Atomic write to leetcode-activity.json
     leetcode_snapshot = {
-        "status": "success",
-        "syncedAt": now_iso,
-        "username": leetcode_data["username"],
-        "profileUrl": leetcode_data["profileUrl"],
-        "ranking": leetcode_data["ranking"],
+        "status": leetcode_status,
+        "syncedAt": leetcode_synced_at,
+        "provider": leetcode_provider,
+        "provenance": leetcode_provenance,
+        "username": leetcode_data.get("username", LEETCODE_USER),
+        "profileUrl": leetcode_data.get("profileUrl", f"https://leetcode.com/u/{LEETCODE_USER}/"),
+        "ranking": leetcode_data.get("ranking"),
         "avatarUrl": leetcode_data.get("avatarUrl", ""),
-        "totalSolved": leetcode_data["totalSolved"],
-        "easySolved": leetcode_data["easySolved"],
-        "mediumSolved": leetcode_data["mediumSolved"],
-        "hardSolved": leetcode_data["hardSolved"],
-        "totalQuestions": leetcode_data["totalQuestions"],
-        "contestRating": leetcode_data["contestRating"],
-        "contestGlobalRank": leetcode_data["contestGlobalRank"],
-        "submissionsTotal": leetcode_data["submissionsTotal"],
-        "activityCalendar": leetcode_data["activityCalendar"],
-        "provenance": "Official LeetCode GraphQL public profile endpoint"
+        "totalSolved": leetcode_data.get("totalSolved"),
+        "easySolved": leetcode_data.get("easySolved"),
+        "mediumSolved": leetcode_data.get("mediumSolved"),
+        "hardSolved": leetcode_data.get("hardSolved"),
+        "totalQuestions": leetcode_data.get("totalQuestions"),
+        "contestRating": leetcode_data.get("contestRating"),
+        "contestGlobalRank": leetcode_data.get("contestGlobalRank"),
+        "submissionsTotal": leetcode_data.get("submissionsTotal"),
+        "activityCalendar": leetcode_data.get("activityCalendar")
     }
     temp_lc = lc_path + ".tmp"
     with open(temp_lc, "w", encoding="utf-8") as f:
@@ -522,23 +622,23 @@ def main():
     os.replace(temp_lc, lc_path)
     print(f"[SYNC SUCCESS] Saved LeetCode activity snapshot -> {lc_path}")
 
-    # Also atomically update legacy github-activity.json for compatibility
+    # Legacy github-activity.json
     legacy_github_snapshot = {
-        "status": "success",
-        "syncedAt": now_iso,
-        "username": github_data["username"],
+        "status": github_status,
+        "syncedAt": github_synced_at,
+        "username": github_data.get("username", GITHUB_USER),
         "profile": {
-            "name": github_data["name"],
-            "publicRepos": github_data["publicRepos"],
-            "followers": github_data["followers"],
-            "profileUrl": github_data["profileUrl"],
-            "avatarUrl": github_data["avatarUrl"],
-            "provenance": "GitHub REST API v3 server-side synchronization"
+            "name": github_data.get("name", "Sumit Kumar"),
+            "publicRepos": github_data.get("publicRepos", 0),
+            "followers": github_data.get("followers", 0),
+            "profileUrl": github_data.get("profileUrl", f"https://github.com/{GITHUB_USER}"),
+            "avatarUrl": github_data.get("avatarUrl", ""),
+            "provenance": github_provenance
         },
-        "contributions": github_data["contributions"],
-        "languages": github_data["languages"],
-        "totalLanguageBytes": github_data["totalLanguageBytes"],
-        "repositories": github_data["repositories"]
+        "contributions": github_data.get("contributions", {}),
+        "languages": github_data.get("languages", []),
+        "totalLanguageBytes": github_data.get("totalLanguageBytes", 0),
+        "repositories": github_data.get("repositories", [])
     }
     temp_legacy = gh_legacy_path + ".tmp"
     with open(temp_legacy, "w", encoding="utf-8") as f:
@@ -546,8 +646,8 @@ def main():
     os.replace(temp_legacy, gh_legacy_path)
     print(f"[SYNC SUCCESS] Updated legacy GitHub snapshot -> {gh_legacy_path}")
 
-    print(f"[SYNC METRICS] GitHub: {github_data['totalContributions']} contributions, {github_data['publicRepos']} repos, top language: {github_data['topLanguage']}")
-    print(f"[SYNC METRICS] LeetCode: {leetcode_data['totalSolved']} solved (E: {leetcode_data['easySolved']}, M: {leetcode_data['mediumSolved']}, H: {leetcode_data['hardSolved']}), Rank: #{leetcode_data['ranking']:,}")
+    print(f"[SYNC METRICS] GitHub: {github_data.get('totalContributions')} contributions, {github_data.get('publicRepos')} repos, top language: {github_data.get('topLanguage')}")
+    print(f"[SYNC METRICS] LeetCode: {leetcode_data.get('totalSolved')} solved (E: {leetcode_data.get('easySolved')}, M: {leetcode_data.get('mediumSolved')}, H: {leetcode_data.get('hardSolved')}), Rank: #{leetcode_data.get('ranking')}")
     print("[SYNC COMPLETE] All operations completed successfully.")
 
 if __name__ == "__main__":
