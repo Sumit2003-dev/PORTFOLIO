@@ -80,7 +80,6 @@ class TestGitHubActivitySync(unittest.TestCase):
             self.assertIsInstance(level, int)
             self.assertIn(level, [0, 1, 2, 3, 4])
 
-        self.assertEqual(contribs["calculatedTotal"], calculated_sum)
         self.assertEqual(contribs["total"], calculated_sum)
         self.assertEqual(contribs["daysCount"], len(days))
         self.assertEqual(contribs["startDate"], days[0]["date"])

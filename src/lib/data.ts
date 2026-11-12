@@ -11,7 +11,7 @@ export const profile = {
   short: "Data Scientist and AI/ML developer building practical machine learning systems, predictive models, and context-grounded RAG applications.",
   description: [
     "Final-year Computer Science & Engineering student specialising in Artificial Intelligence and Data Science, currently gaining hands-on industry experience as a Machine Learning Intern at FlyRank AI.",
-    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I actively learn and build on Google Cloud, standing in the Diamond League on Google Cloud Skills Boost with 186 skill badges, 48,280 points, and a continuous learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
+    "I have a proven record of building and deploying end-to-end ML applications, with strong skills in Python, Scikit-learn and data visualisation — translating academic training into production-oriented outcomes. I actively learn and build on Google Cloud, standing in the Diamond League on Google Cloud Skills Boost with 187 skill badges, 48,322 points, and a continuous learning streak. I'm also an active member of GDG (Google Developer Group) Lucknow and hold a Google Developer Program premium tier membership, staying engaged with the broader developer community beyond coursework.",
     "I'm actively expanding my expertise in Generative AI, RAG systems and LLMs through applied academic and industry projects.",
   ],
   email: "sumit.ku5981@gmail.com",
@@ -38,7 +38,7 @@ export const profile = {
 export const stats = [
   { label: "Projects", value: 6, suffix: "+" },
   { label: "Certificates", value: 51, suffix: "+" },
-  { label: "Cloud Badges", value: 186, suffix: "+" },
+  { label: "Cloud Badges", value: 187, suffix: "+" },
   { label: "Internships", value: 1, suffix: "" },
 ];
 
@@ -362,8 +362,8 @@ export const education = [
 /* ================= ACHIEVEMENTS ================= */
 export const achievements = [
   { label: "Diamond League Rank", value: 18, suffix: "th", prefix: "#", icon: "trophy" },
-  { label: "Cloud Skill Badges", value: 186, suffix: "+", icon: "repo" },
-  { label: "Arcade Points", value: 48280, suffix: "", icon: "trophy" },
+  { label: "Cloud Skill Badges", value: 187, suffix: "+", icon: "repo" },
+  { label: "Arcade Points", value: 48322, suffix: "", icon: "trophy" },
   { label: "Events & Study Jams", value: 10, suffix: "+", icon: "git" },
 ];
 
