@@ -1,12 +1,12 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-12T18:00:07.990493+00:00",
+  "syncedAt": "2026-11-12T18:46:09.969936+00:00",
   "source": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
   "profile": {
     "name": "Sumit Bharti",
     "league": "Diamond League",
-    "points": 48322,
-    "totalBadges": 187,
+    "points": 48371,
+    "totalBadges": 188,
     "provenance": "Direct server-side sync from public profile HTML",
     "privateDashboard": {
       "streakDays": 12,
@@ -16,6 +16,21 @@
     }
   },
   "badges": [
+    {
+      "id": "gcp-29599092",
+      "title": "Build a Smart Cloud Application with Vibe Coding and MCP",
+      "category": "Generative AI",
+      "earnedDate": "Nov 12, 2026",
+      "description": "Earn a skill badge by completing the Build a Smart Cloud Application with Vibe Coding and MCP course, where you will learn to leverage the power of Google's AI coding assistant and MCP servers. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
+      "skills": [
+        "Gemini",
+        "Generative AI",
+        "Vertex AI"
+      ],
+      "iconType": "gemini",
+      "imageUrl": "https://cdn.qwiklabs.com/cCCpajdF7R0iCznK3reWz%2FW180ds9jPiEQOhB2iNOXU%3D",
+      "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29599092"
+    },
     {
       "id": "gcp-29560348",
       "title": "Implement Sensitive Data Protection on Google Cloud",
