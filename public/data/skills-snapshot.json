@@ -1,12 +1,12 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-13T15:46:22.119158+00:00",
+  "syncedAt": "2026-11-13T21:43:15.745460+00:00",
   "source": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
   "profile": {
     "name": "Sumit Bharti",
     "league": "Diamond League",
-    "points": 48382,
-    "totalBadges": 188,
+    "points": 48422,
+    "totalBadges": 190,
     "provenance": "Direct server-side sync from public profile HTML",
     "privateDashboard": {
       "streakDays": 12,
@@ -16,6 +16,36 @@
     }
   },
   "badges": [
+    {
+      "id": "gcp-29623121",
+      "title": "Analyze BigQuery Data in Connected Sheets",
+      "category": "Data & BigQuery",
+      "earnedDate": "Nov 13, 2026",
+      "description": "Complete the Analyze BigQuery Data in Connected Sheets skill badge to demonstrate that you can use Connected Sheets to access, analyze, visualize, and share billions of rows of BigQuery data from your Google Sheets spreadsheet.",
+      "skills": [
+        "BigQuery",
+        "Data Engineering",
+        "SQL"
+      ],
+      "iconType": "data",
+      "imageUrl": "https://cdn.qwiklabs.com/t9dqycKsjvFNl4cstZfSxr2eH65dyfh0rr7ZEowcePI%3D",
+      "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29623121"
+    },
+    {
+      "id": "gcp-29622703",
+      "title": "Streaming Analytics into BigQuery",
+      "category": "Data & BigQuery",
+      "earnedDate": "Nov 13, 2026",
+      "description": "Earn a skill badge by completing the Streaming Analytics into BigQuery skill badge course, where you use Pub/Sub, Dataflow and BigQuery together to stream data for analytics.",
+      "skills": [
+        "BigQuery",
+        "Data Engineering",
+        "SQL"
+      ],
+      "iconType": "data",
+      "imageUrl": "https://cdn.qwiklabs.com/U99MhyBHoka0AV8iYmkXoJFDBlAYXVhtfjmrdFhRsKw%3D",
+      "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29622703"
+    },
     {
       "id": "gcp-29599092",
       "title": "Build a Smart Cloud Application with Vibe Coding and MCP",
