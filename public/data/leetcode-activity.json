@@ -1,11 +1,11 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-14T03:51:11.098861+00:00",
+  "syncedAt": "2026-11-14T14:36:51.503443+00:00",
   "provider": "leetcode-graphql",
   "provenance": "Official LeetCode GraphQL public profile endpoint",
   "username": "sumit2003dev",
   "profileUrl": "https://leetcode.com/u/sumit2003dev/",
-  "ranking": 374448,
+  "ranking": 372916,
   "avatarUrl": "https://assets.leetcode.com/users/sumit2003dev/avatar_1793444124.png",
   "totalSolved": 373,
   "easySolved": 103,
