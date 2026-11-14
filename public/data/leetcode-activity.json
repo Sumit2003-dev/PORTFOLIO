@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-13T21:43:15.809776+00:00",
+  "syncedAt": "2026-11-14T03:51:11.098861+00:00",
   "provider": "leetcode-graphql",
   "provenance": "Official LeetCode GraphQL public profile endpoint",
   "username": "sumit2003dev",
@@ -22,14 +22,9 @@
   "submissionsTotal": 433,
   "activityCalendar": {
     "daysCount": 367,
-    "startDate": "2025-11-12",
-    "endDate": "2026-11-13",
+    "startDate": "2025-11-13",
+    "endDate": "2026-11-14",
     "days": [
-      {
-        "date": "2025-11-12",
-        "count": 0,
-        "level": 0
-      },
       {
         "date": "2025-11-13",
         "count": 0,
@@ -1859,6 +1854,11 @@
         "date": "2026-11-13",
         "count": 2,
         "level": 1
+      },
+      {
+        "date": "2026-11-14",
+        "count": 0,
+        "level": 0
       }
     ]
   }
