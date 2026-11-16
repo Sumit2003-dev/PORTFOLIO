@@ -1,11 +1,11 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-16T03:30:11.972087+00:00",
+  "syncedAt": "2026-11-16T17:37:36.546020+00:00",
   "source": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
   "profile": {
     "name": "Sumit Bharti",
     "league": "Diamond League",
-    "points": 48422,
+    "points": 48466,
     "totalBadges": 190,
     "provenance": "Direct server-side sync from public profile HTML",
     "privateDashboard": {

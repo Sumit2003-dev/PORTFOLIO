@@ -1,17 +1,17 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-16T03:30:12.041198+00:00",
+  "syncedAt": "2026-11-16T17:37:36.626067+00:00",
   "username": "Sumit2003-dev",
   "profile": {
     "name": "Sumit Kumar ",
-    "publicRepos": 13,
+    "publicRepos": 14,
     "followers": 1,
     "profileUrl": "https://github.com/Sumit2003-dev",
     "avatarUrl": "https://avatars.githubusercontent.com/u/179593423?v=4",
     "provenance": "Official GitHub REST API v3 & jogruber contribution transcript"
   },
   "contributions": {
-    "total": 119,
+    "total": 120,
     "daysCount": 366,
     "startDate": "2025-11-16",
     "endDate": "2026-11-16",
@@ -1843,8 +1843,8 @@
       },
       {
         "date": "2026-11-16",
-        "count": 0,
-        "level": 0
+        "count": 1,
+        "level": 1
       }
     ]
   },
@@ -1852,48 +1852,48 @@
     {
       "name": "TypeScript",
       "bytes": 1691316,
-      "percentage": 47.1,
+      "percentage": 44.4,
       "color": "#3178C6"
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 1200033,
-      "percentage": 33.5,
+      "percentage": 31.5,
       "color": "#DA5B0B"
     },
     {
       "name": "Python",
-      "bytes": 606075,
-      "percentage": 16.9,
+      "bytes": 789903,
+      "percentage": 20.8,
       "color": "#3572A5"
     },
     {
+      "name": "HTML",
+      "bytes": 38003,
+      "percentage": 1.0,
+      "color": "#E34C26"
+    },
+    {
       "name": "JavaScript",
-      "bytes": 26899,
-      "percentage": 0.7,
+      "bytes": 34937,
+      "percentage": 0.9,
       "color": "#F1E05A"
     },
     {
       "name": "CSS",
-      "bytes": 22365,
-      "percentage": 0.6,
+      "bytes": 30930,
+      "percentage": 0.8,
       "color": "#563D7C"
-    },
-    {
-      "name": "HTML",
-      "bytes": 20689,
-      "percentage": 0.6,
-      "color": "#E34C26"
     },
     {
       "name": "PLpgSQL",
       "bytes": 13314,
-      "percentage": 0.4,
+      "percentage": 0.3,
       "color": "#336791"
     },
     {
       "name": "PowerShell",
-      "bytes": 3401,
+      "bytes": 4170,
       "percentage": 0.1,
       "color": "#012456"
     },
@@ -1904,7 +1904,7 @@
       "color": "#384D54"
     }
   ],
-  "totalLanguageBytes": 3587131,
+  "totalLanguageBytes": 3805645,
   "repositories": [
     {
       "name": "Airlines-Delay-Prediction",
