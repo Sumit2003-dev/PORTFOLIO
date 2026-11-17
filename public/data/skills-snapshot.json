@@ -1,12 +1,12 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-17T05:29:16.146256+00:00",
+  "syncedAt": "2026-11-17T17:10:55.618853+00:00",
   "source": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9",
   "profile": {
     "name": "Sumit Bharti",
     "league": "Diamond League",
-    "points": 50028,
-    "totalBadges": 190,
+    "points": 50107,
+    "totalBadges": 191,
     "provenance": "Direct server-side sync from public profile HTML",
     "privateDashboard": {
       "streakDays": 12,
@@ -16,6 +16,21 @@
     }
   },
   "badges": [
+    {
+      "id": "gcp-29706133",
+      "title": "Implement Multimodal Vector Search with BigQuery",
+      "category": "Generative AI",
+      "earnedDate": "Nov 17, 2026",
+      "description": "Complete the intermediate Implement Multimodal Vector Search with BigQuery skill badge to demonstrate skills in the following: using Gemini in BigQuery to generate and debug SQL, conduct sentiment analysis, summarize text and identify keywords, generate embeddings, create a Retrieval Augmented Generation (RAG) pipeline, and implement multimodal vector search.",
+      "skills": [
+        "Gemini",
+        "Generative AI",
+        "Vertex AI"
+      ],
+      "iconType": "gemini",
+      "imageUrl": "https://cdn.qwiklabs.com/ptFjKJhCElCLWeQv%2BT%2F%2Bquj23pUL5YzWprpljt6ceJ0%3D",
+      "verificationUrl": "https://www.skills.google/public_profiles/d8429119-44bb-443a-8563-87b7953f74e9/badges/29706133"
+    },
     {
       "id": "gcp-29623121",
       "title": "Analyze BigQuery Data in Connected Sheets",
