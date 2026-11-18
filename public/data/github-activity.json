@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-17T17:10:55.687377+00:00",
+  "syncedAt": "2026-11-18T04:55:21.869272+00:00",
   "username": "Sumit2003-dev",
   "profile": {
     "name": "Sumit Kumar ",
@@ -12,9 +12,9 @@
   },
   "contributions": {
     "total": 120,
-    "daysCount": 367,
+    "daysCount": 368,
     "startDate": "2025-11-16",
-    "endDate": "2026-11-17",
+    "endDate": "2026-11-18",
     "days": [
       {
         "date": "2025-11-16",
@@ -1850,6 +1850,11 @@
         "date": "2026-11-17",
         "count": 0,
         "level": 0
+      },
+      {
+        "date": "2026-11-18",
+        "count": 0,
+        "level": 0
       }
     ]
   },
@@ -1857,31 +1862,31 @@
     {
       "name": "TypeScript",
       "bytes": 1691316,
-      "percentage": 42.7,
+      "percentage": 41.8,
       "color": "#3178C6"
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 1200033,
-      "percentage": 30.3,
+      "percentage": 29.7,
       "color": "#DA5B0B"
     },
     {
       "name": "Python",
-      "bytes": 901251,
-      "percentage": 22.7,
+      "bytes": 971834,
+      "percentage": 24.0,
       "color": "#3572A5"
     },
     {
       "name": "JavaScript",
-      "bytes": 60489,
+      "bytes": 60535,
       "percentage": 1.5,
       "color": "#F1E05A"
     },
     {
       "name": "HTML",
       "bytes": 50511,
-      "percentage": 1.3,
+      "percentage": 1.2,
       "color": "#E34C26"
     },
     {
@@ -1897,6 +1902,12 @@
       "color": "#336791"
     },
     {
+      "name": "Inno Setup",
+      "bytes": 5314,
+      "percentage": 0.1,
+      "color": "#8b949e"
+    },
+    {
       "name": "PowerShell",
       "bytes": 4170,
       "percentage": 0.1,
@@ -1907,9 +1918,15 @@
       "bytes": 3039,
       "percentage": 0.1,
       "color": "#384D54"
+    },
+    {
+      "name": "Batchfile",
+      "bytes": 2706,
+      "percentage": 0.1,
+      "color": "#8b949e"
     }
   ],
-  "totalLanguageBytes": 3963014,
+  "totalLanguageBytes": 4041663,
   "repositories": [
     {
       "name": "Airlines-Delay-Prediction",
