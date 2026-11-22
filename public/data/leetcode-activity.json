@@ -1,21 +1,21 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-22T03:47:50.393092+00:00",
+  "syncedAt": "2026-11-22T15:45:54.088052+00:00",
   "provider": "leetcode-graphql",
   "provenance": "Official LeetCode GraphQL public profile endpoint",
   "username": "sumit2003dev",
   "profileUrl": "https://leetcode.com/u/sumit2003dev/",
-  "ranking": 356697,
+  "ranking": 355338,
   "avatarUrl": "https://assets.leetcode.com/users/sumit2003dev/avatar_1793444124.png",
   "totalSolved": 385,
   "easySolved": 106,
   "mediumSolved": 207,
   "hardSolved": 72,
   "totalQuestions": {
-    "all": 4119,
-    "easy": 977,
-    "medium": 2150,
-    "hard": 992
+    "all": 4123,
+    "easy": 978,
+    "medium": 2152,
+    "hard": 993
   },
   "contestRating": null,
   "contestGlobalRank": null,
