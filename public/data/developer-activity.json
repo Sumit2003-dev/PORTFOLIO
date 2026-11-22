@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "syncedAt": "2026-11-21T21:16:29.628925+00:00",
+  "syncedAt": "2026-11-22T03:47:50.393092+00:00",
   "github": {
     "username": "Sumit2003-dev",
     "name": "Sumit Kumar ",
@@ -9,48 +9,13 @@
     "profileUrl": "https://github.com/Sumit2003-dev",
     "avatarUrl": "https://avatars.githubusercontent.com/u/179593423?v=4",
     "topLanguage": "TypeScript",
-    "totalContributions": 120,
+    "totalContributions": 117,
     "contributions": {
-      "total": 120,
-      "daysCount": 371,
-      "startDate": "2025-11-16",
-      "endDate": "2026-11-21",
+      "total": 117,
+      "daysCount": 365,
+      "startDate": "2025-11-23",
+      "endDate": "2026-11-22",
       "days": [
-        {
-          "date": "2025-11-16",
-          "count": 0,
-          "level": 0
-        },
-        {
-          "date": "2025-11-17",
-          "count": 3,
-          "level": 1
-        },
-        {
-          "date": "2025-11-18",
-          "count": 0,
-          "level": 0
-        },
-        {
-          "date": "2025-11-19",
-          "count": 0,
-          "level": 0
-        },
-        {
-          "date": "2025-11-20",
-          "count": 0,
-          "level": 0
-        },
-        {
-          "date": "2025-11-21",
-          "count": 0,
-          "level": 0
-        },
-        {
-          "date": "2025-11-22",
-          "count": 0,
-          "level": 0
-        },
         {
           "date": "2025-11-23",
           "count": 0,
@@ -1870,6 +1835,11 @@
           "date": "2026-11-21",
           "count": 0,
           "level": 0
+        },
+        {
+          "date": "2026-11-22",
+          "count": 0,
+          "level": 0
         }
       ]
     },
@@ -2024,17 +1994,12 @@
     },
     "contestRating": null,
     "contestGlobalRank": null,
-    "submissionsTotal": 448,
+    "submissionsTotal": 381,
     "activityCalendar": {
       "daysCount": 367,
-      "startDate": "2025-11-20",
-      "endDate": "2026-11-21",
+      "startDate": "2025-11-21",
+      "endDate": "2026-11-22",
       "days": [
-        {
-          "date": "2025-11-20",
-          "count": 0,
-          "level": 0
-        },
         {
           "date": "2025-11-21",
           "count": 0,
@@ -2042,8 +2007,8 @@
         },
         {
           "date": "2025-11-22",
-          "count": 67,
-          "level": 4
+          "count": 0,
+          "level": 0
         },
         {
           "date": "2025-11-23",
@@ -3864,11 +3829,16 @@
           "date": "2026-11-21",
           "count": 1,
           "level": 1
+        },
+        {
+          "date": "2026-11-22",
+          "count": 0,
+          "level": 0
         }
       ]
     },
     "status": "success",
-    "syncedAt": "2026-11-21T21:16:29.628925+00:00"
+    "syncedAt": "2026-11-22T03:47:50.393092+00:00"
   },
   "provenance": {
     "github": "Official GitHub REST API v3 & jogruber contribution transcript",
