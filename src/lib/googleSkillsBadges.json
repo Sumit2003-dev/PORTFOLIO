@@ -2113,7 +2113,7 @@
   },
   {
     "id": "gcp-25338361",
-    "title": "Introduction to AI Agents",
+    "title": "[DEPRECATED] Introduction to AI Agents",
     "category": "Cloud Infrastructure",
     "earnedDate": "Jul 5, 2026",
     "description": "Gain a conceptual overview of AI Agents. Discover how AI Agents use autonomous action and reasoning to solve complex problems. You’ll explore the technical architecture—models, tools, and orchestration—that enables agents to learn, plan, and achieve goals on your behalf.",
